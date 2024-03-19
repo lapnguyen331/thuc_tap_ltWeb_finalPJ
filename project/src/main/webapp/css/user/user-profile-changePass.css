@@ -1,0 +1,35 @@
+.user-profile-change-pass{
+    margin-left: 100px;
+}
+.user-profile-change-pass-wrapper{
+    display: flex;
+    flex-direction: row;
+}
+.user-prfile-change-pass-label-left{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+
+}
+.user-prfile-change-pass-label-left label{
+    margin-top: 20px;
+}
+.user-profile-change-pass-input-right{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+
+}
+.user-profile-change-pass-input-right input{
+    margin-top: 20px;
+}
+.user-profile-submit-pass{
+    margin-left: 155px;
+    margin-top: 15px;
+}
+.user-profile-submit-pass input{
+    padding: 0px 15px 0px 15px;
+    background-color: #ee4d2d;
+    color: white;
+}

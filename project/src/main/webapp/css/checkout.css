@@ -1,0 +1,224 @@
+#checkout-section {
+    margin: 20px 0;
+}
+
+#checkout-section .container {
+    background-color: #fffcf5;
+    padding-bottom: 40px;
+    border-radius: 5px;
+}
+
+#checkout-section .checkout-cart-wrap .info-checkout {
+    background-color: white;
+    border: 2px solid #dddd;
+    width: 600px;
+}
+
+#checkout-section .checkout-title {
+    text-transform: uppercase;
+    color: var(--red-color-main);
+    font-weight: bold;
+}
+
+#checkout-section .checkout-cart-wrap .info-checkout > div {
+    padding: 10px;
+}
+
+#checkout-section .checkout-cart-wrap .info-checkout > div + div {
+    border-top: 2px solid #dddd;
+}
+
+#checkout-section .checkout-cart-wrap .info-checkout .cart-checkout-content {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+#checkout-section .checkout-cart-wrap .info-checkout .cart-checkout-content .product {
+    display: flex;
+    gap: 10px;
+    align-items: start;
+}
+
+#checkout-section .checkout-cart-wrap .info-checkout .cart-checkout-content .product .btn-product-remove {
+    align-self: center;
+    font-size: 20px;
+    color: var(--red-color-main);
+    cursor: pointer;
+}
+
+#checkout-section .checkout-cart-wrap .info-checkout .cart-checkout-content .product .btn-product-remove::before {
+    content: '\f057';
+    font-family: 'Font Awesome 6 Free';
+}
+
+#checkout-section .checkout-cart-wrap .info-checkout .cart-checkout-content .product + .product {
+    border-top: 2px dashed #dddd;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+#checkout-section .checkout-cart-wrap .info-checkout .cart-checkout-content .product .product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+}
+
+#checkout-section .checkout-cart-wrap .info-checkout .cart-checkout-content .product .product-info .product-name {
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 18px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 350px;
+    white-space: nowrap;
+}
+
+#checkout-section .checkout-cart-wrap .info-checkout .cart-checkout-content .product .product-info .product-discount-wrap .discount-box {
+    border: dashed 2px var(--red-color-main);
+    font-size: 13px;
+    padding: 0px 5px;
+    background-color: #ff6b6b;
+}
+
+#checkout-section .checkout-cart-wrap .info-checkout .cart-checkout-content .product .product-info .product-price {
+    font-size: 20px;
+    color: var(--red-color-main);
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#checkout-section .checkout-cart-wrap .info-checkout .cart-checkout-content .product .product-info .product-price.has-discount .current_price {
+    text-decoration: line-through;
+    font-size: 15px;
+}
+
+#checkout-section .checkout-cart-wrap .info-checkout .cart-checkout-content .product .product-info .product-price.has-discount .new_price {
+    font-size: 20px;
+}
+
+#checkout-section .checkout-cart-wrap .info-checkout .cart-checkout-content .product .product-amount {
+    margin-left: auto;
+    align-self: center;
+    flex: 0;
+    text-wrap: nowrap;
+}
+
+#checkout-section .checkout-cart-wrap .info-checkout .cart-checkout-content .product .product-img {
+    min-width: 100px;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border: 1px solid #dddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#checkout-section .checkout-cart-wrap .info-checkout .cart-checkout-content .product .product-img .product-discount-badget {
+    position: absolute;
+    top: 5px;
+    width: 100%;
+    background-color: var(--red-color-main);
+    color: var(--wheat-color);
+    text-align: center;
+    transform: rotate(-45deg);
+    left: -34px;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#checkout-section .checkout-cart-wrap .info-checkout .cart-checkout-content .product .product-img img {
+    object-fit: cover;
+    width: 100%;
+    display: inline-block;
+}
+
+
+#checkout-section .checkout-cart-wrap .info-checkout .number-total-cart {
+    display: flex;
+    justify-content: space-between;
+}
+
+#checkout-section .checkout-cart-wrap .info-checkout .number-total-cart .amount {
+    font-size: 18px;
+    color: var(--red-color-main);
+    font-weight: bold;
+}
+
+#checkout-section .checkout-cart-wrap .info-checkout .call-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#checkout-section .checkout-cart-wrap .info-checkout .call-action .action-btn {
+    background-color: var(--red-color-main);
+    color: var(--wheat-color);
+    padding: 5px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 0;
+}
+
+#checkout-section .checkout-info-wrap .info-form {
+    width: 650px;
+    padding: 0px 10px;
+    background-image: -webkit-linear-gradient(90deg, rgb(254, 246, 235) 0%, rgb(252, 250, 247) 99%);
+    padding-bottom: 30px;
+    padding-top: 10px;
+}
+
+#checkout-section .checkout-info-wrap .info-form>div + div {
+    margin-top: 10px;
+}
+
+#checkout-section .checkout-info-wrap .info-form .txt-field label {
+    display: block;
+    font-weight: bold;
+}
+
+#checkout-section .checkout-info-wrap .info-form .txt-field input,
+#checkout-section .checkout-info-wrap .info-form .txt-field textarea {
+    border: 1px dashed var(--red-color-main);
+    background-color: rgba(255,255,255,0.2);
+    padding: 5px 10px;
+    width: 100%;
+}
+
+textarea:focus-visible,
+input:focus-visible {
+    outline: 0px;
+}
+
+#checkout-section .checkout-info-wrap .info-form .method-wrap {
+    border: 1px dashed var(--red-color-main);
+    padding: 10px;
+    margin-top: 5px;
+}
+
+#checkout-section .checkout-info-wrap .info-form .method-wrap > div {
+    line-height: 30px;
+}
+
+#checkout-section .checkout-info-wrap .info-form .method-wrap .lb-method {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 500;
+    gap: 5px;
+}
+
+#checkout-section .checkout-info-wrap .info-form .method-wrap .lb-method img {
+    width: 40px;   
+}
+
+#checkout-section .checkout-info-wrap .info-form .method-wrap .method-description {
+    font-weight: 350;
+    font-size: 14px;
+}

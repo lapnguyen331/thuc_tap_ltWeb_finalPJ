@@ -1,0 +1,110 @@
+#contact-section {
+    margin: 20px 0;
+}
+
+#contact-section .container {
+    background-color: #fffcf5;
+    padding-bottom: 40px;
+    border-radius: 5px;
+}
+
+#contact-section .contact-title {
+    text-transform: uppercase;
+    color: var(--red-color-main);
+    font-weight: bold;
+}
+
+#contact-section .contact-info-wrap .info-form {
+    padding: 0px 10px;
+    background-image: -webkit-linear-gradient(90deg, rgb(254, 246, 235) 0%, rgb(252, 250, 247) 99%);
+    padding-bottom: 30px;
+    padding-top: 10px;
+}
+
+#contact-section .contact-info-wrap .info-form button[type='submit'] {
+    padding: 5px 20px;
+    background-color: var(--red-color-main);
+    border: 0;
+    color: var(--wheat-color);
+    font-weight: bold;
+}
+
+#contact-section .contact-info-wrap .info-form button[type='submit']::before {
+    font-weight: bold;
+    content: '\f590';
+    font-family: 'Font Awesome 6 Free';
+    margin-right: 5px;
+}
+
+#contact-section .contact-info-wrap .info-form>div + div {
+    margin-top: 10px;
+}
+
+#contact-section .contact-info-wrap .info-form .txt-field label {
+    display: block;
+    font-weight: bold;
+}
+
+#contact-section .contact-info-wrap .info-form .txt-field input,
+#contact-section .contact-info-wrap .info-form .txt-field textarea {
+    border: 1px dashed var(--red-color-main);
+    background-color: rgba(255,255,255,0.2);
+    padding: 5px 10px;
+    width: 100%;
+}
+
+#contact-section .contact-info-wrap .info-form .txt-field textarea:focus-visible,
+#contact-section .contact-info-wrap .info-form .txt-field input:focus-visible {
+    outline: 0px;
+}
+
+#contact-section .contact-info-wrap .info-form .method-wrap {
+    border: 1px dashed var(--red-color-main);
+    padding: 10px;
+    margin-top: 5px;
+}
+
+#contact-section .contact-info-wrap .info-form .method-wrap > div {
+    line-height: 30px;
+}
+
+#contact-section .contact-info-wrap .info-form .method-wrap .lb-method {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 500;
+    gap: 5px;
+}
+
+#contact-section .contact-info-wrap .info-form .method-wrap .lb-method img {
+    width: 40px;   
+}
+
+#contact-section .contact-info-wrap .info-form .method-wrap .method-description {
+    font-weight: 350;
+    font-size: 14px;
+}
+
+#contact-section .contact-info-wrap .contact-p {
+    margin-left: 15px;
+    font-weight: 350;
+    font-family: 'Segoe UI', 'Font Awesome 6 Free';
+}
+
+#contact-section .contact-info-wrap .contact-p + .contact-p {
+    margin-top: 3px;
+}
+
+#contact-section .contact-info-wrap .contact-h:not(:first-child) {
+    margin-top: 10px;
+}
+
+#contact-section .contact-info-wrap .contact-h {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#contact-section .contact-info-wrap .contact-h::before {
+    font-family: 'Font Awesome 6 Free';
+    content: '\f0da';
+    margin-right: 5px;
+}

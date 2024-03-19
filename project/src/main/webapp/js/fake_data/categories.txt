@@ -1,0 +1,68 @@
+{
+  "data": 
+  [
+    {
+      "id": "NHSHQ23",
+      "name": "Nước Hồng Sâm",
+      "image": "/template/image/nuoc-hong-sam.png",
+      "create": "27/09/2023",
+      "status": "active"
+    },
+    {
+      "id": "CHSHQ23",
+      "name": "Cao Hồng Sâm",
+      "image": "/template/image/linh-chi-han-quoc.webp",
+      "create": "26/09/2023",
+      "status": "active"
+    },
+    {
+      "id": "SSKHQ21",
+      "name": "Sâm Khô",
+      "image": "/template/image/sam-kho.png",
+      "create": "12/10/2021",
+      "status": "active"
+    },
+    {
+      "id": "SMOHQ23",
+      "name": "Sâm Mật Ong",
+      "image": "/template/image/sam-mat-ong.png",
+      "create": "11/05/2023",
+      "status": "active"
+    },
+    {
+      "id": "HNSSHQ22",
+      "name": "Hắc Sâm",
+      "image": "/template/image/hac-sam-han-quoc.png",
+      "create": "06/02/2022",
+      "status": "active"
+    },
+    {
+      "id": "NSTHQ23",
+      "name": "Nhân Sâm Tươi",
+      "image": "/template/image/sam-tuoi.png",
+      "create": "27/09/2023",
+      "status": "active"
+    },
+    {
+      "id": "RSLHQ22",
+      "name": "Rượu Sâm Linh Chi",
+      "image": "/template/image/ruou-sam.png",
+      "create": "27/11/2022",
+      "status": "active"
+    },
+    {
+      "id": "THSHQ21",
+      "name": "Trà Hồng Sâm",
+      "image": "/template/image/tra-sam.webp",
+      "create": "15/05/2021",
+      "status": "active"
+    },
+    {
+      "id": "VHSHQ21",
+      "name": "Viên Hồng Sâm",
+      "image": "/template/image/vien-hong-sam.webp",
+      "create": "15/05/2021",
+      "status": "active"
+    }
+  ]
+}

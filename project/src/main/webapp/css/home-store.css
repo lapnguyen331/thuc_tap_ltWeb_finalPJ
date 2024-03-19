@@ -1,0 +1,141 @@
+#store-section .container {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+#store-section .container {
+    background-color: white;
+}
+
+#store-section .col {
+    max-width: 20%;
+    padding: 9px;
+}
+
+#store-section .store-wrap {
+    border: 1px solid #eae2d6;
+    cursor: pointer;
+    height: 365px;
+}
+
+#store-section .store-wrap .thumbnail-wrap {
+    height: 147px;
+    overflow: hidden;
+}
+
+#store-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.3s ease-in-out;
+}
+
+#store-section .thumbnail-wrap img {
+    transition: transform 0.3s;
+}
+
+#store-section .thumbnail-wrap img:hover {
+    transform: scale(1.1);
+}
+
+#store-section .store-wrap .title {
+        text-align: left;
+        background: unset;
+        margin: 10px;
+        display: block;
+}
+
+#store-section a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+#store-section .store-wrap .title h3, #store-section .store-wrap .title .h3 {
+    font-size: 16px;
+    color: rgb(51, 51, 51);
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.625;
+    margin-bottom: 0;
+}
+
+#store-section .store-wrap .hotline-wrap, #store-section .store-wrap .address-wrap {
+    display: flex;
+    align-items: start;
+    padding: 10px;
+    margin-top: -10px;
+}
+
+#store-section .store-wrap .hotline-wrap i, #store-section .store-wrap .hotline-wrap .fas, #store-section .store-wrap .address-wrap .fas {
+    line-height: 30px;
+    padding-right: 10px;
+    color: #f0ad4e;
+}
+
+#store-section .store-wrap .address-wrap .address {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    height: 55px;
+}
+
+#store-section h1, 
+#store-section h2,
+#store-section h3,
+#store-section h4,
+#store-section h5,
+#store-section p,
+#store-section span {
+    color: #333333;
+}
+
+#store-section .store-wrap .hotline-wrap i, #store-section .store-wrap .hotline-wrap .fas, #store-section .store-wrap .address-wrap .fas {
+    line-height: 30px;
+    padding-right: 10px;
+    color: #f0ad4e;
+ }
+
+#store-section .entry-content a, a[rel=nofollow] {
+    color: #bf1e2e;
+    font-weight: bold;
+}
+
+#store-section .store-wrap .phone-number p {
+    margin: 0;
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+#store-section .store-wrap .hotline-wrap.zalo-sms {
+    margin-top: -10px;
+}
+
+#store-section .store-wrap .hotline-wrap {
+    padding-top: 0;
+    margin-top: -15px;
+}
+
+#store-section .hotline, #store-section .hotline .content {
+    display: flex;
+    align-items: start;
+}
+
+#store-section .store-wrap .address-link a {
+    display: flex;
+    border: 1px solid #d37c82;
+    color: #d37c82;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0px 10px;
+    justify-content: center;
+    align-items: center;
+}
+#store-section .store-wrap .address-link .fas {
+    line-height: 30px;
+    padding-right: 10px;
+    color: #d37c82;
+}

@@ -1,0 +1,83 @@
+.user-profile-notify-wrapper{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+.notify-readFag{
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 1.25rem;
+    border-bottom: 1px solid rgba(0,0,0,.09);
+    font-size: .875rem;
+    font-weight: 300;
+}
+.notify-readFag button {
+    border: 1px solid gray;
+    padding: 3px 3px 3px 3px;
+    background: none;
+    margin-left: auto;
+    margin-bottom: 10px;
+}
+/* css section notify */
+
+#notify-sec.user-profile-notify-item{
+    display: block;
+    margin-bottom: 10px;
+    background-color: #fff2ee;
+}
+
+.not-wrap{
+    display: flex;
+    flex-direction: row;
+}
+.not-wrap img {
+    width: 100px;
+    height: 100px;
+    margin-right: 5px;
+}
+.not-wrap .notify-content {
+    width: 90%;
+}
+.notity-title{
+    color: rgba(0,0,0,.8);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+    margin-top: 0;
+}
+.notity-prime-note{
+    font-size: .875rem;
+    font-weight: 400;
+}
+.notity-prime-note span{
+    font-weight: 400;
+}
+.notify-time{
+    margin: 0;
+    color: rgba(0,0,0,.54);
+    line-height: 1;
+}
+.notify-time span{
+    font-weight: 400;
+    font-size: 14px;
+}
+.notify-detail-button{
+    width: 100px;
+    margin-right: 10px;
+    margin-top: 20px;
+}
+.notify-detail-button button{
+    border: 1px solid rgba(0,0,0,.09);
+    color: rgba(0,0,0,.8);
+    min-width: 5rem;
+    height: 1.875rem;
+    margin-left: auto;
+    padding: 0 0.4375rem;
+    background-color: #fff;
+    font-size: .75rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}

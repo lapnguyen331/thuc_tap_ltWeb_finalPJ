@@ -1,0 +1,168 @@
+#signup .container {
+    position: relative;
+    width: 600px;
+    height: 1000px;
+    background: rgba(253, 252, 252, 0.67);
+    border: 1px solid slategray;
+    border-radius: 10px;
+    backdrop-filter: blur(20px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: height .2s ease;
+}
+#signup .container .form-box {
+    width: 100%;
+    padding: 40px;
+}
+
+#signup {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#signup .container .form-box h2{
+    font-size: 2em;
+    color: #162938;
+    text-align: center;
+}
+#signup .container .form-box .input-box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #162938;
+    margin: 30px 0;
+}
+
+#signup .container .form-box .input-box label{
+    position: absolute;
+    top:  50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+    color: #162938;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s;
+}
+#signup .container .form-box .input label{
+    top:  50%;
+    left: 5px;
+    font-size: 1.2em;
+    color: #162938;
+    font-weight: 500;
+}
+#signup .container .form-box .input-box input:focus~label,
+#signup .container .form-box .input-box input:valid~label {
+    top: -5px;
+}
+#signup .container .form-box .input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.1em;
+    color: #000000;
+    font-weight: 400;
+    padding: 0 35px 0 5px;
+}
+
+#signup .container .form-box .input-box .icon  {
+    position: absolute;
+    right: 8px;
+    font-size: 1em;
+    color: #162938;
+    line-height: 57px;
+}
+#signup .container .form-box .input-box .icon .cursor-pointer{
+    cursor: pointer;
+    margin-right: 10px;
+}
+#signup .container .form-box .remember-forgot {
+    font-size: 1.1em;
+    color: #162938;
+    font-weight: 500;
+    margin:  -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+#signup .container .form-box .remember-forgot label input {
+    accent-color: #162938;
+    margin-right: 3px;
+}
+#signup .container .form-box .remember-forgot a{
+    color: #162938;
+    text-decoration: none;
+}
+#signup .container .form-box .remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+#signup .container .form-box .btn {
+    width: 100%;
+    height: 45px;
+    background: #f0ad4e;
+    border: none;
+    outline:  none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+}
+#signup .container .form-box .login-register{
+    font-size: .9em;
+    color: #162938;
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}
+#signup .container .form-box .login-register p a {
+    color: #162938;
+    text-decoration: none;
+    font-weight: 600;
+}
+#signup .container .form-box .login-register p a:hover{
+    text-decoration: underline;
+}
+#signup .container .form-box .icons{
+    text-align: center;
+}
+#signup .container .form-box .icons p{
+    margin-top: 10px;
+    color: #162938;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.2em;
+}
+#signup .container .form-box .icons a.icons-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0px 5px 20px 0.5px rgba(81, 81, 81, 0.2);
+    transition: all 0.2s;
+}
+
+#signup .container .form-box .icons a.icons-btn + a.icons-btn {
+    margin-left: 5px;
+}
+
+#signup .container .form-box .icons a.icons-btn:active {
+    transform: translateY(3px);
+}
+#dob {
+    border: 2px solid #162938;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+select[name="gender"] {
+    border: 2px solid #162938;
+    font-weight: 600;
+    margin-left: 10px;
+}
