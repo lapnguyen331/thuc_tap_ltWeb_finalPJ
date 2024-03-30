@@ -138,36 +138,12 @@
                     revert: function (id, load, error) {
                         //setTimeout(() => error('oh my god'), 10)
                         const doRevert = async function() {
-                             const {data: {timestamp, url, public_id, signature}} = await axios.get(`${pageContext.request.contextPath}/cloudinary/get-signature`, {
-                                params: {
-                                    type: 'revert',
-                                    id: id,
-                                },
-                            })
-                            const API_KEY = '367879416323992'
-                            const formData = new FormData();
-                            formData.append('api_key', API_KEY)
-                            formData.append('signature', signature)
-                            formData.append('public_id', public_id)
-                            formData.append('timestamp', timestamp)
-                            fetch(url, {
-                                method: 'delete',
-                                headers: {
-                                    "Content-Type": "application/json"
-                                },
-                                body: JSON.stringify({
-                                    'api_key': API_KEY,
-                                    'signature': signature,
-                                    'public_id': public_id,
-                                    'timestamp': timestamp
-                                })
-                            })
-                            .then((response) => {
+                            axios.get(`${pageContext.request.contextPath}/cloudinary/revert-upload`, {
+                                params: {id: id}
+                            }).then(response => {
                                 console.log(response)
                                 load();
-                            })
-                            .catch((thrown) => {
-                                console.log(thrown)
+                            }).catch(thrown => {
                                 thrown && setTimeout(() => error('Có lỗi xảy ra...'), 10)
                             })
                         }
