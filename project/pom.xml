@@ -59,6 +59,11 @@
             <artifactId>jdbi3-sqlobject</artifactId>
             <version>3.41.3</version>
         </dependency>
+        <dependency>
+            <groupId>com.cloudinary</groupId>
+            <artifactId>cloudinary-http44</artifactId>
+            <version>1.36.0</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api -->
         <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/apache-jstl -->
         <dependency>
