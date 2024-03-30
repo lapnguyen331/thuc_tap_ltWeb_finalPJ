@@ -70,8 +70,6 @@ const data_tables = new DataTable('#table_orders', {
         {
             data: 'create'
         },
-
-       
     ],
     createdRow: function( row, data, dataIndex ) {
         $(row).addClass('abc');

@@ -19,103 +19,16 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/contact.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/fixed-buttons.css">
 
-    <title>Check Out</title>
+    <title>Liên hệ</title>
 </head>
 <body>
-    <div id="fixed-btns">
-        <div class="cart-btn" type="button" data-mdb-toggle="modal" data-mdb-target="#my-cart">
-            <i class="fa-solid fa-cart-plus d-inline-block pt-1 pe-none"></i>
-        </div>
-    </div>
-    <div class="modal fade right" id="my-cart" tabindex="-1">
-        <div class="modal-dialog modal-side modal-top-right">
-            <div class="modal-content bg-gold">
-                <div class="modal-header">
-                    <div class="modal-title">
-                        <div class="fw-semibold fs-5 text-up">
-                            <span>Giỏ hàng của tôi</span>
-                            <i class="fa-solid fa-basket-shopping"></i>
-                        </div>
-                    </div>
-                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="cart-products d-flex flex-column">
-                        <div class="product-wrap d-flex align-items-center gap-2">
-                            <div class="btn-product-remove">
-                                <i class="fa-regular fa-trash-can"></i>
-                            </div>
-                            <div class="img-wrap border rounded d-flex align-items-center justify-content-center">
-                                <img src="/template/image/cao-hong-sam-hong-seon-gold-hop-2-lo-250g-1.webp" width="100%">
-                            </div>
-                            <div class="d-flex flex-column justify-content-center">
-                                <div class="product-name">
-                                    Cao hồng sâm Hong Seon Gold hộp 2 lọ 250g
-                                </div>
-                                <div class="text-primray-red-color-main fw-bold">
-                                    980.000₫
-                                </div>
-                            </div>
-                            <div class="amount-btns">
-                                <div class="bg-primary-red-main-color text-wheat-color d-flex align-items-center arrow-wrap">
-                                    <div class="arrow arrow-down"></div>
-                                </div>
-                                <input type="text">
-                                <div class="bg-primary-red-main-color text-wheat-color d-flex align-items-center arrow-wrap">
-                                    <div class="arrow arrow-up"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-wrap d-flex align-items-center gap-2">
-                            <div class="btn-product-remove">
-                                <i class="fa-regular fa-trash-can"></i>
-                            </div>
-                            <div class="img-wrap border rounded d-flex align-items-center justify-content-center">
-                                <img src="/template/image/cao-sam-hu-doi-1.jpg" width="100%">
-                            </div>
-                            <div class="d-flex flex-column justify-content-center">
-                                <div class="product-name">
-                                    Cao Sâm Hũ Đôi Arirang Hàn Quốc
-                                </div>
-                                <div class="text-primray-red-color-main fw-bold">
-                                    2.100.000₫
-                                </div>
-                            </div>
-                            <div class="amount-btns">
-                                <div class="bg-primary-red-main-color text-wheat-color d-flex align-items-center arrow-wrap">
-                                    <div class="arrow arrow-down"></div>
-                                </div>
-                                <input type="text">
-                                <div class="bg-primary-red-main-color text-wheat-color d-flex align-items-center arrow-wrap">
-                                    <div class="arrow arrow-up"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="bg-gold bg-sharp-5">
-                        <button class="btn-moveTo" >
-                            <a href="${pageContext.request.contextPath}/cart.html" >
-                                <span >Xem chi tiết giỏ hàng</span>
-                            </a>
-                        </button>
-                    </div>
+<jsp:include page="/WEB-INF/view/shared/cart.jsp"></jsp:include>
 
-                    <div class="bg-gold bg-sharp-5">
-                        <button class="btn-closeModal" type="button" data-mdb-dismiss="modal">
-                            <span>Hủy bỏ</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <jsp:include page="/WEB-INF/view/shared/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/view/shared/header.jsp"></jsp:include>
 
     <section id="contact-section">
         <div class="container">
-            <form action="#" method="post">
+            <form action="contact" method="post">
                 <div class="row px-3 py-3">
                     <div class="col-md-6">
                         <div class="contact-info-wrap">
@@ -124,19 +37,19 @@
                                 <div class="info-form ">
                                     <div class="txt-field last-name-txt-field">
                                         <label for="txt-last-name">Họ *:</label>
-                                        <input type="text" id="txt-last-name">
+                                        <input type="text" name="firstname" id="txt-last-name">
                                     </div>
                                     <div class="txt-field name-txt-field">
                                         <label for="txt-name">Tên *:</label>
-                                        <input type="text" id="txt-name">
+                                        <input type="text" name="lastname" id="txt-name">
                                     </div>
                                     <div class="txt-field phone-txt-field">
                                         <label for="txt-phone">Số điện thoại *:</label>
-                                        <input type="text" id="txt-phone">
+                                        <input type="text" name="submitphone" id="txt-phone">
                                     </div>
                                     <div class="txt-field email-txt-field">
-                                        <label for="txt-email">Số điện thoại *:</label>
-                                        <input type="text" id="txt-email">
+                                        <label for="txt-email">Email *:</label>
+                                        <input type="text" name="submitemail" id="txt-email">
                                     </div>
                                     <div class="txt-field note-txt-field">
                                         <label for="txt-note">Nội dung *:</label>
@@ -179,7 +92,7 @@
         src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v18.0" nonce="Qoebijhj">
     </script>
     <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
-    <script src="${pageContext.request.contextPath}/libs/mdb-bootstrap-5/js/mdb.min.js"></script>
+    <script src="${pageContext.request.contextPath}/libs/mdb-bootstrap-5-pro/js/mdb.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/checkout.js"></script>
 </body>
 </html>

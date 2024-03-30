@@ -98,7 +98,7 @@
 <%@ include file="/WEB-INF/view/admin/shared/sidebar.jsp" %>
 <section id="main-content-section">
     <div class="main-content">
-        <form id="products-form" method="post" action="${pageContext.request.contextPath}/admin/product/detail" enctype="multipart/form-data">
+        <form id="products-form" method="post" action="${pageContext.request.contextPath}/admin/product/detail/update" enctype="multipart/form-data">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
@@ -116,14 +116,14 @@
                                 <div class="d-flex flex-column">
                                     <h4>Ngày tạo sản phẩm</h4>
                                     <div class="form-outline">
-                                        <input type="text" name="createAt" value="${requestScope.product['getStringDayCreateAt']()}" class="form-control" placeholder="Ngày tạo" id="txt_date">
+                                        <input type="text" name="createAt" value="${requestScope.product['getStringDayCreateAt']()}" class="form-control" placeholder="Ngày tạo" id="txt_date" disabled>
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column">
                                     <h4>Tình trạng</h4>
-                                    <select class="select">
-                                        <option value="1" ${requestScope.product.status ? 'checked' : ''}>Hoạt động</option>
-                                        <option value="0" ${requestScope.product.status ? '' : 'checked'}>Tạm dừng</option>
+                                    <select class="select" name="status">
+                                        <option value="true" ${requestScope.product.status ? 'selected="selected"' : ''}>Hoạt động</option>
+                                        <option value="false" ${requestScope.product.status ? '' : 'selected="selected"'}>Tạm dừng</option>
                                     </select>
                                 </div>
                             </div>
@@ -131,6 +131,13 @@
                     </div>
                     <div class="col-md-9">
                         <div class="right-container bg-white rounded p-4">
+                            <c:if test="${not empty requestScope.message}">
+                                <div class="col-md-12">
+                                    <div class="fw-semibold text-center text-success">
+                                            ${requestScope.message}
+                                    </div>
+                                </div>
+                            </c:if>
                             <!-- Tabs navs -->
                             <ul class="nav nav-tabs mb-3 nav-fill" id="ex1" role="tablist">
                                 <li class="nav-item" role="presentation">
@@ -266,7 +273,8 @@
                                         <div class="fw-semibold">Mã bài viết</div>
                                         <div class="input-group mb-3">
                                             <div id="box_blog_filter">
-                                                <input name="blogId" value="${requestScope.product.blog.id}" type="text" id="blog_filter" class="form-control" style="width: 400px;" />
+                                                <input name="blogId" type="hidden" id="txt-blog-id" value="${requestScope.product.blog.id}">
+                                                <input type="text" id="blog_filter" value="${requestScope.product.blog.title}" class="form-control" style="width: 400px;" />
                                             </div>
                                             <button class="btn btn-primary d-flex gap-1 align-items-center text-capitalize" type="button">
                                                 <i class="fa-regular fa-folder-open"></i>
@@ -287,7 +295,7 @@
                             </div>
                         </div>
                         <div class="actions-field">
-                            <button class="cancel-btn">Làm mới</button>
+<%--                            <button class="cancel-btn">Làm mới</button>--%>
                             <button type="submit" class="update-btn">Cập nhật thông tin</button>
                         </div>
                     </div>
@@ -304,7 +312,7 @@
 <script src="${pageContext.request.contextPath}/libs/DataTables/datatables.min.js"></script>
 <script src="${pageContext.request.contextPath}/libs/daterangepicker-master/daterangepicker.js"></script>
 <script src="${pageContext.request.contextPath}/libs/suneditor-master/dist/suneditor.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/admin/products-edit.js?v=7"></script>
+<script src="${pageContext.request.contextPath}/js/admin/products-edit.js?v=10"></script>
 <script>
     loadBlog('${requestScope.product.blog.path}');
 </script>

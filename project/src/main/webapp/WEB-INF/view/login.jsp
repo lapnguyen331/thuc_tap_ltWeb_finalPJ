@@ -24,7 +24,7 @@
     <div class="container">
         <div class="form-box login">
             <h2>Đăng nhập</h2>
-            <form id="login-form" method="post">
+            <form id="login-form" method="post" onsubmit="return validateForm()" >
                 <div class="input-box">
                 <span class="icon">
                   <i class="fa-solid fa-user fa-sm"></i>
@@ -53,6 +53,11 @@
                     <div class="text-danger fw-light"></div>
                 </div>
                 <div class="icons">
+                    <c:if test="${not empty requestScope.message}">
+                        <div class="fw-semibold text-danger text-center">
+                            ${requestScope.message}
+                        </div>
+                    </c:if>
                     <p>Hoặc đăng nhập với:</p>
                     <a href="#" class="icons-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0,0,256,256">
@@ -79,6 +84,7 @@
         src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v18.0" nonce="Qoebijhj">
 </script>
 <script src="${pageContext.request.contextPath}/js/login-page_v06.js"></script>
+<script src="${pageContext.request.contextPath}/js/login-validation.js"></script>
 <script src="${pageContext.request.contextPath}/libs/swiper/swiper-bundle.min.js"></script>
 <script>
     $(document).ready(function() {

@@ -33,7 +33,7 @@ public class OrderItemDAO extends AbstractDAO<OrderItem> implements IOrderItemDA
                     .define("table2", "orders")
                     .define("table3", "products")
                     .define("table4","images")
-                    .define("columns", "odi.*, od.id, p.*,img.*");
+                    .define("columns", "odi.*, od.id, p.*, img.*");
         }, new OrderItemRowMapper("odi"), new OrderRowMapper("od"), new ProductRowMapper("p"),new ImageRowMapper("img"));
     }
 
@@ -61,6 +61,32 @@ public class OrderItemDAO extends AbstractDAO<OrderItem> implements IOrderItemDA
                     .defineList("columns", keys)
                     .bindList("values", values);
         }).mapTo(int.class).findOne().orElse(0);
+    }
+
+    @Override
+    public List<OrderItem> getOrderItemOf(Order order) {
+        final String SELECT = "SELECT <columns> FROM <table1> odi" +
+                " JOIN <table2> od ON odi.orderId = od.id" +
+                " JOIN <table3> p ON odi.productId = p.id"+
+                " LEFT JOIN <table4> img on p.thumbnail = img.id" +
+                " WHERE odi.orderId = :order.id"  ;
+        return query(SELECT, OrderItem.class, query -> {
+            query.define("table1", "order_details")
+                    .define("table2", "orders")
+                    .define("table3", "products")
+                    .define("table4","images")
+                    .define("columns", "odi.*, od.id, p.*, img.*")
+                    .bindBean("order", order);
+        }, new OrderItemRowMapper("odi"), new OrderRowMapper("od"), new ProductRowMapper("p"),new ImageRowMapper("img"));
+    }
+
+    @Override
+    public int delete(OrderItem orderItem) {
+        final String DELETE = "DELETE FROM <table> WHERE orderId = :orderItem.order.id AND productId = :orderItem.product.id";
+        return update(DELETE, update -> {
+            update.define("table", "order_details")
+                    .bindBean("orderItem", orderItem);
+        });
     }
 
 

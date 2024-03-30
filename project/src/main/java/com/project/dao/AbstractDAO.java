@@ -13,6 +13,7 @@ import org.jdbi.v3.core.statement.SqlStatement;
 import org.jdbi.v3.core.statement.Update;
 import org.json.JSONObject;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
@@ -50,6 +51,7 @@ public abstract class AbstractDAO<T> implements GenericDAO<T> {
             statement.bind(i, para[i]);
         }
     }
+
 
     @Override
     public List<T> query(String sql, RowMapper<T> mapper, Consumer<Query> callback) {

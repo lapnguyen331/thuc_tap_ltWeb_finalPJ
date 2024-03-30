@@ -55,6 +55,9 @@ public class ProductService extends AbstractService {
     public List<Product> search(String name, int categoryId, String brand, String minPrice, String maxPrice) {
         return productDAO.searchProduct(name, categoryId, brand, minPrice, maxPrice);
     }
+    public int insertProduct(Product p) {
+        return productDAO.insert(p);
+    }
     public List<Product> search(@Nullable String name, @NotNull List<Integer> categoryIds, @NotNull List<String> brands) {
         return productDAO.searchProduct(name, categoryIds, brands);
     }

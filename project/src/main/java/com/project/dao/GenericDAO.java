@@ -13,4 +13,5 @@ public interface GenericDAO<T> {
     List<T> query(String sql, RowMapper<T> mapper, Consumer<Query> callback);
     int insert(String sql, Consumer<Update> callback) throws Exception;
     boolean check(String sql, Predicate<Query> check) throws Exception;
+//    int querryAmmount(String sql);
 }

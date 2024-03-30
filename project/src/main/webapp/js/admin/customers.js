@@ -22,16 +22,17 @@ const translate = {
         "sortDescending": ": activate to sort column descending"
     }
 };
+// const status_badget = {
+//     active: '<span class="badge badge-success">Hoạt động</span>',
+//     deactive: '<span class="badge badge-danger">Tạm ngưng</span>',
+// }
 const status_badget = {
-    active: '<span class="badge badge-success">Hoạt động</span>',
-    deactive: '<span class="badge badge-danger">Tạm ngưng</span>',
+    1: '<span class="badge badge-success">Hoạt động</span>',
+    0: '<span class="badge badge-danger">Tạm ngưng</span>',
 }
-const verify_badget = {
-    1: '<span class="badge badge-success">Đã Xác minh</span>',
-    0: '<span class="badge badge-danger">Chưa xác minh</span>',
-}
+console.log('test');
 const data_tables = new DataTable('#table_customers', {
-    ajax: '/template/admin/customers.txt',
+    ajax: `${window.context}/admin/customerApi`,
     language: translate,
     dom: 'tip',
     scrollCollapse: true,
@@ -48,7 +49,7 @@ const data_tables = new DataTable('#table_customers', {
         {
             data: 'email',
             render: function(data, type, row) {
-                return `<div class="d-flex justify-content-start w-100 gap-2"><span>${row.email}</span>${verify_badget[row.verified]}</div>`
+                return `<div class="d-flex justify-content-start w-100 gap-2"><span>${row.email}</span></div>`
             }
         },
         {
@@ -58,7 +59,7 @@ const data_tables = new DataTable('#table_customers', {
             data: 'created'
         },
         {
-            orderable: false,
+            // orderable: false,
             data: null,
             render: function(data) {
                 return status_badget[data.status];
@@ -68,10 +69,10 @@ const data_tables = new DataTable('#table_customers', {
             className: 'dt-right',
             data: null,
             orderable: false,
-            render: function() {
+            render: function(data, type, row) {
                 const html = `
-                <div class="action-btns">
-                    <a href="/template/admin/customers_edit.html" data-mdb-toggle="tooltip">
+                <div class="action-btns" >
+                    <a href="${window.context}/admin/customers_edit?customerid=${row.id}" data-mdb-toggle="tooltip">
                         <i class="fa-solid fa-edit view-btn" data-mdb-toggle="tooltip" title="Chỉnh sửa"></i>
                     </a>
                     <i class="fa-solid fa-circle-xmark remove-btn" data-mdb-toggle="tooltip" title="Xóa khách hàng"></i>
@@ -95,7 +96,7 @@ $('#date_picker').daterangepicker({
     drop: "auto",
     autoUpdateInput: false,
 }, function(start, end, label) {
-  console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+    console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
 });
 
 $('#date_picker').on('apply.daterangepicker', function(ev, picker) {

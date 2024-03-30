@@ -262,29 +262,31 @@ public class ProductDAO extends AbstractDAO<Product> implements IProductDAO {
                 p.getDescription(),
                 p.getProducer() == null ? null : p.getProducer().getId(),
                 p.getCategory() == null ? null : p.getCategory().getId(),
-                p.getDiscount() == null ? null : p.getDiscount().getId(),
+                p.getDiscount() == null || p.getDiscount().getId() == 0 ? null : p.getDiscount().getId(),
                 p.getBlog() == null ? null : p.getBlog().getId(),
                 p.getCreateAt() == null ? LocalDateTime.now().toString() : p.getCreateAt().toString(),
                 p.getUpdateAt() == null ? LocalDateTime.now().toString() : p.getUpdateAt().toString()
         );
+        values = values.stream().filter(v -> v != null).toList();
         var columns = Arrays.asList(
                 "name",
                 "price",
                 "quantity",
                 "minAge",
-                "thumbnail",
+                p.getThumbnail() == null || p.getThumbnail().getId() == 0 ? null : "thumbnail",
                 "specification",
                 "weight",
                 "status",
                 "brand",
                 "description",
-                "producerId",
-                "categoryId",
-                "discountId",
-                "blogId",
+                p.getProducer() == null || p.getProducer().getId() == 0 ? null : "producerId",
+                p.getCategory() == null || p.getCategory().getId() == 0 ? null : "categoryId",
+                p.getDiscount() == null || p.getDiscount().getId() == 0 ? null : "discountId",
+                p.getBlog() == null || p.getBlog().getId() == 0 ? null : "blogId",
                 "createAt",
                 "updateAt"
         );
+        columns = columns.stream().filter(c -> c != null).toList();
         var updates = new ArrayList<String>();
         for (int i = 0; i < columns.size(); i++) {
             updates.add(String.format("%s = '%s'", columns.get(i), values.get(i)));

@@ -31,6 +31,9 @@ public class UserService extends AbstractService {
     public List<User> getAll() {
         return userDAO.getAll();
     }
+    public List<User> getAllCustomer(){
+        return userDAO.getAllCustomer();
+    }
 
     public User getUserByName(String username) {
         return userDAO.getLoginInfo(username);
@@ -70,10 +73,13 @@ public class UserService extends AbstractService {
     public int updateInfor(int id, String username, String firstname,String lastname,String email,String phone,String address, String gender, String birth){
         return userDAO.updateInfor(id,username,firstname,lastname,email,phone,address,gender,birth);
     }
+    public int updateCustomerInfor(int id, String username, String firstname,String lastname,String email,String phone,String address, String gender, String birth,String status){
+        return userDAO.updateCusIfor(id,username,firstname,lastname,email,phone,address,gender,birth,status);
+    }
     public static void main(String[] args) {
         var service = new UserService();
 //        System.out.println(service.getUserByName("root"));
-        System.out.println(service.updateInfor(3,"up","up","up","up","up","up","0","2023-11-10"));
+//        System.out.println(service.updateInfor(3,"up","up","up","up","up","up","0","2023-11-10"));
 //        try {
 //            String em = User.hashPassword("conga");
 //            System.out.println(em);
@@ -81,6 +87,8 @@ public class UserService extends AbstractService {
 //        } catch (NoSuchAlgorithmException e) {
 //            throw new RuntimeException(e);
 //        }
+//        service.getAllCustomer().forEach(System.out::println);
+        System.out.println(service.getInforById(15));
 
     }
 }

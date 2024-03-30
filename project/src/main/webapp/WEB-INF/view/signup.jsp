@@ -30,13 +30,13 @@
     <div class="container">
         <div class="form-box register">
             <h2>Đăng ký tài khoản</h2>
-            <form action ="${pageContext.request.contextPath}/signup" method="post">
+            <form action ="${pageContext.request.contextPath}/signup" method="post" onsubmit="return validateSignupForm()">
                 <c:if test="${empty requestScope.message}">
                     <div class="input-box">
                     <span class="icon">
                          <i class="fa-solid fa-user fa-sm"></i>
                     </span>
-                        <input type="text" id="username" name="username" required>
+                        <input type="text" id="username" name="username">
                         <label>Tên tài khoản</label>
                     </div>
                     <div class="row">
@@ -45,7 +45,7 @@
                             <span class="icon">
                                 <i class="fa-light fa-input-text"></i>
                             </span>
-                                <input type="text" id="first-name" name="firstName" required>
+                                <input type="text" id="first-name" name="firstName">
                                 <label for="first-name">Họ</label>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                             <span class="icon">
                               <i class="fa-solid fa-signature"></i>
                              </span>
-                                <input type="text" id="last-name" name="lastName" required>
+                                <input type="text" id="last-name" name="lastName">
                                 <label for="last-name">Tên</label>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                         <div class="col-md-7">
                             <div class="input">
                                 <label for="dob">Ngày sinh</label>
-                                <input type="date" id="dob" name="dob" required>
+                                <input type="date" id="dob" name="dob">
                             </div>
                         </div>
                         <div class="col-md-5">
@@ -72,7 +72,7 @@
                                 <i class="fa-solid fa-venus-mars"></i>
                              </span>
                                 <label>Giới tính</label>
-                                <select name="gender" required>
+                                <select name="gender">
                                     <option value="false">Nam</option>
                                     <option value="true">Nữ</option>
                                 </select>
@@ -83,14 +83,14 @@
                     <span class="icon">
                        <i class="fa-solid fa-mobile"></i>
                     </span>
-                        <input type="text" id="phone-number" name="phone" required>
+                        <input type="text" id="phone-number" name="phone">
                         <label for="phone-number">Số điện thoại</label>
                     </div>
                     <div class="input-box">
                 <span class="icon">
                   <i class="fa-solid fa-envelope fa-sm"></i>
                 </span>
-                        <input type="text" name="email" required>
+                        <input type="text" name="email">
                         <label>Email</label>
                     </div>
                     <div class="input-box">
@@ -98,7 +98,7 @@
                   <i class="fa-solid fa-eye cursor-pointer"></i>
                   <i class="fa-solid fa-lock fa-sm"></i>
                 </span>
-                        <input type="password" name="password" id="password" required>
+                        <input type="password" name="password" id="password">
                         <label>Mật khẩu</label>
                     </div>
                     <div class="input-box">
@@ -106,13 +106,16 @@
                          <i class="fa-solid fa-eye cursor-pointer"></i>
                          <i class="fa-solid fa-lock fa-sm"></i>
                     </span>
-                        <input type="password" name="password2" id="password2" required>
+                        <input type="password" name="password2" id="password2">
                         <label>Nhập lại mật khẩu</label>
                     </div>
                     <div class="remember-forgot">
                         <label><input type="checkbox">Tôi đồng ý với các điều khoản sử dụng</label>
                     </div>
                     <button type="submit" class="btn">Đăng ký</button>
+                    <div class="d-flex justify-content-center" id="signup-status">
+                        <div class="text-danger fw-bold"></div>
+                    </div>
                 </c:if>
                 <c:if test="${not empty requestScope.message}">
                     <div class="fw-semibold txt-info text-center">
@@ -153,6 +156,7 @@
         src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v18.0" nonce="Qoebijhj">
 </script>
 <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/js/signup-validation"></script>
 <script src="${pageContext.request.contextPath}/libs/swiper/swiper-bundle.min.js"></script>
 <script src="${pageContext.request.contextPath}/libs/mdb-bootstrap-5-pro/js/mdb.min.js"></script>
 <script>

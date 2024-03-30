@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Properties;
 
 @MultipartConfig()
-@WebServlet(name = "AdminProductDetail_edit", urlPatterns = {"/admin/product/detail"})
+@WebServlet(name = "AdminProductDetail", urlPatterns = {"/admin/product/detail/*"})
 public class ProductDetailServlet extends HttpServlet {
     private final ProductService productService;
     private final ImageService imageService;
@@ -44,19 +44,130 @@ public class ProductDetailServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String action = request.getPathInfo();
+        var producers = producerService.getAll();
+        request.setAttribute("producers", producers);
+        switch (action) {
+            case "/update": {
+                showUpdatePage(request, response);
+                return;
+            }
+            case "/new": {
+                showNewPage(request, response);
+                return;
+            }
+        }
+    }
+
+    private void showNewPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/view/admin/product_details_new.jsp").forward(request, response);
+    }
+
+    private void showUpdatePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Product product = productService.getById(id);
+        System.out.println(product);
         var galleries = imageService.getGalleriesOf(product);
-        var producers = producerService.getAll();
         request.setAttribute("product", product);
         request.setAttribute("galleries", galleries);
-        request.setAttribute("producers", producers);
-        request.getRequestDispatcher("/WEB-INF/view/admin/product_details.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/admin/product_details_update.jsp").forward(request, response);
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doUpdate(request, response);
+        String action = request.getRequestURI().substring(request.getRequestURI().lastIndexOf("/"));
+        switch (action) {
+            case "/update":
+                doUpdate(request, response);
+                break;
+            case "/new":
+                doAdd(request, response);
+                break;
+        }
+    }
+
+    private void doAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        float price = Float.parseFloat(request.getParameter("price"));
+        var category = categoryService.findCateById(Integer.parseInt(request.getParameter("categoryId")));
+        String specification = request.getParameter("specification");
+        float weight = Float.parseFloat(request.getParameter("weight"));
+        String brand = request.getParameter("brand");
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        int minAge = Integer.parseInt(request.getParameter("minAge"));
+        var producer = producerService.getById(Integer.parseInt(request.getParameter("producerId")));
+        String description = request.getParameter("description");
+        boolean status = Boolean.parseBoolean(request.getParameter("status"));
+        var blog = blogService.findById(Integer.parseInt(request.getParameter("blogId")));
+        String[] thumbnail_old = request.getParameterValues("thumbnail-old-image[]");
+        Image thumbnail = null;
+        String[] gallery_old = request.getParameterValues("gallery-old-image[]");
+        try {
+            imageService.begin();
+            var handle = imageService.getHandle();
+            var sub_productService = new ProductService(handle);
+            Part thumbnail_new = request.getParts().stream()
+                    .filter(p -> "thumbnail-new-image[]".equals(p.getName()))
+                    .filter(p -> p.getSize() != 0)
+                    .findFirst().orElse(null);
+            if (thumbnail_new != null) {
+                int imgId = imageService.createAndInsert(thumbnail_new, request.getServletContext().getRealPath("/assests"));
+                thumbnail = imageService.findOneById(imgId);
+            } else if (thumbnail_old != null) {
+                String uuid = getUUID(thumbnail_old[0]);
+                thumbnail = imageService.findOneByUUID(uuid);
+            }
+            Product product = new Product();
+            {
+                product.setName(name);
+                product.setPrice(price);
+                product.setQuantity(quantity);
+                product.setMinAge(minAge);
+                product.setThumbnail(thumbnail);
+                product.setSpecification(specification);
+                product.setWeight(weight);
+                product.setStatus(status);
+                product.setBrand(brand);
+                product.setDescription(description);
+                product.setProducer(producer);
+                product.setCategory(category);
+                product.setBlog(blog);
+            }
+            int id = sub_productService.insertProduct(product);
+            if (id <= 0)
+                throw new OperationCancelledException();
+            product.setId(id);
+            List<Part> gallery_new = request.getParts().stream().filter(p -> "gallery-new-image[]".equals(p.getName()))
+                    .filter(p -> p.getSize() != 0)
+                    .toList();
+            if (!gallery_new.isEmpty()) {
+                for (Part p : gallery_new) {
+                    int insertedKey = imageService.createAndInsert(p, request.getServletContext().getRealPath("/assests"));
+                    imageService.insertToGalleryOf(product, imageService.findOneById(insertedKey));
+                }
+            }
+            if (gallery_old != null) {
+                for (String s : gallery_old) {
+                    String uuid = getUUID(s);
+                    var gallery = imageService.findOneByUUID(uuid);
+                    imageService.insertToGalleryOf(product, gallery);
+                }
+            }
+            imageService.commit();
+            request.setAttribute("message", "Thêm sản phẩm thành công");
+            response.sendRedirect(request.getContextPath()+"/admin/product/detail/update?id="+id);
+        } catch (IOException e) {
+            e.printStackTrace();
+            imageService.rollback();
+            request.setAttribute("message", "Có lỗi xảy ra trong quá trình thêm mới");
+            request.getRequestDispatcher("/WEB-INF/view/admin/product_details_new.jsp").forward(request, response);
+        } catch (OperationCancelledException e) {
+            e.printStackTrace();
+            imageService.rollback();
+            request.setAttribute("message", "Có lỗi xảy ra trong quá trình thêm mới");
+            request.getRequestDispatcher("/WEB-INF/view/admin/product_details_new.jsp").forward(request, response);
+        }
     }
 
     private void doUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -115,9 +226,12 @@ public class ProductDetailServlet extends HttpServlet {
             }
             int update = sub_productService.updateProduct(product);
             if (update <= 0) throw new OperationCancelledException();
-            imageService.clearGalleries(product);
+            int delete = imageService.clearGalleries(product);
             if (!gallery_new.isEmpty()) {
-                for (Part p : gallery_new) imageService.createAndInsert(p, request.getServletContext().getRealPath("/assests"));
+                for (Part p : gallery_new) {
+                    int insertedKey = imageService.createAndInsert(p, request.getServletContext().getRealPath("/assests"));
+                    imageService.insertToGalleryOf(product, imageService.findOneById(insertedKey));
+                }
             }
             if (gallery_old != null) {
                 for (String s : gallery_old) {
@@ -126,33 +240,15 @@ public class ProductDetailServlet extends HttpServlet {
                     imageService.insertToGalleryOf(product, gallery);
                 }
             }
-            imageService.rollback();
+            request.setAttribute("message", "Update sản phẩm thành công");
+            imageService.commit();
         } catch (IOException e) {
             e.printStackTrace();
             imageService.rollback();
         } catch (NotFoundProductException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private String getJSONProducts(List<Product> products) {
-        JSONArray data = new JSONArray();
-        for (var product : products) {
-            JSONObject obj = new JSONObject();
-            obj.put("id", product.getId())
-                    .put("name", product.getName())
-                    .put("specific", product.getSpecification())
-                    .put("discount", product.getDiscount().getDiscountPercent())
-                    .put("image", product.getThumbnail().getPath())
-                    .put("rate", 4.9)
-                    .put("price", product.getStringPrice(product.getPrice()))
-                    .put("category", product.getCategory().getId())
-                    .put("quantity", product.getQuantity());
-            data.put(obj);
-        }
-        JSONObject rs = new JSONObject();
-        rs.put("data", data);
-        return rs.toString();
+        response.sendRedirect(request.getContextPath()+"/admin/product/detail/update?id="+id);
     }
     private String getUUID(String link) {
         String fileName = link.substring(link.lastIndexOf('/')+1, link.length());

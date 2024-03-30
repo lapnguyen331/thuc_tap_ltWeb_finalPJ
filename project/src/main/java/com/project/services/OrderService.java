@@ -7,6 +7,7 @@ import com.project.exceptions.NotEnoughQuantityException;
 import com.project.exceptions.NotFoundProductException;
 import com.project.models.*;
 import org.jdbi.v3.core.Handle;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -29,11 +30,11 @@ public class OrderService extends AbstractService {
     public List<Order> getAll() {
         return orderDAO.getAll();
     }
+
     public int createOrder(List<CartItem> cartItems, Order order) throws NotEnoughQuantityException, NotFoundProductException {
         ProductService productService = new ProductService(this.handle);
         OrderItemService orderItemService = new OrderItemService(this.handle);
         int orderId = -1;
-        begin();
 //            Tạo order trước
         orderId = orderDAO.insert(order);
         order.setId(orderId);
@@ -53,6 +54,29 @@ public class OrderService extends AbstractService {
         update(order);
         return orderId;
     }
+    public int insertOrder(List<OrderItem> orderItems, Order order) throws NotEnoughQuantityException, NotFoundProductException {
+        ProductService productService = new ProductService(this.handle);
+        OrderItemService orderItemService = new OrderItemService(this.handle);
+        int orderId = -1;
+//            Tạo order trước
+        orderId = orderDAO.insert(order);
+        order.setId(orderId);
+//            Thêm orderItem tương ứng với cartItem
+        float orderPrice = 0f;
+        for (var item : orderItems) {
+            int productId = item.getProduct().getId();
+            var product = productService.getById(productId);
+            item.setOrder(order);
+//                Tính giá tiền của orderItem
+            float price = product.getDiscountPrice() * item.getQuantity();
+            orderPrice += price;
+            orderItemService.insert(item);
+        }
+//            Update lại thông tin tổng tiền của order
+        order.setTotalPrice(orderPrice);
+        update(order);
+        return orderId;
+    }
     //lấy order theo user
     public List<Order> getAllOrderOfUser(User user){
         return orderDAO.getAllUserOrder(user);
@@ -66,12 +90,7 @@ public class OrderService extends AbstractService {
         }
         return null;
     }
-
-    public static void main(String[] args) {
-        OrderService t = new OrderService();
-        User em = new User();
-//        em.setId(1);
-//        t.getAllOrderOfUser(em).forEach(System.out::println);
-        System.out.println(t.getOrderById(30));
+    public List<Order> getAllOrder(){
+        return orderDAO.getAllOrder();
     }
 }

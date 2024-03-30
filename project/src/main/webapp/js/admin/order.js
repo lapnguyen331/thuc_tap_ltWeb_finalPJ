@@ -1,4 +1,3 @@
-
 const translate = {
     "decimal":        "",
     "emptyTable":     "Không có dữ liệu trong table",
@@ -29,15 +28,29 @@ const categories = {
 const badget_status = [
     '<span class="badge badge-danger">Đã bị hủy</span>',
     '<span class="badge badge-success">Đã được giao</span>',
-    '<span class="badge badge-info">Đang xử lí</span>',
     '<span class="badge badge-primary">Đang giao</span>',
     '<span class="badge badge-warning">Đang trả về</span>',
 ]
+DataTable.ext.search.push(function (settings, data, dataIndex, row) {
+    const status = $('#status_filter').find(':selected').val();
+    if (!status) return true;
+    return row.status == status;
+})
+DataTable.ext.search.push(function (settings, data, dataIndex, row) {
+    if (!$('#date_picker').val()) return true;
+    const start = $('#date_picker').data('daterangepicker').startDate.format('DD-MM-YYYY');
+    const end = $('#date_picker').data('daterangepicker').endDate.format('DD-MM-YYYY');
+    const rowDate = moment(data[6], 'DD/MM/YYYY');
+    const startDate = moment(start, 'DD/MM/YYYY');
+    const endDate = moment(end, 'DD/MM/YYYY');
+    return rowDate.isAfter(startDate) && rowDate.isBefore(endDate)
+})
 const data_tables = new DataTable('#table_orders', {
-    ajax: '/template/admin/orders.txt',
+    ajax: `${window.context}/api/order/getAll`,
     language: translate,
     dom: 'tip',
     scrollCollapse: true,
+    pageLength: 5,
     width: '100%',
     scrollY: '400px',
     columns: [
@@ -45,7 +58,7 @@ const data_tables = new DataTable('#table_orders', {
             data: 'id'
         },
         {
-            data: 'customer'
+            data: 'name'
         },
         {
             data: 'price',
@@ -70,13 +83,12 @@ const data_tables = new DataTable('#table_orders', {
         },
         {
             data: null,
-            render: function() {
+            render: function(data, type, row) {
                 const html = `
                 <div class="action-btns">
-                    <a href="/template/admin/orders_edit.html" data-mdb-toggle="tooltip">
+                    <a href= "${window.context}/admin/order/update?id=${row.id}" data-mdb-toggle="tooltip">
                     <i class="fa-solid fa-edit view-btn" data-mdb-toggle="tooltip" title="Chỉnh sửa"></i>
                     </a>
-                    <i class="fa-solid fa-circle-xmark remove-btn" data-mdb-toggle="tooltip" title="Xóa đơn hàng"></i>
                 </div>
                 `
                 return html;
@@ -84,8 +96,12 @@ const data_tables = new DataTable('#table_orders', {
         },
     ],
 });
-
-
+$('#status_filter').on('change', function(e) {
+    data_tables.draw();
+})
+$("#filter_input").on('input', function(e) {
+    data_tables.column(1).search($(this).val()).draw()
+});
 //init
 (function() {
     $('#table_tabs').on('click', 'li', function() {
@@ -103,19 +119,18 @@ const data_tables = new DataTable('#table_orders', {
         drop: "auto",
         autoUpdateInput: false,
     }, function(start, end, label) {
-      console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+        $(this).data('start', start.format('YYYY-MM-DD'))
+        $(this).data('end', end.format('YYYY-MM-DD'))
     });
     
     $('#date_picker').on('apply.daterangepicker', function(ev, picker) {
         $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+        data_tables.draw();
     })
     
     $('#date_picker').on('cancel.daterangepicker', function(ev, picker) {
         $(this).val('');
+        data_tables.draw();
     });
-    
-    new mdb.Select($('#status_filter')[0], {
-        clearButton: true,
-    })
-    $('.select-clear-btn').css({display: 'none'});
+    new mdb.Select($('#status_filter')[0])
 })();

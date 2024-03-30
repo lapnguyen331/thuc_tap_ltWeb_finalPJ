@@ -30,15 +30,18 @@
     <div class="container">
         <div class="form-box forgot">
             <h2>Quên mật khẩu</h2>
-            <form action ="#">
+            <form id="fp-form" method="post" onsubmit="return validateFpForm()" >
                 <div class="input-box">
                     <span class="icon">
                         <i class="fa-solid fa-envelope fa-sm"></i>
                     </span>
-                    <input type="text" id="email" name="email" required>
+                    <input type="text" id="email" name="email">
                     <label for="email">Email:</label>
                 </div>
                 <button type="submit">Gửi yêu cầu</button>
+                <div class="d-flex justify-content-center" id="fp-status">
+                    <div class="text-danger fw-bold"></div>
+                </div>
             </form>
         </div>
     </div>
@@ -52,6 +55,7 @@
         src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v18.0" nonce="Qoebijhj">
 </script>
 <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/js/fp-validation.js"></script>
 <script src="${pageContext.request.contextPath}/libs/swiper/swiper-bundle.min.js"></script>
 <script>
     const swiper = new Swiper('.swiper', {

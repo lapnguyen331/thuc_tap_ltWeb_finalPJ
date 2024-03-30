@@ -27,7 +27,7 @@ const status_badget = {
     deactive: '<span class="badge badge-danger w-100">Chưa giải quyết</span>',
 }
 const data_tables = new DataTable('#table_contacts', {
-    ajax: '/template/admin/contacts.txt',
+    ajax: `${window.context}/admin/contactAPI`,
     language: translate,
     dom: 'tip',
     scrollCollapse: true,
@@ -56,7 +56,7 @@ const data_tables = new DataTable('#table_contacts', {
         {
             data: null,
             render: function(data, type, row) {
-                return `${data.first_name} ${data.last_name}`
+                return `${data.firstname} ${data.lastname}`
             }
         },
         {
@@ -151,7 +151,7 @@ const async_data = async (value) => {
 const modal_load = function(data) {
     let html = `
         <div>
-            <div class="fw-semibold text-black">${data.first_name} ${data.last_name}</div>
+            <div class="fw-semibold text-black">${data.firstname} ${data.lastname}</div>
             <div class="d-flex align-items-center gap-1 text-secondary">
                 <span>tới tôi</span>
                 <i class="fa-solid fa-chevron-down d-inline-block" style="font-size: 10px; padding-top: 5px;"></i>

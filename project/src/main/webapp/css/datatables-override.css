@@ -17,7 +17,7 @@
 }
 
 .dataTables_scrollHead {
-    background-image: url(/template/image/footer-bg.jpg);
+    background-image: url(../inventory/images/footer-bg.jpg);
     color: var(--wheat-color);
     box-shadow: rgba(0, 0, 0, 0.2) 0px 0.5rem 0.5rem !important;
     z-index: 1;

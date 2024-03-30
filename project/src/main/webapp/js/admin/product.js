@@ -80,7 +80,7 @@ const searchProducts = async function(){
                     </div>
                     <div class="action-btns">
 <!--                        <i class="fa-regular fa-circle-xmark remove-btn" data-mdb-toggle="tooltip" title="Xóa sản phẩm"></i>-->
-                        <a href="${window.context}/admin/product/detail?id=${data.id}" data-mdb-toggle="tooltip" title="Xem trang sản phẩm"><i class="fa-regular fa-edit view-btn"></i></a>
+                        <a href="${window.context}/admin/product/detail/update?id=${data.id}" data-mdb-toggle="tooltip" title="Xem trang sản phẩm"><i class="fa-regular fa-edit view-btn"></i></a>
                         <a href="${window.context}/product?id=${data.id}" data-mdb-toggle="tooltip" title="Xem trang sản phẩm"><i class="fa-regular fa-eye remove-btn"></i></a>
                     </div>
                 </div>

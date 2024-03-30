@@ -93,7 +93,7 @@ $('#input_price_product').on('change', function() {
 
 const asyncAutocomplete = document.querySelector('#async-brands');
 const asyncFilter = async (query) => {
-  const url = `https://dummyjson.com/products`;
+  const url = `${window.context}/admin/dashboardAPI`;
   const response = await fetch(url);
   const data = await response.json();
   const filter = data.products.filter(({brand}) => brand.indexOf(query) >= 0);
@@ -142,8 +142,8 @@ const products = {
         gallery: undefined,
         blog: '',
     },
-    
-    "CHS013912": { 
+
+    "CHS013912": {
         id: 'CHS013912',
         name: 'Cao hồng sâm Hong Seon Gold hộp 2 lọ 250g',
         price: '980000',
@@ -155,7 +155,7 @@ const products = {
         min_age: 13,
         producer: 'NCC2',
         desc: 'Cao hồng sâm 6 năm tuổi kết hợp bới một số loại thảo dược quý như linh chi, bạch chỉ,' +
-        'xuyên khung,… làm gia tăng những thành phần đặc hiệu và công năng của sản phẩm giúp cho việc hỗ trợ' 
+        'xuyên khung,… làm gia tăng những thành phần đặc hiệu và công năng của sản phẩm giúp cho việc hỗ trợ'
         + 'và tăng cường bồi bổ cơ thể, cải thiện sức khỏe đạt hiệu quả tốt nhất…',
         thumbnail: [{id: 1, src: 'https://hongsamkimy.vn/wp-content/uploads/2023/07/Untitled-design-2023-07-13T093015.683-jpg.webp'}],
         gallery: [

@@ -14,6 +14,7 @@
     gap: 20px;
 }
 
+#customer-info,
 #order-info {
     min-height: 100px;
     background-color: white;
@@ -38,23 +39,24 @@
     padding: 20px;
 }
 
-#product_edit #products-form .form-title {
+#product_edit #order-form .form-title {
     font-weight: 500;
 }
 
-#product_edit #products-form .products-range {
+#product_edit #order-form .products-range {
     display: grid;
     grid-template-columns: 33% 33% 33%;
     gap: 10px;
     padding: 20px;
     border: 1px dashed rgba(0,0,0,.5);
     border-radius: 5px;
-    min-height: 236px;
+    min-height: 150px;
     margin-top: 10px;
     margin-bottom: 20px;
+    position: relative;
 }
 
-#product_edit #products-form .products-range .product-card {
+#product_edit #order-form .products-range .product-card {
     display: flex;
     align-items: center;
     width: inherit;
@@ -66,7 +68,7 @@
     position: relative;
 }
 
-#product_edit #products-form .products-range .product-card .remove-btn {
+#product_edit #order-form .products-range .product-card .remove-btn {
     font-size: 18px;
     cursor: pointer;
     color: #fa5252;
@@ -78,11 +80,11 @@
     transition: all .2s;
 }
 
-#product_edit #products-form .products-range .product-card:hover .remove-btn {
+#product_edit #order-form .products-range .product-card:hover .remove-btn {
     opacity: 1;
 }
 
-#product_edit #products-form .products-range .product-card .img-wrap {
+#product_edit #order-form .products-range .product-card .img-wrap {
     flex-shrink: 0;
     width: 64px;
     height: 64px;
@@ -90,39 +92,39 @@
     border: 1px dashed rgba(0,0,0,.5);
 }
 
-#product_edit #products-form .products-range .product-card .info-wrap {
+#product_edit #order-form .products-range .product-card .info-wrap {
     overflow: hidden;
 }
 
-#product_edit #products-form .products-range .product-card .info-wrap .product-title {
+#product_edit #order-form .products-range .product-card .info-wrap .product-title {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     font-weight: 500;
 }
 
-#product_edit #products-form .products-range .product-card .info-wrap .product-price {
+#product_edit #order-form .products-range .product-card .info-wrap .product-price {
     font-size: 14px;
     font-weight: 500;
 }
 
-#product_edit #products-form .products-range .product-card .info-wrap .id-wrap {
+#product_edit #order-form .products-range .product-card .info-wrap .id-wrap {
     display: flex;
     align-items: center;
 }
 
-#product_edit #products-form .products-range .product-card .info-wrap .id-wrap .product-id {
+#product_edit #order-form .products-range .product-card .info-wrap .id-wrap .product-id {
     font-size: 14px;
     color: rgba(0,0,0,.5);
 }
 
-#product_edit #products-form .products-range .product-card .info-wrap .id-wrap .number-field {
+#product_edit #order-form .products-range .product-card .info-wrap .id-wrap .number-field {
     display: flex;
     height: 20px;
     margin-left: auto;
 }
 
-#product_edit #products-form .products-range .product-card .info-wrap .id-wrap .number-field input {
+#product_edit #order-form .products-range .product-card .info-wrap .id-wrap .number-field input {
     width: 30px;
     border: 1px solid rgba(0,0,0,.5);
     text-align: center;
@@ -138,7 +140,7 @@
     outline: none;
 }
 
-#product_edit #products-form .products-range .product-card .info-wrap .id-wrap .number-field button {
+#product_edit #order-form .products-range .product-card .info-wrap .id-wrap .number-field button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -150,11 +152,11 @@
     transition: all .3s;
 }
 
-#product_edit #products-form .products-range .product-card .info-wrap .id-wrap .number-field button:hover {
+#product_edit #order-form .products-range .product-card .info-wrap .id-wrap .number-field button:hover {
     background-color: var(--red-dark-color-main);
 }
 
-#product_edit #products-form .products-range .product-card .info-wrap .id-wrap .number-field button span {
+#product_edit #order-form .products-range .product-card .info-wrap .id-wrap .number-field button span {
     display: flex;
     width: 10px;
     height: 10px;
@@ -163,7 +165,7 @@
     font-weight: bold;
 }
 
-#product_edit #products-form .filter-input {
+#product_edit #order-form .filter-input {
     background-color: #f9f9f9;
     border-radius: 5px;
     display: inline-flex;
@@ -173,11 +175,11 @@
     color: #4B5675;
 }
 
-#product_edit #products-form .filter-input:has(input:focus) {
+#product_edit #order-form .filter-input:has(input:focus) {
     background-color: #f1f1f4;
 }
 
-#product_edit #products-form .filter-input input {
+#product_edit #order-form .filter-input input {
     width: 250px;
     border: 0;
     background: none;
@@ -265,20 +267,20 @@
     padding: 10px;
 }
 
-#order-info .customer-wrapper {
+#customer-info .customer-wrapper {
     display: flex;
     gap: 10px;
     align-items: center;
 }
 
-#order-info .customer-wrapper .avatar {
+#customer-info .customer-wrapper .avatar {
     width: 60px;
     height: 60px;
     border-radius: 5px;
     border: 1px dashed rgba(0,0,0,.5);
 }
 
-#order-info .customer-contact ul {
+#customer-info .customer-contact ul {
     margin: 0;
     margin-top: 15px;
     padding: 0;
