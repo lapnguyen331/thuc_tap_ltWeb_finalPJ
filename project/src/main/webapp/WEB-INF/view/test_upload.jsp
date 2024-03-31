@@ -10,6 +10,7 @@
     <!-- add before </body> -->
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/libs/mdb-bootstrap-5-pro/css/mdb.min.css">
     <style>
         .filepond--drop-label {
             color: #4c4e53;
@@ -38,16 +39,15 @@
     </style>
 </head>
 <body>
-    <form method="post" id="upload" enctype="multipart/form-data">
-        <input type="file" id="file" multiple />
-        <button type="submit">Upload</button>
-    </form>
+    <div class="d-flex justify-content-center" id="loading-bar">
+        <img src="${pageContext.request.contextPath}/inventory/images/loading-gif.gif" width="100px" alt="">
+    </div>
     <input type="file"
            class="filepond"
            name="filepond"
            multiple
            data-max-file-size="3MB"
-           data-max-files="8">
+           data-max-files="8" style="display: none">
     <script
             src="https://code.jquery.com/jquery-3.7.1.js"
             integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
@@ -68,6 +68,7 @@
                     },
                 }
             })
+            $('#loading-bar').addClass('d-none')
             FilePond.registerPlugin(FilePondPluginImagePreview);
             // Turn input element into a pond with configuration options
             FilePond.create($('.filepond').get()[0], {
@@ -185,42 +186,6 @@
                 },
             });
         })();
-    </script>
-    <script>
-        $("#upload").on("submit", async function (e) {
-            e.preventDefault();
-            const API_KEY = '367879416323992'
-            const files = [...$(this).find("input").prop("files")];
-            const formData = new FormData();
-            const api = `https://api.cloudinary.com/v1_1/dqki124o5/auto/upload`;
-            const {data: signatureData} = await axios.get(`${pageContext.request.contextPath}/cloudinary/get-signature`);
-            console.log('sign data: ', signatureData)
-            formData.append('timestamp', signatureData.timestamp);
-            formData.append('signature', signatureData.signature);
-            formData.append('folder', signatureData.folder);
-            formData.append('api_key', API_KEY);
-            for (const file of files) {
-                formData.append("file", file);
-                const {data: res} = await axios.post(api, formData, {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    },
-                    onUploadProgress: ({loaded, total, progress, bytes, estimated, rate, upload  = true}) => {
-                        console.log(loaded + '/' + total);
-                    }
-                });
-                $.ajax({
-                    type: 'post',
-                    url: `${pageContext.request.contextPath}/cloudinary/upload`,
-                    data: {
-                        public_id: res.public_id,
-                        version: res.version,
-                        signature: res.signature,
-                        resource_type: res.resource_type
-                    },
-                }).then(msg => console.log(msg))
-            }
-        });
     </script>
 </body>
 </html>
