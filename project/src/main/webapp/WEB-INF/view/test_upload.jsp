@@ -94,7 +94,7 @@
                             formData.append('signature', signatureData.signature);
                             formData.append('folder', signatureData.folder);
                             formData.append('api_key', API_KEY);
-                            formData.append("file", file);
+                            formData.append("file", 'https://kgin.com.vn/wp-content/uploads/2021/10/nuoc-sam-100-anh-dai-dien-1.jpg');
                             const {data: res} = await axios.post(api, formData, {
                                 headers: {
                                     "Content-Type": "multipart/form-data",

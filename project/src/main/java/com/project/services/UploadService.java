@@ -70,11 +70,36 @@ public class UploadService {
         return cloudinary.api().deleteResources(public_id, params);
     }
 
+    public List<String> uploadImagesByURL(List<String> urls, String folder) throws Exception {
+        List<String> rs = new ArrayList<>();
+        try {
+            for (String url : urls) {
+                var response = cloudinary.uploader().upload(url, ObjectUtils.asMap(
+                        "folder", folder
+                ));
+                System.out.println(response.get("public_id"));
+                rs.add((String) response.get("public_id"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            cloudinary.api().deleteResourcesByPrefix(folder+"/", ObjectUtils.emptyMap());
+            System.out.println("Xảy ra lỗi, đã xóa toàn bộ folder: "+folder);
+        }
+        return rs;
+    }
+
     public ApiResponse getResource(String public_id, Map<String, Object> params) throws Exception {
         return cloudinary.api().resource(public_id, params);
     }
 
     public static void main(String[] args) throws Exception {
-        System.out.println(new UploadService().searchImages("folder:tmp/admin/* && assest_id = 7e238769212fe3e3632f2631049e501d"));
+        var list = Arrays.asList("https://kgin.com.vn/wp-content/uploads/2023/10/set-1-kgin-min.jpg",
+                "https://kgin.com.vn/wp-content/uploads/2023/10/bo-qua-tang-hong-sam-kgin.jpg",
+                "https://kgin.com.vn/wp-content/uploads/2023/10/set1-tri-an-950k-kgin.jpg",
+                "https://kgin.com.vn/wp-content/uploads/2023/10/set-1-tri-an-scaled.jpg",
+                "https://kgin.com.vn/wp-content/uploads/2023/10/bo-qua-tang-kin-scaled.jpg");
+        var instance = new UploadService();
+        var rs = instance.uploadImagesByURL(list, "assest/products/product__1");
+        System.out.println(rs);
     }
 }
