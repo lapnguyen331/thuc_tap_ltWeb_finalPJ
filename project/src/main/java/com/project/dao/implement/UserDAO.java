@@ -58,6 +58,17 @@ public class UserDAO extends AbstractDAO<User> implements IUserDAO {
     }
 
     @Override
+    public List<User> getUserByMail(String mail) {
+        final String SELECT = "SELECT <columns> FROM <table1> u" +
+                " WHERE u.email = :mail";
+        return query(SELECT, User.class, (query -> {
+            query.define("columns", "u.*")
+                    .bind("mail",mail)
+                    .define("table1", "users");
+        }), new UserRowMapper("u"));
+    }
+
+    @Override
     public User getToken(User user) {
         final String SELECT = "SELECT <columns> FROM <table>" +
                 " WHERE id = :user.id";
