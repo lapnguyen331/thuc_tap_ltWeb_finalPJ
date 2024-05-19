@@ -31,13 +31,18 @@ public class UserService extends AbstractService {
     public List<User> getAll() {
         return userDAO.getAll();
     }
-
+    public List<User> getUserByMail(String mail){
+        return userDAO.getUserByMail(mail);
+    }
     public User getUserByName(String username) {
         return userDAO.getLoginInfo(username);
     }
     //lấy thông tin user + avartar bằng id
     public User getInforById(int id){
         return userDAO.getInforUserById(id);
+    }
+    public int changePassById(int id,String password){
+        return userDAO.updateAccountById(id,password);
     }
     public int changePass(int id,String username,String password){
         return userDAO.updateAccount(id,username,password);
@@ -74,13 +79,14 @@ public class UserService extends AbstractService {
         var service = new UserService();
 //        System.out.println(service.getUserByName("root"));
         System.out.println(service.updateInfor(3,"up","up","up","up","up","up","0","2023-11-10"));
-//        try {
-//            String em = User.hashPassword("conga");
-//            System.out.println(em);
-//            System.out.println(service.changePass(3,"lapusername",em));
-//        } catch (NoSuchAlgorithmException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            String em = User.hashPassword("conga");
+            System.out.println(em);
+            System.out.println(service.changePassById(17,em));
+//            System.out.println(service.getInforById(17).toString());
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }

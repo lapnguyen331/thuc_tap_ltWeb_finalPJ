@@ -56,10 +56,10 @@ public class ForgotPassServlet extends HttpServlet {
             try {
                 String randompass = getRandomPass();
                 System.out.println(userList.get(0).toString());
-                int userId = userService.changePass(userList.get(0).getId(),userList.get(0).getUsername(),User.hashPassword(randompass));
+                userService.changePassById(userList.get(0).getId(),User.hashPassword(randompass.trim()));
                 MailService.sendMail("Website ginseng - reset mật khẩu","HỆ THỐNG WEB BÁN NHÂN SÂM GINSENG\n" +
                         "\n" +
-                        "Chúng tôi đã hỗ trỡ bạn  reset mật khẩu.\n Đây là mật khẩu mới của bạn:" +randompass+
+                        "Chúng tôi đã hỗ trỡ bạn  reset mật khẩu.\n Đây là mật khẩu mới của bạn: " +"*"+randompass+"*"+
                         "\n" +
                         "Trân trọng!\n" +
                         "Cảm ơn",email.trim());
@@ -78,7 +78,7 @@ public class ForgotPassServlet extends HttpServlet {
     private String getRandomPass (){
         char[] possibleCharacters = (new String("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")).toCharArray();
         int randomStrLength =9;
-        String randomStr = RandomStringUtils.random( randomStrLength, 0, possibleCharacters.length-1, false, false, possibleCharacters, new SecureRandom() );
+        String randomStr = RandomStringUtils.random( randomStrLength, 0, possibleCharacters.length-1, false, true, possibleCharacters, new SecureRandom() );
         System.out.println( "mật khẩu random " +randomStr );
         return randomStr;
     }

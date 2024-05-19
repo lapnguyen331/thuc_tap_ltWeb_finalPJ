@@ -28,7 +28,7 @@
     transform: translateX(-600px);
 }
 #login .container .form-box.register {
-   position: absolute;
+    position: absolute;
     transition: none;
     transform: translateX(600px);
 }

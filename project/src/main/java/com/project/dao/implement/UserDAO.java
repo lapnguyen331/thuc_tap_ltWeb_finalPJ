@@ -95,6 +95,18 @@ public class UserDAO extends AbstractDAO<User> implements IUserDAO {
     }
 
     @Override
+    public int updateAccountById(int id, String password) {
+
+        final String UPDATE = "UPDATE <table> SET password = :values , updateAt = :timeUpdate WHERE id = :id";
+        return update(UPDATE, (update ->  {
+            update.define("table", "users")
+                    .bind("id",id)
+                    .bind("values", password)
+                    .bind("timeUpdate",LocalDateTime.now());
+        }));
+    }
+
+    @Override
     public int updateToken(int id, String token) {
         final String UPDATE = "UPDATE <table> SET token = :token, tokenCreateAt = :createAt WHERE id = :id";
         return update(UPDATE, (update ->  {

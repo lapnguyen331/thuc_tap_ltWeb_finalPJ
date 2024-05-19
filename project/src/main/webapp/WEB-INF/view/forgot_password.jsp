@@ -30,15 +30,22 @@
     <div class="container">
         <div class="form-box forgot">
             <h2>Quên mật khẩu</h2>
-            <form action ="#">
-                <div class="input-box">
+            <form action ="${pageContext.request.contextPath}/forgotpassword" method="post">
+                <c:if test="${empty requestScope.message}">
+                    <div class="input-box">
                     <span class="icon">
                         <i class="fa-solid fa-envelope fa-sm"></i>
                     </span>
-                    <input type="text" id="email" name="email" required>
-                    <label for="email">Email:</label>
-                </div>
-                <button type="submit">Gửi yêu cầu</button>
+                        <input type="text" id="email" name="email" required>
+                        <label for="email">Email:</label>
+                    </div>
+                    <button type="submit">Gửi yêu cầu</button>
+                </c:if>
+                <c:if test="${not empty requestScope.message}">
+                    <div class="fw-semibold txt-info text-center">
+                            ${requestScope.message}
+                    </div>
+                </c:if>
             </form>
         </div>
     </div>
