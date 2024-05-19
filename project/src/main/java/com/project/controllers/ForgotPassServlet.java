@@ -24,15 +24,11 @@ public class ForgotPassServlet extends HttpServlet {
 
     private UserService userService;
     @Override
-    public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
-        this.userService = new UserService();
-        super.service(req, res);
-    }
-    @Override
     public void init() throws ServletException {
-
+        this.userService = new UserService();
         super.init();
     }
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,7 +43,6 @@ public class ForgotPassServlet extends HttpServlet {
 
         String email= request.getParameter("email");
         String responseMsg = null;
-        userService.begin();
         List<User> userList = userService.getUserByMail(email.trim());
         if(userList.isEmpty()){
             responseMsg = "không tồn tại email này trong hệ thống";
@@ -56,18 +51,19 @@ public class ForgotPassServlet extends HttpServlet {
             try {
                 String randompass = getRandomPass();
                 System.out.println(userList.get(0).toString());
-                userService.changePassById(userList.get(0).getId(),User.hashPassword(randompass.trim()));
+                userService.begin();
+                userService.changePassById(userList.get(0).getId(),User.hashPassword(randompass));
+                userService.commit();
                 MailService.sendMail("Website ginseng - reset mật khẩu","HỆ THỐNG WEB BÁN NHÂN SÂM GINSENG\n" +
                         "\n" +
-                        "Chúng tôi đã hỗ trỡ bạn  reset mật khẩu.\n Đây là mật khẩu mới của bạn: " +"*"+randompass+"*"+
+                        "Chúng tôi đã hỗ trỡ bạn  reset mật khẩu.\n Đây là mật khẩu mới của bạn: " +randompass+
                         "\n" +
                         "Trân trọng!\n" +
                         "Cảm ơn",email.trim());
                 responseMsg = String.format("Đăng kí tài khoản thành công, kiểm tra email %s để lấy mã xác minh", email.trim());
-            } catch (MessagingException e) {
-                throw new RuntimeException(e);
-            } catch (NoSuchAlgorithmException e) {
-                throw new RuntimeException(e);
+            } catch (MessagingException | NoSuchAlgorithmException e) {
+                userService.rollback();
+                responseMsg = "gửi thất bại vui lòng thử lại sau ít phút";
             }
         }
         request.setAttribute("code", code);
