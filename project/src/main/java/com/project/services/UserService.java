@@ -18,6 +18,7 @@ import java.util.concurrent.TimeoutException;
 
 public class UserService extends AbstractService {
     private final IUserDAO userDAO;
+
     public UserService() {
         super();
         this.userDAO = FactoryDAO.getDAO(super.handle, FactoryDAO.DAO_USER);
