@@ -11,7 +11,9 @@ public class Image {
 
     public Image() {
     }
-
+    public Image(String path){
+        this.path = path;
+    }
     public Image(int id, String path, String uuid, LocalDateTime createAt, LocalDateTime updateAt) {
         this.id = id;
         this.path = path;

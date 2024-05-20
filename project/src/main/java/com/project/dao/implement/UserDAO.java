@@ -206,4 +206,32 @@ public class UserDAO extends AbstractDAO<User> implements IUserDAO {
                     .define("values", String.join(", ", con));
         }));
     }
+    public int insertGoogleUser(User user) {
+        var keys = Arrays.asList(
+                "username",
+                "avatar",
+                "levelAccess",
+                "firstName",
+                "status",
+                "email",
+                "verified",
+                "createAt"
+        );
+        var values = Arrays.asList(
+                user.getUsername(),
+                Optional.ofNullable(user.getAvatar()).map(Image::getId).orElse(1042),
+                user.getLevelAccess(),
+                user.getFirstName(),
+                user.getStatus(),
+                user.getEmail(),
+                user.isVerified(),
+                Optional.ofNullable(user.getCreateAt()).orElse(LocalDateTime.now())
+        );
+        final String INSERT = "INSERT INTO <table> (<columns>) VALUES (<values>)";
+        return insertAndReturnGeneratedKeys(INSERT, "id", (update -> {
+            update.define("table", "users")
+                    .defineList("columns", keys)
+                    .bindList("values", values);
+        })).mapTo(int.class).findOne().orElse(-1);
+    }
 }

@@ -7,6 +7,7 @@ import com.project.db.JDBIConnector;
 import com.project.exceptions.AlreadyVerifiedException;
 import com.project.exceptions.DuplicateInfoUserException;
 import com.project.exceptions.NotFoundUserException;
+import com.project.models.Image;
 import com.project.models.User;
 import org.jdbi.v3.core.Handle;
 
@@ -88,6 +89,16 @@ public class UserService extends AbstractService {
 //        } catch (NoSuchAlgorithmException e) {
 //            throw new RuntimeException(e);
 //        }
+
+    }
+
+    public int addNewGoogleUser(String username, String email, int levelAccess,String firstName, String picture) throws DuplicateInfoUserException {
+        if(userDAO.getLoginInfo(username) != null){
+            throw new DuplicateInfoUserException("Đã tồn tại username này trong hệ thống!");
+        }
+
+        User user = new User(username, new Image(picture),levelAccess,firstName,1,email,true);
+        return userDAO.insertGoogleUser(user);
 
     }
 }

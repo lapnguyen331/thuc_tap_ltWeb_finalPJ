@@ -106,4 +106,17 @@ public class UserGoogleDTO {
                 ", picture='" + picture + '\'' +
                 '}';
     }
+
+    public String exactUserNameGoogle(String email) {
+//        slit by '@'
+        String[] part = email.split("@");
+        if(part.length > 0){
+            return part[0];
+        }
+        else {
+            System.out.println("invalid mail format from google");
+            return null;
+        }
+
+    }
 }

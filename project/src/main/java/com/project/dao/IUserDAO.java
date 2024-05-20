@@ -17,4 +17,5 @@ public interface IUserDAO {
     int updateAccountById(int id, String password);
     int updateToken(int id, String token);
     int updateInfor(int id, String username, String fistname,String lastname, String email, String phone,String address, String gender, String birth) ;
+     int insertGoogleUser(User user);
 }

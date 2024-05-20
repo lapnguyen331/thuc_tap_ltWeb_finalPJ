@@ -6,6 +6,8 @@ import com.project.accessGoogle.Constants;
 import com.project.dao.implement.CartDAO;
 import com.project.dto.UserGoogleDTO;
 
+import com.project.exceptions.DuplicateInfoUserException;
+import com.project.models.Image;
 import com.project.models.User;
 import com.project.services.UserService;
 import jakarta.servlet.RequestDispatcher;
@@ -94,43 +96,55 @@ public class LoginGoogleServlet extends HttpServlet {
         else{
             UserGoogleDTO usergog= processRequest(request, response);
             try {
-                User userDB = new UserService().getUserByMail(usergog.getEmail()).get(0);
-                if(userDB == null){
+                UserService userService = new UserService();
+                User userDB = userService.getUserByMail(usergog.getEmail()).get(0);
+                if (userDB == null) {
                     String username = usergog.getName();
-                }else {
-                    HttpSession session = request.getSession();
+                    if (username == null) {
+                        username = usergog.exactUserNameGoogle(usergog.getEmail());
+                    }
 
-                    CartDAO.updateCart(userDB.getId()); //update cart lên session
+
+                    int count = userService.addNewGoogleUser(username, usergog.getEmail(), 0, usergog.getFamily_name(), usergog.getPicture()); //add tài khoản google vào db
+                    //lấy lại dữ liệu đã add
+                    User currentUser = userService.getUserByMail(usergog.getEmail()).get(0);//chắc chắn có dữ liệu
+                    HttpSession session = request.getSession();
+//                    CartDAO.updateCart(userDB.getId()); //update cart lên session --> undone
                     session.setAttribute("user", userDB);
-//                    NOTE
-                    String role = userDB.getLevelAccess();
-                    session.setAttribute("role", role +"");
+                    session.setAttribute("role", currentUser.getLevelAccess() + "");
                     json.put("status", HttpServletResponse.SC_OK);
                     msg = "Đăng nhập thành công!";
-                    response.sendRedirect(request.getContextPath() + "/admin/profile");
-                    if (result.equals("ADMIN")) {
-                        // redirect to admin page
-                        MyUtils.setUserRole(session, "Admin");
-                        response.sendRedirect(request.getContextPath() + "/admin/profile");
-                    } else if (result.equals("USER")) {
-                        // redirect to home
-                        MyUtils.setUserRole(session, "User");
-                        response.sendRedirect(request.getContextPath() + "/page/home");
-                    }  else if (result.equals("Manager")) {
-                        // redirect to home
-                        MyUtils.setUserRole(session, "MANAGER");
-                        response.sendRedirect(request.getContextPath() + "/admin/profile");
+//                    NOTE
+                    //chuyển hướng theo level access
+                    int role = userDB.getLevelAccess();
+                    session.setAttribute("role", role + "");
 
+                    response.sendRedirect(request.getContextPath() + "/admin/profile");
+                    if (role == 1) {//admin
+                        // redirect to admin page
+//                        MyUtils.setUserRole(session, "Admin");
+                        response.sendRedirect(request.getContextPath() + "/admin/profile");
+                    } else if (role == 0) { //khách hàng
+                        // redirect to home
+//                        MyUtils.setUserRole(session, "User");
+                        response.sendRedirect(request.getContextPath() + "/home.jsp");
+                    }
+//                    else if (result.equals("Manager")) { //phát triển thêm các vai trò khác
+//                        // redirect to home
+//                        MyUtils.setUserRole(session, "MANAGER");
+//                        response.sendRedirect(request.getContextPath() + "/admin/profile");
+//                      }
                 }
             }
-            catch (IndexOutOfBoundsException ex){
+
+            catch (IndexOutOfBoundsException | DuplicateInfoUserException ex){
                 System.out.println("user mới từ đăng nhập bằng google");
+                }
             }
-            }
-            RequestDispatcher dis = request.getRequestDispatcher("/WEB-INF/view/home.jsp");
-            dis.forward(request, response);
+//            RequestDispatcher dis = request.getRequestDispatcher("/WEB-INF/view/home.jsp");
+//            dis.forward(request, response);
         }
-    }
+
 
     /**
      * Returns a short description of the servlet.
