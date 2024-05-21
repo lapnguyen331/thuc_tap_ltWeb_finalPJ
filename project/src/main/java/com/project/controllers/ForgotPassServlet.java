@@ -43,16 +43,16 @@ public class ForgotPassServlet extends HttpServlet {
 
         String email= request.getParameter("email");
         String responseMsg = null;
-        List<User> userList = userService.getUserByMail(email.trim());
-        if(userList.isEmpty()){
+        User user = userService.getUserByMail(email.trim());
+        if(user == null){
             responseMsg = "không tồn tại email này trong hệ thống";
         }
         else {
             try {
                 String randompass = getRandomPass();
-                System.out.println(userList.get(0).toString());
+                System.out.println(user.toString());
                 userService.begin();
-                userService.changePassById(userList.get(0).getId(),User.hashPassword(randompass));
+                userService.changePassById(user.getId(),User.hashPassword(randompass));
                 userService.commit();
                 MailService.sendMail("Website ginseng - reset mật khẩu","HỆ THỐNG WEB BÁN NHÂN SÂM GINSENG\n" +
                         "\n" +
