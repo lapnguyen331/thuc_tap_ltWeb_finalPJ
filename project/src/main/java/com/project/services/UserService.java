@@ -33,7 +33,7 @@ public class UserService extends AbstractService {
     public List<User> getAll() {
         return userDAO.getAll();
     }
-    public List<User> getUserByMail(String mail){
+    public User getUserByMail(String mail){
         return userDAO.getUserByMail(mail);
     }
     public User getUserByName(String username) {
@@ -92,13 +92,15 @@ public class UserService extends AbstractService {
 
     }
 
-    public int addNewGoogleUser(String username, String email, int levelAccess,String firstName, String picture) throws DuplicateInfoUserException {
+    public int addNewGoogleUser(String username, String email, int levelAccess,String firstName, String picture) throws  NoSuchAlgorithmException {
+        String cuuid = User.getUUID();
         if(userDAO.getLoginInfo(username) != null){
-            throw new DuplicateInfoUserException("Đã tồn tại username này trong hệ thống!");
+            username += cuuid;
         }
-
-        User user = new User(username, new Image(picture),levelAccess,firstName,1,email,true);
-        return userDAO.insertGoogleUser(user);
+        //BUG :đang set mặc định tài khoản mới gender là true
+        User user =new User(-1, username, User.hashPassword("default"), null, levelAccess, firstName, null, true, null, null,
+                null, 1, email, true, null, null, cuuid, LocalDateTime.now());;
+        return userDAO.insert(user);
 
     }
 }
