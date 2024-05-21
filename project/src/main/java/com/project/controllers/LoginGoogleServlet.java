@@ -2,13 +2,9 @@ package com.project.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.project.accessGoogle.Constants;
-import com.project.dao.implement.CartDAO;
-import com.project.dao.implement.UserDAO;
+import com.project.accessBySocial.google.Constants;
 import com.project.dto.UserGoogleDTO;
 
-import com.project.exceptions.DuplicateInfoUserException;
-import com.project.models.Image;
 import com.project.models.User;
 import com.project.services.UserService;
 import jakarta.servlet.RequestDispatcher;

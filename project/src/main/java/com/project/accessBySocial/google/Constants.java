@@ -1,4 +1,4 @@
-package com.project.accessGoogle;
+package com.project.accessBySocial.google;
 
 public class Constants {
     public static String GOOGLE_CLIENT_ID = "1037251831730-fnl81cdfmlvkrj09qkpt2ad6inqeosnh.apps.googleusercontent.com";

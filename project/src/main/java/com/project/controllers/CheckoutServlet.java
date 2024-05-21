@@ -54,5 +54,7 @@ public class CheckoutServlet extends HttpServlet {
         }
         request.setAttribute("result", responseMessage);
         request.getRequestDispatcher("/cart").include(request, response);
+        System.out.println("payment"+request.getParameter("payment-method"));
+
     }
 }
