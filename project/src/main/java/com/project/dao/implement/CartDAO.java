@@ -29,7 +29,7 @@ public class CartDAO extends AbstractDAO<Cart> implements ICartDAO {
     }
 
     @Override
-    public static Cart updateCart(int id) {
+    public  Cart updateCart(int id) {
         return null;
     }
 }

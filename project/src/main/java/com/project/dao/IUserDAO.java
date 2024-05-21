@@ -9,7 +9,7 @@ public interface IUserDAO {
     List<User> getAll();
     User getLoginInfo(String username);
     User getInforUserById(int id);
-    List<User> getUserByMail(String mail);
+    User getUserByMail(String mail);
     User getToken(User user);
     int insert(User user);
     int validate(int id);
@@ -17,5 +17,4 @@ public interface IUserDAO {
     int updateAccountById(int id, String password);
     int updateToken(int id, String token);
     int updateInfor(int id, String username, String fistname,String lastname, String email, String phone,String address, String gender, String birth) ;
-     int insertGoogleUser(User user);
 }

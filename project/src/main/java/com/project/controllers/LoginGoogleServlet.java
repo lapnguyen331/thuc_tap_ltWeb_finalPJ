@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.project.accessGoogle.Constants;
 import com.project.dao.implement.CartDAO;
+import com.project.dao.implement.UserDAO;
 import com.project.dto.UserGoogleDTO;
 
 import com.project.exceptions.DuplicateInfoUserException;
@@ -24,6 +25,7 @@ import org.json.JSONObject;
 
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 @WebServlet(name = "LoginGoogleServlet", urlPatterns = {"/login-google"})
 public class LoginGoogleServlet extends HttpServlet {
@@ -93,59 +95,59 @@ public class LoginGoogleServlet extends HttpServlet {
             RequestDispatcher dis = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
             dis.forward(request, response);
         }
-        else{
-            UserGoogleDTO usergog= processRequest(request, response);
-            try {
-                UserService userService = new UserService();
-                User userDB = userService.getUserByMail(usergog.getEmail()).get(0);
-                if (userDB == null) {
-                    String username = usergog.getName();
-                    if (username == null) {
-                        username = usergog.exactUserNameGoogle(usergog.getEmail());
-                    }
+        else {
+            UserGoogleDTO usergog = processRequest(request, response);
+            UserService userService = new UserService();
+            User userDB = userService.getUserByMail(usergog.getEmail());
+            if (userDB == null) {
+                insertGoogleAccount(request,response,userService,usergog);
 
-
-                    int count = userService.addNewGoogleUser(username, usergog.getEmail(), 0, usergog.getFamily_name(), usergog.getPicture()); //add tài khoản google vào db
-                    //lấy lại dữ liệu đã add
-                    User currentUser = userService.getUserByMail(usergog.getEmail()).get(0);//chắc chắn có dữ liệu
-                    HttpSession session = request.getSession();
+            }
+            //lấy lại dữ liệu đã add
+            User currentUser = userService.getUserByMail(usergog.getEmail());//chắc chắn có dữ liệu
+            HttpSession session = request.getSession();
 //                    CartDAO.updateCart(userDB.getId()); //update cart lên session --> undone
-                    session.setAttribute("user", userDB);
-                    session.setAttribute("role", currentUser.getLevelAccess() + "");
-                    json.put("status", HttpServletResponse.SC_OK);
-                    msg = "Đăng nhập thành công!";
-//                    NOTE
-                    //chuyển hướng theo level access
-                    int role = userDB.getLevelAccess();
-                    session.setAttribute("role", role + "");
-
-                    response.sendRedirect(request.getContextPath() + "/admin/profile");
-                    if (role == 1) {//admin
-                        // redirect to admin page
+            session.setAttribute("user", currentUser);
+            session.setAttribute("role", currentUser.getLevelAccess() + "");
+            json.put("status", HttpServletResponse.SC_OK);
+            msg = "Đăng nhập thành công!";
+            //chuyển hướng theo level access
+            int role = currentUser.getLevelAccess();
+            session.setAttribute("role", role + "");
+            System.out.println(role);
+            if (role == 1) {//admin
+                // redirect to admin page
 //                        MyUtils.setUserRole(session, "Admin");
-                        response.sendRedirect(request.getContextPath() + "/admin/profile");
-                    } else if (role == 0) { //khách hàng
-                        // redirect to home
+//                response.sendRedirect("admin/profile");
+                response.sendRedirect("home");
+            } else if (role == 0) { //khách hàng
+                // redirect to home
 //                        MyUtils.setUserRole(session, "User");
-                        response.sendRedirect(request.getContextPath() + "/home.jsp");
-                    }
+                System.out.println("vào dc kh");
+                response.sendRedirect("home");
+            }
 //                    else if (result.equals("Manager")) { //phát triển thêm các vai trò khác
 //                        // redirect to home
 //                        MyUtils.setUserRole(session, "MANAGER");
 //                        response.sendRedirect(request.getContextPath() + "/admin/profile");
 //                      }
-                }
-            }
-
-            catch (IndexOutOfBoundsException | DuplicateInfoUserException ex){
-                System.out.println("user mới từ đăng nhập bằng google");
-                }
-            }
-//            RequestDispatcher dis = request.getRequestDispatcher("/WEB-INF/view/home.jsp");
-//            dis.forward(request, response);
         }
 
+        }
 
+    //trường hợp tài khoản đăng nhập bằng google chưa có trong database --> insert tk vào database
+    protected void insertGoogleAccount(HttpServletRequest request, HttpServletResponse response,UserService userService,UserGoogleDTO usergog)
+            throws ServletException, IOException {
+        String username = usergog.getName();
+        if (username == null) {
+            username = usergog.exactUserNameGoogle(usergog.getEmail());
+        }
+        try {
+            int count = userService.addNewGoogleUser(username, usergog.getEmail(), 0, usergog.getFamily_name(), usergog.getPicture()); //add tài khoản google vào db
+        } catch ( NoSuchAlgorithmException e) {
+            System.out.println("lỗi ko tạo được pass googleSignup");
+        }
+    }
     /**
      * Returns a short description of the servlet.
      * @return a String containing servlet description
