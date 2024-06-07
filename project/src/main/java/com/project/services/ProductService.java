@@ -38,6 +38,10 @@ public class ProductService extends AbstractService {
     public List<Product> getTop4() {
         return productDAO.selectTop4_shortDetails();
     }
+    //lấy num sản phẩm có nội dung ngắn (meta data)
+    public List<Product> getTopNum(int num){
+        return productDAO.selectTopNum_shortDetails(num);
+    }
     public List<Product> getTopOf(Category c, int n) {
         return productDAO.selectTopProductsOf_shortDetails(c, n);
     }

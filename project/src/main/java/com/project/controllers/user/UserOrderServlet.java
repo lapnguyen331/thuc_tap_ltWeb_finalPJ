@@ -1,4 +1,4 @@
-package com.project.controllers;
+package com.project.controllers.user;
 
 import com.google.gson.Gson;
 import com.project.models.Image;
@@ -12,14 +12,20 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.json.*;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
-@WebServlet(name = "UserOrderAPIServlet", urlPatterns = {"/api/user-profile-orderapi"})
-public class UserOrderAPIServlet extends HttpServlet {
+@WebServlet(name = "UserOrderServlet", urlPatterns = {"/user-profile-order"})
+public class UserOrderServlet extends HttpServlet {
     private UserService userService;
     private OrderService orderService;
 
@@ -35,46 +41,19 @@ public class UserOrderAPIServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("user");
         User repUser = userService.getInforById(user.getId());
-        if(repUser.getAvatar().getPath().isEmpty()){
+        if(repUser.getAvatar().getPath() == null){
             repUser.setAvatar(new Image(000,"/inventory/images/user-profile/use-avatar-header-default.jpg",null,null,null));
         }else{
             Image em = repUser.getAvatar();
             repUser.setAvatar(new Image(em.getId(),"/files/"+ em.getPath(),null,null,null));
         }
-        loadDataOrder(repUser,response);
+        request.setAttribute("userifor",repUser);
+        request.getRequestDispatcher("/WEB-INF/view/user/user-profile-order.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
-    protected void loadDataOrder(User repUser,HttpServletResponse response){
-        List<Order> orderList= orderService.getAllOrderOfUser(repUser);
-        //tao json
-        try {
-            var out = response.getWriter();
-            response.setContentType("application/json");
 
-        JSONArray objectArray = new JSONArray();
-        JSONObject json;
-        for (Order order : orderList) {
-            json = new JSONObject();
-            json.put("id",order.getId());
-            json.put("totalprice",order.getTotalPrice());
-
-            json.put("status",order.getStatus());
-            json.put("create",order.getCreateAt1());
-            objectArray.put(json);
-//            order.getDateOnly(order.getCreateAt())
-        }
-        json = new JSONObject().put("data",objectArray);
-        String data = json.toString();
-//        System.out.println(data);
-            out.write(data);
-            out.flush();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
 }

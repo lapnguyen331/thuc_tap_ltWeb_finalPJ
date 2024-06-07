@@ -1,4 +1,4 @@
-package com.project.controllers;
+package com.project.controllers.user;
 
 import com.project.exceptions.NotEnoughQuantityException;
 import com.project.exceptions.NotFoundProductException;
