@@ -155,7 +155,7 @@ public class ProductDetailServlet extends HttpServlet {
         return rs.toString();
     }
     private String getUUID(String link) {
-        String fileName = link.substring(link.lastIndexOf('/')+1, link.length());
+        String fileName = link.substring(link.lastIndexOf('/')+1);
         return fileName.substring(0, fileName.lastIndexOf("."));
     }
 }

@@ -198,7 +198,7 @@ class Filters {
         if (filterValue(itemValue) === false) {
           return false;
         }
-        continue;
+
       } else if (Array.isArray(itemValue)) {
         const check = (filter, item) => {
           return filter.filter((value) => item.includes(value)).length > 0;

@@ -74,7 +74,7 @@ public class UserProfileEditServlet extends HttpServlet {
                }
                else {
                    firstname = name.substring(0, index);
-                   lastname = name.substring(index, name.length());
+                   lastname = name.substring(index);
                }
            }
            String gender = "";

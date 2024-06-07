@@ -529,7 +529,7 @@ class Treeview {
 
       this.expand(id);
     } else {
-      return;
+
     }
   }
 
@@ -541,7 +541,7 @@ class Treeview {
 
       collapse.hide();
     } else {
-      return;
+
     }
   }
 

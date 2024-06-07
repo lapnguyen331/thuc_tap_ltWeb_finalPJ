@@ -35,7 +35,7 @@ class Rotate extends TouchUtil {
     this._startTouch = e;
     this._origin = {};
     EventHandler.trigger(this._element, EVENT_START, { touch: e });
-    return;
+
   }
 
   handleTouchMove(e) {

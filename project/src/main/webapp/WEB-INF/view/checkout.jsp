@@ -157,7 +157,7 @@
                                     <div class="payment-method-item">
                                         <div class="left-part">
                                             <input class="form-check-input" type="radio" value="pay2" name="payment-method" id="pay-vnpay" />
-                                            <label class="form-check-label" for="pay-vnpay">Quét mã <span class="vn-text red">VN</span> <span class="vn-text blue">Pay</span> </label>
+                                            <label class="form-check-label" for="pay-vnpay">Thanh toán bằng <span class="vn-text red">VN</span> <span class="vn-text blue">Pay</span> </label>
                                         </div>
                                         <div class="icon">
                                             <img src="${pageContext.request.contextPath}/inventory/icons/64x64-vi-vnpay.svg" alt="">
@@ -166,7 +166,7 @@
                                     <div class="payment-method-item">
                                         <div class="left-part">
                                             <input class="form-check-input" type="radio" value="pay3" name="payment-method" id="pay-momo" />
-                                            <label class="form-check-label" for="pay-momo"> Quét mã <span class="momo-text">MoMo</span>  </label>
+                                            <label class="form-check-label" for="pay-momo">Thanh toán bằng <span class="momo-text">MoMo</span>  </label>
                                         </div>
                                         <div class="icon">
                                             <img src="${pageContext.request.contextPath}/inventory/icons//momo_icon_square_pinkbg.svg" alt="">

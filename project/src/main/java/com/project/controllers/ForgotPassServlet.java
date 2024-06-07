@@ -50,7 +50,7 @@ public class ForgotPassServlet extends HttpServlet {
         else {
             try {
                 String randompass = getRandomPass();
-                System.out.println(user.toString());
+                System.out.println(user);
                 userService.begin();
                 userService.changePassById(user.getId(),User.hashPassword(randompass));
                 userService.commit();
@@ -72,7 +72,7 @@ public class ForgotPassServlet extends HttpServlet {
 
     }
     private String getRandomPass (){
-        char[] possibleCharacters = (new String("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")).toCharArray();
+        char[] possibleCharacters = ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789").toCharArray();
         int randomStrLength =9;
         String randomStr = RandomStringUtils.random( randomStrLength, 0, possibleCharacters.length-1, false, true, possibleCharacters, new SecureRandom() );
         System.out.println( "mật khẩu random " +randomStr );

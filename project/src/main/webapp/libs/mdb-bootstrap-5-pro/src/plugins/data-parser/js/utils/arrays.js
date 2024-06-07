@@ -11,7 +11,7 @@ const pullAll = (array = [], items = []) => {
       if (array[i] === item) {
         array.splice(i, 1);
       } else {
-        continue;
+
       }
     }
   });

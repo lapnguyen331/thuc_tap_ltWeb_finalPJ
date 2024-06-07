@@ -207,7 +207,7 @@ export const add_pricing_table_plugin = {
         // If the value is less than 0, set the value to 0
         if (numberValue < 0) {
           inputEl.value = 0;
-          return;
+
         }
       }
   

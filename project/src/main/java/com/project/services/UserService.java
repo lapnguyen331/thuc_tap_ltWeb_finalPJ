@@ -99,7 +99,7 @@ public class UserService extends AbstractService {
         }
         //BUG :đang set mặc định tài khoản mới gender là true
         User user =new User(-1, username, User.hashPassword("default"), null, levelAccess, firstName, null, true, null, null,
-                null, 1, email, true, null, null, cuuid, LocalDateTime.now());;
+                null, 1, email, true, null, null, cuuid, LocalDateTime.now());
         return userDAO.insert(user);
 
     }

@@ -36,7 +36,7 @@ public class LoginGoogleServlet extends HttpServlet {
         return user;
     }
 
-    public static String getToken(String code) throws ClientProtocolException,  IOException {
+    public static String getToken(String code) throws IOException {
         // call api to get token
         String response = Request.post(Constants.GOOGLE_LINK_GET_TOKEN)
                 .bodyForm(Form.form().add("client_id", Constants.GOOGLE_CLIENT_ID)
@@ -50,7 +50,7 @@ public class LoginGoogleServlet extends HttpServlet {
         return accessToken;
     }
 
-    public static UserGoogleDTO getUserInfo(final String accessToken) throws ClientProtocolException, IOException {
+    public static UserGoogleDTO getUserInfo(final String accessToken) throws IOException {
         String link = Constants.GOOGLE_LINK_GET_USER_INFO + accessToken;
         String response = Request.get(link).execute().returnContent().asString();
 

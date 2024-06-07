@@ -173,7 +173,8 @@ public class UserDAO extends AbstractDAO<User> implements IUserDAO {
             update.define("table", "users")
                     .bind("id", id);
         }));
-    };
+    }
+
     public int updateInfor(int id, String username, String fistname,String lastname, String email, String phone,String address, String gender, String birth) {
         var keys = Arrays.asList(
                 "username",
