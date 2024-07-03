@@ -1,0 +1,26 @@
+.breadcrumbs {
+    display: flex;
+    list-style: none;
+    background-color: #fffcf5;
+    padding: 8px 20px;
+}
+
+.breadcrumbs li,
+.breadcrumbs li a {
+    color: var(--red-color-main);
+    text-transform: capitalize;
+}
+
+.breadcrumbs li:hover a {
+    color: #480000;
+}
+
+
+.breadcrumbs li + li::before {
+    content: '\f101';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: bold;
+    color: inherit;
+    font-size: 13px;
+    margin: 0px 5px;
+}
