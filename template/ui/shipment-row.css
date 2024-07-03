@@ -37,7 +37,7 @@
 }
 
 .shipment-row-wrap>.body {
-    height: 100%;
+    height: 200px;
     padding: 20px;
     display: flex;
     gap: 10px;
@@ -60,13 +60,27 @@
     transform: translate(-50%, -50%);
 }
 .shipment-row-wrap>.body>.info-grid {
-    background-color: #454545;
     flex: 1;
     display: grid;
-    grid-template-columns: auto auto auto auto;
-    grid-gap: 10px;
-    padding: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 10px;
+    column-gap: 20px;
+    height: 100%;
+    align-content: space-between;
 }
+
 .shipment-row-wrap>.body>.info-grid>.grid-item {
-    background-color: #97ff5e;
+    
+}
+
+.shipment-row-wrap>.body>.info-grid>.grid-item>.info-label {
+    font-weight: 600;
+}
+
+.shipment-row-wrap>.body>.info-grid>.grid-item>.info-text {
+    overflow: hidden;
+    width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }

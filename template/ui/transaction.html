@@ -4,16 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-    }
     </style>
+    <link rel="stylesheet" href="../css/main-style.css">
     <link rel="stylesheet" href="./transaction.css">
     <link rel="stylesheet" href="../libs/mdb-bootstrap-5-pro/css/mdb.min.css">
+    <link rel="stylesheet" href="../stylesheet/fontawesome.min.css">
+    <link rel="stylesheet" href="../stylesheet/all.min.css">
+    <link rel="stylesheet" href="../libs//DataTables/datatables.css">
+    <link rel="stylesheet" href="../css/datatables-override.css">
+    <link rel="stylesheet" href="../css/bootstrap-override.css">
     <link rel="stylesheet" href="shipment-row.css">
+    <style>
+        .table-header {
+            background-image: url(../images/footer-bg.jpg);
+            color: var(--wheat-color);
+            text-transform: uppercase;
+            font-size: 20px;
+            padding: 10px;
+            font-weight: 600;
+        }
+
+        .dataTables_scrollHead {
+            display: none;
+        }
+        
+        .dataTables_wrapper {
+            margin-top: 0px;
+        }
+    </style>
 </head>
 <body>
     <header class="main-header"></header>
@@ -32,35 +50,21 @@
                     <div class="square"></div>
                     <div class="square"></div>
                 </article>
-
-                <div class="shipment-row-wrap">
-                    <div class="header">
-                        <div class="fw-normal">Mã lô hàng: xxx</div>
-                        <div class="d-flex gap-1">
-                            <div class="fw-normal">Mức độ phân loại lô hàng này:</div>
-                            <div class="shipment-tag outdate">
-                                <span>Sắp hết hạn</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="body">
-                        <div class="thumbnail-wrap">
-                            <img src="https://ih1.redbubble.net/image.5452846048.9607/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.jpg" width="100%" alt="encore">
-                        </div>
-                        <div class="info-grid">
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
-                        </div>
-                    </div>
+                <div class="table-header">
+                    <span>Trình quản lý nhập kho</span>
                 </div>
+                <table id="table_orders" style="width: 100%">
+                    <thead>
+                    <tr>
+                    </tr>
+                    </thead>
+                </table>
             </main>
         </article>
     </main>
+    <script src="../js/jquery.js"></script>
+    <script src="../libs/DataTables/datatables.js"></script>
+    <script type="module" src="fake-data.js"></script>
+    <script type="module" src="transaction.js"></script>
 </body>
 </html>
