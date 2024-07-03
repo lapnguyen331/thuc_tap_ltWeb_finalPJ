@@ -1,0 +1,126 @@
+#section-product-filter {
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 200px;
+    padding-bottom: 80px;
+}
+
+#section-product-filter .filter-header {
+    position: relative;
+}
+
+#section-product-filter .filter-content {
+    padding-bottom: 30px;
+    margin-top: -20px;
+    padding-top: 20px;
+    background: url('/template/image/product-filter-bg-footer.png');
+    background-size: contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-color: #e7dccc;
+    max-height: 400px;
+    overflow-y: scroll;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+#section-product-filter .filter-content::-webkit-scrollbar {
+    display: none;
+}
+
+#section-product-filter .filter-content form {
+    display: flex;
+    flex-direction: column;
+}
+
+#section-product-filter .filter-content form input[type='submit'] {
+    margin-top: 40px;
+    align-self: center;
+    padding: 8px 20px;
+    border: 2px solid gray;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.6);
+    font-weight: bold;
+    color: gray;
+    transition: all 0.2s;
+}
+
+#section-product-filter .filter-content form input[type='submit']:hover {
+    background-color: var(--red-color-main);
+    font-weight: bold;
+    border-color: var(--red-color-main);
+    color: rgb(255, 255, 255);
+}
+
+#section-product-filter .filter-title {
+    font-weight: bold;
+    margin-left: 10px;
+    padding: 0;
+    margin-bottom: 0;
+    margin-top: 10px;
+    display: flex;  
+    align-items: center;
+}
+
+#section-product-filter .filter-title::before {
+    content: '\f002';
+    font-family: 'Font Awesome 6 Free';
+    margin-right: 5px;
+    margin-top: 3px;
+}
+
+#section-product-filter .radio-filter,
+#section-product-filter .checkbox-filter {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+}
+#section-product-filter .radio-filter li, 
+#section-product-filter .checkbox-filter li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    vertical-align: top;
+    padding: 10px;
+}
+
+#section-product-filter .radio-filter li:hover,
+#section-product-filter .checkbox-filter li:hover {
+    background-color: var(--red-color-main);
+    color: white;
+}
+
+#section-product-filter .radio-filter li + li,
+#section-product-filter .checkbox-filter li + li {
+    border-top: 1px gray solid;
+}
+
+
+#section-product-filter input {
+    margin-top: 2px;
+}
+
+#section-product-filter label {
+    width: 100%;
+    cursor: pointer;
+}
+
+#section-product-filter .filter-type-select {
+    display: flex;
+    padding: 10px;
+}
+
+#section-product-filter .filter-type-select select {
+    width: 100%;
+    border-radius: 3px;
+    background-color: transparent;
+    color: gray;
+    font-weight: 500;
+    padding: 5px 10px;
+}
+
+#section-product-filter .filter-type-select select:focus-visible {
+    outline: 0;
+}

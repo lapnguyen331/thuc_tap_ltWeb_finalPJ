@@ -1,0 +1,86 @@
+* {
+    --mdb-form-outline-select-label-color: var(--red-color-main) !important;
+    --mdb-form-outline-select-notch-border-color: var(--red-color-main) !important;
+    --mdb-form-outline-select-input-focused-arrow-color: var(--red-color-main) !important;
+    --mdb-form-outline-select-label-color: var(--red-color-main) !important;
+    --mdb-form-outline-select-notch-border-color: var(--red-color-main) !important;
+    --mdb-form-outline-select-input-focused-arrow-color: var(--red-color-main) !important;
+    --mdb-autocomplete-label-color: var(--red-color-main) !important;
+    --mdb-btn-disabled-bg: var(--red-color-main) !important;
+    --mdb-btn-disabled-border-color: var(--red-color-main) !important;
+    --mdb-nav-tabs-link-active-color: var(--red-color-main) !important;
+    --mdb-nav-tabs-link-active-border-color: var(--red-color-main) !important;
+}
+
+.btn-primary {
+    --mdb-btn-bg: var(--red-color-main);
+    --mdb-btn-color: #fff;
+    --mdb-btn-box-shadow: 0 4px 9px -4px var(--red-color-main);
+    --mdb-btn-hover-bg: var(--red-light-color-main);
+    --mdb-btn-hover-color: #fff;
+    --mdb-btn-focus-bg: var(--red-light-color-main);
+    --mdb-btn-focus-color: #fff;
+    --mdb-btn-active-bg: #cd1b2d;
+    --mdb-btn-active-color: #fff;
+    --mdb-btn-box-shadow-state: 0 8px 9px -4px rgba(202, 59, 59, 0.3),0 4px 18px 0 rgba(202, 59, 59, 0.2);
+}
+
+.form-check-input[type=checkbox]:checked:focus {
+    background-color: var(--red-color-main) !important;
+}
+
+.form-check-input[type=checkbox]:checked {
+    background-image: none;
+    background-color: var(--red-color-main) !important;
+}
+
+.form-check-input:checked:focus:before {
+    box-shadow: 0 0 0 13px var(--red-color-main);
+}
+
+.form-check-input[type=checkbox]:checked::after {
+    border-color: var(--wheat-color) !important;
+}
+
+.form-check-input:checked {
+    border-color: var(--red-dark-color-main) !important;
+}
+
+.form-outline .form-control:focus~.form-notch .form-notch-leading {
+    border-color: var(--red-color-main);
+    box-shadow: -1px 0 0 0 var(--red-color-main), 0 1px 0 0 var(--red-color-main), 0 -1px 0 0 var(--red-color-main);
+}
+
+.form-outline .form-control:focus~.form-notch .form-notch-middle {
+    border-color: var(--red-color-main);
+    box-shadow: 0 1px 0 0 var(--red-color-main);
+    border-top: 1px solid transparent;
+}
+
+.form-outline .form-control:focus~.form-notch .form-notch-trailing {
+    border-color: var(--red-color-main);
+    box-shadow: 1px 0 0 0 var(--red-color-main), 0 -1px 0 0 var(--red-color-main), 0 1px 0 0 var(--red-color-main);
+}
+
+.input-group>.form-control:focus {
+    border-color: var(--red-color-main);
+    box-shadow: inset 0 0 0 1px var(--red-color-main);
+}
+
+.nav-tabs .nav-link {
+    text-transform: capitalize;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.form-outline .form-control:focus~.form-label {
+    color: var(--red-color-main);
+}
+
+.daterangepicker td.active, .daterangepicker td.active:hover {
+    background-color: var(--red-light-color-main);
+}
+
+.daterangepicker td.in-range {
+    background-color: #f8ebeb;
+}

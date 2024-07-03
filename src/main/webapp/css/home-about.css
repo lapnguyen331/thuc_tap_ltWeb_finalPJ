@@ -1,0 +1,45 @@
+#about-section .container {
+    background-color: #ffff;
+}
+#about-section * {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#about-section .img-about {
+    overflow: hidden;
+}
+
+#about-section .img-about img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#about-section .about-content {
+    overflow-y: scroll;
+    height: 450px;
+    padding-right: 10px;
+}
+
+#about-section .about-content::-webkit-scrollbar {
+    width: 5px;
+    background-color: #ffc9c9;
+    border-radius: 10px;
+}
+
+#about-section .about-content::-webkit-scrollbar-thumb {
+    background-color: var(--red-color-main);
+    border-radius: 10px;
+}
+
+#about-section .about-content a {
+    color: #bf1e2e;
+    font-weight: bold;
+}
+#about-section .about-content h1,
+#about-section .about-content h2,
+#about-section .about-content h3,
+#about-section .about-content h4 {
+    color: #db0000;
+    font-weight: bold;
+}

@@ -1,0 +1,109 @@
+#main-content-section {
+    height: 100%;
+}
+
+#categories-form {
+    width: 100%;
+}
+
+#categories-form .left-container {
+    width: 100%;
+}
+
+#categories-form .left-container .thumbnail-wrap {
+    width: 100%;
+    padding: 20px;
+}
+
+#categories-form .left-container .thumbnail-wrap .upload-text {
+    font-size: 14px;
+}
+
+.actions-field {
+    display: flex;
+    justify-content: end;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.actions-field .update-btn:hover {
+    background-color: #14a44d;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 11px -4px rgba(20,164,77,0.3), 0 4px 18px 0 rgba(20,164,77,0.2);
+}
+
+.actions-field .update-btn {
+    border: none;
+    font-weight: 500;
+    padding: 5px 15px;
+    border-radius: 5px;
+    background-color: #19a952;
+    color: white;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all .2s ease;
+    box-shadow: 0 8px 9px -4px rgba(20,164,77,0.3), 0 4px 18px 0 rgba(20,164,77,0.2);
+}
+
+.actions-field .cancel-btn:hover {
+    background-color: #4dabf7;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 11px -4px rgba(77, 171, 247, 0.3), 0 4px 18px rgba(97, 191, 247, 0.2);
+}
+
+.actions-field .cancel-btn {
+    border: none;
+    font-weight: 500;
+    padding: 5px 15px;
+    border-radius: 5px;
+    background-color: #4dabf7;
+    color: white;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all .2s ease;
+    box-shadow: 0 8px 9px -4px rgba(77, 171, 247, 0.3), 0 4px 18px 0 rgba(97, 191, 247, 0.2)
+}
+
+.blog-selector-wrap {
+    display: flex;
+    gap: 8px;
+}
+
+.blog-selector-wrap .img-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    padding: 5px;
+    overflow: hidden;
+    border: 1px dashed var(--red-color-main);
+}
+
+.blog-selector-wrap .img-wrap img {
+    width: 100%;
+}
+
+.blog-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.blog-info .blog-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-wrap: stable;
+    white-space: initial;
+}
+
+.blog-info .blog-id {
+    font-size: 13px;
+}
+
+.input-group .btn {
+    position: static;
+    z-index: 0 !important;
+}

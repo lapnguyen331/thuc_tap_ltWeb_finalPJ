@@ -1,0 +1,300 @@
+/* Phần Header */
+#main-header-section {
+    background-color: #f8f9fa;
+    position: relative;
+    z-index: 5;
+    font-size: 15px;
+    position: sticky;
+    top: 0;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.3)!important;
+}
+
+#main-header-section * {
+    padding: 0;
+    margin: 0;
+}
+
+/* Phần Header - phía trên */
+#main-header-section #main-header-top {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#main-header-section #main-header-top .logo-wrapper img {
+    max-width: 150px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+#main-header-section #main-header-top .logo-wrapper img:hover {
+    transform: scale(1.1);
+}
+
+#main-header-section #main-header-top .topbar-menu {
+    display: flex;
+    list-style: none;
+
+    align-items: center;
+    margin-top: 10px;
+}
+
+#main-header-section #main-header-top .topbar-menu .topbar-menu-item {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center ;
+}
+
+#main-header-section #main-header-top .topbar-menu .topbar-menu-item + .topbar-menu-item::before {
+    background-color: var(--red-dark-color-main);
+    content: '';
+    width: 0.5px;
+    height: 23px;
+}
+
+#main-header-section #main-header-top .topbar-menu .topbar-menu-item .redirect-link {
+    text-decoration: none;
+    color: var(--red-color-main);
+    padding: 0px 13px;
+}
+
+#main-header-section #main-header-top .topbar-menu .topbar-menu-item .redirect-link .user-wrap {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+}
+
+#main-header-section #main-header-top .topbar-menu .topbar-menu-item .redirect-link .user-wrap .user-pages {
+    top: 90%;
+    position: absolute;
+    width: 200px;
+    z-index: 10;
+    border-radius: 5px;
+    color: #333333;
+    padding-top: 10px;
+    background-color: transparent;
+    display: none;
+}
+
+#main-header-section #main-header-top .topbar-menu .topbar-menu-item .redirect-link .user-wrap:hover .user-pages {
+    display: block;
+}
+
+#main-header-section #main-header-top .topbar-menu .topbar-menu-item .redirect-link .user-wrap .user-pages ul {
+    display: inline-flex;
+    flex-flow: column;
+    list-style: none;
+    z-index: 11;
+    width: 100%;
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#main-header-section #main-header-top .topbar-menu .topbar-menu-item .redirect-link .user-wrap .user-pages li {
+    padding: 8px;
+    background-color: white;
+    color: #333333;
+}
+
+#main-header-section #main-header-top .topbar-menu .topbar-menu-item .redirect-link .user-wrap .user-pages li a {
+    color: inherit;
+}
+
+#main-header-section #main-header-top .topbar-menu .topbar-menu-item .redirect-link .user-wrap .user-pages:has(li:first-child:hover)::before,
+#main-header-section #main-header-top .topbar-menu .topbar-menu-item .redirect-link .user-wrap .user-pages li:hover {
+    color: var(--red-color-main);
+    background-color: rgb(249, 249, 249);
+}
+#main-header-section #main-header-top .topbar-menu .topbar-menu-item .redirect-link .user-wrap .user-pages li i {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#main-header-section #main-header-top .topbar-menu .topbar-menu-item .redirect-link .user-wrap .user-pages::before {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 8px;
+    left: 50px;
+    content: '';
+    transform: rotate(45deg);
+    background-color: white;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+}
+
+#main-header-section #main-header-top .search-input .search-input-wrapper {
+    display: flex;
+    position: relative;
+    margin: 10px 0;
+}
+
+#main-header-section #main-header-top .search-input .search-input-wrapper input {
+    width: 100%;
+    border: 2px solid #dddd;
+    border-radius: 4px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: 0;
+    padding-left: 10px;
+    font-style: italic;
+}
+
+#main-header-section #main-header-top .search-input .search-input-wrapper input:focus-visible {
+    outline: none;
+}
+
+#main-header-section #main-header-top .search-input .search-input-wrapper .btn-search {
+    min-width: fit-content;
+    text-decoration: none;
+    background-color: var(--wheat-color);;
+    padding: 8px 15px;
+    font-weight: bold;
+    color: #ffff;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+#main-header-section #main-header-top .search-input .search-input-wrapper .btn-search::before {
+    content: "\f002";
+    font-family: 'Font Awesome 6 Free';
+    margin-right: 5px;
+}
+
+/* Phần Header - phía dưới */
+#main-header-section #main-header-bot {
+    display: flex;
+    background-color: var(--red-color-main);
+    min-height: fit-content;
+    align-items: flex-start;
+}
+
+#main-header-section #main-header-bot .main-nav {
+    width: 100%;
+    display: flex;
+    min-width: fit-content;
+    color: #ffff;
+    padding: 0 20px;
+    align-items: stretch;
+    height: fit-content;
+}
+
+#main-header-section #main-header-bot .main-nav .all-items {
+    min-width: fit-content;
+    background-color: var(--red-dark-color-main);
+    display: block;
+    padding: 10px 10px;
+    position: relative;
+}
+
+#main-header-section #main-header-bot .main-nav .all-items::before {
+    content: '\f0c9';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+#main-header-section #main-header-bot .main-nav .nav-items-wrapper {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+#main-header-section #main-header-bot .main-nav .nav-items-wrapper .nav-item {
+    text-transform: capitalize;
+    position: relative;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+#main-header-section #main-header-bot .main-nav .nav-items-wrapper .nav-item a:link, 
+#main-header-section #main-header-bot .main-nav .nav-items-wrapper .nav-item a:visited {
+    text-decoration: none;
+    color: inherit;
+}
+
+#main-header-section #main-header-bot .main-nav .nav-items-wrapper .nav-item:hover {
+    color: var(--wheat-color);
+}
+
+#main-header-section #main-header-bot .main-nav .nav-items-wrapper .nav-item:has(ul.menu)::after {
+    display: inline;
+    content: '\f0dd';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+/* #main-header-section #main-header-bot .main-nav .nav-items-wrapper.... */
+#main-header-section #main-header-bot * .menu-wrapper .menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: fit-content;
+    display: none;
+    box-shadow: -1px 2px 5px 1px rgba(102, 102, 102, 0.3);
+}
+
+#main-header-section #main-header-bot * .menu-wrapper:hover>.menu {
+    display: block;
+    list-style: none;
+}
+
+#main-header-section #main-header-bot * .menu-wrapper:hover .menu .menu-item {
+    background-color: var(--bisque-color);
+    text-wrap: nowrap;
+    font-family: 'Segoe UI';
+    font-weight: 300;
+    color: var(--red-color-main);
+    text-transform: capitalize;
+    text-align: left;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 12px;
+}
+
+#main-header-section #main-header-bot * .menu-wrapper:hover * a {
+    text-decoration: none;
+    margin-right: 20px;
+    padding: 10px 0;
+    color: inherit;
+}
+
+#main-header-section #main-header-bot * .menu-wrapper:hover .menu .menu-item + .menu-item {
+    border-top: 1px solid gray;
+}
+
+#main-header-section #main-header-bot * .menu-wrapper:hover .menu .menu-item:hover {
+    background-color: var(--red-color-main);
+    color: var(--wheat-color);
+}
+
+
+#main-header-section #main-header-bot * .menu-wrapper .menu .menu-item:has(ul.menu)::after {
+    content: '\f0da';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: bold;
+}
+
+#main-header-section #main-header-bot * .menu-item .menu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    list-style: none;
+    box-shadow: -1px 2px 5px 1px rgba(102, 102, 102, 0.3);
+    z-index: 2;
+    display: none;
+}
+
+#main-header-section #main-header-bot * .menu-item:hover>.menu {
+    display: block;
+}

@@ -1,0 +1,30 @@
+#home-slider-section {
+    display: flex;
+}
+.custom-bullet {
+    width: 20px;
+    height: 20px;
+    background: var(--wheat-color);
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+.custom-bullet+.custom-bullet {
+    margin-left: 15px;
+}
+.custom-bullet-active::after {
+    content: "";
+    width: 17px;
+    height: 17px;
+    background-color: var(--red-color-main);
+    border-radius: 50%;
+    position: absolute;
+}
+
+.swiper-wrapper .swiper-slide img {
+    object-fit: cover;
+    height: 500px;
+}

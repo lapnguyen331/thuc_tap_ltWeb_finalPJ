@@ -1,0 +1,905 @@
+{
+  "data": 
+  [
+    {
+      "id": "8859191149060",
+      "name": "SET 1 - 950k Bộ Quà Tặng Tri Ân",
+      "specific": "Set 4",
+      "price": "1450000",
+      "discount": "34",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2023/10/set1-tri-an.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/10/SET1-TRI-AN-KGIN.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/10/SET1-TRI-AN-KGIN-CHI-TIET.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/10/set1-tri-an-950k-kgin.jpg"
+      ],
+      "link": "https://kgin.com.vn/set-1-950k-bo-qua-tang-tri-an/",
+      "sold": "19.6k",
+      "rate": "4.9",
+      "category": "NHSHQ23"
+    },
+    {
+      "id": "8809191147850",
+      "name": "SET 2 - 1590k Bộ Quà Tặng Bình An",
+      "specific": "Set 3",
+      "price": "2150000",
+      "discount": "26",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2023/10/set2-binh-an.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/10/set-KGIN-BINH-AN.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/10/set-2-KGIN-BINH-AN-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/10/KGIN-BINH-AN.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/10/SET1-TRI-AN-KGIN.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/10/chi-tiet-set-BINH-AN-KGIN.jpg"
+      ],
+      "link": "https://kgin.com.vn/set-2-1590k-bo-qua-tang-binh-an/",
+      "sold": "15.6k",
+      "rate": "4.9",
+      "category": "NHSHQ23"
+    },
+    {
+      "id": "8809191123460",
+      "name": "SET 3 - 2690k Bộ Quà Tặng Tài Lộc",
+      "specific": "Set 3",
+      "price": "3200000",
+      "discount": "16",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2023/10/set3-tailoc-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/10/set-3-tai-loc-kgin-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/10/kgin-tai-loc.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/10/SET1-TRI-AN-KGIN.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/10/set-KGIN-BINH-AN.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/10/kgin-chi-tiet-set-tai-loc.jpg"
+      ],
+      "link": "https://kgin.com.vn/set-3-2690k-bo-qua-tang-tai-loc/",
+      "sold": "12.6k",
+      "rate": "4.8",
+      "category": "NHSHQ23"
+    },
+    {
+      "id": "8809191149060",
+      "name": "Nước Hồng Sâm Hàn Quốc hộp 30 gói Pocheon",
+      "specific": "30 gói x 80ml",
+      "price": "2000000",
+      "discount": "30",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2021/10/nuoc-sam-100-anh-dai-dien-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/10/nuoc-sam-100-3-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/10/nuoc-sam-100-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/10/nuoc-sam-100-1.jpg"
+      ],
+      "link": "https://kgin.com.vn/nuoc-ep-hong-sam-pocheon/",
+      "sold": "5.2K",
+      "rate": "4.9",
+      "category": "NHSHQ23"
+    },
+    {
+      "id": "8809118595864",
+      "name": "Tinh chất hắc sâm Hàn Quốc thượng hạng 6 năm tuổi",
+      "specific": "30 gói x 10ml",
+      "price": "4550000",
+      "discount": "15",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2022/07/tinh-chat-hac-sam-1-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/07/tinh-chat-hac-sam-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/07/tinh-chat-hac-sam-5.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/07/tinh-chat-hac-sam-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/07/tinh-chat-hac-sam-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/07/tinh-chat-hac-sam-6.jpg"
+      ],
+      "link": "https://kgin.com.vn/tinh-chat-hac-sam-han-quoc-thuong-hang-6-nam-tuoi/",
+      "sold": "1.6k",
+      "rate": "4.8",
+      "category": "NHSHQ23"
+    },
+    {
+      "id": "8809332391778",
+      "name": "Tinh Chất Hồng Sâm Thượng Hạng Everytime KGC 30 gói",
+      "specific": "10ml x 30 gói",
+      "price": "2650000",
+      "discount": "15",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2021/10/tinh-chat-everytime-30g-anh-dai-dien.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/10/tinh-chat-everytime-30g-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/10/tinh-chat-everytime-30g-4.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/10/tinh-chat-everytime-30g-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/10/tinh-chat-everytime-30g-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/12/tinh-chat-everytime-kgin.jpg"
+      ],
+      "link": "https://kgin.com.vn/tinh-chat-hong-sam-thuong-hang-kgc-30-goi/",
+      "sold": "2.6k",
+      "rate": "4.9",
+      "category": "NHSHQ23"
+    },
+    {
+      "id": "8809755521738",
+      "name": "Nước Hồng Sâm Nhung Hươu Hàn Quốc Hộp 30 Gói",
+      "specific": "30 gói x 70ml",
+      "price": "1250000",
+      "discount": "21",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2022/12/nuoc-sam-nhung-huou-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/12/nuoc-sam-nhung-huou-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/12/nuoc-sam-nhung-huou-5.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/12/nuoc-sam-nhung-huou-4.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/12/nuoc-sam-nhung-huou-3.jpg"
+      ],
+      "link": "https://kgin.com.vn/nuoc-hong-sam-nhung-huou-han-quoc-hop-30-goi/",
+      "sold": "4.6k",
+      "rate": "4.8",
+      "category": "NHSHQ23"
+    },
+    {
+      "id": "8809013351046",
+      "name": "Nước Ép Hồng Sâm Bio Hàn Quốc",
+      "specific": "30 gói x 70ml",
+      "price": "750000",
+      "discount": "13",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2021/09/nuoc-sam-bio-anh-dai-dien.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/nuoc-sam-bio-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/nuoc-sam-bio-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/66532d165d98d0c4de99a84ac530e831.jpg"
+      ],
+      "link": "https://kgin.com.vn/hong-sam-bio/",
+      "sold": "3.9k",
+      "rate": "4.8",
+      "category": "NHSHQ23"
+    },
+    {
+      "id": "8809308650564",
+      "name": "Cao Hồng Sâm Hoàng Đế",
+      "specific": "2 hũ x 500gr",
+      "price": "2500000",
+      "discount": "16",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2023/06/cao-sam-hu-doi-5.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/06/cao-sam-hu-doi-6.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/06/cao-sam-hu-doi-11.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/06/cao-sam-hu-doi-12.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/06/cao-sam-hu-doi-9.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/06/cao-sam-hu-doi-10.jpg"
+      ],
+      "link": "https://kgin.com.vn/cao-hong-sam-hoang-de/",
+      "sold": "851",
+      "rate": "4.9",
+      "category": "CHSHQ23"
+    },
+    {
+      "id": "8809118595840",
+      "name": "Cao Hắc Sâm Nguyên Chất 120G - Chiết Xuất Hắc Sâm Hàn Quốc 6 Năm Tuổi",
+      "specific": "120G",
+      "price": "4200000",
+      "discount": "15",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2023/03/cao-hac-sam-120g-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/03/cao-hac-sam-120g-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/03/cao-hac-sam-120g-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/03/cao-hac-sam-120g-4.jpg"
+      ],
+      "link": "https://kgin.com.vn/cao-hac-sam-nguyen-chat-thuong-hang-120g-chiet-xuat-hac-sam-han-quoc-6-nam-tuoi/",
+      "sold": "1.6k",
+      "rate": "4.8",
+      "category": "CHSHQ23"
+    },
+    {
+      "id": "8809191149633",
+      "name": "Cao Hồng Sâm Linh Chi Pocheon Hàn Quốc",
+      "specific": "2 lọ x 240gr",
+      "price": "1400000",
+      "discount": "14",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2022/03/cao-hslc-dai-dien-sua.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/cao-hong-sam-linh-chi-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/cao-hong-sam-linh-chi-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/cao-hong-sam-linh-chi-4.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/cao-hong-sam-linh-chi-5.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/cao-hong-sam-linh-chi-6.jpg"
+      ],
+      "link": "https://kgin.com.vn/cao-hong-sam-linh-chi-taewoong/",
+      "sold": "2.7k",
+      "rate": "4.7",
+      "category": "CHSHQ23"
+    },
+    {
+      "id": "8809118590746",
+      "name": "Cao Sâm Hàn Quốc Cao Cấp",
+      "specific": "3 lọ x 100gr",
+      "price": "2500000",
+      "discount": "28",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2021/09/cao-3-lo-anh-dai-dien.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/cao-3-lo-5.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/cao-3-lo-14.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/cao-3-lo-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/cao-3-lo-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/cao-3-lo-4.jpg"
+      ],
+      "link": "https://kgin.com.vn/cao-hong-sam-han-quoc-cao-cap-2/",
+      "sold": "23.6k",
+      "rate": "4.9",
+      "category": "CHSHQ23"
+    },
+    {
+      "id": "8809118594171",
+      "name": "Cao Sâm Thượng Hạng Daedong 240gr",
+      "specific": "1 lọ x 240g",
+      "price": "3105000",
+      "discount": "10",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2021/09/cao-1-lo-anh-dai-dien-sua.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/cao-1-lo-17.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/cao-1-lo-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/cao-1-lo-7.jpg"
+      ],
+      "link": "https://kgin.com.vn/cao-hong-sam-thuong-hang-daedong-240gr/",
+      "sold": "3.8K",
+      "rate": "4.9",
+      "category": "CHSHQ23"
+    },
+    {
+      "id": "8809308650564",
+      "name": "Cao Sâm Hũ Đôi Arirang Hàn Quốc",
+      "specific": "2 hũ x 500gr",
+      "price": "2400000",
+      "discount": "13",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2022/12/cao-sam-hu-doi-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/12/cao-sam-hu-doi-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/12/cao-sam-hu-doi-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/12/cao-sam-hu-doi-4.jpg"
+      ],
+      "link": "https://kgin.com.vn/cao-sam-hu-doi-arirang-han-quoc/",
+      "sold": "1.2k",
+      "rate": "4.8",
+      "category": "CHSHQ23"
+    },
+    {
+      "id": "8809535592835",
+      "name": "Cao Sâm Nguyên Chất Thượng Hạng KGC 240g",
+      "specific": "1 hộp 240gr",
+      "price": "5000000",
+      "discount": "8",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2022/02/cao-1lo-kgc-240g-dai-dien-sua.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/10/cao-kgc-240g-6.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/10/cao-kgc-240g-4.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/10/cao-kgc-240g-5.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/10/cao-kgc-240g-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/10/cao-kgc-240g-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/10/cao-kgc-240g-1.jpg"
+      ],
+      "link": "https://kgin.com.vn/cao-hong-sam-nguyen-chat-thuong-hang-kgc-240g/",
+      "sold": "31.9k",
+      "rate": "4.9",
+      "category": "CHSHQ23"
+    },
+    {
+      "id": "8809118594171",
+      "name": "Cao Sâm Hàn Quốc Thượng Hạng",
+      "specific": "1 lọ x 240gr",
+      "price": "3105000",
+      "discount": "10",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2021/09/cao-1-lo-anh-dai-dien-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/cao-1-lo-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/cao-1-lo-12.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/cao-1-lo-6.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/cao-1-lo-5.jpg"
+      ],
+      "link": "https://kgin.com.vn/cao-hong-sam-han-quoc-thuong-hang/",
+      "sold": "1.9k",
+      "rate": "4.9",
+      "category": "CHSHQ23"
+    },
+    {
+      "id": "8809118599084",
+      "name": "Hồng sâm khô hộp thiếc 300gr Hàn Quốc",
+      "specific": "1 hộp x 300g",
+      "price": "3050000",
+      "discount": "8",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-150g-anh-dai-dien.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-chung-11.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/07/sam-kho-chung-10.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/07/sam-kho-chung-9.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/07/sam-kho-300g-4.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-chung-7.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-chung-6.jpg"
+      ],
+      "link": "https://kgin.com.vn/hong-sam-cu-kho-han-quoc-300g/",
+      "sold": "8.7k",
+      "rate": "4.9",
+      "category": "SSKHQ21"
+    },
+    {
+      "id": "8809755521622",
+      "name": "Hồng Sâm Lát Khô Cao Cấp 6 Năm Tuổi - Sâm Khô Thái Lát Hàn Quốc Tiện Dụng",
+      "specific": "200gr",
+      "price": "2800000",
+      "discount": "21",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2023/05/kgin-hong-sam-kho-lat-main.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/05/hong-sam-kho-thai-lat-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/05/hong-sam-kho-thai-lat-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/05/hong-sam-kho-thai-lat-4.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/05/hong-sam-kho-thai-lat-5.jpg"
+      ],
+      "link": "https://kgin.com.vn/hong-sam-lat-kho-cao-cap-6-nam-tuoi-sam-kho-thai-lat-han-quoc-tien-dung/",
+      "sold": "1.6k",
+      "rate": "4.8",
+      "category": "SSKHQ21"
+    },
+    {
+      "id": "8809118597011",
+      "name": "Hắc Sâm Khô Thái Lát 75GR Thượng Hạng - Hắc Sâm Cắt Lát  6 Năm Tuổi Daedong Hàn Quốc",
+      "specific": "1 lọ x 75gr",
+      "price": "2700000",
+      "discount": "22",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2022/01/hac-sam-lat-75g-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/01/hac-sam-lat-75g-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/01/hac-sam-lat-75g-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/05/hac-sam-lat-4.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/05/hac-sam-lat-2.jpg"
+      ],
+      "link": "https://kgin.com.vn/hac-sam-kho-thai-lat-75gr-thuong-hang-hac-sam-cat-lat-6-nam-tuoi-daedong-han-quoc/",
+      "sold": "1k",
+      "rate": "4.6",
+      "category": "SSKHQ21"
+    },
+    {
+      "id": "8809755521707",
+      "name": "Hắc Sâm Củ Khô Hàn Quốc 150g",
+      "specific": "1 hộp x 150g",
+      "price": "4200000",
+      "discount": "10",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2021/09/hac-sam-kho-300g-anh-dai-dien-sua.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/06/hac-sam-kho-7.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/06/hac-sam-kho-5.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/06/hac-sam-kho-9.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/06/hac-sam-kho-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/06/hac-sam-kho-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/06/hac-sam-kho-3.jpg"
+      ],
+      "link": "https://kgin.com.vn/hac-sam-cu-kho-han-quoc-150g/",
+      "sold": "1.7",
+      "rate": "4.9",
+      "category": "SSKHQ21"
+    },
+    {
+      "id": "8809118590326",
+      "name": "Hồng sâm củ khô Hàn Quốc 37,5g",
+      "specific": "1 hộp x 37,5g",
+      "price": "850000",
+      "discount": "12",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-375-anh-dai-dien.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-chung-11.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-375g-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-375g-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-375gr-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-chung-4.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-chung-5.jpg"
+      ],
+      "link": "https://kgin.com.vn/hong-sam-cu-kho-han-quoc-375g/",
+      "sold": "5.6k",
+      "rate": "4.9",
+      "category": "SSKHQ21"
+    },
+    {
+      "id": "8809118590197",
+      "name": "Hồng sâm củ khô Hàn Quốc 75g",
+      "specific": "1 hộp x 75g",
+      "price": "1850000",
+      "discount": "32",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-75g-anh-dai-dien.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-chung-11.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/07/sam-kho-375-75g-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-375gr-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-375g-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-chung-4.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-chung-5.jpg"
+      ],
+      "link": "https://kgin.com.vn/hong-sam-cu-kho-han-quoc-75g/",
+      "sold": "2.9k",
+      "rate": "4.9",
+      "category": "SSKHQ21"
+    },
+    {
+      "id": "8809118590081",
+      "name": "Hồng sâm khô Hàn Quốc hộp thiếc 150g",
+      "specific": "1 hộp x 150g",
+      "price": "2050000",
+      "discount": "12",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-150g-anh-dai-dien.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-chung-11.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-150g-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-150g-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-chung-6.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-150g-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-chung-7.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-150g-4.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-150g-5.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-150g-6-e1656249349132.jpg"
+      ],
+      "link": "https://kgin.com.vn/hong-sam-cu-kho-han-quoc-150g/",
+      "sold": "3.8k",
+      "rate": "4.9",
+      "category": "SSKHQ21"
+    },
+    {
+      "id": "8809118590142",
+      "name": "Hồng sâm củ khô Hàn Quốc 600g",
+      "specific": "1 hộp x 600g",
+      "price": "6000000",
+      "discount": "8",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-150g-anh-dai-dien.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-chung-11.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-chung-4.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-chung-5.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/07/sam-kho-chung-10.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/07/sam-kho-chung-9.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/sam-kho-chung-6.jpg"
+      ],
+      "link": "https://kgin.com.vn/hong-sam-cu-kho-han-quoc-600g/",
+      "sold": "3.6k",
+      "rate": "4.9",
+      "category": "SSKHQ21"
+    },
+    {
+      "id": "8809118595840",
+      "name": "Cao Hắc Sâm Nguyên Chất 120G - Chiết Xuất Hắc Sâm Hàn Quốc 6 Năm Tuổi",
+      "specific": "120G",
+      "price": "4200000",
+      "discount": "15",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2023/03/cao-hac-sam-120g-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/03/cao-hac-sam-120g-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/03/cao-hac-sam-120g-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/03/cao-hac-sam-120g-4.jpg"
+      ],
+      "link": "https://kgin.com.vn/cao-hac-sam-nguyen-chat-thuong-hang-120g-chiet-xuat-hac-sam-han-quoc-6-nam-tuoi/",
+      "sold": "1.6k",
+      "rate": "4.8",
+      "category": "HNSSHQ22"
+    },
+    {
+      "id": "8809118597011",
+      "name": "Hắc Sâm Khô Thái Lát 75GR Thượng Hạng - Hắc Sâm Cắt Lát  6 Năm Tuổi Daedong Hàn Quốc",
+      "specific": "1 lọ x 75gr",
+      "price": "2700000",
+      "discount": "22",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2022/01/hac-sam-lat-75g-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/01/hac-sam-lat-75g-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/01/hac-sam-lat-75g-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/05/hac-sam-lat-4.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/05/hac-sam-lat-2.jpg"
+      ],
+      "link": "https://kgin.com.vn/hac-sam-kho-thai-lat-75gr-thuong-hang-hac-sam-cat-lat-6-nam-tuoi-daedong-han-quoc/",
+      "sold": "1k",
+      "rate": "4.6",
+      "category": "HNSSHQ22"
+    },
+    {
+      "id": "8809118595864",
+      "name": "Tinh chất hắc sâm Hàn Quốc thượng hạng 6 năm tuổi",
+      "specific": "30 gói x 10ml",
+      "price": "4550000",
+      "discount": "15",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2022/07/tinh-chat-hac-sam-1-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/07/tinh-chat-hac-sam-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/07/tinh-chat-hac-sam-5.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/07/tinh-chat-hac-sam-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/07/tinh-chat-hac-sam-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/07/tinh-chat-hac-sam-6.jpg"
+      ],
+      "link": "https://kgin.com.vn/tinh-chat-hac-sam-han-quoc-thuong-hang-6-nam-tuoi/",
+      "sold": "1.6k",
+      "rate": "4.8",
+      "category": "HNSSHQ22"
+    },
+    {
+      "id": "8809755521707",
+      "name": "Hắc Sâm Củ Khô Hàn Quốc 150g",
+      "specific": "1 hộp x 150g",
+      "price": "4200000",
+      "discount": "10",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2021/09/hac-sam-kho-300g-anh-dai-dien-sua.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/06/hac-sam-kho-7.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/06/hac-sam-kho-5.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/06/hac-sam-kho-9.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/06/hac-sam-kho-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/06/hac-sam-kho-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/06/hac-sam-kho-3.jpg"
+      ],
+      "link": "https://kgin.com.vn/hac-sam-cu-kho-han-quoc-150g/",
+      "sold": "1.7",
+      "rate": "4.9",
+      "category": "HNSSHQ22"
+    },
+    {
+      "id": "Hàn Quốc",
+      "name": "Hắc Sâm Củ Khô Hàn Quốc 300gr",
+      "specific": "1 hộp x 300g",
+      "price": "7800000",
+      "discount": "8",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2021/09/hac-sam-kho-300g-anh-dai-dien.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/06/hac-sam-kho-7.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/06/hac-sam-kho-5.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/06/hac-sam-kho-9.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/06/hac-sam-kho-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/06/hac-sam-kho-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/06/hac-sam-kho-3.jpg"
+      ],
+      "link": "https://kgin.com.vn/hac-sam-cu-kho-han-quoc/",
+      "sold": "9.7",
+      "rate": "4.9",
+      "category": "HNSSHQ22"
+    },
+    {
+      "id": "8809118597011",
+      "name": "Hắc Sâm Khô Thái Lát 225Gr Thượng Hạng Daedong",
+      "specific": "3 lọ x 75gr",
+      "price": "6900000",
+      "discount": "13",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2021/09/kgin-hac-sam-lat-dai-dien.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/05/hac-sam-lat-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/05/hac-sam-lat-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/05/hac-sam-lat-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/05/hac-sam-lat-4.jpg"
+      ],
+      "link": "https://kgin.com.vn/hac-sam-kho-thai-lat-han-quoc/",
+      "sold": "2.7k",
+      "rate": "4.9",
+      "category": "HNSSHQ22"
+    },
+    {
+      "id": "8809288860229",
+      "name": "Kẹo Hắc Sâm Hàn Quốc 300GR",
+      "specific": "1 gói x 300gr",
+      "price": "120000",
+      "discount": "33",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2018/09/keo-hac-sam-anh-dai-dien.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/12/keo-sam-kgin.jpg"
+      ],
+      "link": "https://kgin.com.vn/keo-hac-sam-han-quoc/",
+      "sold": "10.6k",
+      "rate": "4.7",
+      "category": "HNSSHQ22"
+    },
+    {
+      "id": "8119118597011",
+      "name": "Rượu Sâm Hàn Quốc Chính Hãng",
+      "specific": "3.5 lít",
+      "price": "3000000",
+      "discount": "17",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2018/10/ruou-sam-anh-dai-dien.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2018/10/ruou-sam-7.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2018/10/ruou-sam-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2018/10/ruou-sam-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2018/10/ruou-sam-4.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2018/10/ruou-sam-5.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2018/10/ruou-sam-6.jpg"
+      ],
+      "link": "https://kgin.com.vn/ruou-nhan-sam-tuoi-han-quoc/",
+      "sold": "2.1k",
+      "rate": "4.6",
+      "category": "NSTHQ23"
+    },
+    {
+      "id": "8801238597011",
+      "name": "Sâm Hàn Quốc Loại 6 Củ 1 Kg",
+      "specific": "1kg x 6 củ",
+      "price": "4000000",
+      "discount": "20",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2022/05/nhan-sam-tuoi-anh-dai-dien.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/nhan-sam-tuoi-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/nhan-sam-tuoi-4-e1647932623643.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/nhan-sam-tuoi-5.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/nhan-sam-tuoi-12.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/nhan-sam-tuoi-9.jpg"
+      ],
+      "link": "https://kgin.com.vn/nhan-sam-tuoi-han-quoc-6cu-kg/",
+      "sold": "18.6k",
+      "rate": "4.9",
+      "category": "NSTHQ23"
+    },
+    {
+      "id": "8809145697011",
+      "name": "Rượu Sâm Hàn Quốc Chính Hãng",
+      "specific": "3.5 lít",
+      "price": "3000000",
+      "discount": "17",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2018/10/ruou-sam-anh-dai-dien.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2018/10/ruou-sam-7.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2018/10/ruou-sam-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2018/10/ruou-sam-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2018/10/ruou-sam-4.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2018/10/ruou-sam-5.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2018/10/ruou-sam-6.jpg"
+      ],
+      "link": "https://kgin.com.vn/ruou-nhan-sam-tuoi-han-quoc/",
+      "sold": "2.1k",
+      "rate": "4.6",
+      "category": "RSLHQ22"
+    },
+    {
+      "id": "8809178997011",
+      "name": "Bình Rượu Sâm Hàn Quốc 1.4 Lít - 2 Củ Số 60",
+      "specific": "1.4 lít",
+      "price": "1600000",
+      "discount": "25",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2022/11/ruou-sam-60-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/11/ruou-sam-60-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/11/ruou-sam-60-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/11/ruou-sam-60-4.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/11/ruou-sam-60-5.jpg"
+      ],
+      "link": "https://kgin.com.vn/binh-ruou-sam-han-quoc-1-4-lit-2-cu-so-60/",
+      "sold": "1.6k",
+      "rate": "4.8",
+      "category": "RSLHQ22"
+    },
+    {
+      "id": "8809452597011",
+      "name": "Bình Rượu Sâm Hàn Quốc 1 Củ Số 29-92",
+      "specific": "660ml",
+      "price": "650000",
+      "discount": "15",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2022/05/ruou-sam-29.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/05/ruou-sam-29-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/05/ruou-sam-29-4.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/05/ruou-sam-29-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/05/ruou-sam-29-1-sua.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/05/ruou-sam-9.jpg"
+      ],
+      "link": "https://kgin.com.vn/binh-ruou-sam-han-quoc-1-cu-so-29-92/",
+      "sold": "0.7k",
+      "rate": "4.5",
+      "category": "RSLHQ22"
+    },
+    {
+      "id": "Hàn Quốc",
+      "name": "Bình Rượu Sâm Hàn Quốc 3 Lít - 3 Củ Số 57",
+      "specific": "3 lít",
+      "price": "2850000",
+      "discount": "12",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2022/11/ruou-sam-57-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/11/ruou-sam-57-5.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/11/ruou-sam-57-4.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/11/ruou-sam-57-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/02/ruou-sam-57-7.jpg"
+      ],
+      "link": "https://kgin.com.vn/binh-ruou-sam-han-quoc-3-lit-3-cu-so-57/",
+      "sold": "2.6k",
+      "rate": "4.9",
+      "category": "RSLHQ22"
+    },
+    {
+      "id": "8809114797011",
+      "name": "BÌNH RƯỢU SÂM HÀN QUỐC 4.5 LÍT - 4 CỦ SỐ 58",
+      "specific": "4.5 lít",
+      "price": "3800000",
+      "discount": "8",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2023/06/ruou-sam-58-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/06/ruou-sam-58-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/06/ruou-sam-58-2.jpg"
+      ],
+      "link": "https://kgin.com.vn/binh-ruou-sam-han-quoc-4-5-lit-4-cu-so-58/",
+      "sold": "0.6k",
+      "rate": "4.8",
+      "category": "RSLHQ22"
+    },
+    {
+      "id": "Hàn Quốc",
+      "name": "Bình Rượu Sâm Hàn Quốc 9 Lít - 4 Củ Số 08",
+      "specific": "9 lít",
+      "price": "5000000",
+      "discount": "10",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2022/11/ruou-sam-08-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/11/ruou-sam-08-03.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/11/ruou-sam-08-04.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/11/ruou-sam-08-2.jpg"
+      ],
+      "link": "https://kgin.com.vn/binh-ruou-sam-han-quoc-9-lit-4-cu-so-08/",
+      "sold": "4.6k",
+      "rate": "4.8",
+      "category": "RSLHQ22"
+    },
+    {
+      "id": "8809169697011",
+      "name": "Bình Rượu Sâm Hàn Quốc 13.5 Lít - 5 Củ Số 06",
+      "specific": "13.5 lít",
+      "price": "6800000",
+      "discount": "12",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2022/11/ruou-sam-06-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/11/ruou-sam-06-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/11/ruou-sam-06-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/11/ruou-sam-06-4.jpg"
+      ],
+      "link": "https://kgin.com.vn/binh-ruou-sam-han-quoc-13-5-lit-5-cu-so-06/",
+      "sold": "5.6k",
+      "rate": "4.6",
+      "category": "RSLHQ22"
+    },
+    {
+      "id": "8809110007011",
+      "name": "Bình Rượu Sâm Hàn Quốc 25 Lít - 8 Củ Số 03",
+      "specific": "25 Lít",
+      "price": "12500000",
+      "discount": "12",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2022/11/ruou-sam-03-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/11/ruou-sam-03-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/11/ruou-sam-03-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2022/11/ruou-sam-03-4.jpg"
+      ],
+      "link": "https://kgin.com.vn/binh-ruou-sam-han-quoc-25-lit-8-cu-so-03/",
+      "sold": "1.2k",
+      "rate": "4.7",
+      "category": "RSLHQ22"
+    },
+    {
+      "id": "8809118595819",
+      "name": "Trà Hồng Sâm Hàn Quốc Cao cấp",
+      "specific": "100 gói x 3g",
+      "price": "690000",
+      "discount": "9",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2021/09/tra-hong-_637066627390139414_HasThumb.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/09/tra-sam-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/09/tra-sam-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/09/tra-sam-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/12/tra-sam-kgin-4.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/12/tra-sam-kgin-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/12/tra-sam-kgin-3.jpg"
+      ],
+      "link": "https://kgin.com.vn/tra-hong-sam-han-quoc-cao-cap/",
+      "sold": "25.6k",
+      "rate": "4.9",
+      "category": "THSHQ21"
+    },
+    {
+      "id": "8809118595802",
+      "name": "Trà Hồng Sâm Cao Cấp Hộp Nhỏ",
+      "specific": "50 gói x 3g",
+      "price": "380000",
+      "discount": "13",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2021/09/NHAN-SAM1609-768x768-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/09/tra-sam-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/09/tra-sam-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/12/tra-sam-kgin-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/12/tra-sam-kgin-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/12/tra-sam-kgin-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/12/tra-sam-kgin-4.jpg"
+      ],
+      "link": "https://kgin.com.vn/tra-hong-sam-cao-cap-hop-nho/",
+      "sold": "2.4k",
+      "rate": "4.8",
+      "category": "THSHQ21"
+    },
+    {
+      "id": "8809023005519",
+      "name": "Bột Hồng Sâm Cheong Kwan Jang Dạng Hũ 90G",
+      "specific": "1 hũ x 90gr",
+      "price": "1650000",
+      "discount": "33",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2021/09/71295338_M_500.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/09/bot-sam-hu-kgc-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/09/bot-sam-hu-kgc-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/09/bot-sam-hu-kgc-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/09/bot-sam-hu-kgc-4.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/09/bot-sam-4.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/09/bot-sam-5.jpg"
+      ],
+      "link": "https://kgin.com.vn/bot-hong-sam-cheong-kwan-jang-dang-hu-90g/",
+      "sold": "26.9k",
+      "rate": "4.9",
+      "category": "THSHQ21"
+    },
+    {
+      "id": "8809118597646",
+      "name": "Viên Hồng Sâm Linh Chi Nhung Hươu",
+      "specific": "120 viên x 830mg",
+      "price": "1000000",
+      "discount": "12",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2023/08/vien-sam-lc-dtht-4.jpg"
+      ],
+      "link": "https://kgin.com.vn/vien-sam-nhung-linh-chi-gold/",
+      "sold": "1.7k",
+      "rate": "4.5",
+      "category": "VHSHQ21"
+    },
+    {
+      "id": "8809191149572",
+      "name": "Viên Sâm Bio ApGold Hàn Quốc nguyên chất 100%",
+      "specific": "60 viên x 250mg",
+      "price": "750000",
+      "discount": "13",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2021/09/vien-sam-anh-dai-dien.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/vien-sam-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/vien-sam-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/vien-sam-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2021/09/vien-sam-4.jpg"
+      ],
+      "link": "https://kgin.com.vn/vien-hong-sam-han-quoc-nguyen-chat-100/",
+      "sold": "1.6k",
+      "rate": "4.8",
+      "category": "VHSHQ21"
+    },
+    {
+      "id": "8809535595638",
+      "name": "Viên Nhộng Hồng Sâm KGC Capsule 300 viên",
+      "specific": "300 viên x 50 ngày",
+      "price": "3590000",
+      "discount": "19",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2021/10/vien-hong-sam-con-nhong-KGC-Extract-Capsule-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/10/vien-sam-kgc-300-vien-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/10/vien-sam-kgc-300-vien-2.jpg"
+      ],
+      "link": "https://kgin.com.vn/vien-nhong-hong-sam-kgc-capsule-300-vien/",
+      "sold": "22.6k",
+      "rate": "4.8",
+      "category": "VHSHQ21"
+    },
+    {
+      "id": "8809332398098",
+      "name": "Viên Cao Hồng Sâm Cheong Kwan Jang 168g",
+      "specific": "1 lọ x 168g",
+      "price": "1850000",
+      "discount": "19",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2021/10/cao-1lo-kgc-240g-dai-dien.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/10/vien-cao-sam-168g-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/10/vien-cao-sam-168g-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/10/vien-cao-sam-168g-3.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2020/10/vien-cao-sam-168g-4.jpg"
+      ],
+      "link": "https://kgin.com.vn/vien-cao-hong-sam-cheong-kwan-jang-168g/",
+      "sold": "19.6k",
+      "rate": "4.8",
+      "category": "VHSHQ21"
+    },
+    {
+      "id": "8809118597646",
+      "name": "Viên đạm sâm nhung linh chi đông trùng hạ thảo Hàn Quốc",
+      "specific": "120 viên x 830mg",
+      "price": "1000000",
+      "discount": "12",
+      "images": [
+        "https://kgin.com.vn/wp-content/uploads/2023/08/vien-sam-lc-dtht-1.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/08/vien-sam-lc-dtht-2.jpg",
+        "https://kgin.com.vn/wp-content/uploads/2023/08/vien-sam-lc-dtht-3.jpg"
+      ],
+      "link": "https://kgin.com.vn/vien-dam-sam-nhung-linh-chi-dong-trung-ha-thao-han-quoc/",
+      "sold": "4.6k",
+      "rate": "4.6",
+      "category": "VHSHQ21"
+    }
+  ]
+}
