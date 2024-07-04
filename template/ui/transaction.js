@@ -1,36 +1,12 @@
-import { fake_transaction_data } from "./fake-data.js";
-const translate = {
-    "decimal":        "",
-    "emptyTable":     "Không có dữ liệu trong table",
-    "info":           "Hiển thị từ dòng _START_ đến dòng _END_ trong tổng số _TOTAL_",
-    "infoEmpty":      "Showing 0 to 0 of 0 entries",
-    "infoFiltered":   "(Lọc ra trong _MAX_ dòng)",
-    "infoPostFix":    "",
-    "thousands":      ",",
-    "lengthMenu":     "Hiển thị tối đa _MENU_ dòng",
-    "loadingRecords": "Đang load...",
-    "processing":     "",
-    "search":         "Tìm kiếm",
-    "zeroRecords":    "Không tìm thấy trường nào.",
-    "paginate": {
-        "first":      "Đầu tiên",
-        "last":       "Cuối cùng",
-        "next":       "Tiếp theo",
-        "previous":   "Trước đó"
-    },
-    "aria": {
-        "sortAscending":  ": activate to sort column ascending",
-        "sortDescending": ": activate to sort column descending"
-    }
-};
-const data_tables = new DataTable('#table_orders', {
+import { translate } from "./data-table-translate.js";
+const data_tables_transaction = new DataTable('#table_transaction', {
     language: translate,
     dom: 'tip',
     scrollCollapse: true,
     pageLength: 5,
     width: '100%',
     scrollY: '400px',
-    data: fake_transaction_data.data,
+    ajax: 'fake_transaction_data.json',
     createdRow: function(row, data, index ) {
         
     },
@@ -51,7 +27,7 @@ const data_tables = new DataTable('#table_orders', {
                     </div>
                     <div class="body">
                         <div class="thumbnail-wrap">
-                            <img src="https://ih1.redbubble.net/image.5452846048.9607/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.jpg" width="100%" alt="encore">
+                            <img src="${row.thumbnail}" width="100%" alt="encore">
                         </div>
                         <div class="info-grid">
                             <div class="grid-item">
@@ -95,9 +71,122 @@ const data_tables = new DataTable('#table_orders', {
         }
     ],
 });
+const typeChange = {
+    'THEM_HANG': '<div class="text-success fw-semibold">Thêm hàng</div>'
+}
+const data_tables_transaction_history = new DataTable('#table_history_transaction', {
+    language: translate,
+    dom: 'tip',
+    scrollCollapse: true,
+    pageLength: 5,
+    width: '100%',
+    scrollY: '200px',
+    columnDefs: [
+        {
+            target: [0, 2],
+            className: 'text-wrap',
+        }
+    ],
+    ajax: 'fake_transaction_history_month4_data.json',
+    createdRow: function(row, data, index ) {
+        
+    },
+    columns: [
+        {
+            data: 'transactionId',
+            render: function(data, type, row) {
+                return `
+                <div class="d-flex align-items-center">
+                    <a href="#">#${data}</a>
+                </div>
+                `
+            }
+        },
+        {
+            data: null,
+            className: 'w-25',
+            render: function(data, type, row) {
+                return `
+                <div class="d-flex gap-2" style="max-width: 100%">
+                    <div class="flex-shrink-0 d-flex justify-content-center align-items-center overflow-hidden border border-1 rounded-1" style="height: 50px; aspect-ratio: 1/1;">
+                        <img src="https://ih1.redbubble.net/image.5452846048.9607/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.jpg" width="100%" alt="">
+                    </div>
+                    <div class="d-flex flex-column">
+                        <div>Mã sản phẩm: ${row.productId}</div>
+                        <div style="overflow: hidden;
+                        width: 100%;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 1;
+                        -webkit-box-orient: vertical;">Tên: ${row.productName}</div>
+                    </div>
+                </div>
+                `
+            }
+        },
+        {
+            data: 'change',
+            className: 'w-auto',
+            render: function(data, type, row) {
+                return `
+                <div class="d-flex gap-1">
+                    <span class="fw-normal">Trong kho:</span>
+                    <span class="fw-semibold">${row.inStocks}</span>
+                    <span class="fw-semibold text-${data <= 0 ? 'danger' : 'success'}">(${data > 0 && '+'}${data})</span>
+                </div>
+                `
+            }
+            
+        },
+        {
+            data: null,
+            render: function(data, type, row) {
+                return `
+                    ${typeChange[row.changeType]}
+                `
+            }
+            
+        },
+        {
+            data: 'dateTime',
+            render: function(data, type, row) {
+                return `
+                    <div>${data}</div>
+                `
+            }
+            
+        },
+        {
+            width: '200px',
+            className: 'dt-center',
+            data: 'note',
+            render: function(data, type, row) {
+                return `
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="${data}">
+                    <div style="text-align: left;
+                    overflow: hidden;
+                        width: 100%;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 1;
+                        -webkit-box-orient: vertical;">${data}</div>
+                </span>
+                
+                `
+            }
+            
+        }
+    ],
+});
 $('#status_filter').on('change', function(e) {
     data_tables.draw();
 })
 $("#filter_input").on('input', function(e) {
     data_tables.column(1).search($(this).val()).draw()
 });
+(function() {
+    $('#table_tabs').on('click', 'li', function() {
+        const lis = $(this).siblings().filter('li');
+        $(lis).removeClass('active');
+        $(this).addClass('active')
+        this.dataset.jsonName && data_tables_transaction_history.ajax.url(`fake_transaction_history_${this.dataset.jsonName}_data.json`).load()
+    })
+})();

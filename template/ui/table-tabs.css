@@ -1,0 +1,29 @@
+#table_tabs {
+    display: block;
+    padding: 10px 0px;
+}
+
+#table_tabs ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#table_tabs ul li {
+    display: block;
+    padding: 5px 15px;
+    border-bottom: 1px solid transparent;
+    cursor: pointer;
+    transition: all .3s ease;
+    font-weight: 500;
+}
+
+#table_tabs ul li:not(.active):hover {
+    color: var(--red-color-main);
+}
+
+#table_tabs ul li.active {
+    color: var(--red-color-main);
+    border-bottom: 1px solid var(--red-color-main);
+}

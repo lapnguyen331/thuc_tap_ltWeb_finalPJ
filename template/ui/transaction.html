@@ -14,7 +14,13 @@
     <link rel="stylesheet" href="../css/datatables-override.css">
     <link rel="stylesheet" href="../css/bootstrap-override.css">
     <link rel="stylesheet" href="shipment-row.css">
+    <link rel="stylesheet" href="table-tabs.css">
     <style>
+        #table_tabs>ul>li{
+            flex: 1;
+            text-align: center;
+        }
+
         .table-header {
             background-image: url(../images/footer-bg.jpg);
             color: var(--wheat-color);
@@ -24,12 +30,16 @@
             font-weight: 600;
         }
 
-        .dataTables_scrollHead {
+        #table_transaction_wrapper .dataTables_scrollHead {
             display: none;
         }
         
         .dataTables_wrapper {
             margin-top: 0px;
+        }
+
+        #table_history_transaction_wrapper .dataTables_scrollHead {
+            background-image: url(../images/footer-bg.jpg);
         }
     </style>
 </head>
@@ -53,9 +63,56 @@
                 <div class="table-header">
                     <span>Trình quản lý nhập kho</span>
                 </div>
-                <table id="table_orders" style="width: 100%">
+                <table id="table_transaction" style="width: 100%">
                     <thead>
                     <tr>
+                    </tr>
+                    </thead>
+                </table>
+                <div class="table-header">
+                    <span>Lịch sử biến động tồn kho</span>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav id="table_tabs">
+                            <ul class="w-100 justify-content-between">
+                                <li class="active" data-json-name="month4">
+                                    <i class="fa-solid fa-arrow-trend-up"></i>
+                                    <span>Tháng 04/2024</span>
+                                </li>
+                                <li data-json-name="month5">
+                                    <i class="fa-solid fa-arrow-trend-up"></i>
+                                    <span>Tháng 05/2024</span>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-arrow-trend-up"></i>
+                                    <span>Tháng 06/2024</span>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-arrow-trend-up"></i>
+                                    <span>Tháng 07/2024</span>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-arrow-trend-up"></i>
+                                    <span>Tháng 08/2024</span>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-arrow-trend-up"></i>
+                                    <span>Tháng 09/2024</span>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <table id="table_history_transaction" class="hover" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th>Mã lô</th>
+                        <th>Sản phẩm trong lô</th>
+                        <th>Số lượng biến động</th>
+                        <th>Loại biến động</th>
+                        <th>Thời gian</th>
+                        <th>Ghi chú</th>
                     </tr>
                     </thead>
                 </table>
@@ -65,6 +122,7 @@
     <script src="../js/jquery.js"></script>
     <script src="../libs/DataTables/datatables.js"></script>
     <script type="module" src="fake-data.js"></script>
+    <script type="module" src="data-table-translate.js"></script>
     <script type="module" src="transaction.js"></script>
 </body>
 </html>
