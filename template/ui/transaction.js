@@ -17,7 +17,10 @@ const data_tables_transaction = new DataTable('#table_transaction', {
                 const html = `
                 <div class="shipment-row-wrap">
                     <div class="header">
-                        <div class="fw-normal">Mã lô hàng: ${row.transactionId}</div>
+                        <div class="form-check">
+                            <input class="form-check-input chbox-shipment" type="checkbox" value="${row.transactionId}" />
+                            <label class="form-check-label">Mã lô hàng: ${row.transactionId}</label>
+                        </div>
                         <div class="d-flex gap-1">
                             <div class="fw-normal">Mức độ phân loại lô hàng này:</div>
                             <div class="shipment-tag outdate">
@@ -76,18 +79,19 @@ const typeChange = {
 }
 const data_tables_transaction_history = new DataTable('#table_history_transaction', {
     language: translate,
+    ajax: 'fake_transaction_history_month4_data.json',
     dom: 'tip',
     scrollCollapse: true,
-    pageLength: 5,
     width: '100%',
     scrollY: '200px',
+    processing: true,
+    serverSide: true,
     columnDefs: [
         {
             target: [0, 2],
             className: 'text-wrap',
         }
     ],
-    ajax: 'fake_transaction_history_month4_data.json',
     createdRow: function(row, data, index ) {
         
     },
@@ -135,7 +139,6 @@ const data_tables_transaction_history = new DataTable('#table_history_transactio
                 </div>
                 `
             }
-            
         },
         {
             data: null,
@@ -182,11 +185,76 @@ $('#status_filter').on('change', function(e) {
 $("#filter_input").on('input', function(e) {
     data_tables.column(1).search($(this).val()).draw()
 });
-(function() {
+let selected_arr = [];
+$('#table_transaction').on('change', '.chbox-shipment', function(e) {
+    let {value} = this;
+    let isChecked = $(this).prop('checked');
+    isChecked 
+    && selected_arr.push(value) 
+    && $('#count_selected_sku_label').removeClass('d-none')
+    .text(`(Đã chọn ${selected_arr.length} lô hàng)`)
+    if (!isChecked) {
+        selected_arr = [...selected_arr.filter(e => e !== value)]
+        $('#count_selected_sku_label').text(``).addClass('d-none')
+    }
+});
+const modal = new mdb.Modal($('#new_sku_modal'), {});
+$('#add_new_sku_button').on('click', () => {
+    modal.show();
+});
+(async function() {
     $('#table_tabs').on('click', 'li', function() {
         const lis = $(this).siblings().filter('li');
         $(lis).removeClass('active');
         $(this).addClass('active')
         this.dataset.jsonName && data_tables_transaction_history.ajax.url(`fake_transaction_history_${this.dataset.jsonName}_data.json`).load()
     })
+})();
+(function() {
+    let selectedId = undefined;
+    const asyncAutocomplete = document.querySelector('#search_product_by_name');
+    const asyncFilter = async (query) => {
+      const url = 'fake_product_data.json';
+      const response = await fetch(url);
+      const {data} = await response.json();
+      return data.filter((item) => {
+        return item.name.toLowerCase().startsWith(query.toLowerCase());
+      });
+    };
+    new mdb.Autocomplete(asyncAutocomplete, {
+      filter: asyncFilter,
+      displayValue: (value) => value.name,
+      itemContent: (result) => {    
+        return `
+            <div class="auto-complete-sku-product-row">
+                <div class="thumbnail-wrapper">
+                    <img src="${result.images[0]}" width="100%" alt="">
+                </div>
+                <div class="info">
+                    <span class="product-id">Mã: ${result.id}</span>
+                    <span class="product-name">${result.name}</span>
+                </div>
+            </div>
+        `;
+      }
+    });
+    asyncAutocomplete.addEventListener('itemSelect.mdb.autocomplete', function({value}) {
+        selectedId = value.id;
+        console.log(selectedId)
+        $('#product-showcase').html(`
+            <div class="border-top border-success border-2 mt-3 pt-2 px-2" style="background-color: #F1F1F1">
+                <div class="auto-complete-sku-product-row">
+                    <div class="thumbnail-wrapper">
+                        <img src="${value.images[0]}" width="100%" alt="">
+                    </div>
+                    <div class="info">
+                        <span class="product-id">Mã: ${value.id}</span>
+                        <span class="product-name">${value.name}</span>
+                    </div>
+                </div>
+            </div>
+            `
+        ).removeClass('d-none')
+        $(asyncAutocomplete).find('input[type="text"]').prop('disabled', true)
+    });
 })();
