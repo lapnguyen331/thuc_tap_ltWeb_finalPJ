@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../stylesheet/fontawesome.min.css">
     <link rel="stylesheet" href="../stylesheet/all.min.css">
     <link rel="stylesheet" href="../libs//DataTables/datatables.css">
+    <link rel="stylesheet" href="../libs/daterangepicker-master/daterangepicker.css">
     <link rel="stylesheet" href="../css/datatables-override.css">
     <link rel="stylesheet" href="../css/bootstrap-override.css">
     <link rel="stylesheet" href="shipment-row.css">
@@ -147,6 +148,7 @@
                     <div id="search_product_by_name" class="form-outline autocomplete" data-mdb-input-init>
                         <input type="text" class="form-control form-control-sm" />
                         <label class="form-label">Tìm kiếm sản phẩm</label>
+                        <span class="trailing pe-auto clear d-none" tabindex="0">✕</span>
                     </div>
                     <div class="d-flex gap-1">
                         <div class="btn-function btn-save">
@@ -158,7 +160,28 @@
                     </div>
                 </div>
                 <div id="product-showcase" class="d-none"></div>
-
+                <div class="fw-semibold fs-6 mt-3 mb-2">Thông tin kho</div>
+                <article id="product-info-form" class="d-flex flex-column gap-3">
+                    <div class="form-outline autocomplete" data-mdb-input-init>
+                        <input type="text" class="form-control form-control-sm" />
+                        <label class="form-label">Số lượng trong kho</label>
+                    </div>
+                    <select id="sku_newForm_selectField_supplier" data-mdb-select-init>
+                        <option value="1">Nhà cung cấp 1</option>
+                        <option value="2">Nhà cung cấp 2</option>
+                        <option value="3">Nhà cung cấp 3</option>
+                    </select>
+                    <label class="form-label select-label">Bên cung cấp</label>
+                    <div class="form-outline" style="position: relative;">
+                        <input id="txt-date" type="text" class="form-control form-control-sm" />
+                        <label class="form-label">Hạn sử dụng</label>
+                        <div id="txt-date-parent" style="position: absolute;"></div>
+                    </div>
+                    <div class="form-outline autocomplete" data-mdb-input-init>
+                        <input type="text" class="form-control form-control-sm" />
+                        <label class="form-label">Giá nhập trên từng đơn vị</label>
+                    </div>
+                </article>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-mdb-ripple-init data-mdb-dismiss="modal">Đóng</button>
@@ -168,11 +191,19 @@
         </div>
     </article>
 
-    <script src="../libs/mdb-bootstrap-5-pro/js/mdb.min.js"></script>
     <script src="../js/jquery.js"></script>
+    <script src="../libs/mdb-bootstrap-5-pro/js/mdb.min.js"></script>
+    <script src="../libs/daterangepicker-master/moment.min.js"></script>
+    <script src="../libs/daterangepicker-master/daterangepicker.js"></script>
     <script src="../libs/DataTables/datatables.js"></script>
     <script type="module" src="fake-data.js"></script>
     <script type="module" src="data-table-translate.js"></script>
+    <script>
+        new mdb.Select(document.getElementById('sku_newForm_selectField_supplier'), {
+            container: 'body',
+            size: 'sm',
+        });
+    </script>
     <script type="module" src="transaction.js"></script>
 </body>
 </html>

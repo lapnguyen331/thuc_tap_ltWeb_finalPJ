@@ -211,7 +211,64 @@ $('#add_new_sku_button').on('click', () => {
     })
 })();
 (function() {
-    let selectedId = undefined;
+    const selectProductState = {
+        __aInternal: undefined,
+        aListener: function(prev, cur) {},
+        set product(val) {
+          this.aListener(this.__aInternal, val);
+          this.__aInternal = val;
+        },
+        get product() {
+          return this.__aInternal;
+        },
+        onChangeHandler: function(listener) {
+          this.aListener = listener;
+        }
+    }
+    selectProductState.onChangeHandler((previousValue, currentValue) => {
+        const $jqueryTarget = $('#product-showcase')
+        previousValue === undefined 
+            && $jqueryTarget.removeClass('d-none')
+            && currentValue != undefined
+            && $jqueryTarget.html(`
+                <div class="border-top border-warning border-2 mt-3 pt-2 px-2 product-showcase" style="background-color: #F1F1F1">
+                    <div class="auto-complete-sku-product-row">
+                        <div class="thumbnail-wrapper">
+                            <img src="${currentValue.images[0]}" width="100%" alt="">
+                        </div>
+                        <div class="info">
+                            <span class="product-id">Mã: ${currentValue.id}</span>
+                            <span class="product-name">${currentValue.name}</span>
+                        </div>
+                    </div>
+                </div>
+            `)
+        currentValue === undefined && $jqueryTarget.addClass('d-none') && $jqueryTarget.html('')
+    })
+    const confirmState = {
+        __aInternal: false,
+        aListener: function(prev, cur) {},
+        set isSaved(val) {
+          this.aListener(this.__aInternal, val);
+          this.__aInternal = val;
+        },
+        get isSaved() {
+          return this.__aInternal;
+        },
+        onChangeHandler: function(listener) {
+          this.aListener = listener;
+        }
+    }
+    confirmState.onChangeHandler((previous, current) => {
+        const $asyncCompleteTextField = $('#search_product_by_name').find('input[type="text"]')
+        current 
+        && $asyncCompleteTextField.prop('disabled', true)
+        && $('.product-showcase').removeClass('border-warning').addClass('border-success')
+        !current 
+        && $asyncCompleteTextField.val()
+        && $asyncCompleteTextField.prop('disabled', false).val('')
+        && mdb.Autocomplete.getInstance($('#search_product_by_name').get()[0]).open()
+    })
     const asyncAutocomplete = document.querySelector('#search_product_by_name');
     const asyncFilter = async (query) => {
       const url = 'fake_product_data.json';
@@ -238,23 +295,31 @@ $('#add_new_sku_button').on('click', () => {
         `;
       }
     });
-    asyncAutocomplete.addEventListener('itemSelect.mdb.autocomplete', function({value}) {
-        selectedId = value.id;
-        console.log(selectedId)
-        $('#product-showcase').html(`
-            <div class="border-top border-success border-2 mt-3 pt-2 px-2" style="background-color: #F1F1F1">
-                <div class="auto-complete-sku-product-row">
-                    <div class="thumbnail-wrapper">
-                        <img src="${value.images[0]}" width="100%" alt="">
-                    </div>
-                    <div class="info">
-                        <span class="product-id">Mã: ${value.id}</span>
-                        <span class="product-name">${value.name}</span>
-                    </div>
-                </div>
-            </div>
-            `
-        ).removeClass('d-none')
-        $(asyncAutocomplete).find('input[type="text"]').prop('disabled', true)
+    $('#txt-date').daterangepicker({
+        "singleDatePicker": true,
+        locale: {
+            format: 'DD/MM/YYYY'
+        },
+        parentEl: '#txt-date + #txt-date-parent',
+        minDate: getToday(),
+    }, function(start, end, label) {
+        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
     });
+    asyncAutocomplete.addEventListener('itemSelect.mdb.autocomplete', function({value}) {
+        selectProductState.product = value;
+    });
+    $('.btn-function.btn-delete').on('click', () => {
+        selectProductState.product = undefined
+        confirmState.isSaved = false;
+    })
+    $('.btn-function.btn-save').on('click', () => {
+        confirmState.isSaved = true;
+    })
+    function getToday() {
+        let today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        const yyyy = today.getFullYear();
+        return dd + '/' + mm + '/' + yyyy;
+    }
 })();
