@@ -20,7 +20,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public abstract class AbstractDAO<T> implements GenericDAO<T> {
-    private Handle handle;
+    private final Handle handle;
 
     public AbstractDAO(Handle handle) {
         this.handle = handle;
@@ -43,7 +43,7 @@ public abstract class AbstractDAO<T> implements GenericDAO<T> {
             throw e;
         }
         return list;
-    };
+    }
 
     private void setParameters(SqlStatement<Query> statement, Object... para) {
         for (int i = 0; i < para.length; i++) {

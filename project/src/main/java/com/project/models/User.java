@@ -48,6 +48,17 @@ public class User {
         this.updateAt = updateAt;
     }
 
+    public User( String username,  Image avatar, int levelAccess, String firstName, int status, String email, boolean verified) throws NoSuchAlgorithmException {
+        this.username = username;
+        this.password = User.hashPassword("default");
+        this.status = status;
+        this.email = email;
+        this.avatar = avatar;
+        this.levelAccess = levelAccess;
+        this.firstName = firstName;
+        this.verified = verified;
+    }
+
     public User(int id, String username, String password, Image avatar, int levelAccess, String firstName, String lastName, boolean gender, String address, String phone, Date birthDate, int status, String email, boolean verified, LocalDateTime createAt, LocalDateTime updateAt, String token, LocalDateTime tokenCreateAt) {
         this.id = id;
         this.username = username;

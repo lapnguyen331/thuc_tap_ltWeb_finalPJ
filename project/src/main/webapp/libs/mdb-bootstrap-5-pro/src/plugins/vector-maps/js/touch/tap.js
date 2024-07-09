@@ -56,11 +56,11 @@ class Tap extends TouchUtil {
   }
 
   handleTouchEnd() {
-    return;
+
   }
 
   handleTouchMove() {
-    return;
+
   }
 }
 
