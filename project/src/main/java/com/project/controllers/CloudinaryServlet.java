@@ -141,7 +141,11 @@ public class CloudinaryServlet extends HttpServlet {
                 boolean validate = signature.equals(expected);
                 resMsg = validate ? "Upload ảnh thành công" : "Upload ảnh thất bại";
                 if (!validate) {
-                    ApiResponse resp = uploadService.destroy(resource_type, public_id);
+                    try {
+                        ApiResponse resp = uploadService.destroy(resource_type, public_id);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 }
                 response.getWriter().write(resMsg);
                 response.getWriter().flush();

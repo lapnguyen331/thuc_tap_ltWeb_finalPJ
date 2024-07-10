@@ -5,9 +5,12 @@ import org.jdbi.v3.sqlobject.SqlObject;
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
 import org.jdbi.v3.sqlobject.config.RegisterBeanMappers;
 import org.jdbi.v3.sqlobject.customizer.Bind;
+import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.customizer.BindList;
 import org.jdbi.v3.sqlobject.customizer.Define;
+import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
+import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -39,4 +42,13 @@ public interface ImageDAO {
         WHERE gl.productId = :productId
     """)
     List<Image> getImagesByProductId(@Bind("productId") Integer productId);
+
+    @SqlUpdate("""
+            INSERT INTO images
+                (path, uuid, createAt, updateAt)
+            VALUES
+                (:i.path, :i.uuid, :i.createAt, :i.updateAt)
+            """)
+    @GetGeneratedKeys
+    Integer insert(@BindBean("i") Image image);
 }

@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
-@WebServlet(name = "SearchServlet", value = "/checkout")
+@WebServlet(name = "CheckoutServlet", value = "/checkout")
 public class CheckoutServlet extends HttpServlet {
     private OrderService orderService;
     private ProductService productService;

@@ -1,13 +1,11 @@
 package com.project.models_rework;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class UserService extends AbstractService {
-    List<UserDetailsDTO> getUserById(Integer id) {
+    public List<UserDetailsDTO> getUserById(Integer id) {
         UserDAO userDAO = getHandle().attach(UserDAO.class);
         User user = userDAO.getUserById(id).get(0);
         var dto = UserDTOMapper.INSTANCE.mapToDTO(getHandle(), user);

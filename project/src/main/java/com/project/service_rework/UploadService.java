@@ -1,17 +1,13 @@
-package com.project.services;
+package com.project.service_rework;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.Transformation;
-import com.cloudinary.Url;
 import com.cloudinary.api.ApiResponse;
 import com.cloudinary.utils.ObjectUtils;
-import com.project.service_rework.ProductScriptService;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.*;
 
 public class UploadService {
@@ -67,6 +63,10 @@ public class UploadService {
         return cloudinary.api().deleteResources(public_id, params);
     }
 
+    public Map uploadFileByURL(String url, Map<String, Object> params) throws Exception {
+        return cloudinary.uploader().upload(url, params);
+    }
+
     public List<String> uploadImagesByURL(List<String> urls, String folder) throws Exception {
         List<String> rs = new ArrayList<>();
         try {
@@ -104,18 +104,12 @@ public class UploadService {
     }
 
     public static void main(String[] args) throws Exception {
-        var list = Arrays.asList("https://kgin.com.vn/wp-content/uploads/2023/10/set-1-kgin-min.jpg",
-                "https://kgin.com.vn/wp-content/uploads/2023/10/bo-qua-tang-hong-sam-kgin.jpg",
-                "https://kgin.com.vn/wp-content/uploads/2023/10/set1-tri-an-950k-kgin.jpg",
-                "https://kgin.com.vn/wp-content/uploads/2023/10/set-1-tri-an-scaled.jpg",
-                "https://kgin.com.vn/wp-content/uploads/2023/10/bo-qua-tang-kin-scaled.jpg");
         var instance = new UploadService();
-//        var rs = instance.uploadImagesByURL(list, "assest/products/product__1");
-        var service = new ProductScriptService();
-        File file = service.convertBlogToFile("<h1>HEADER</h1>");
-        System.out.println(instance.uploadFile(file, Map.of(
-                "resource_type", "raw",
-                "folder", "assest/products/product__1"
-        )));
+//        instance.deleteAllResources("inventory", Map.of());
+//        instance.deleteAllResources("inventory", Map.of(
+//                "resource_type", "raw"
+//        ));
+//        instance.deleteFolder("inventory");
+        System.out.println(instance.getResource("inventory/products/product__334/5e85e7c06e384d60ba04952fea95f9f9", Map.of()));;
     }
 }
