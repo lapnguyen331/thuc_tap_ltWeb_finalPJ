@@ -40,29 +40,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-5">
-                <div class="carousel-wrapper">
-                    <!-- Flickity HTML init -->
-                    <div class="carousel carousel-main" data-flickity='{"pageDots": false, "contain": true, "fullscreen": true, "wrapAround": true}'>
-                        <c:forEach var="image" items="${requestScope.galleries}">
-                            <div class="carousel-cell">
-                                <img src="${pageContext.request.contextPath}/inventory/images/loading-gif.gif" alt="">
-                            </div>
-                        </c:forEach>
-                    </div>
-
-                    <div class="carousel carousel-nav"
-                         data-flickity='{ "asNavFor": ".carousel-main", "contain": true, "pageDots": false, "contain": true}'>
-                        <c:forEach var="image" items="${requestScope.galleries}">
-                            <div class="carousel-cell">
-                                <img src="${pageContext.request.contextPath}/inventory/images/loading-gif.gif" alt="">
-                            </div>
-                        </c:forEach>
-                    </div>
+                <div id="gallery" class="d-flex align-items-center justify-content-center h-100">
+                    <img src="${pageContext.request.contextPath}/inventory/images/loading-gif.gif"
+                         style="width: 300px" alt="">
                 </div>
             </div>
             <div class="col-md-7 placeholder-glow d-flex flex-column justify-content-center">
                 <div id="product-name">
-                    <span class="placeholder placeholder-lg col-6"></span>
+                    <h4 class="placeholder placeholder-lg col-6"></h4>
                 </div>
                 <div>
                     <div class="rating-stars">
@@ -354,15 +339,16 @@
 </section>
 <jsp:include page="/WEB-INF/view/shared/footer.jsp"></jsp:include>
 <div id="fb-root"></div>
+<script> var contextPath = "${pageContext.request.contextPath}";</script>
 <script async defer crossorigin="anonymous"
         src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v18.0" nonce="Qoebijhj">
 </script>
 <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/libs/flickity/flickity.pkgd.min.js"></script>
 <script src="${pageContext.request.contextPath}/libs/mdb-bootstrap-5-pro/js/mdb.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/details_product.js"></script>
+<script src="${pageContext.request.contextPath}/js/details_product.js?v=3"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.11.2/cloudinary-core-shrinkwrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/cloudinary/loading_path.js"></script>
+<script src="${pageContext.request.contextPath}/js/cloudinary/loading_path.js?v=3"></script>
 <script>
     const gMap = $('.google-map-frame');
     const stores = $('#tab-product-guide .address .store');

@@ -1,5 +1,6 @@
 package com.project.dto.mapper.product;
 
+import com.project.dao_rework.BlogDAO;
 import com.project.dao_rework.DiscountDAO;
 import com.project.dao_rework.ImageDAO;
 import com.project.dto.response.product.ProductCardDTO;
@@ -20,8 +21,8 @@ public abstract class ProductDetailsDTOMapper {
     @Mapping(target = "discount", source = "discountId", qualifiedByName = "getDiscount")
     @Mapping(target = "gallery", source = "id", qualifiedByName = "getGallery")
     @Mapping(target = "priceFormat", source = "price", qualifiedByName = "formatPrice")
-    @Mapping(target = "thumbnail", source = "thumbnail", qualifiedByName = "getImageLink")
     @Mapping(target = "discountPriceFormat", ignore = true)
+    @Mapping(target = "blogPath", source = "blogId", qualifiedByName = "getBlogURL")
     public abstract ProductDetailsDTO mapToDTO(@Context Handle handle, Product product);
 
     @Named("getDiscount")
@@ -46,18 +47,16 @@ public abstract class ProductDetailsDTOMapper {
                 .map(Image::getPath).toList();
     }
 
+    @Named("getBlogURL")
+    protected String getBlogURL(@Context Handle handle, Integer blogId) {
+        return handle.attach(BlogDAO.class).getById_all(blogId).get(0).getPath();
+    }
+
     @Named("formatPrice")
     protected String formatPrice(Float price) {
         String r = (int) price.floatValue() + "";
         r = r.replaceAll("(?<=\\d)(?=(\\d{3})+(?!\\d))", ".");
         return r;
-    }
-
-    @Named("getImageLink")
-    protected String getImageLink(@Context Handle handle, Integer thumbnail) {
-        return handle.attach(ImageDAO.class)
-                .getImageById(thumbnail).get(0)
-                .getPath();
     }
 
     @AfterMapping

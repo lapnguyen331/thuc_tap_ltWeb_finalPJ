@@ -7,12 +7,14 @@ import org.jdbi.v3.sqlobject.config.RegisterBeanMappers;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
+import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RegisterBeanMappers({
-        @RegisterBeanMapper(BlogDAO.class),
+        @RegisterBeanMapper(Blog.class),
         @RegisterBeanMapper(LocalDateTime.class)
 })
 public interface BlogDAO {
@@ -26,6 +28,12 @@ public interface BlogDAO {
             """)
     @GetGeneratedKeys
     Integer insert(@BindBean("b")Blog blog);
+
+    @SqlQuery("""
+            SELECT * FROM blogs
+            WHERE id = :blogId
+            """)
+    List<Blog> getById_all(@Bind("blogId") Integer blogId);
 
     @SqlUpdate("""
             UPDATE blogs SET

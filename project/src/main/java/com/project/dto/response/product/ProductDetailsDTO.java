@@ -17,7 +17,8 @@ public class ProductDetailsDTO {
     Discount discount;
     String priceFormat;
     String discountPriceFormat;
-    String thumbnail;
+    String specification;
+    String description;
     Integer categoryId;
     String brand;
     String blogPath;
