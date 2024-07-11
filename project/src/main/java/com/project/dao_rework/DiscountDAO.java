@@ -25,4 +25,10 @@ public interface DiscountDAO {
             WHERE id = :discountId
             """)
     List<Float> getDiscountPercent(@Bind("discountId") Integer discountId);
+
+    @SqlQuery("""
+            SELECT id, name, discountPercent FROM discounts
+            WHERE id = :discountId
+            """)
+    List<Discount> getDiscountById_id_name_percent(@Bind("discountId") Integer discountId);
 }

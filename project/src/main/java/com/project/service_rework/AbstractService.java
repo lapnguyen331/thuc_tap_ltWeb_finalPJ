@@ -18,16 +18,28 @@ public class AbstractService {
     }
 
     public void begin() {
-        if (!isPassed) handle.begin();
+        if (isPassed) {
+            throw new RuntimeException("Cannot modify passed Handle at this service");
+        }
+        handle.begin();
     }
     public void commit() {
-        if (!isPassed) handle.commit();
+        if (isPassed) {
+            throw new RuntimeException("Cannot modify passed Handle at this service");
+        }
+        handle.commit();
     }
     public void rollback() {
-        if (!isPassed) handle.rollback();
+        if (isPassed) {
+            throw new RuntimeException("Cannot modify passed Handle at this service");
+        }
+        handle.rollback();
     }
     public void close() {
-        if (!isPassed) handle.close();
+        if (isPassed) {
+            throw new RuntimeException("Cannot modify passed Handle at this service");
+        }
+        handle.close();
     }
     public Handle getHandle() {
         return handle;

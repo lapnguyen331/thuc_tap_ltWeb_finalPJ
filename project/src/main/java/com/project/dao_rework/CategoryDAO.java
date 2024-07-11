@@ -6,6 +6,7 @@ import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
 import org.jdbi.v3.sqlobject.config.RegisterBeanMappers;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
+import org.jdbi.v3.sqlobject.customizer.DefineList;
 import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
@@ -22,4 +23,9 @@ public interface CategoryDAO {
             SELECT id, name FROM categories
             """)
     List<Category> getAll_id_name();
+
+    @SqlQuery("""
+            SELECT id, name, thumbnail FROM categories
+            """)
+    List<Category> getAll_id_name_thumbnail();
 }

@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main-footer.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/button-title.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/product-card.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/details-product.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/details-product.css?v=1">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/breadcrumbs.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/fixed-buttons.css">
 
@@ -45,7 +45,7 @@
                     <div class="carousel carousel-main" data-flickity='{"pageDots": false, "contain": true, "fullscreen": true, "wrapAround": true}'>
                         <c:forEach var="image" items="${requestScope.galleries}">
                             <div class="carousel-cell">
-                                <img src="${pageContext.request.contextPath}/files/${image.path}" alt="">
+                                <img src="${pageContext.request.contextPath}/inventory/images/loading-gif.gif" alt="">
                             </div>
                         </c:forEach>
                     </div>
@@ -54,42 +54,59 @@
                          data-flickity='{ "asNavFor": ".carousel-main", "contain": true, "pageDots": false, "contain": true}'>
                         <c:forEach var="image" items="${requestScope.galleries}">
                             <div class="carousel-cell">
-                                <img src="${pageContext.request.contextPath}/files/${image.path}" alt="">
+                                <img src="${pageContext.request.contextPath}/inventory/images/loading-gif.gif" alt="">
                             </div>
                         </c:forEach>
                     </div>
                 </div>
             </div>
-            <div class="col-md-7">
-                <h2>${requestScope.product.name}</h2>
-                <div class="rating-stars">
-                    <span class="rating-score">4.8</span>
-                    <div class="rating-empty">
-                        <span>&#xf005;&#xf005;&#xf005;&#xf005;&#xf005;</span>
-                        <div class="rating-fill" style="width: 50%;">&#xf005;&#xf005;&#xf005;&#xf005;&#xf005;</div>
-                    </div>
+            <div class="col-md-7 placeholder-glow d-flex flex-column justify-content-center">
+                <div id="product-name">
+                    <span class="placeholder placeholder-lg col-6"></span>
                 </div>
-                <span class="sold-amount"><b>1.2k</b> Đã bán</span>
-                <p>${requestScope.product.description}</p>
+                <div>
+                    <div class="rating-stars">
+                        <span class="rating-score">4.8</span>
+                        <div class="rating-empty">
+                            <span>&#xf005;&#xf005;&#xf005;&#xf005;&#xf005;</span>
+                            <div class="rating-fill" style="width: 50%;">&#xf005;&#xf005;&#xf005;&#xf005;&#xf005;</div>
+                        </div>
+                    </div>
+                    <span class="sold-amount"><b>1.2k</b> Đã bán</span>
+                </div>
+                <div id="product-description">
+                    <span class="placeholder col-10"></span>
+                    <span class="placeholder col-8"></span>
+                    <span class="placeholder col-6"></span>
+                </div>
                 <div class="row d-flex align-items-start">
                     <div class="col-md-6 pl-0">
                         <div class="products-stats">
                             <div class="stat-label">Quy cách</div>
-                            <span class="stat-text">${requestScope.product.specification}</span>
+                            <div id="product-specification">
+                                <span class="stat-text placeholder col-12"></span>
+                            </div>
 
                             <div class="stat-label">Mã sản phẩm</div>
-                            <span class="stat-text">${requestScope.product.id}</span>
-
+                            <div id="product-id">
+                                <span class="stat-text placeholder col-8"></span>
+                            </div>
                             <div class="stat-label">Thương hiệu</div>
-                            <span class="stat-text">${requestScope.product.brand}</span>
-                            <c:set var="price" value="${product.price}"></c:set>
-                            <c:set var="discountPrice" value="${(100 - product.discount.discountPercent) * product.price / 100}"></c:set>
+                            <div id="product-brand">
+                                <span class="stat-text placeholder col-12"></span>
+                            </div>
                             <div class="stat-label">Giá gốc</div>
-                            <span class="stat-text text-through">${product['getStringPrice'](price)}</span>
+                            <div id="product-price">
+                                <span class="stat-text text-through placeholder col-12"></span>
+                            </div>
                             <div class="stat-label">Chương trình:</div>
-                            <div>${requestScope.product.discount.name}</div>
+                            <div id="product-discount-name">
+                                <span class="placeholder col-12"></span>
+                            </div>
                             <div class="stat-label">Giá khuyến mãi</div>
-                            <h4>${product['getStringPrice'](discountPrice)}</h4>
+                            <div id="product-discount-price">
+                                <h4 class="placeholder col-8"></h4>
+                            </div>
 
                             <div class="stat-label">Số lượng</div>
                             <div class="number-field">
@@ -157,7 +174,9 @@
             <div class="col-md-12">
                 <div class="tab-content-wrapper">
                     <section class="tab-content tab-is-active" id="tab-product-content">
-                        <c:out value="${requestScope.blog}" escapeXml="false"/>
+                        <div class="d-flex justify-content-center" id="blog-content">
+                            <img src="${pageContext.request.contextPath}/inventory/images/loading-gif.gif" style="width: 200px" alt="">
+                        </div>
                     </section>
                     <section class="tab-content" id="tab-product-guide">
                         <div class="container">
@@ -342,7 +361,8 @@
 <script src="${pageContext.request.contextPath}/libs/flickity/flickity.pkgd.min.js"></script>
 <script src="${pageContext.request.contextPath}/libs/mdb-bootstrap-5-pro/js/mdb.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/details_product.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.11.2/cloudinary-core-shrinkwrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/cloudinary/loading_path.js"></script>
 <script>
     const gMap = $('.google-map-frame');
     const stores = $('#tab-product-guide .address .store');

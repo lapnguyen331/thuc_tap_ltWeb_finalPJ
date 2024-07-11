@@ -1,19 +1,16 @@
-package com.project.filters;
+package com.project.filters.rework;
 
 import com.project.models.Cart;
-import com.project.models.User;
-import com.project.services.CategoryService;
-import com.project.services.UserService;
-
+import com.project.service_rework.CategoryService;
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-//@WebFilter(filterName = "global2", urlPatterns = {"/*"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
-public class RequestFilter implements Filter {
+@WebFilter(filterName = "global2", urlPatterns = {"/*"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
+public class UpdateSessionFilter implements Filter {
     CategoryService cService;
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -31,7 +28,7 @@ public class RequestFilter implements Filter {
         request.setCharacterEncoding("utf-8");
         HttpSession session = request.getSession(true);
         if (session.getAttribute("categories") == null) {
-            session.setAttribute("categories", cService.getAll());
+            session.setAttribute("categories", cService.getAll_id_name_thumbnail());
         }
         var cart = session.getAttribute("cart");
         if (cart == null) {

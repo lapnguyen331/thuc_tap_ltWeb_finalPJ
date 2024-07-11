@@ -27,6 +27,12 @@ public interface ProductDAO {
             """)
     List<Product> getTop(@Bind("top") Integer top);
 
+    @SqlQuery("""
+            SELECT * FROM products
+            WHERE id = :productId
+            """)
+    List<Product> getById_all(@Bind("productId") Integer productId);
+
     @SqlUpdate("""
             INSERT INTO products
                 (name, price, quantity, minAge, thumbnail,

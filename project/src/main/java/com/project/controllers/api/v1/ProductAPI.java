@@ -23,7 +23,15 @@ public class ProductAPI extends HttpServlet {
             case "/getByCategory":
                 doGetByCategory(request, response);
                 break;
+            case "/getDetails":
+                doGetDetails(request, response);
+                break;
         }
+    }
+
+    private void doGetDetails(HttpServletRequest request, HttpServletResponse response) {
+        Integer productId = Integer.parseInt(request.getParameter("id"));
+        request.setAttribute("api_response", productService.getDetailsByProductId(productId));
     }
 
     private void doGetByCategory(HttpServletRequest request, HttpServletResponse response) {
