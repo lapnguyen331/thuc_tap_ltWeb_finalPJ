@@ -7,8 +7,10 @@ import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @RegisterBeanMappers({
         @RegisterBeanMapper(Product.class),
@@ -20,6 +22,12 @@ public interface ProductDAO {
             WHERE categoryId = :categoryId
             """)
     List<Product> getByCategoryId(@Bind("categoryId") Integer categoryId);
+
+    @SqlQuery("""
+            SELECT id FROM products
+            WHERE id = :productId
+            """)
+    Optional<Product> checkExistByProductId(@Bind("productId") Integer productId);
 
     @SqlQuery("""
             SELECT * FROM products

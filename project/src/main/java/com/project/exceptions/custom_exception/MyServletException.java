@@ -1,6 +1,7 @@
 package com.project.exceptions.custom_exception;
 
 import jakarta.servlet.ServletException;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
