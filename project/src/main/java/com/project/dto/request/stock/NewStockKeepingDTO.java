@@ -18,5 +18,6 @@ public class NewStockKeepingDTO implements Serializable {
     Integer productId;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     LocalDate expiredDate;
+    Integer inStock;
     Float unitPrice;
 }

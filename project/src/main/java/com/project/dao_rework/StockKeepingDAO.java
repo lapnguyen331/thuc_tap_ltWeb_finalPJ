@@ -26,10 +26,12 @@ public interface StockKeepingDAO {
 
     @SqlUpdate("""
             INSERT INTO stock_keeping
-                (productId, expiredDate, unitPrice)
+                (productId, expiredDate, inStock, unitPrice)
             VALUES
-                (:st.productId, :st.expiredDate, :st.unitPrice)
+                (:st.productId, :st.expiredDate, :st.inStock, :st.unitPrice)
             """)
     @GetGeneratedKeys
     Integer insert(@BindBean("st") StockKeeping stockKeeping);
+
+
 }

@@ -4,7 +4,6 @@ import com.project.models_rework.enums.SKUChangeType;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Builder
@@ -12,10 +11,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class StockKeepingHistory {
+public class SKUHistory {
     Integer id;
     Integer stockId;
-    Integer change;
+    Integer changeValue;
     SKUChangeType type;
     String note;
     LocalDateTime createAt;
