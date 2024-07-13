@@ -6,7 +6,7 @@ const data_tables_transaction = new DataTable('#table_transaction', {
     pageLength: 5,
     width: '100%',
     scrollY: '400px',
-    ajax: 'fake_transaction_data.json',
+    ajax: 'http://localhost:8080/MyContext/api/v1/stock-keeping/doGetAll-SKURowData',
     createdRow: function(row, data, index ) {
         
     },
@@ -18,8 +18,8 @@ const data_tables_transaction = new DataTable('#table_transaction', {
                 <div class="shipment-row-wrap">
                     <div class="header">
                         <div class="form-check">
-                            <input class="form-check-input chbox-shipment" type="checkbox" value="${row.transactionId}" />
-                            <label class="form-check-label">Mã lô hàng: ${row.transactionId}</label>
+                            <input class="form-check-input chbox-shipment" type="checkbox" value="${row.stockId}" />
+                            <label class="form-check-label">Mã lô hàng: ${row.stockId}</label>
                         </div>
                         <div class="d-flex gap-1">
                             <div class="fw-normal">Mức độ phân loại lô hàng này:</div>
@@ -30,40 +30,40 @@ const data_tables_transaction = new DataTable('#table_transaction', {
                     </div>
                     <div class="body">
                         <div class="thumbnail-wrap">
-                            <img src="${row.thumbnail}" width="100%" alt="encore">
+                            <img src="${row.product.thumbnail}" width="100%" alt="encore">
                         </div>
                         <div class="info-grid">
                             <div class="grid-item">
                                 <div class="info-label">Mã sản phẩm</div>
-                                <div class="info-text">${row.productId}</div>
+                                <div class="info-text">${row.product.id}</div>
                             </div>
                             <div class="grid-item">
                                 <div class="info-label">Số lượng có sẵn trong kho</div>
-                                <div class="info-text">${row.soldInMonth} cái</div>
+                                <div class="info-text">${row.availableQuantity} cái</div>
                             </div>
                             <div class="grid-item">
                                 <div class="info-label">Bên cung cấp sản phẩm</div>
-                                <div class="info-text">${row.supplier}</div>
+                                <div class="info-text">${row.producer.name}</div>
                             </div>
                             <div class="grid-item">
                                 <div class="info-label">Số bán trong tháng</div>
-                                <div class="info-text">61 sản phẩm</div>
+                                <div class="info-text">${row.stat.sellQuantity} sản phẩm</div>
                             </div>
                             <div class="grid-item">
                                 <div class="info-label">Tên sản phẩm</div>
-                                <div class="info-text">This is a very long product name with fully description, Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quos enim ducimus minima ea iusto velit laudantium est, iste inventore nobis, at aliquam adipisci magni voluptas maxime. Exercitationem, quaerat optio.</div>
+                                <div class="info-text">${row.product.name}.</div>
                             </div>
                             <div class="grid-item">
                                 <div class="info-label">Ngày hết hạn</div>
-                                <div class="info-text">30 - 04 - 2024</div>
+                                <div class="info-text">${row.expiredDate}</div>
                             </div>
                             <div class="grid-item">
                                 <div class="info-label">Ngày biến động gần nhất</div>
-                                <div class="info-text">25 - 04 - 2024</div>
+                                <div class="info-text">${row.lastChange}</div>
                             </div>
                             <div class="grid-item">
                                 <div class="info-label">Doanh thu tháng này</div>
-                                <div class="info-text">2.730.000 vnđ</div>
+                                <div class="info-text">${row.stat.totalRevenue} vnđ</div>
                             </div>
                         </div>
                     </div>
@@ -75,11 +75,12 @@ const data_tables_transaction = new DataTable('#table_transaction', {
     ],
 });
 const typeChange = {
-    'THEM_HANG': '<div class="text-success fw-semibold">Thêm hàng</div>'
+    'THEM_HANG': '<div class="text-success fw-semibold">Thêm hàng</div>',
+    'THEM_SKU_MOI': '<div class="text-success fw-semibold">Thêm SKU mới</div>'
 }
 const data_tables_transaction_history = new DataTable('#table_history_transaction', {
     language: translate,
-    ajax: 'fake_transaction_history_month4_data.json',
+    ajax: 'http://localhost:8080/MyContext/api/v1/stock-keeping/doGetAll-SKUHistoryData',
     dom: 'tip',
     scrollCollapse: true,
     width: '100%',
@@ -97,7 +98,7 @@ const data_tables_transaction_history = new DataTable('#table_history_transactio
     },
     columns: [
         {
-            data: 'transactionId',
+            data: 'id',
             render: function(data, type, row) {
                 return `
                 <div class="d-flex align-items-center">
@@ -113,28 +114,28 @@ const data_tables_transaction_history = new DataTable('#table_history_transactio
                 return `
                 <div class="d-flex gap-2" style="max-width: 100%">
                     <div class="flex-shrink-0 d-flex justify-content-center align-items-center overflow-hidden border border-1 rounded-1" style="height: 50px; aspect-ratio: 1/1;">
-                        <img src="https://ih1.redbubble.net/image.5452846048.9607/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.jpg" width="100%" alt="">
+                        <img src="${row.product.thumbnail}" width="100%" alt="">
                     </div>
                     <div class="d-flex flex-column">
-                        <div>Mã sản phẩm: ${row.productId}</div>
+                        <div>Mã sản phẩm: ${row.product.id}</div>
                         <div style="overflow: hidden;
                         width: 100%;
                         display: -webkit-box;
                         -webkit-line-clamp: 1;
-                        -webkit-box-orient: vertical;">Tên: ${row.productName}</div>
+                        -webkit-box-orient: vertical;">Tên: ${row.product.name}</div>
                     </div>
                 </div>
                 `
             }
         },
         {
-            data: 'change',
+            data: 'changeValue',
             className: 'w-auto',
             render: function(data, type, row) {
                 return `
                 <div class="d-flex gap-1">
                     <span class="fw-normal">Trong kho:</span>
-                    <span class="fw-semibold">${row.inStocks}</span>
+                    <span class="fw-semibold">${row.prevValue}</span>
                     <span class="fw-semibold text-${data <= 0 ? 'danger' : 'success'}">(${data > 0 && '+'}${data})</span>
                 </div>
                 `
@@ -144,13 +145,13 @@ const data_tables_transaction_history = new DataTable('#table_history_transactio
             data: null,
             render: function(data, type, row) {
                 return `
-                    ${typeChange[row.changeType]}
+                    ${typeChange[row.type]}
                 `
             }
             
         },
         {
-            data: 'dateTime',
+            data: 'createAt',
             render: function(data, type, row) {
                 return `
                     <div>${data}</div>
@@ -234,7 +235,7 @@ $('#add_new_sku_button').on('click', () => {
                 <div class="border-top border-warning border-2 mt-3 pt-2 px-2 product-showcase" style="background-color: #F1F1F1">
                     <div class="auto-complete-sku-product-row">
                         <div class="thumbnail-wrapper">
-                            <img src="${currentValue.images[0]}" width="100%" alt="">
+                            <img src="${currentValue.thumbnail}" width="100%" alt="">
                         </div>
                         <div class="info">
                             <span class="product-id">Mã: ${currentValue.id}</span>
@@ -271,12 +272,10 @@ $('#add_new_sku_button').on('click', () => {
     })
     const asyncAutocomplete = document.querySelector('#search_product_by_name');
     const asyncFilter = async (query) => {
-      const url = 'fake_product_data.json';
+      const url = `http://localhost:8080/MyContext/api/v1/products/getByName?name=${query}`;
       const response = await fetch(url);
-      const {data} = await response.json();
-      return data.filter((item) => {
-        return item.name.toLowerCase().startsWith(query.toLowerCase());
-      });
+      const data = await response.json();
+      return data;
     };
     new mdb.Autocomplete(asyncAutocomplete, {
       filter: asyncFilter,
@@ -285,7 +284,7 @@ $('#add_new_sku_button').on('click', () => {
         return `
             <div class="auto-complete-sku-product-row">
                 <div class="thumbnail-wrapper">
-                    <img src="${result.images[0]}" width="100%" alt="">
+                    <img src="${result.thumbnail}" width="100%" alt="">
                 </div>
                 <div class="info">
                     <span class="product-id">Mã: ${result.id}</span>
@@ -305,6 +304,16 @@ $('#add_new_sku_button').on('click', () => {
     }, function(start, end, label) {
         console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
     });
+    $.ajax({
+        url: `http://localhost:8080/MyContext/api/v1/producer/getAll_producerIDName`,
+        success: (data) => {
+            const $select = $(`#sku_newForm_selectField_supplier`).html('')
+            const arr = [... data.map((e) => {
+                return $(`<option value="${e.id}">${e.name}</option>`)
+            })]
+            arr.forEach(a => $select.append(a))
+        }
+    })
     asyncAutocomplete.addEventListener('itemSelect.mdb.autocomplete', function({value}) {
         selectProductState.product = value;
     });
