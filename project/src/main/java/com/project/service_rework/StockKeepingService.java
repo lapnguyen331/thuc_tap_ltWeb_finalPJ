@@ -6,11 +6,13 @@ import com.project.dao_rework.StockKeepingDAO;
 import com.project.dto.mapper.product.ProductCardDTOMapper;
 import com.project.dto.mapper.product.ProductDetailsDTOMapper;
 import com.project.dto.mapper.stock.NewStockKeepingDTOMapper;
+import com.project.dto.mapper.stock.SKUHistoryDTOMapper;
 import com.project.dto.mapper.stock.SKURowDTOMapper;
 import com.project.dto.request.stock.ChangeInStockDTO;
 import com.project.dto.request.stock.NewStockKeepingDTO;
 import com.project.dto.response.product.ProductCardDTO;
 import com.project.dto.response.product.ProductDetailsDTO;
+import com.project.dto.response.stock.SKUHistoryDTO;
 import com.project.dto.response.stock.SKURowDTO;
 import com.project.exceptions.custom_exception.MyServletException;
 import com.project.exceptions.custom_exception.ProductException;
@@ -48,6 +50,11 @@ public class StockKeepingService extends AbstractService {
         return SKURowDTOMapper.INSTANCE.mapToDTO(handle, model);
     }
 
+    public List<SKURowDTO> getAllSKURowDTO() throws MyServletException {
+        var list = handle.attach(StockKeepingDAO.class).getAll_all();
+        return SKURowDTOMapper.INSTANCE.mapToDTO(handle, list);
+    }
+
     public Integer changeInStock(ChangeInStockDTO dto) throws MyServletException {
         if (handle.attach(StockKeepingDAO.class).checkExistsById(dto.stockId).isEmpty()) {
             throw new StockKeepingException(String.format("Không tồn tại sku với id: %d", dto.stockId), 404);
@@ -80,5 +87,17 @@ public class StockKeepingService extends AbstractService {
                 .changeValue(changeValue).createAt(LocalDateTime.now())
                 .build();
         return handle.attach(SKUHistoryDAO.class).insert(history);
+    }
+
+    public List<SKUHistoryDTO> getStockHistoryInMonthOfStockKeeping(Integer stockId, Integer month) throws MyServletException {
+        var modelList = handle.attach(SKUHistoryDAO.class)
+                .getByStockIdAndCreateAtInMonth(stockId, month);
+        return SKUHistoryDTOMapper.INSTANCE.mapToDTO(handle, modelList);
+    }
+
+    public List<SKUHistoryDTO> getAllSKUHistory() throws MyServletException {
+        var modelList = handle.attach(SKUHistoryDAO.class)
+                .getAllSKUHistory_all();
+        return SKUHistoryDTOMapper.INSTANCE.mapToDTO(handle, modelList);
     }
 }

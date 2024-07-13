@@ -43,6 +43,13 @@ public interface ProductDAO {
 
     @SqlQuery("""
             SELECT id, name, thumbnail FROM products
+            WHERE 
+                name LIKE <query>
+            """)
+    List<Product> getByName_id_name_thumbnail(@Define("query") String query);
+
+    @SqlQuery("""
+            SELECT id, name, thumbnail FROM products
             WHERE id = :productId
             """)
     List<Product> getById_id_name_thumbnail(@Bind("productId") Integer productId);

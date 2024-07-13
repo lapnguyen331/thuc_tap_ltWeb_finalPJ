@@ -5,10 +5,11 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.project.dto.MessageDTO;
 import com.project.dto.request.stock.ChangeInStockDTO;
 import com.project.dto.request.stock.NewStockKeepingDTO;
+import com.project.dto.response.dataTable.DataTableDTO;
+import com.project.dto.response.stock.SKUHistoryDTO;
 import com.project.exceptions.custom_exception.MyServletException;
 import com.project.filters.RestResponseDTOApiFilter;
 import com.project.filters.RestRequestBodyApiFilter;
-import com.project.service_rework.ProductService;
 import com.project.service_rework.StockKeepingService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -28,8 +29,54 @@ public class StockKeepingAPI extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getPathInfo();
+        switch (action) {
+            case "/doGet-SKURowData": {
+                doGet_SKURowData(request, response);
+                break;
+            }
+            case "/doGetAll-SKURowData": {
+                doGet_AllSKURowData(request, response);
+                break;
+            }
+            case "/doGet-SKUHistoryData": {
+                doGet_SKUHistoryData(request, response);
+                break;
+            }
+            case "/doGetAll-SKUHistoryData": {
+                doGetAll_SKUHistoryData(request, response);
+                break;
+            }
+        }
+    }
+
+    private void doGet_SKURowData(HttpServletRequest request, HttpServletResponse response) throws MyServletException {
         Integer stockId = Integer.parseInt(request.getParameter("id"));
         request.setAttribute(RestResponseDTOApiFilter.PUT_KEY, stockKeepingService.getSKURowDTO(stockId));
+    }
+
+    private void doGet_AllSKURowData(HttpServletRequest request, HttpServletResponse response) throws MyServletException {
+        var list = stockKeepingService.getAllSKURowDTO();
+        var dto = DataTableDTO.builder()
+                .data(list).build();
+        request.setAttribute(RestResponseDTOApiFilter.PUT_KEY, dto);
+    }
+
+    private void doGet_SKUHistoryData(HttpServletRequest request, HttpServletResponse response) throws MyServletException {
+        Integer stockId = Integer.parseInt(request.getParameter("id"));
+        Integer month = Integer.parseInt(request.getParameter("month"));
+        var list = stockKeepingService.getStockHistoryInMonthOfStockKeeping(stockId, month);
+        var dto = DataTableDTO.builder()
+                .data(list).build();
+        request.setAttribute(RestResponseDTOApiFilter.PUT_KEY, dto);
+    }
+
+
+    private void doGetAll_SKUHistoryData(HttpServletRequest request, HttpServletResponse response) throws MyServletException {
+        var list = stockKeepingService.getAllSKUHistory();
+        var dto = DataTableDTO.builder()
+                .data(list).build();
+        request.setAttribute(RestResponseDTOApiFilter.PUT_KEY, dto);
     }
 
     @Override

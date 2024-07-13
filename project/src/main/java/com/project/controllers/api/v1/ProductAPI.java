@@ -1,5 +1,6 @@
 package com.project.controllers.api.v1;
 
+import com.project.filters.RestResponseDTOApiFilter;
 import com.project.service_rework.ProductService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -26,16 +27,25 @@ public class ProductAPI extends HttpServlet {
             case "/getDetails":
                 doGetDetails(request, response);
                 break;
+            case "/getByName":
+                doGetByName(request, response);
+                break;
         }
+    }
+
+    private void doGetByName(HttpServletRequest request, HttpServletResponse response) {
+        String name = request.getParameter("name");
+        var list = productService.getProductLikeName(name);
+        request.setAttribute(RestResponseDTOApiFilter.PUT_KEY, list);
     }
 
     private void doGetDetails(HttpServletRequest request, HttpServletResponse response) {
         Integer productId = Integer.parseInt(request.getParameter("id"));
-        request.setAttribute("api_response", productService.getDetailsByProductId(productId));
+        request.setAttribute(RestResponseDTOApiFilter.PUT_KEY, productService.getDetailsByProductId(productId));
     }
 
     private void doGetByCategory(HttpServletRequest request, HttpServletResponse response) {
         Integer categoryId = Integer.parseInt(request.getParameter("id"));
-        request.setAttribute("api_response", productService.getProductCardOfCategory(categoryId));
+        request.setAttribute(RestResponseDTOApiFilter.PUT_KEY, productService.getProductCardOfCategory(categoryId));
     }
 }

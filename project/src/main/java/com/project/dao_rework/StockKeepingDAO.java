@@ -60,7 +60,7 @@ public interface StockKeepingDAO {
     Integer getInStockById(@Bind("stockId") Integer stockId);
 
     @SqlQuery("""
-            SELECT productId FROM sock_keeping
+            SELECT productId FROM stock_keeping
             WHERE 
                 id = :stockId
             """)

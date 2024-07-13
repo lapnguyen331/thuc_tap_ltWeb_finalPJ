@@ -31,6 +31,7 @@ public class RestResponseDTOApiFilter implements Filter {
         var response = (HttpServletResponse) servletResponse;
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
+        response.addHeader("Access-Control-Allow-Origin", "*");
         String str = null;
         int statusCode = 400;
         try {

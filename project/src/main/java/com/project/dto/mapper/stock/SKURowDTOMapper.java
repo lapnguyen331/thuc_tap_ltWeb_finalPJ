@@ -12,6 +12,7 @@ import com.project.exceptions.custom_exception.ProductException;
 import com.project.models_rework.Product;
 import com.project.models_rework.SKUHistory;
 import com.project.models_rework.StockKeeping;
+import com.project.service_rework.UploadService;
 import org.jdbi.v3.core.Handle;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
@@ -31,6 +32,7 @@ public abstract class SKURowDTOMapper {
     @Mapping(target = "stat", source = "id", qualifiedByName = "mapToStatDTO")
     @Mapping(target = "lastChange", source = "id", qualifiedByName = "getLatestDate")
     public abstract SKURowDTO mapToDTO(@Context Handle handle, StockKeeping model) throws MyServletException;
+    public abstract List<SKURowDTO> mapToDTO(@Context Handle handle, List<StockKeeping> models) throws MyServletException;
 
     @Named("mapToProductDTO")
     protected SKURowDTO.Product mapToProduct(@Context Handle handle, Integer productId) throws MyServletException {
@@ -40,8 +42,15 @@ public abstract class SKURowDTOMapper {
         var product = handle.attach(ProductDAO.class).getById_id_name_thumbnail(productId).get(0);
         var listThumbnail = handle.attach(ImageDAO.class).getImageById(product.getThumbnail());
         String thumbnail_path = listThumbnail.isEmpty() ? null : listThumbnail.get(0).getPath();
+        String thumbnail_link = null;
+        var uploadService = new UploadService();
+        try {
+            thumbnail_link = uploadService.getURL(thumbnail_path);
+        } catch (Exception e) {
+            throw new MyServletException("Lỗi server khi cố lấy thông tin ảnh", 500);
+        }
         return SKURowDTO.Product.builder()
-                .thumbnail(thumbnail_path)
+                .thumbnail(thumbnail_link)
                 .name(product.getName())
                 .id(product.getId())
                 .build();

@@ -37,7 +37,20 @@ public interface SKUHistoryDAO {
             AND 
                 MONTH(sh.createAt) = :month
             """)
+    List<SKUHistory> getByStockIdAndCreateAtInMonth(@Bind("stockId") Integer stockId,
+                                          @Bind("month") Integer month);
+
+    @SqlQuery("""
+            SELECT * FROM sku_history sh
+            WHERE
+                MONTH(sh.createAt) = :month
+            """)
     List<SKUHistory> getByCreateAtInMonth(@Bind("month") Integer month);
+
+    @SqlQuery("""
+            SELECT * FROM sku_history
+            """)
+    List<SKUHistory> getAllSKUHistory_all();
 
     @SqlQuery("""
             SELECT sku_history_order.orderItemId FROM sku_history

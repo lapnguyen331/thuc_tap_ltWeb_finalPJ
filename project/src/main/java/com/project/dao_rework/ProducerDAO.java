@@ -28,6 +28,11 @@ public interface ProducerDAO {
     List<Producer> getById_all(@Bind("producerId") Integer producerId);
 
     @SqlQuery("""
+            SELECT id, name FROM producers
+            """)
+    List<Producer> getAll_id_name();
+
+    @SqlQuery("""
             SELECT id FROM producers
             WHERE
                 id = :producerId

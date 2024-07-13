@@ -10,6 +10,7 @@ import com.project.exceptions.custom_exception.StockKeepingException;
 import com.project.models_rework.OrderItem;
 import com.project.models_rework.SKUHistory;
 import com.project.models_rework.StockKeeping;
+import com.project.service_rework.UploadService;
 import org.jdbi.v3.core.Handle;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
@@ -25,6 +26,7 @@ public abstract class SKUHistoryDTOMapper {
     @Mapping(target = "product", source = "stockId", qualifiedByName = "mapToProductDTO")
     @Mapping(target = "orderItem", source = "id", qualifiedByName = "mapToOrderItemDTO")
     public abstract SKUHistoryDTO mapToDTO(@Context Handle handle, SKUHistory model) throws MyServletException;
+    public abstract List<SKUHistoryDTO> mapToDTO(@Context Handle handle, List<SKUHistory> model) throws MyServletException;
 
     @Named("mapToProductDTO")
     protected SKUHistoryDTO.Product mapToProduct(@Context Handle handle, Integer stockId) throws MyServletException {
@@ -38,8 +40,15 @@ public abstract class SKUHistoryDTOMapper {
         var product = handle.attach(ProductDAO.class).getById_id_name_thumbnail(productId).get(0);
         var listThumbnail = handle.attach(ImageDAO.class).getImageById(product.getThumbnail());
         String thumbnail_path = listThumbnail.isEmpty() ? null : listThumbnail.get(0).getPath();
+        var uploadService = new UploadService();
+        String thumbnail_link = null;
+        try {
+            thumbnail_link = uploadService.getURL(thumbnail_path);
+        } catch (Exception e) {
+            throw new MyServletException("Lỗi server khi cố lấy thông tin ảnh", 500);
+        }
         return SKUHistoryDTO.Product.builder()
-                .thumbnail(thumbnail_path)
+                .thumbnail(thumbnail_link)
                 .name(product.getName())
                 .id(product.getId())
                 .build();
