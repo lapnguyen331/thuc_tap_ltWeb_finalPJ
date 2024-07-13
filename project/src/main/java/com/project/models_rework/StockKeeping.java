@@ -16,4 +16,5 @@ public class StockKeeping {
     LocalDate expiredDate;
     Float unitPrice;
     Integer inStock;
+    Integer producerId;
 }
