@@ -265,6 +265,7 @@ $('#add_new_sku_button').on('click', () => {
         current 
         && $asyncCompleteTextField.prop('disabled', true)
         && $('.product-showcase').removeClass('border-warning').addClass('border-success')
+        && $('#sku_newForm_productId').val(selectProductState.product.id)
         !current 
         && $asyncCompleteTextField.val()
         && $asyncCompleteTextField.prop('disabled', false).val('')
@@ -323,6 +324,34 @@ $('#add_new_sku_button').on('click', () => {
     })
     $('.btn-function.btn-save').on('click', () => {
         confirmState.isSaved = true;
+    })
+    $('#sku_newForm_confirm').on('click', () => {
+        const productId = Number($('#sku_newForm_productId').val());
+        const inStock = Number($('#sku_newForm_inStock').val())
+        const expiredDate = $('#txt-date').val()
+        const producerId = Number($('#sku_newForm_selectField_supplier').val())
+        const unitPrice = Number($('#sku_newForm_unitPrice').val())
+        const data = {producerId, inStock, expiredDate, unitPrice, productId};
+        $.ajax({
+            url: 'http://localhost:8080/MyContext/api/v1/stock-keeping',
+            data: JSON.stringify(data),
+            type: 'POST',
+            success: (data) => {
+                Swal.fire({
+                    title: "Thành công!",
+                    text: "Đã thêm SKU mới vào cửa hàng!",
+                    icon: "success"
+                });
+                data_tables_transaction.ajax.reload()
+                data_tables_transaction_history.ajax.reload()
+                selectProductState.product = undefined
+                confirmState.isSaved = false
+                $('#sku_newForm_productId').val('')
+                $('#sku_newForm_inStock').val('')
+                $('#txt-date').val('')
+                $('#sku_newForm_unitPrice').val('')
+            }
+        })
     })
     function getToday() {
         let today = new Date();

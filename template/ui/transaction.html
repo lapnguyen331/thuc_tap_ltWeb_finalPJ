@@ -147,6 +147,7 @@
                 <div class="d-flex gap-3">
                     <div id="search_product_by_name" class="form-outline autocomplete" data-mdb-input-init>
                         <input type="text" class="form-control form-control-sm" />
+                        <input type="hidden" id="sku_newForm_productId" class="form-control form-control-sm" />
                         <label class="form-label">Tìm kiếm sản phẩm</label>
                         <span class="trailing pe-auto clear d-none" tabindex="0">✕</span>
                     </div>
@@ -163,7 +164,7 @@
                 <div class="fw-semibold fs-6 mt-3 mb-2">Thông tin kho</div>
                 <article id="product-info-form" class="d-flex flex-column gap-3">
                     <div class="form-outline autocomplete" data-mdb-input-init>
-                        <input type="text" class="form-control form-control-sm" />
+                        <input id="sku_newForm_inStock" type="text" class="form-control form-control-sm" />
                         <label class="form-label">Số lượng trong kho</label>
                     </div>
                     <select id="sku_newForm_selectField_supplier">
@@ -178,14 +179,14 @@
                         <div id="txt-date-parent" style="position: absolute;"></div>
                     </div>
                     <div class="form-outline autocomplete" data-mdb-input-init>
-                        <input type="text" class="form-control form-control-sm" />
+                        <input id="sku_newForm_unitPrice" type="text" class="form-control form-control-sm" />
                         <label class="form-label">Giá nhập trên từng đơn vị</label>
                     </div>
                 </article>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-mdb-ripple-init data-mdb-dismiss="modal">Đóng</button>
-            <button type="button" class="btn btn-primary" data-mdb-ripple-init>Save changes</button>
+            <button type="button" class="btn btn-primary" id="sku_newForm_confirm" data-mdb-ripple-init>Thêm</button>
             </div>
         </div>
         </div>
@@ -195,6 +196,7 @@
     <script src="../libs/mdb-bootstrap-5-pro/js/mdb.min.js"></script>
     <script src="../libs/daterangepicker-master/moment.min.js"></script>
     <script src="../libs/daterangepicker-master/daterangepicker.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../libs/DataTables/datatables.js"></script>
     <script type="module" src="fake-data.js"></script>
     <script type="module" src="data-table-translate.js"></script>
