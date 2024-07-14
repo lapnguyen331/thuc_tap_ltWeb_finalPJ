@@ -4,6 +4,7 @@ import com.project.dao_rework.DiscountDAO;
 import com.project.dao_rework.ImageDAO;
 import com.project.dto.response.product.ProductCardDTO;
 import com.project.models_rework.Product;
+import lombok.NoArgsConstructor;
 import org.jdbi.v3.core.Handle;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
@@ -11,6 +12,7 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper(builder = @Builder(disableBuilder = true))
+@NoArgsConstructor
 public abstract class ProductCardDTOMapper {
     public static final ProductCardDTOMapper INSTANCE = Mappers.getMapper(ProductCardDTOMapper.class);
 

@@ -6,6 +6,7 @@ import com.project.dto.request.stock.NewStockKeepingDTO;
 import com.project.dto.response.product.ProductCardDTO;
 import com.project.models_rework.Product;
 import com.project.models_rework.StockKeeping;
+import lombok.NoArgsConstructor;
 import org.jdbi.v3.core.Handle;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
@@ -13,6 +14,7 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper(builder = @Builder(disableBuilder = true))
+@NoArgsConstructor
 public abstract class NewStockKeepingDTOMapper {
     public static final NewStockKeepingDTOMapper INSTANCE = Mappers.getMapper(NewStockKeepingDTOMapper.class);
 

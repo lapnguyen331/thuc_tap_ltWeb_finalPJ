@@ -28,30 +28,30 @@ $('#btn-toggle-sidebar').on({
 //             }
 //         })};
 //     setInterval(notificationContact(),100000);
-(function() {
-    var status = $('.newNoti'),
-        poll = function() {
-            $.ajax({
-                url: `${window.context}/admin/contactInform`,
-                dataType: 'json',
-                type: 'get',
-                data:{get_param: 'value'} ,
-                success: function(data) { // check if available
-                    var json = $.parseJSON(data);
-                    status.innerHTML =$(json[0]).uncheckNotiNum;
-                    console.log("append")
-                    // if ( data ) { // get and check data value
-                    //     status.text(data.info); // get and print data string
-                    // }
-                },
-                error: function() { // error logging
-                    console.log('Error!');
-                }
-            });
-        },
-        pollInterval = setInterval(function() { // run function every 2000 ms
-            poll();
-        }, 2000);
-    poll(); // also run function on init
-})();
+// (function() {
+//     var status = $('.newNoti'),
+//         poll = function() {
+//             $.ajax({
+//                 url: `${window.context}/admin/contactInform`,
+//                 dataType: 'json',
+//                 type: 'get',
+//                 data:{get_param: 'value'} ,
+//                 success: function(data) { // check if available
+//                     var json = $.parseJSON(data);
+//                     status.innerHTML =$(json[0]).uncheckNotiNum;
+//                     console.log("append")
+//                     // if ( data ) { // get and check data value
+//                     //     status.text(data.info); // get and print data string
+//                     // }
+//                 },
+//                 error: function() { // error logging
+//                     console.log('Error!');
+//                 }
+//             });
+//         },
+//         pollInterval = setInterval(function() { // run function every 2000 ms
+//             poll();
+//         }, 2000);
+//     poll(); // also run function on init
+// })();
 

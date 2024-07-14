@@ -8,6 +8,7 @@ import com.project.dto.response.product.ProductDetailsDTO;
 import com.project.models_rework.Image;
 import com.project.models_rework.Product;
 import jdk.jfr.Name;
+import lombok.NoArgsConstructor;
 import org.jdbi.v3.core.Handle;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
@@ -15,6 +16,7 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper(builder = @Builder(disableBuilder = true))
+@NoArgsConstructor
 public abstract class ProductDetailsDTOMapper {
     public static final ProductDetailsDTOMapper INSTANCE = Mappers.getMapper(ProductDetailsDTOMapper.class);
 

@@ -1,12 +1,13 @@
 package com.project.controllers.api.v1;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.project.dto.MessageDTO;
 import com.project.dto.request.stock.ChangeInStockDTO;
 import com.project.dto.request.stock.NewStockKeepingDTO;
+import com.project.dto.request.stock.data_table.DataTableFilterDTO;
 import com.project.dto.response.dataTable.DataTableDTO;
-import com.project.dto.response.stock.SKUHistoryDTO;
 import com.project.exceptions.custom_exception.MyServletException;
 import com.project.filters.RestResponseDTOApiFilter;
 import com.project.filters.RestRequestBodyApiFilter;
@@ -23,31 +24,21 @@ import java.io.IOException;
 public class StockKeepingAPI extends HttpServlet {
     private StockKeepingService stockKeepingService;
 
-    public StockKeepingAPI() {
-        this.stockKeepingService = new StockKeepingService();
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        stockKeepingService = new StockKeepingService();
+        super.service(req, resp);
+    }
+
+    @Override
+    public void destroy() {
+        stockKeepingService.close();
+        super.destroy();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getPathInfo();
-        switch (action) {
-            case "/doGet-SKURowData": {
-                doGet_SKURowData(request, response);
-                break;
-            }
-            case "/doGetAll-SKURowData": {
-                doGet_AllSKURowData(request, response);
-                break;
-            }
-            case "/doGet-SKUHistoryData": {
-                doGet_SKUHistoryData(request, response);
-                break;
-            }
-            case "/doGetAll-SKUHistoryData": {
-                doGetAll_SKUHistoryData(request, response);
-                break;
-            }
-        }
+
     }
 
     private void doGet_SKURowData(HttpServletRequest request, HttpServletResponse response) throws MyServletException {
@@ -72,16 +63,45 @@ public class StockKeepingAPI extends HttpServlet {
     }
 
 
-    private void doGetAll_SKUHistoryData(HttpServletRequest request, HttpServletResponse response) throws MyServletException {
-        var list = stockKeepingService.getAllSKUHistory();
-        var dto = DataTableDTO.builder()
-                .data(list).build();
+    private void doGetAll_SKUHistoryData(HttpServletRequest request, HttpServletResponse response) throws MyServletException, JsonProcessingException {
+        String json = request.getAttribute(RestRequestBodyApiFilter.PUT_KEY).toString();
+        ObjectMapper mapper = new ObjectMapper();
+        DataTableFilterDTO filterDTO = mapper.readValue(json, DataTableFilterDTO.class);
+        var dto = stockKeepingService.getAllSKUHistory(filterDTO);
         request.setAttribute(RestResponseDTOApiFilter.PUT_KEY, dto);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String json = req.getAttribute(RestRequestBodyApiFilter.PUT_KEY).toString();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getPathInfo();
+        synchronized (stockKeepingService) {
+            switch (action) {
+                case "/doGet-SKURowData": {
+                    doGet_SKURowData(request, response);
+                    break;
+                }
+                case "/doGetAll-SKURowData": {
+                    doGet_AllSKURowData(request, response);
+                    break;
+                }
+                case "/doGet-SKUHistoryData": {
+                    doGet_SKUHistoryData(request, response);
+                    break;
+                }
+                case "/doGetAll-SKUHistoryData": {
+                    doGetAll_SKUHistoryData(request, response);
+                    break;
+                }
+                case "/doAddNew-SKU": {
+                    doAddNew_SKU(request, response);
+                    break;
+                }
+            }
+        }
+    }
+
+    private void doAddNew_SKU(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String json = request.getAttribute(RestRequestBodyApiFilter.PUT_KEY).toString();
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         NewStockKeepingDTO dto = objectMapper.readValue(json, NewStockKeepingDTO.class);
@@ -90,7 +110,7 @@ public class StockKeepingAPI extends HttpServlet {
         try {
             if (stockKeepingService.insertNewStock(dto) > 0) {
                 stockKeepingService.commit();
-                req.setAttribute(RestResponseDTOApiFilter.PUT_KEY, responseMessage);
+                request.setAttribute(RestResponseDTOApiFilter.PUT_KEY, responseMessage);
             }
         } catch (Exception e) {
             stockKeepingService.rollback();

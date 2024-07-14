@@ -10,6 +10,8 @@ import com.project.dto.mapper.stock.SKUHistoryDTOMapper;
 import com.project.dto.mapper.stock.SKURowDTOMapper;
 import com.project.dto.request.stock.ChangeInStockDTO;
 import com.project.dto.request.stock.NewStockKeepingDTO;
+import com.project.dto.request.stock.data_table.DataTableFilterDTO;
+import com.project.dto.response.dataTable.DataTableDTO;
 import com.project.dto.response.product.ProductCardDTO;
 import com.project.dto.response.product.ProductDetailsDTO;
 import com.project.dto.response.stock.SKUHistoryDTO;
@@ -22,7 +24,10 @@ import com.project.models_rework.enums.SKUChangeType;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class StockKeepingService extends AbstractService {
     public Integer insertNewStock(NewStockKeepingDTO dto) throws MyServletException {
@@ -99,5 +104,35 @@ public class StockKeepingService extends AbstractService {
         var modelList = handle.attach(SKUHistoryDAO.class)
                 .getAllSKUHistory_all();
         return SKUHistoryDTOMapper.INSTANCE.mapToDTO(handle, modelList);
+    }
+
+    public DataTableDTO getAllSKUHistory(DataTableFilterDTO filterDTO) throws MyServletException {
+        Map<Integer, String> orderMap = new LinkedHashMap<>();
+        filterDTO.order.forEach(order -> {
+            var column = filterDTO.columns.get(order.getColumn());
+            orderMap.put(order.column, order.dir);
+        });
+        String ORDER_BY = "";
+        if (!orderMap.isEmpty()) {
+            String sequence = "";
+            for (var entry : orderMap.entrySet()) {
+                Integer index = entry.getKey();
+                String dir = entry.getValue();
+                String columnName = SKUHistoryDAO.dataTable_ToColumns.get(filterDTO.columns.get(index).name);
+                sequence += columnName + " " + dir + ", ";
+            }
+            sequence = sequence.substring(0, sequence.length() - 2); //remove ", "
+            ORDER_BY = "ORDER BY "+sequence;
+        }
+        var list = handle.attach(SKUHistoryDAO.class).getAllSKUHistory_all(ORDER_BY, filterDTO.length, filterDTO.start);
+        var dto = SKUHistoryDTOMapper.INSTANCE.mapToDTO(handle, list);
+        var toTal = handle.attach(SKUHistoryDAO.class)
+                .getTotalCount();
+        var filterTotal = handle.attach(SKUHistoryDAO.class)
+                .getCountFilter("");
+        return DataTableDTO.builder()
+                .draw(filterDTO.draw)
+                .data(dto).recordsFiltered(filterTotal)
+                .recordsTotal(toTal).build();
     }
 }

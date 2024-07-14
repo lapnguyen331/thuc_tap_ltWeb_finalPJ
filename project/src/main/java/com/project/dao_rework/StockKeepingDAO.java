@@ -19,9 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@RegisterBeanMappers({
-        @RegisterBeanMapper(StockKeeping.class),
-})
+@RegisterBeanMapper(StockKeeping.class)
 public interface StockKeepingDAO {
     @SqlQuery("""
             SELECT * FROM stock_keeping           

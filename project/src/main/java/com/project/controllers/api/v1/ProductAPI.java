@@ -13,23 +13,26 @@ import java.io.IOException;
 public class ProductAPI extends HttpServlet {
     private ProductService productService;
 
-    public ProductAPI() {
-        this.productService = new ProductService();
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getPathInfo();
-        switch (action) {
-            case "/getByCategory":
-                doGetByCategory(request, response);
-                break;
-            case "/getDetails":
-                doGetDetails(request, response);
-                break;
-            case "/getByName":
-                doGetByName(request, response);
-                break;
+        productService = new ProductService();
+        try {
+            switch (action) {
+                case "/getByCategory":
+                    doGetByCategory(request, response);
+                    break;
+                case "/getDetails":
+                    doGetDetails(request, response);
+                    break;
+                case "/getByName":
+                    doGetByName(request, response);
+                    break;
+            }
+        } catch(Exception e) {
+            throw e;
+        } finally {
+            productService.close();
         }
     }
 

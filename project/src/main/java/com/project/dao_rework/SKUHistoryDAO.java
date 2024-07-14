@@ -7,6 +7,7 @@ import org.jdbi.v3.sqlobject.config.RegisterBeanMappers;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.customizer.BindList;
+import org.jdbi.v3.sqlobject.customizer.Define;
 import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
@@ -14,13 +15,21 @@ import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
-@RegisterBeanMappers({
-        @RegisterBeanMapper(SKUHistory.class),
-        @RegisterBeanMapper(LocalDateTime.class),
-        @RegisterBeanMapper(SKUChangeType.class)
-})
+@RegisterBeanMapper(SKUHistory.class)
+@RegisterBeanMapper(LocalDateTime.class)
+@RegisterBeanMapper(SKUChangeType.class)
 public interface SKUHistoryDAO {
+    Map<String, String> dataTable_ToColumns = Map.of(
+            "dt_id", "id",
+            "dt_stockId", "stockId",
+            "dt_prevValue", "prevValue",
+            "dt_changeValue", "changeValue",
+            "dt_type", "type",
+            "dt_note", "note",
+            "dt_createAt", "createAt");
+
     @SqlUpdate("""
             INSERT INTO sku_history
                 (stockId, prevValue, changeValue, type, note, createAt)
@@ -51,6 +60,28 @@ public interface SKUHistoryDAO {
             SELECT * FROM sku_history
             """)
     List<SKUHistory> getAllSKUHistory_all();
+
+    @SqlQuery("""
+            SELECT * FROM sku_history
+            <filter>
+            LIMIT :length
+            OFFSET :offset
+            """)
+    List<SKUHistory> getAllSKUHistory_all(@Define("filter") String filter,
+                                          @Bind("length") Integer length,
+                                          @Bind("offset") Integer offset);
+
+    @SqlQuery("""
+            SELECT COUNT(*) FROM sku_history
+            """)
+    Integer getTotalCount();
+
+    @SqlQuery("""
+            SELECT COUNT(*) FROM sku_history
+            <filter>
+            """)
+    Integer getCountFilter(@Define("filter") String filter);
+
 
     @SqlQuery("""
             SELECT sku_history_order.orderItemId FROM sku_history

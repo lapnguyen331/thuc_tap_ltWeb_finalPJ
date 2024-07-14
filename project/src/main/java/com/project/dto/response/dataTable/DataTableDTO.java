@@ -13,4 +13,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PUBLIC)
 public class DataTableDTO implements Serializable {
     List<?> data;
+    Integer draw;
+    Integer recordsTotal;
+    Integer recordsFiltered;
 }

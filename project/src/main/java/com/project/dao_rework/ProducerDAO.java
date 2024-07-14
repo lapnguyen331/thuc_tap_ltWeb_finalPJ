@@ -1,16 +1,10 @@
 package com.project.dao_rework;
 
 import com.project.models_rework.Producer;
-import com.project.models_rework.SKUHistory;
-import com.project.models_rework.enums.SKUChangeType;
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
 import org.jdbi.v3.sqlobject.config.RegisterBeanMappers;
 import org.jdbi.v3.sqlobject.customizer.Bind;
-import org.jdbi.v3.sqlobject.customizer.BindBean;
-import org.jdbi.v3.sqlobject.customizer.BindList;
-import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
-import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,6 +14,7 @@ import java.util.List;
         @RegisterBeanMapper(LocalDateTime.class),
 })
 public interface ProducerDAO {
+    @RegisterBeanMapper(Producer.class)
     @SqlQuery("""
             SELECT * FROM producers
             WHERE
@@ -27,11 +22,13 @@ public interface ProducerDAO {
             """)
     List<Producer> getById_all(@Bind("producerId") Integer producerId);
 
+    @RegisterBeanMapper(Producer.class)
     @SqlQuery("""
             SELECT id, name FROM producers
             """)
     List<Producer> getAll_id_name();
 
+    @RegisterBeanMapper(Producer.class)
     @SqlQuery("""
             SELECT id FROM producers
             WHERE

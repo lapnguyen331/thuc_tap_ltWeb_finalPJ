@@ -13,6 +13,7 @@ import com.project.models_rework.Product;
 import com.project.models_rework.SKUHistory;
 import com.project.models_rework.StockKeeping;
 import com.project.service_rework.UploadService;
+import lombok.NoArgsConstructor;
 import org.jdbi.v3.core.Handle;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
@@ -22,6 +23,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Mapper(builder = @Builder(disableBuilder = true))
+@NoArgsConstructor
 public abstract class SKURowDTOMapper {
     public static final SKURowDTOMapper INSTANCE = Mappers.getMapper(SKURowDTOMapper.class);
 
@@ -39,8 +41,10 @@ public abstract class SKURowDTOMapper {
         if (handle.attach(ProductDAO.class).checkExistByProductId(productId).isEmpty()) {
             throw new ProductException(String.format("Không tồn tại product với id: %d", productId), 404);
         }
-        var product = handle.attach(ProductDAO.class).getById_id_name_thumbnail(productId).get(0);
-        var listThumbnail = handle.attach(ImageDAO.class).getImageById(product.getThumbnail());
+        var productDAO = handle.attach(ProductDAO.class);
+        var product = productDAO.getById_id_name_thumbnail(productId).get(0);
+        var imageDAO = handle.attach(ImageDAO.class);
+        var listThumbnail = imageDAO.getImageById(product.getThumbnail());
         String thumbnail_path = listThumbnail.isEmpty() ? null : listThumbnail.get(0).getPath();
         String thumbnail_link = null;
         var uploadService = new UploadService();
@@ -58,10 +62,11 @@ public abstract class SKURowDTOMapper {
 
     @Named("mapToProducerDTO")
     protected SKURowDTO.Producer mapToProducer(@Context Handle handle, Integer producerId) throws MyServletException {
-        if (handle.attach(ProducerDAO.class).checkExistsById(producerId).isEmpty()) {
+        var producerDAO = handle.attach(ProducerDAO.class);
+        if (producerDAO.checkExistsById(producerId).isEmpty()) {
             throw new ProducerException(String.format("Không tồn tại nhà cung cấp với id: %d", producerId), 404);
         }
-        var producer = handle.attach(ProducerDAO.class).getById_all(producerId).get(0);
+        var producer = producerDAO.getById_all(producerId).get(0);
         return SKURowDTO.Producer.builder()
                 .name(producer.getName())
                 .id(producer.getId())

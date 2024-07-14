@@ -7,6 +7,7 @@ import com.project.exceptions.custom_exception.MyServletException;
 import com.project.models_rework.Category;
 import com.project.models_rework.Product;
 import com.project.service_rework.UploadService;
+import lombok.NoArgsConstructor;
 import org.jdbi.v3.core.Handle;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
@@ -14,6 +15,7 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper(builder = @Builder(disableBuilder = true))
+@NoArgsConstructor
 public abstract class ProductIDNameThumbnailDTOMapper {
     public static final ProductIDNameThumbnailDTOMapper INSTANCE = Mappers.getMapper(ProductIDNameThumbnailDTOMapper.class);
     @Mapping(target = "thumbnail", source = "thumbnail", qualifiedByName = "getThumbnail")

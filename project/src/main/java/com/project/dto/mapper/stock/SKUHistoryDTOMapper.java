@@ -11,6 +11,7 @@ import com.project.models_rework.OrderItem;
 import com.project.models_rework.SKUHistory;
 import com.project.models_rework.StockKeeping;
 import com.project.service_rework.UploadService;
+import lombok.NoArgsConstructor;
 import org.jdbi.v3.core.Handle;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Mapper(builder = @Builder(disableBuilder = true))
+@NoArgsConstructor
 public abstract class SKUHistoryDTOMapper {
     public static final SKUHistoryDTOMapper INSTANCE = Mappers.getMapper(SKUHistoryDTOMapper.class);
 
@@ -37,8 +39,10 @@ public abstract class SKUHistoryDTOMapper {
         if (handle.attach(ProductDAO.class).checkExistByProductId(productId).isEmpty()) {
             throw new ProductException(String.format("Không tồn tại product với id: %d", productId), 404);
         }
-        var product = handle.attach(ProductDAO.class).getById_id_name_thumbnail(productId).get(0);
-        var listThumbnail = handle.attach(ImageDAO.class).getImageById(product.getThumbnail());
+        var productDAO = handle.attach(ProductDAO.class);
+        var product = productDAO.getById_id_name_thumbnail(productId).get(0);
+        var imageDAO = handle.attach(ImageDAO.class);
+        var listThumbnail = imageDAO.getImageById(product.getThumbnail());
         String thumbnail_path = listThumbnail.isEmpty() ? null : listThumbnail.get(0).getPath();
         var uploadService = new UploadService();
         String thumbnail_link = null;
