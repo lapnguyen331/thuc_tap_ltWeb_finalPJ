@@ -44,6 +44,7 @@ public class RestResponseDTOApiFilter implements Filter {
             str = objectMapper.writeValueAsString(request.getAttribute(PUT_KEY));
             statusCode = 200;
         } catch (MyServletException e) {
+            e.printStackTrace();
             if (e instanceof MyServletException) {
                 var exception = (MyServletException) e;
                 statusCode = exception.getErrorCode();

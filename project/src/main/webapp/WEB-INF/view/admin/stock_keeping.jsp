@@ -60,7 +60,7 @@
                             <i class="fas fa-plus"></i>
                             Thêm SKU mới
                         </div>
-                        <div class="btn-function fs-6">
+                        <div class="btn-function fs-6" id="edit_selected_sku_button">
                             <i class="fas fa-plus"></i>
                             Điều chỉnh tồn kho
                         </div>
@@ -188,7 +188,10 @@
 <script src="${pageContext.request.contextPath}/libs/daterangepicker-master/daterangepicker.js"></script>
 <script src="${pageContext.request.contextPath}/libs/suneditor-master/dist/suneditor.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/admin/data-table-translate.js" type="module"></script>
-<script type="module" src="${pageContext.request.contextPath}/js/admin/stock_keeping.js?v=16"></script>
+<script>
+    let initStockIds = ${requestScope.json}
+</script>
+<script type="module" src="${pageContext.request.contextPath}/js/admin/stock_keeping.js?v=19"></script>
 <script>
     new mdb.Select(document.getElementById('sku_newForm_selectField_supplier'), {
         container: 'body',

@@ -1,49 +1,10 @@
 import { translate } from "./data-table-translate.js";
-const fake_data = [
-    {
-        transactionId: "xxx",
-        productId: "xxx",
-        changeType: "THEM_HANG",
-        productName: "This is a very long product name with fully description, Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quos enim ducimus minima ea iusto velit laudantium est, iste inventore nobis, at aliquam adipisci magni voluptas maxime. Exercitationem, quaerat optio.",
-        dateTime: "22 - 04 - 2024",
-        change: 22,
-        inStocks: 61,
-        note: "Nhập thêm hàng vào lô tháng 4 Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quos enim ducimus minima ea iusto velit laudantium est, iste inventore nobis, at aliquam adipisci magni voluptas maxime. Exercitationem, quaerat optio."
-    },
-    {
-        transactionId: "xxx",
-        productId: "xxx",
-        changeType: "THEM_HANG",
-        productName: "This is a very long product name with fully description, Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quos enim ducimus minima ea iusto velit laudantium est, iste inventore nobis, at aliquam adipisci magni voluptas maxime. Exercitationem, quaerat optio.",
-        dateTime: "22 - 04 - 2024",
-        change: 22,
-        inStocks: 61,
-        note: "Nhập thêm hàng vào lô tháng 4 Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quos enim ducimus minima ea iusto velit laudantium est, iste inventore nobis, at aliquam adipisci magni voluptas maxime. Exercitationem, quaerat optio."
-    },
-    {
-        transactionId: "xxx",
-        productId: "xxx",
-        changeType: "THEM_HANG",
-        productName: "This is a very long product name with fully description, Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quos enim ducimus minima ea iusto velit laudantium est, iste inventore nobis, at aliquam adipisci magni voluptas maxime. Exercitationem, quaerat optio.",
-        dateTime: "22 - 04 - 2024",
-        change: 22,
-        inStocks: 61,
-        note: "Nhập thêm hàng vào lô tháng 4 Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quos enim ducimus minima ea iusto velit laudantium est, iste inventore nobis, at aliquam adipisci magni voluptas maxime. Exercitationem, quaerat optio."
-    },
-    {
-        transactionId: "xxx",
-        productId: "xxx",
-        changeType: "THEM_HANG",
-        productName: "This is a very long product name with fully description, Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quos enim ducimus minima ea iusto velit laudantium est, iste inventore nobis, at aliquam adipisci magni voluptas maxime. Exercitationem, quaerat optio.",
-        dateTime: "22 - 04 - 2024",
-        change: 22,
-        inStocks: 61,
-        note: "Nhập thêm hàng vào lô tháng 4 Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quos enim ducimus minima ea iusto velit laudantium est, iste inventore nobis, at aliquam adipisci magni voluptas maxime. Exercitationem, quaerat optio."
-    }
-]
 const data_tables_transaction_history = new DataTable('#table_sku_edit', {
     language: translate,
-    data: startData,
+    ajax: {
+        url: `${window.context}/api/v1/stock-keeping/doGetSession-stockIds`,
+        method: 'POST',
+    },
     dom: 'tip',
     scrollCollapse: true,
     width: '100%',
@@ -91,7 +52,7 @@ const data_tables_transaction_history = new DataTable('#table_sku_edit', {
             data: 'stockId',
             render: function(data, type, row) {
                 return `
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center stock-id" data-stock-id="${data}">
                     <a href="#">#${data}</a>
                 </div>
                 `
@@ -135,19 +96,36 @@ const data_tables_transaction_history = new DataTable('#table_sku_edit', {
             data: 'note',
             render: function(data, type, row) {
                 return `
-                <div class="d-flex align-items-center gap-2">
+                <div class="d-flex align-items-center gap-2" data-stock-id="${row.stockId}">
                     <select class="sku_edit_select_reason">
                             <option value="HET_HAN">Hết hạn</option>
                             <option value="SL_THAY_DOI">Thay đổi số lượng</option>
+                            <option value="THEM_HANG">Thêm hàng</option>
                     </select>
-                    <i class="far fa-times-circle text-danger"></i>
+                    <i class="far fa-times-circle text-danger delete-button" style="cursor:pointer;"></i>
                 </div>
                 `;
             }
-
+        },
+        {
+            width: '150px',
+            className: 'dt-center',
+            data: 'note',
+            render: function(data, type, row) {
+                return `
+                <div class="d-flex align-items-center gap-2" data-stock-id="${row.stockId}">
+                    <textarea class="form-control" name="" id="" cols="30" 
+                    style="resize: none; font-size: 12px" rows="3"></textarea>
+                </div>
+                `;
+            }
         }
     ],
-    initComplete: function(settings, json) {
+    preDrawCallback: function() {
+        $('.sku_edit_select_reason').remove()
+        $('.sku_edit_select_supplier').remove()
+    },
+    fnDrawCallback: function() {
         [...document.getElementsByClassName('sku_edit_select_reason')].forEach(select => {
             new mdb.Select(select, {
                 container: 'body',
@@ -163,6 +141,77 @@ const data_tables_transaction_history = new DataTable('#table_sku_edit', {
         })
     }
 });
+$('#btn_updateAll').on('click', function() {
+    try {
+        const errors = [];
+        const data = [...data_tables_transaction_history.$('tr')].map(row => {
+            const inStockStr = $(row).find("input[type='text']").val()
+            if (inStockStr === "" || inStockStr === undefined) {
+                let error = new Error("Lỗi xảy ra")
+                error.data = {cause: row, msg: 'Trường này không được để trống!'}
+                errors.push(error)
+            }
+            const inStock = Number(inStockStr)
+            const stockId = $(row).find('.stock-id').data('stock-id')
+            const note = $(row).find('textarea').val()
+            const type = $(row).find('.sku_edit_select_reason').val()
+            return {inStock, stockId, note, type}
+        })
+        if (errors.length > 0) {
+            throw errors;
+        }
+        const swalStatus = Swal.mixin({})
+        swalStatus.fire({
+            title: "Đang gửi yêu cầu...",
+            html: "Xin chờ giây lát.",
+            icon: 'info',
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        })
+        new Promise(resolve => setTimeout(() => resolve(), 1500))
+        .then(() => {
+            return $.ajax({
+                url: `${window.context}/api/v1/stock-keeping`,
+                method: 'PUT',
+                data: JSON.stringify(data),
+            })
+        }).then(data => {
+            initStockIds = []
+            return $.ajax({
+                url: `${window.context}/api/v1/stock-keeping/doUpdateSession-stockIds`,
+                method: 'POST',
+                data: JSON.stringify({
+                    stockIds: initStockIds
+                })
+            })
+        }).then(data => {
+            swalStatus.fire({
+                icon: "success",
+                title: "Cập nhật thành công",
+                showConfirmButton: false,
+                timer: 1500
+            })
+            data_tables_transaction_history.ajax.url(`${window.context}/api/v1/stock-keeping/doGetSession-stockIds`).load()
+        }).catch(error => {
+            console.log(error)
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: error.responseJSON.message,
+            });
+        })
+    } catch (errors) {
+        errors.forEach(({data}) => {
+            const {cause} = data;
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Bạn chưa nhập hết các trường dữ liệu cần thiết!",
+            });
+        })
+    }
+})
 $('#status_filter').on('change', function(e) {
     data_tables.draw();
 })
@@ -171,6 +220,20 @@ $("#filter_input").on('input', function(e) {
 });
 const mySelect = new mdb.Select(document.getElementById('sku_upload_select'), {
     container: 'body'
+});
+$('#table_sku_edit').on('click', '.delete-button', function() {
+    const stockId = Number($(this).parent().data('stock-id'))
+    $.ajax({
+        url: `${window.context}/api/v1/stock-keeping/doUpdateSession-stockIds`,
+        method: 'POST',
+        data: JSON.stringify({
+            stockIds: [... initStockIds.filter(data => data !== stockId)]
+        }),
+        success: () => {
+            initStockIds = [... initStockIds.filter(data => data !== stockId)]
+            data_tables_transaction_history.ajax.url(`${window.context}/api/v1/stock-keeping/doGetSession-stockIds`).load()
+        }
+    })
 });
 (async function() {
     $('#table_tabs').on('click', 'li', function() {

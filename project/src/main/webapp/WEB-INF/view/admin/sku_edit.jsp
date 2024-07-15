@@ -174,13 +174,17 @@
                         <th>
                             <span>Lý do điều chỉnh</span>
                         </th>
+                        <th>
+                            <span>Ghi chú</span>
+                        </th>
                     </tr>
                     </thead>
                 </table>
                 <div class="border-top border-1 mt-3 border-info">
                     <div class="d-flex align-items-center justify-content-between pt-3 px-2">
                         <div class="px-2 py-1 border border-1 rounded-1 fw-semibold d-inline-block">Thoát</div>
-                        <div class="px-2 py-1 text-white border border-1 rounded-1 fw-semibold d-inline-block bg-success">Xác nhận</div>
+                        <div id="btn_updateAll" style="cursor: pointer"
+                             class="px-2 py-1 text-white border border-1 rounded-1 fw-semibold d-inline-block bg-success">Xác nhận</div>
                     </div>
                 </div>
             </main>
@@ -188,7 +192,7 @@
     </main>
 </section>
 <script>
-    const startData = ${requestScope.json}
+    let initStockIds = ${requestScope.stockIdsJSON}
 </script>
 <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/libs/mdb-bootstrap-5-pro/js/mdb.min.js"></script>
@@ -199,7 +203,7 @@
 <script src="${pageContext.request.contextPath}/libs/daterangepicker-master/daterangepicker.js"></script>
 <script src="${pageContext.request.contextPath}/libs/suneditor-master/dist/suneditor.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/admin/data-table-translate.js" type="module"></script>
-<script src="${pageContext.request.contextPath}/js/admin/sku_edit.js?v=1" type="module"></script>
+<script src="${pageContext.request.contextPath}/js/admin/sku_edit.js?v=10" type="module"></script>
 </body>
 
 </html>

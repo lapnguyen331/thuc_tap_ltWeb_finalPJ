@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebFilter(filterName = "global2", urlPatterns = {"/*"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
 public class UpdateSessionFilter implements Filter {
@@ -29,6 +30,9 @@ public class UpdateSessionFilter implements Filter {
         HttpSession session = request.getSession(true);
         if (session.getAttribute("categories") == null) {
             session.setAttribute("categories", cService.getAll_id_name_thumbnail());
+        }
+        if (session.getAttribute("selectStockIDs") == null) {
+            session.setAttribute("selectStockIDs", new ArrayList<Integer>());
         }
         var cart = session.getAttribute("cart");
         if (cart == null) {

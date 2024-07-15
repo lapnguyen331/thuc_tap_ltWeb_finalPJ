@@ -1,11 +1,37 @@
 import { translate } from "./data-table-translate.js";
 $(document).ready(() => {
+    const selectStockIdsState = {
+        __aInternal: new Set(initStockIds),
+        aListener: function(stateValue) {},
+        get ids() {
+            return this.__aInternal;
+        },
+        add: function (item) {
+            this.__aInternal.add(Number(item))
+            this.aListener(this.__aInternal)
+        },
+        remove: function (item) {
+            this.__aInternal.delete(Number(item))
+            this.aListener(this.__aInternal)
+        },
+        onChangeHandler: function(listener) {
+            this.aListener = listener;
+        }
+    }
+    selectStockIdsState.onChangeHandler((idsSet) => {
+        const size = idsSet.size
+        size > 0 && $('#count_selected_sku_label')
+            .text(`Đã chọn ${size} lô hàng`).removeClass('d-none')
+            && console.log(idsSet)
+        size == 0 && $('#count_selected_sku_label')
+            .text(``).addClass('d-none')
+    })
     const data_tables_transaction = new DataTable('#table_transaction', {
         language: translate,
-        dom: 'tip',
         scrollCollapse: true,
         bDeferRender: true,
-        pageLength: 5,
+        searching: false,
+        lengthMenu: [5, 10, 15, 25, 50],
         width: '100%',
         scrollY: '400px',
         ajax: {
@@ -23,7 +49,8 @@ $(document).ready(() => {
                 <div class="shipment-row-wrap">
                     <div class="header">
                         <div class="form-check">
-                            <input class="form-check-input chbox-shipment" type="checkbox" value="${row.stockId}" />
+                            <input class="form-check-input chbox-shipment" type="checkbox" ${selectStockIdsState.ids.has(row.stockId) && 'checked'} 
+                            value="${row.stockId}" />
                             <label class="form-check-label">Mã lô hàng: ${row.stockId}</label>
                         </div>
                         <div class="d-flex gap-1">
@@ -97,6 +124,7 @@ $(document).ready(() => {
         width: '100%',
         scrollY: '200px',
         processing: true,
+        searching: false,
         serverSide: true,
         columnDefs: [
             {
@@ -205,19 +233,24 @@ $(document).ready(() => {
     $("#filter_input").on('input', function(e) {
         data_tables.column(1).search($(this).val()).draw()
     });
-    let selected_arr = [];
     $('#table_transaction').on('change', '.chbox-shipment', function(e) {
         let {value} = this;
         let isChecked = $(this).prop('checked');
-        isChecked
-        && selected_arr.push(value)
-        && $('#count_selected_sku_label').removeClass('d-none')
-            .text(`(Đã chọn ${selected_arr.length} lô hàng)`)
-        if (!isChecked) {
-            selected_arr = [...selected_arr.filter(e => e !== value)]
-            $('#count_selected_sku_label').text(``).addClass('d-none')
-        }
+        isChecked && selectStockIdsState.add(value)
+        !isChecked && selectStockIdsState.remove(value)
     });
+    $('#edit_selected_sku_button').on('click', function() {
+        $.ajax({
+            url: `${window.context}/api/v1/stock-keeping/doUpdateSession-stockIds`,
+            method: 'POST',
+            data: JSON.stringify({
+                stockIds: [... selectStockIdsState.ids]
+            }),
+            success: () => {
+                window.location.href =`${window.context}/admin/sku-edit`;
+            }
+        })
+    })
     const modal = new mdb.Modal($('#new_sku_modal'), {});
     $('#add_new_sku_button').on('click', () => {
         modal.show();

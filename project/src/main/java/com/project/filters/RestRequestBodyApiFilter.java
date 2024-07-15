@@ -28,9 +28,11 @@ public class RestRequestBodyApiFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         var request = (HttpServletRequest) servletRequest;
         var response = (HttpServletResponse) servletResponse;
-        String requestData = request.getReader().lines().collect(Collectors.joining());
-        System.out.println("In Filter: "+requestData);
-        request.setAttribute("json_data", requestData);
+        if (request.getMethod().equalsIgnoreCase("POST") || request.getMethod().equalsIgnoreCase("PUT")) {
+            String requestData = request.getReader().lines().collect(Collectors.joining());
+            System.out.println("In Filter: "+requestData);
+            request.setAttribute("json_data", requestData);
+        }
         filterChain.doFilter(request, response);
     }
 }
