@@ -30,8 +30,14 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/table-tabs.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/stock_keeping_row.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/sku_edit.css">
-    <title>Quản lí sản phẩm</title>'
+    <title>Quản lí sản phẩm</title>
     <style>
+        body {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
         #table_tabs>ul>li{
             flex: 1;
             text-align: center;
@@ -72,68 +78,14 @@
             border-top: 1px solid black;
         }
     </style>
-
-    <style>
-        .box-chat {
-            background-color: white;
-            z-index: 1000;
-            width: 800px;
-            padding: 20px;
-            border-radius: 10px;
-            position: absolute;
-            height: 400px;
-        }
-
-        .box-chat-body {
-            width: 400px;
-            overflow-y: scroll;
-            border-left: 2px solid #cccccc;
-            margin-left: 20px;
-            padding-left: 20px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            margin-top: 20px;
-            margin-bottom: 50px;
-        }
-
-        .view-group {
-            overflow: hidden;
-            padding-right: 40px;
-        }
-    </style>
 </head>
 
 <body>
+<%@ include file="/WEB-INF/view/admin/shared/boxchat.jsp" %>
 <%@ include file="/WEB-INF/view/admin/shared/header.jsp" %>
 <%@ include file="/WEB-INF/view/admin/shared/sidebar.jsp" %>
 <section id="main-content-section">
     <main class="main" id="sku_edit">
-        <div class="box-chat draggable-element shadow-1-strong"
-             data-mdb-draggable-init data-mdb-drag-handle=".draggable-drag-ico">
-            <i class="fas fa-arrows-alt draggable-drag-ico"></i>
-            <div class="d-flex h-100">
-                <div class="d-flex flex-fill flex-column">
-                    <div class="fw-semibold fs-6 mt-3 mb-2">Tên user:</div>
-                    <div class="form-outline mt-2 w-50" data-mdb-input-init>
-                        <input id="box-chat_usernameInput" type="text" class="form-control form-control-sm" />
-                    </div>
-                    <div class="fw-semibold fs-6 mt-3 mb-2">Tin nhắn:</div>
-                    <div class="form-outline" data-mdb-input-init>
-                        <textarea class="form-control" id="box-chat_txtAreaMessage" rows="4"></textarea>
-                    </div>
-                    <div class="d-flex flex-row-reverse mt-3">
-                        <div class="bg-success fw-semibold fs-6 rounded-1 py-1 px-2 text-white"
-                             id="send-button" style="cursor: pointer"
-                        >Gửi tin nhắn</div>
-                    </div>
-                </div>
-                <div class="box-chat-body">
-                    <div class="view-group" id="box-chat_viewGroup">
-
-                    </div>
-                </div>
-            </div>
-        </div>
         <article class="body">
             <main class="content p-3">
                 <header class="header d-flex justify-content-between">
