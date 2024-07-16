@@ -221,6 +221,93 @@ $("#filter_input").on('input', function(e) {
 const mySelect = new mdb.Select(document.getElementById('sku_upload_select'), {
     container: 'body'
 });
+
+$(document).ready(() => {
+    let websocket;
+    function initWebSocket(url) {
+        console.log(url)
+        websocket = new WebSocket(url);
+        websocket.onopen = function(message) {processOpen(message);};
+        websocket.onmessage = function(message) {processMessage(message);};
+        websocket.onclose = function(message) {processClose(message);};
+        websocket.onerror = function(message) {processError(message);};
+
+        function processOpen() {
+            console.log('Server connect...')
+        }
+        function processMessage({data}) {
+            let obj
+            try {
+                obj = JSON.parse(data)
+            } catch (e) {
+                console.log(e.message)
+            }
+            if (obj['actions'] == null) {
+                console.log(obj)
+            } else {
+                obj.actions.forEach(action => {
+                    switch (action) {
+                        case "sender": {
+                            const {sender} = obj;
+                            $('#box-chat_viewGroup').append(`
+                            <div class="d-flex flex-column align-items-end" >
+                                <div class="fw-semibold fs-6 mb-2 d-inline">${sender.username}</div>
+                                <div class="d-flex gap-2 flex-row-reverse justify-content-start flex-shrink-0">
+                                    <img src="https://img.freepik.com/free-vector/illustration-user-avatar-icon_53876-5907.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1721001600&semt=ais_user" class="rounded-circle me-2"
+                                         style="width: 30px; height: 30px" alt="" />
+                                    <p class="p-3 bg-primary text-white rounded-4 shadow-1">
+                                        ${sender.message}
+                                    </p>
+                                </div>
+                            </div>
+                        `)
+                        }
+                        break;
+                        case "receiver": {
+                            const {receiver} = obj;
+                            $('#box-chat_viewGroup').append(`
+                                <div class="d-flex flex-column align-items-start" >
+                                    <div class="fw-semibold fs-6 mb-2">${receiver.username}</div>
+                                    <div class="d-flex gap-2 justify-content-start flex-shrink-0">
+                                        <img src="https://img.freepik.com/free-vector/illustration-user-avatar-icon_53876-5907.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1721001600&semt=ais_user" class="rounded-circle me-2"
+                                             style="width: 30px; height: 30px" alt="" />
+                                        <p class="p-3 bg-light rounded-4 shadow-1">
+                                            ${receiver.message}
+                                        </p>
+                                    </div>
+                                </div>
+                            `)
+                        }
+                        break;
+                    }
+                })
+            }
+        }
+        function processClose(message) {
+        }
+        function processError(message) {
+        }
+    }
+    function sendMessage(myMessage) {
+        if (typeof websocket != 'undefined' && websocket.readyState == WebSocket.OPEN) {
+            websocket.send(myMessage);
+        }
+    }
+    function doWebSocketConnect() {
+        const target = $('#box-chat_usernameInput').val()
+        console.log(websocket)
+        if (!websocket) {
+            $.ajax(`${window.context}/api/v1/web-socket`).then(url => initWebSocket(url+"/chat/"+target))
+        }
+    }
+
+    $('#send-button').on('click', () => {
+        doWebSocketConnect()
+        const msg = $('#box-chat_txtAreaMessage').val()
+        sendMessage(msg)
+    })
+})
+
 $('#table_sku_edit').on('click', '.delete-button', function() {
     const stockId = Number($(this).parent().data('stock-id'))
     $.ajax({
@@ -235,6 +322,7 @@ $('#table_sku_edit').on('click', '.delete-button', function() {
         }
     })
 });
+
 (async function() {
     $('#table_tabs').on('click', 'li', function() {
         const lis = $(this).siblings().filter('li');

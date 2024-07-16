@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/libs/daterangepicker-master/daterangepicker.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/libs/suneditor-master/dist/css/suneditor.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/libs/DataTables/datatables.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/libs/mdb-bootstrap-5-pro/plugins/css/drag-and-drop.min.css">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main-style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main-header.css">
@@ -71,6 +72,35 @@
             border-top: 1px solid black;
         }
     </style>
+
+    <style>
+        .box-chat {
+            background-color: white;
+            z-index: 1000;
+            width: 800px;
+            padding: 20px;
+            border-radius: 10px;
+            position: absolute;
+            height: 400px;
+        }
+
+        .box-chat-body {
+            width: 400px;
+            overflow-y: scroll;
+            border-left: 2px solid #cccccc;
+            margin-left: 20px;
+            padding-left: 20px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-top: 20px;
+            margin-bottom: 50px;
+        }
+
+        .view-group {
+            overflow: hidden;
+            padding-right: 40px;
+        }
+    </style>
 </head>
 
 <body>
@@ -78,6 +108,32 @@
 <%@ include file="/WEB-INF/view/admin/shared/sidebar.jsp" %>
 <section id="main-content-section">
     <main class="main" id="sku_edit">
+        <div class="box-chat draggable-element shadow-1-strong"
+             data-mdb-draggable-init data-mdb-drag-handle=".draggable-drag-ico">
+            <i class="fas fa-arrows-alt draggable-drag-ico"></i>
+            <div class="d-flex h-100">
+                <div class="d-flex flex-fill flex-column">
+                    <div class="fw-semibold fs-6 mt-3 mb-2">Tên user:</div>
+                    <div class="form-outline mt-2 w-50" data-mdb-input-init>
+                        <input id="box-chat_usernameInput" type="text" class="form-control form-control-sm" />
+                    </div>
+                    <div class="fw-semibold fs-6 mt-3 mb-2">Tin nhắn:</div>
+                    <div class="form-outline" data-mdb-input-init>
+                        <textarea class="form-control" id="box-chat_txtAreaMessage" rows="4"></textarea>
+                    </div>
+                    <div class="d-flex flex-row-reverse mt-3">
+                        <div class="bg-success fw-semibold fs-6 rounded-1 py-1 px-2 text-white"
+                             id="send-button" style="cursor: pointer"
+                        >Gửi tin nhắn</div>
+                    </div>
+                </div>
+                <div class="box-chat-body">
+                    <div class="view-group" id="box-chat_viewGroup">
+
+                    </div>
+                </div>
+            </div>
+        </div>
         <article class="body">
             <main class="content p-3">
                 <header class="header d-flex justify-content-between">
@@ -196,6 +252,7 @@
 </script>
 <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/libs/mdb-bootstrap-5-pro/js/mdb.min.js"></script>
+<script src="${pageContext.request.contextPath}/libs/mdb-bootstrap-5-pro/plugins/js/drag-and-drop.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/admin/sidebar.js?v=1"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="${pageContext.request.contextPath}/libs/daterangepicker-master/moment.min.js"></script>
@@ -203,7 +260,7 @@
 <script src="${pageContext.request.contextPath}/libs/daterangepicker-master/daterangepicker.js"></script>
 <script src="${pageContext.request.contextPath}/libs/suneditor-master/dist/suneditor.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/admin/data-table-translate.js" type="module"></script>
-<script src="${pageContext.request.contextPath}/js/admin/sku_edit.js?v=10" type="module"></script>
+<script src="${pageContext.request.contextPath}/js/admin/sku_edit.js?v=18" type="module"></script>
 </body>
 
 </html>
