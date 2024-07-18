@@ -159,6 +159,7 @@
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-websocket</artifactId>
             <version>10.1.0</version>
+        </dependency>
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-web-api</artifactId>
