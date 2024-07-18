@@ -29,7 +29,7 @@ public class Logger {
         Logger.error("lỗi trang home");
         Logger.error("lỗi trang home");
         Logger.error("lỗi trang home");
-        Logger.error("lỗi trang home");
+        Logger.info("lỗi trang home");
         Logger.warning("cảnh báo lỗi");
 
 
