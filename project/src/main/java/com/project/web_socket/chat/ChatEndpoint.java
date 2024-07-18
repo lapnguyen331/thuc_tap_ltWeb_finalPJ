@@ -1,4 +1,4 @@
-package com.project.web_socket;
+package com.project.web_socket.chat;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.project.dto.response.chat.UserChatRowDTO;
@@ -8,6 +8,9 @@ import com.project.models.User;
 import com.project.models_rework.Chat;
 import com.project.service_rework.ChatService;
 import com.project.service_rework.UserService;
+import com.project.web_socket.HttpSessionConfigurator;
+import com.project.web_socket.WSUserRequestDTO;
+import com.project.web_socket.WSActionDTO;
 import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.OnOpen;
 import jakarta.websocket.*;

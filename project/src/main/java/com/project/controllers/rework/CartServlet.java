@@ -1,7 +1,9 @@
-package com.project.controllers;
+package com.project.controllers.rework;
+
 import com.project.models.Cart;
 import com.project.models.CartItem;
 import com.project.models.Product;
+import com.project.service_rework.UploadService;
 import com.project.services.ProductService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,18 +12,21 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-//@WebServlet(name = "CartAction", urlPatterns = {"/cartAction", "/cart"})
+@WebServlet(name = "CartAction", urlPatterns = {"/cartAction", "/cart"})
 public class CartServlet extends HttpServlet {
     private ProductService productService;
+    private UploadService uploadService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.productService = new ProductService();
+        this.uploadService = new UploadService();
     }
 
     @Override
@@ -70,6 +75,14 @@ public class CartServlet extends HttpServlet {
                 JSONArray arr = new JSONArray();
                 JSONObject obj;
                 for (var entry : set) {
+                    var value = entry.getValue();
+                    String path = value.getProduct().getThumbnail().getPath();
+                    try {
+                        String link = uploadService.getURL(path);
+                        value.getProduct().getThumbnail().setPath(link);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                     obj = new JSONObject();
                     obj.put("id", entry.getKey());
                     obj.put("item", JSONObject.wrap(entry.getValue()));

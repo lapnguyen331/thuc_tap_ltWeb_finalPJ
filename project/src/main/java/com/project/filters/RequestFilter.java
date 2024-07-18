@@ -33,11 +33,6 @@ public class RequestFilter implements Filter {
         if (session.getAttribute("categories") == null) {
             session.setAttribute("categories", cService.getAll());
         }
-        var cart = session.getAttribute("cart");
-        if (cart == null) {
-            cart = new Cart();
-            session.setAttribute("cart", cart);
-        }
         filterChain.doFilter(servletRequest, servletResponse);
     }
 }

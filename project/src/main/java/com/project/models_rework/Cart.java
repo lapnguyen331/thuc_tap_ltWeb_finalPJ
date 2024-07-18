@@ -1,59 +1,38 @@
 package com.project.models_rework;
 
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Cart {
-    private final  Map<Integer, CartItem> products;
+    Integer cartId;
+    Integer userId;
+    Map<Integer, CartItem> products = new HashMap<>();
 
-    public Cart() {
-        this.products = new HashMap<>();
-    }
-
-    public Map<Integer, CartItem> getProducts() {
-        return products;
-    }
-
-    public boolean put(Product product) {
-        int productKey = product.getId();
-        if (products.containsKey(productKey)) {
+    public boolean put(Integer productId, Integer quantity) {
+        if (products.containsKey(productId)) {
             return false;
         }
-        this.products.put(productKey, new CartItem(product, 1));
+        this.products.put(productId, new CartItem(productId, quantity));
         return true;
     }
 
-    public boolean isContains(Product product) {
-        int productKey = product.getId();
-        return this.products.containsKey(productKey);
+    public boolean isContains(Integer productId) {
+        return this.products.containsKey(productId);
     }
 
-    public boolean putOut(Product product, int quantity) {
-        if (!isContains(product)) return false;
-        if (getItem(product).getQuantity() - quantity <= 0) {
-            this.products.remove(product.getId());
-        }
-        else {
-            getItem(product).setQuantity(getItem(product).getQuantity() - quantity);
-        }
-        return true;
+    public CartItem getItem(Integer productId) {
+        return this.products.get(productId);
     }
 
-    public void putIn(Product product, int quantity) {
-        int productKey = product.getId();
-        if (products.containsKey(productKey)) {
-            getItem(product).setQuantity(getItem(product).getQuantity() + quantity);
-            return;
-        }
-        this.products.put(productKey, new CartItem(product, quantity));
-    }
-
-    public CartItem getItem(Product product) {
-        return this.products.get(product.getId());
-    }
-
-    public void remove(Product product) {
-        int productKey = product.getId();
-        this.products.remove(productKey);
+    public void remove(Integer productId) {
+        this.products.remove(productId);
     }
 }
