@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/stylesheet/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/stylesheet/fontawesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/libs/mdb-bootstrap-5-pro/plugins/css/drag-and-drop.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/boxchat.css?v=2">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/boxchat.css?v=3">
 </head>
 <div
         style="
@@ -33,9 +33,6 @@
             <div class="d-flex flex-column h-100">
                 <div class="d-flex gap-2 mb-2 align-items-center justify-content-between">
                     <div class="fw-semibold fs-5">Lịch sử chat</div>
-                    <div class="bg-success" id="searchButton" style="padding: 5px 10px; border-radius: 10px; color: white">
-                        <i class="fas fa-search fa-1x"></i>
-                    </div>
                 </div>
                 <hr>
                 <div class="contact-wrap empty">
@@ -91,41 +88,25 @@
         </div>
     </div>
 </div>
-<div class="searchPane" style="position: fixed;
+<div class="searchPane draggable-element d-none" data-mdb-draggable-init style="position: fixed;
     bottom: 0;
     z-index: 2;
     right: 20%;
     width: 300px;
     height: 400px;
     border-radius: 10px;
-    transform:translate(0%, -20%);
     box-shadow: 0 0 8rem 0 rgba(0, 0, 0, 0.1), 0rem 2rem 4rem -3rem rgba(0, 0, 0, 0.5);
     background-color: #ffffff">
     <div style="display: flex; width: 100%; justify-content: center; gap: 20px; padding: 10px 0px">
         <div class="form-outline" style="width: 200px;">
-            <input type="text" class="form-control form-control-sm" />
+            <input type="text" id="txt_searchUsername" class="form-control form-control-sm" />
         </div>
-        <div class="bg-primary py-1 px-2 rounded text-white" style="cursor: pointer">
+        <div class="bg-primary py-1 px-2 rounded text-white" id="searchButton" style="cursor: pointer">
             <i class="fa fa-search"></i>
         </div>
     </div>
-    <div class="bg-primary" style="height: 320px; overflow: auto">
-        <div>A</div>
-        <div>A</div>
-        <div>A</div>
-        <div>A</div>
-        <div>A</div>
-        <div>A</div>
-        <div>A</div>
-        <div>A</div>
-        <div>A</div>
-        <div>A</div>
-        <div>A</div>
-        <div>A</div>
-        <div>A</div>
-        <div>A</div>
-        <div>A</div>
-        <div>A</div>
+    <div class="search-row-wrap" style="height: 320px; overflow: auto">
+
     </div>
 </div>
 <div
@@ -164,7 +145,7 @@
     <c:if test="${not empty sessionScope.user}">
         var userId = ${sessionScope.user.id}
     </c:if>
-    var chooseId = undefined;
+    var choosedUser = undefined;
 </script>
-<script type="module" src="${pageContext.request.contextPath}/js/admin/chatbox.js?v=15"></script>
+<script type="module" src="${pageContext.request.contextPath}/js/admin/chatbox.js?v=18"></script>
 </html>

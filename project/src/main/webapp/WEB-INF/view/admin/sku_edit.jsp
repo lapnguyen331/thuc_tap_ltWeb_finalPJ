@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,7 +82,9 @@
 </head>
 
 <body>
-<%@ include file="/WEB-INF/view/admin/shared/boxchat.jsp" %>
+<c:if test="${not empty sessionScope.user}">
+    <%@ include file="/WEB-INF/view/admin/shared/boxchat.jsp" %>
+</c:if>
 <%@ include file="/WEB-INF/view/admin/shared/header.jsp" %>
 <%@ include file="/WEB-INF/view/admin/shared/sidebar.jsp" %>
 <section id="main-content-section">

@@ -294,6 +294,38 @@
         opacity: 1;
     }
 }
+
+.search-row-wrap {
+    border-top: 1px solid gray;
+    background-color: whitesmoke;
+}
+
+.search-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.search-row:hover {
+    background-color: rgba(53, 53, 53, 0.27);
+}
+
+.search-row .avatar {
+    background-image: url(https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/452109017_457318957207428_4938227900251479360_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=OfZNB_PKypQQ7kNvgGB66pn&_nc_ht=scontent.fsgn2-7.fna&oh=00_AYCOGX_XTgbuw675yrABxfrn6R6kSoquvOlBRYRs8pCWUw&oe=669F06A6);
+    background-size: cover;
+    width: 50px;
+    aspect-ratio: 1/1;
+    border: 1px solid darkgray;
+    border-radius: 50%;
+}
+
+.search-row .username {
+    font-size: 15px;
+    font-weight: 600;
+}
+
 .pic.stark {
     background-image: url("https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/7/73/SMH_Mentor_6.png");
 }

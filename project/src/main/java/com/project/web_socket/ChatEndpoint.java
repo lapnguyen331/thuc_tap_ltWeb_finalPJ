@@ -2,7 +2,10 @@ package com.project.web_socket;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.project.dto.response.chat.UserChatRowDTO;
+import com.project.dto.response.user.UserDetailsDTO;
+import com.project.exceptions.custom_exception.MyServletException;
 import com.project.models.User;
+import com.project.models_rework.Chat;
 import com.project.service_rework.ChatService;
 import com.project.service_rework.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -17,7 +20,7 @@ import java.util.*;
 @ServerEndpoint(value = "/chat", configurator = HttpSessionConfigurator.class)
 public class ChatEndpoint {
     private ChatService service = new ChatService();
-    static Map<String, Set<Session>> map_user = new HashMap<>(); // user -> [logon sessions]
+    private UserService userService = new UserService(service.getHandle());
     static Map<Integer, Set<Session>> map_user_v2 = new HashMap<>(); // userId -> [logon sessions]
     static Map<String, List<WSActionDTO>> chatHistory = new HashMap<>();
     // username -> targetname
@@ -43,13 +46,9 @@ public class ChatEndpoint {
         session.getBasicRemote().sendText(mapper.writeValueAsString(dto));
         session.getUserProperties().put("username", username);
         session.getUserProperties().put("userId", userId);
-        if (map_user.get(username) == null) {
-            map_user.put(username, Collections.synchronizedSet(new HashSet<>()));
-        }
         if (map_user_v2.get(userId) == null) {
             map_user_v2.put(userId, Collections.synchronizedSet(new HashSet<>()));
         }
-        map_user.get(username).add(session);
         map_user_v2.get(userId).add(session);
     }
 
@@ -72,10 +71,25 @@ public class ChatEndpoint {
                 // Đối với người gửi
                 var sendChat = sendChat(userId, targetId, requestDTO.data);
                 synchronizeData(userId, mapper.writeValueAsString(sendChat));
+                synchronizeData(userId, mapper.writeValueAsString(getLastChats(userId)));
+                session.getBasicRemote().sendText(mapper.writeValueAsString(getChatBetween(userId, targetId)));
 
                 // Đối với người nhận
                 var receiveChat = receiveChat(userId, targetId, requestDTO.data);
                 synchronizeData(targetId, mapper.writeValueAsString(receiveChat));
+                synchronizeData(targetId, mapper.writeValueAsString(getLastChats(targetId)));
+                if (map_user_v2.get(targetId) != null) {
+                    map_user_v2.get(targetId).stream()
+                            .filter(ss -> ss.getUserProperties().get("targetId") != null)
+                            .filter(ss -> Integer.parseInt(ss.getUserProperties().get("targetId")+"") == userId)
+                            .forEach(ss -> {
+                                try {
+                                    ss.getBasicRemote().sendText(mapper.writeValueAsString(getChatBetween(targetId, userId)));
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            });
+                }
                 break;
             }
             case "get_history": {
@@ -85,14 +99,10 @@ public class ChatEndpoint {
                 session.getBasicRemote().sendText(mapper.writeValueAsString(dto));
                 break;
             }
-            case "count_unread": {
-                var unreadMsg = getUnreadMessage(username, requestDTO.target);
-                synchronizeData(username, mapper.writeValueAsString(unreadMsg));
-                break;
-            }
             case "open_chat_window_with": {
-                session.getUserProperties().put("targetId", Integer.parseInt(requestDTO.data));
-                var response = createMessage("OK");
+                Integer targetId = Integer.parseInt(requestDTO.data);
+                session.getUserProperties().put("targetId", targetId);
+                var response = openChatWith(targetId);
                 session.getBasicRemote().sendText(mapper.writeValueAsString(response));
                 break;
             }
@@ -101,6 +111,7 @@ public class ChatEndpoint {
                 Integer userId = (Integer) session.getUserProperties().get("userId");
                 var dto = markRead(userId, targetId);
                 synchronizeData(userId, mapper.writeValueAsString(dto));
+                synchronizeData(userId, mapper.writeValueAsString(getLastChats(userId)));
                 break;
             }
             case "get_last_chat": {
@@ -114,11 +125,7 @@ public class ChatEndpoint {
 
     @OnClose
     public void onClose(Session session) throws IOException {
-        String username = (String) session.getUserProperties().get("username");
         Integer userId = (Integer) session.getUserProperties().get("userId");
-        if (map_user.get(username) != null) {
-            map_user.get(username).remove(session);
-        }
         if (map_user_v2.get(userId) != null) {
             map_user_v2.get(userId).remove(session);
         }
@@ -127,14 +134,6 @@ public class ChatEndpoint {
     @OnError
     public void onError(Session session, Throwable throwable) {
         throwable.printStackTrace();
-    }
-
-    public static void synchronizeData(String username, String data) throws IOException {
-        if (map_user.get(username) != null) {
-            for (var session : map_user.get(username)) {
-                session.getBasicRemote().sendText(data);
-            }
-        }
     }
 
     public static void synchronizeData(Integer userId, String data) throws IOException {
@@ -154,23 +153,10 @@ public class ChatEndpoint {
     }
 
     public WSActionDTO markRead(Integer id1, Integer id2) {
+        service.markReadMessage(id2, id1, LocalDateTime.now());
         return WSActionDTO.builder()
                 .action("mark_read")
                 .data(List.of(id2))
-                .build();
-    }
-
-    public WSActionDTO getUnreadMessage(String username, String target) {
-        String key = username+"<->"+target;
-        List<ReceiveChatDTO> history = chatHistory.get(key).stream()
-                .filter(ws -> ws.action.equals("receive_chat"))
-                .map(dto -> dto.data.get(0))
-                .map(dto -> (ReceiveChatDTO) dto)
-                .filter(chat -> chat.isNew)
-                .toList();
-        return WSActionDTO.builder()
-                .action("count_unread")
-                .data(List.of(history.size()))
                 .build();
     }
 
@@ -191,6 +177,11 @@ public class ChatEndpoint {
     }
 
     public WSActionDTO sendChat(Integer id1, Integer id2, String message) {
+        Chat chat = Chat.builder()
+                .isNew(true).createAt(LocalDateTime.now())
+                .senderId(id1).receiverId(id2).message(message)
+                .build();
+        service.insertNewChat(chat);
 //        var dto = service.getChatsBetween(id1, id2);
         var sender = new UserChatRowDTO.Sender().builder().id(id1).build();
         var receiver = new UserChatRowDTO.Receiver().builder().id(id2).build();
@@ -214,6 +205,19 @@ public class ChatEndpoint {
                 .isNew(true).message(message).build();
         return WSActionDTO.builder()
                 .action("receive_chat")
+                .data(List.of(dto))
+                .build();
+    }
+
+    public WSActionDTO openChatWith(Integer id) {
+        UserDetailsDTO dto = null;
+        try {
+            dto = userService.getUserById(id).get(0);
+        } catch (MyServletException e) {
+            throw new RuntimeException(e);
+        }
+        return WSActionDTO.builder()
+                .action("open_chat_with")
                 .data(List.of(dto))
                 .build();
     }
