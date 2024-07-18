@@ -87,7 +87,7 @@ $.ajax(`${window.context}/api/v1/web-socket`)
 
 function loadLastestChatMessages(chats) {
     if (chats.length >= 1 ) {
-        const target = $('.contact-wrap');
+        const target = $('.center .contact-wrap');
         target.removeClass('empty').empty();
         [...chats].forEach(chat => {
             const isSender = chat.sender.id === userId
@@ -104,7 +104,7 @@ function loadLastestChatMessages(chats) {
     }
 }
 
-$('.contact-wrap').on('click', '.contact.row__chat', function() {
+$('.center .contact-wrap').on('click', '.contact.row__chat', function() {
     const targetId = Number($(this).data('user-id'))
     openWindowChat(targetId)
 })

@@ -35,6 +35,10 @@
 <body>
 <%@ include file="/WEB-INF/view/admin/shared/header.jsp" %>
 <%@ include file="/WEB-INF/view/admin/shared/sidebar.jsp" %>
+
+<c:if test="${not empty sessionScope.user}">
+    <%@ include file="/WEB-INF/view/admin/shared/boxchat.jsp" %>
+</c:if>
 <section id="main-content-section">
     <main class="main">
         <article class="body">
