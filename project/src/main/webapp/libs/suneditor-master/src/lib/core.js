@@ -2363,7 +2363,7 @@ export default function (context, pluginCallButtons, plugins, lang, options, _re
                         l = rangeLines.indexOf(lEl);
                         rangeLines.splice(f, (l - f) + 1);
                         len = rangeLines.length;
-                        continue;
+
                     }
                 }
             }
@@ -2674,7 +2674,7 @@ export default function (context, pluginCallButtons, plugins, lang, options, _re
                             parent = rangeElement.parentNode;
                             i = -1;
                             len = children.length;
-                            continue;
+
                         }
                     }
                 }
@@ -4034,12 +4034,12 @@ export default function (context, pluginCallButtons, plugins, lang, options, _re
                         child.style.cssText += newCssText;
                         util.addClass(child, newClass);
                     } else if (!util.isBreak(child) && util._isIgnoreNodeChange(child)) {
-                        continue;
+
                     } else if (len === 1) {
                         children = child.childNodes;
                         len = children.length;
                         i = -1;
-                        continue;
+
                     } else {
                         break;
                     }
@@ -7242,7 +7242,7 @@ export default function (context, pluginCallButtons, plugins, lang, options, _re
                         f = selectedFormats[i];
                         if (util.isListCell(f)) {
                             if (!f.previousElementSibling && !shift) {
-                                continue;
+
                             } else {
                                 cells.push(f);
                             }
@@ -7966,7 +7966,7 @@ export default function (context, pluginCallButtons, plugins, lang, options, _re
             // user event
             if (typeof functions.onSave === 'function') {
                 functions.onSave(content, core);
-                return;
+
             }
         },
 

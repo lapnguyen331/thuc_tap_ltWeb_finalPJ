@@ -6613,7 +6613,7 @@
 		settings._bLoadingState = false;
 		_fnCallbackFire( settings, 'aoStateLoaded', 'stateLoaded', [settings, s] );
 		callback();
-	};
+	}
 	
 	
 	/**
@@ -21801,7 +21801,7 @@ var DataTable = $.fn.dataTable;
                 },
                 init: Criteria.initNoValue,
                 inputValue: function () {
-                    return;
+
                 },
                 isInputValid: function () {
                     return true;
@@ -21817,7 +21817,7 @@ var DataTable = $.fn.dataTable;
                 },
                 init: Criteria.initNoValue,
                 inputValue: function () {
-                    return;
+
                 },
                 isInputValid: function () {
                     return true;
@@ -21924,7 +21924,7 @@ var DataTable = $.fn.dataTable;
                 },
                 init: Criteria.initNoValue,
                 inputValue: function () {
-                    return;
+
                 },
                 isInputValid: function () {
                     return true;
@@ -21940,7 +21940,7 @@ var DataTable = $.fn.dataTable;
                 },
                 init: Criteria.initNoValue,
                 inputValue: function () {
-                    return;
+
                 },
                 isInputValid: function () {
                     return true;
@@ -22049,7 +22049,7 @@ var DataTable = $.fn.dataTable;
                 },
                 init: Criteria.initNoValue,
                 inputValue: function () {
-                    return;
+
                 },
                 isInputValid: function () {
                     return true;
@@ -22065,7 +22065,7 @@ var DataTable = $.fn.dataTable;
                 },
                 init: Criteria.initNoValue,
                 inputValue: function () {
-                    return;
+
                 },
                 isInputValid: function () {
                     return true;
@@ -22187,7 +22187,7 @@ var DataTable = $.fn.dataTable;
                 },
                 init: Criteria.initNoValue,
                 inputValue: function () {
-                    return;
+
                 },
                 isInputValid: function () {
                     return true;
@@ -22203,7 +22203,7 @@ var DataTable = $.fn.dataTable;
                 },
                 init: Criteria.initNoValue,
                 inputValue: function () {
-                    return;
+
                 },
                 isInputValid: function () {
                     return true;
@@ -22331,7 +22331,7 @@ var DataTable = $.fn.dataTable;
                 },
                 init: Criteria.initNoValue,
                 inputValue: function () {
-                    return;
+
                 },
                 isInputValid: function () {
                     return true;
@@ -22347,7 +22347,7 @@ var DataTable = $.fn.dataTable;
                 },
                 init: Criteria.initNoValue,
                 inputValue: function () {
-                    return;
+
                 },
                 isInputValid: function () {
                     return true;
@@ -22461,7 +22461,7 @@ var DataTable = $.fn.dataTable;
                 },
                 init: Criteria.initNoValue,
                 inputValue: function () {
-                    return;
+
                 },
                 isInputValid: function () {
                     return true;
@@ -22477,7 +22477,7 @@ var DataTable = $.fn.dataTable;
                 },
                 init: Criteria.initNoValue,
                 inputValue: function () {
-                    return;
+
                 },
                 isInputValid: function () {
                     return true;
@@ -22559,7 +22559,7 @@ var DataTable = $.fn.dataTable;
                 },
                 init: Criteria.initNoValue,
                 inputValue: function () {
-                    return;
+
                 },
                 isInputValid: function () {
                     return true;
@@ -22575,7 +22575,7 @@ var DataTable = $.fn.dataTable;
                 },
                 init: Criteria.initNoValue,
                 inputValue: function () {
-                    return;
+
                 },
                 isInputValid: function () {
                     return true;
@@ -23093,7 +23093,7 @@ var DataTable = $.fn.dataTable;
                 var crit = _a[_i];
                 // If the criteria is not complete then skip it
                 if (crit.criteria instanceof Criteria && !crit.criteria.s.filled) {
-                    continue;
+
                 }
                 // Otherwise if a single one fails return false
                 else if (!crit.criteria.search(rowData, rowIdx)) {
@@ -25802,13 +25802,13 @@ var DataTable = $.fn.dataTable;
          * Remove functionality from makeSelection - needs to be more advanced when tracking selections
          */
         SearchPaneST.prototype._makeSelection = function () {
-            return;
+
         };
         /**
          * Blank method to remove reloading of selected rows - needs to be more advanced when tracking selections
          */
         SearchPaneST.prototype._reloadSelect = function () {
-            return;
+
         };
         /**
          * Decides if a row should be added when being added from the server
@@ -26460,13 +26460,13 @@ var DataTable = $.fn.dataTable;
          * @param isPreselect boolean to indicate if the preselect array is to override the current selection list.
          */
         SearchPanes.prototype._initSelectionListeners = function (isPreselect) {
-            return;
+
         };
         /**
          * Blank method that is overridden in SearchPanesST to retrieve the totals from the server data
          */
         SearchPanes.prototype._serverTotals = function () {
-            return;
+
         };
         /**
          * Set's the xhr listener so that SP can extact appropriate data from the response
@@ -27215,7 +27215,7 @@ var DataTable = $.fn.dataTable;
          * Overrides the method in SearchPanes
          */
         SearchPanesST.prototype._updateSelection = function () {
-            return;
+
         };
         /**
          * Returns a function that updates the selection list based on a specific pane

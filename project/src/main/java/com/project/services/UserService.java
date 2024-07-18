@@ -7,6 +7,7 @@ import com.project.db.JDBIConnector;
 import com.project.exceptions.AlreadyVerifiedException;
 import com.project.exceptions.DuplicateInfoUserException;
 import com.project.exceptions.NotFoundUserException;
+import com.project.models.Image;
 import com.project.models.User;
 import org.jdbi.v3.core.Handle;
 
@@ -18,6 +19,7 @@ import java.util.concurrent.TimeoutException;
 
 public class UserService extends AbstractService {
     private final IUserDAO userDAO;
+
     public UserService() {
         super();
         this.userDAO = FactoryDAO.getDAO(super.handle, FactoryDAO.DAO_USER);
@@ -31,16 +33,23 @@ public class UserService extends AbstractService {
     public List<User> getAll() {
         return userDAO.getAll();
     }
+
     public List<User> getAllCustomer(){
         return userDAO.getAllCustomer();
     }
 
+    public User getUserByMail(String mail){
+        return userDAO.getUserByMail(mail);
+    }
     public User getUserByName(String username) {
         return userDAO.getLoginInfo(username);
     }
     //lấy thông tin user + avartar bằng id
     public User getInforById(int id){
         return userDAO.getInforUserById(id);
+    }
+    public int changePassById(int id,String password){
+        return userDAO.updateAccountById(id,password);
     }
     public int changePass(int id,String username,String password){
         return userDAO.updateAccount(id,username,password);
@@ -83,12 +92,25 @@ public class UserService extends AbstractService {
 //        try {
 //            String em = User.hashPassword("conga");
 //            System.out.println(em);
-//            System.out.println(service.changePass(3,"lapusername",em));
+//            System.out.println(service.changePassById(17,em));
+////            System.out.println(service.getInforById(17).toString());
 //        } catch (NoSuchAlgorithmException e) {
 //            throw new RuntimeException(e);
 //        }
 //        service.getAllCustomer().forEach(System.out::println);
         System.out.println(service.getInforById(15));
+
+    }
+
+    public int addNewGoogleUser(String username, String email, int levelAccess,String firstName, String picture) throws  NoSuchAlgorithmException {
+        String cuuid = User.getUUID();
+        if(userDAO.getLoginInfo(username) != null){
+            username += cuuid;
+        }
+        //BUG :đang set mặc định tài khoản mới gender là true
+        User user =new User(-1, username, User.hashPassword("default"), null, levelAccess, firstName, null, true, null, null,
+                null, 1, email, true, null, null, cuuid, LocalDateTime.now());
+        return userDAO.insert(user);
 
     }
 }

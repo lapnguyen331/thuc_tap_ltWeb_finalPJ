@@ -251,7 +251,7 @@ public class ProductDetailServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath()+"/admin/product/detail/update?id="+id);
     }
     private String getUUID(String link) {
-        String fileName = link.substring(link.lastIndexOf('/')+1, link.length());
+        String fileName = link.substring(link.lastIndexOf('/')+1);
         return fileName.substring(0, fileName.lastIndexOf("."));
     }
 }

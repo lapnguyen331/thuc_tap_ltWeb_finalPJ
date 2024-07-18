@@ -25,7 +25,6 @@
 <body>
 <jsp:include page="/WEB-INF/view/shared/header.jsp"></jsp:include>
 
-
 <section id="signup">
     <div class="container">
         <div class="form-box register">
@@ -119,7 +118,7 @@
                 </c:if>
                 <c:if test="${not empty requestScope.message}">
                     <div class="fw-semibold txt-info text-center">
-                        ${requestScope.message}
+                            ${requestScope.message}
                     </div>
                 </c:if>
                 <c:if test="${requestScope.resend}">
@@ -147,6 +146,7 @@
         </div>
     </div>
 </section>
+
 
 
 <jsp:include page="/WEB-INF/view/shared/footer.jsp"></jsp:include>

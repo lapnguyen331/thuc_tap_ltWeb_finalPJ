@@ -12,6 +12,7 @@ public interface IProductDAO {
     List<Product> selectAll_fullDetails();
     List<Product> selectAll_shortDetails();
     List<Product> selectTop4_shortDetails();
+    List<Product> selectTopNum_shortDetails(int num);
     List<Product> selectTop3ProductsOf_shortDetails(Category category);
     List<Product> selectTopProductsOf_shortDetails(Category category, int n);
     List<String> selectAllBrands();

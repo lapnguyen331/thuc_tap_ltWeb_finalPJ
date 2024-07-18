@@ -806,7 +806,7 @@ class Onboarding {
     ) {
       this._handleAutoToggle();
     } else if (this._currentStep.duration === 0 || this._currentStep.autoplay === false) {
-      return;
+
     }
   }
 

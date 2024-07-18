@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class MailProperties {
-    private static Properties prop = new Properties();
+    private static final Properties prop = new Properties();
 
     static {
         try {
