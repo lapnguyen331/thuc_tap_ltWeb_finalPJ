@@ -1,0 +1,15 @@
+home:http://localhost:8080/home
+forgetPassword: http://localhost:8080/forgotpassword
+login:http://localhost:8080/login
+privacy:http://localhost:8080/privacy
+introduce:http://localhost:8080/introduce
+signup:http://localhost:8080/signup
+
+user-profile:http://localhost:8080/user-profile
+user-order: http://localhost:8080/user-profile-order
+user-order-detail: http://localhost:8080/user-profile-order-detail?orderdes=36
+
+Payment:
+    vnpay:
+        api :http://localhost:8080/payment/api/vnpay
+admin:

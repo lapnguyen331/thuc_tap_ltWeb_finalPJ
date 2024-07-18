@@ -98,7 +98,7 @@
 <%@ include file="/WEB-INF/view/admin/shared/sidebar.jsp" %>
 <section id="main-content-section">
     <div class="main-content">
-        <form id="products-form">
+        <form id="products-form" method="post" action="${pageContext.request.contextPath}/admin/product/detail/new" enctype="multipart/form-data">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
@@ -114,14 +114,14 @@
                                 <div class="d-flex flex-column">
                                     <h4>Ngày tạo sản phẩm</h4>
                                     <div class="form-outline">
-                                        <input type="text" class="form-control" placeholder="Ngày tạo" id="txt_date">
+                                        <input type="text" name="createAt" class="form-control" placeholder="Ngày tạo" id="txt_date" disabled>
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column">
                                     <h4>Tình trạng</h4>
-                                    <select class="select">
-                                        <option value="active">Hoạt động</option>
-                                        <option value="deactive">Tạm dừng</option>
+                                    <select class="select" name="status">
+                                        <option value="true">Hoạt động</option>
+                                        <option value="false">Tạm dừng</option>
                                     </select>
                                 </div>
                             </div>
@@ -129,6 +129,13 @@
                     </div>
                     <div class="col-md-9">
                         <div class="right-container bg-white rounded p-4">
+                            <c:if test="${not empty requestScope.message}">
+                                <div class="col-md-12">
+                                    <div class="fw-semibold text-center text-success">
+                                            ${requestScope.message}
+                                    </div>
+                                </div>
+                            </c:if>
                             <!-- Tabs navs -->
                             <ul class="nav nav-tabs mb-3 nav-fill" id="ex1" role="tablist">
                                 <li class="nav-item" role="presentation">
@@ -155,16 +162,16 @@
                                         Bài viết mô tả
                                     </a>
                                 </li>
-                                <li class="nav-item" role="presentation">
-                                    <a
-                                            class="nav-link"
-                                            id="ex1-tab-3"
-                                            data-mdb-toggle="tab"
-                                            href="#ex1-tabs-3"
-                                            role="tab">
-                                        Đánh giá sản phẩm
-                                    </a>
-                                </li>
+<%--                                <li class="nav-item" role="presentation">--%>
+<%--                                    <a--%>
+<%--                                            class="nav-link"--%>
+<%--                                            id="ex1-tab-3"--%>
+<%--                                            data-mdb-toggle="tab"--%>
+<%--                                            href="#ex1-tabs-3"--%>
+<%--                                            role="tab">--%>
+<%--                                        Đánh giá sản phẩm--%>
+<%--                                    </a>--%>
+<%--                                </li>--%>
                             </ul>
                             <!-- Tabs content -->
                             <div class="tab-content" id="ex1-content">
@@ -175,12 +182,12 @@
                                                 <div class="form-outline">
                                                     <i class="fa-solid fa-hashtag trailing"></i>
                                                     <input type="text" name="id" id="input_id_product" class="form-control" maxlength="10" minlength="10" readonly/>
-                                                    <label class="form-label" for="input_id_product">Mã sản phẩm</label>
+                                                    <label class="form-label" for="input_id_product">Mã sản phẩm mới</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-outline">
-                                                    <input type="text" id="input_name_product" class="form-control" />
+                                                    <input type="text" name="name" id="input_name_product" class="form-control" />
                                                     <label class="form-label" for="input_name_product">Tên sản phẩm</label>
                                                 </div>
                                             </div>
@@ -189,13 +196,15 @@
                                             <div class="col-md-6">
                                                 <div class="form-outline">
                                                     <i class="trailing">VNĐ</i>
-                                                    <input type="text" id="input_price_product" class="form-control" />
+                                                    <input type="text" name="price" id="input_price_product" class="form-control" />
                                                     <label class="form-label" for="input_price_product">Giá bán</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <select class="select" id="select_category_product">
-                                                    <!-- JavaScript ở chèn option vào đây -->
+                                                <select name="categoryId" class="select" id="select_category_product">
+                                                    <c:forEach var="category" items="${sessionScope.categories}">
+                                                        <option value="${category.id}">${category.name}</option>
+                                                    </c:forEach>
                                                 </select>
                                                 <label class="form-label select-label">Danh mục sản phẩm</label>
                                             </div>
@@ -203,13 +212,13 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-outline">
-                                                    <input type="text" id="input_specific_product" class="form-control"/>
+                                                    <input name="specification" type="text" id="input_specific_product" class="form-control"/>
                                                     <label class="form-label" for="input_specific_product">Quy cách</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-outline">
-                                                    <input type="text" id="input_weight_product" class="form-control"/>
+                                                    <input name="weight" type="text" id="input_weight_product" class="form-control"/>
                                                     <label class="form-label" for="input_weight_product">Trọng lượng (gram)</label>
                                                 </div>
                                             </div>
@@ -217,13 +226,13 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-outline autocomplete" id="async-brands">
-                                                    <input type="text" id="input_brand_product" class="form-control"/>
+                                                    <input type="text" name="brand" id="input_brand_product" class="form-control"/>
                                                     <label class="form-label" for="input_brand_product">Thương hiệu</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-outline">
-                                                    <input type="text" id="input_remains_product" class="form-control"/>
+                                                    <input type="text" name="quantity" id="input_remains_product" class="form-control"/>
                                                     <label class="form-label" for="input_remains_product">Tồn kho</label>
                                                 </div>
                                             </div>
@@ -231,23 +240,27 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-outline">
-                                                    <input type="text" id="input_age_product" class="form-control"/>
+                                                    <input type="text" name="minAge" id="input_age_product" class="form-control"/>
                                                     <label class="form-label" for="input_age_product">Độ tuổi nhỏ nhất</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <select class="select" id="select_producers_product">
-                                                    <!-- JavaScript chèn option vào đây -->
+                                                <select name="producerId" class="select" id="select_producers_product">
+                                                    <c:forEach var="producer" items="${requestScope.producers}">
+                                                        <option value="${producer.id}">${producer.name}</option>
+                                                    </c:forEach>
                                                 </select>
                                                 <label class="form-label select-label">Đơn vị sản xuất</label>
                                             </div>
                                         </div>
                                         <div class="form-outline">
-                                            <textarea class="form-control" id="txtArea_desc_product" rows="4"></textarea>
+                                            <textarea name="description" class="form-control" id="txtArea_desc_product" rows="4">
+                                            </textarea>
                                             <label class="form-label" for="txtArea_desc_product">Mô tả sản phẩm</label>
                                         </div>
                                         <label for="images_gallery_product" class="form-label">Hình ảnh thư viện</label>
-                                        <div class="input-images" id="images_gallery_product"></div>
+                                        <div class="input-images" id="images_gallery_product">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
@@ -255,20 +268,19 @@
                                         <div class="fw-semibold">Mã bài viết</div>
                                         <div class="input-group mb-3">
                                             <div id="box_blog_filter">
-                                                <input type="text" id="blog_filter" class="form-control" style="width: 400px;" />
+                                                <input name="blogId" type="text" id="blog_filter" class="form-control" style="width: 400px;" />
                                             </div>
                                             <button class="btn btn-primary d-flex gap-1 align-items-center text-capitalize" type="button">
                                                 <i class="fa-regular fa-folder-open"></i>
                                                 <span>Blog có sẵn</span>
                                             </button>
-                                            <button class="btn btn-success d-flex gap-1 align-items-center text-capitalize" type="button">
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                                <span>Viết blog mới</span>
-                                            </button>
+<%--                                            <button class="btn btn-success d-flex gap-1 align-items-center text-capitalize" type="button">--%>
+<%--                                                <i class="fa-solid fa-pen-to-square"></i>--%>
+<%--                                                <span>Viết blog mới</span>--%>
+<%--                                            </button>--%>
                                         </div>
                                         <div class="fw-semibold">Nội dung bài viết</div>
-                                        <textarea id="suneditor">
-                                            </textarea>
+                                        <textarea id="suneditor"></textarea>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
@@ -277,8 +289,8 @@
                             </div>
                         </div>
                         <div class="actions-field">
-                            <button class="cancel-btn">Làm mới</button>
-                            <button class="update-btn">Cập nhật thông tin</button>
+<%--                            <button class="cancel-btn">Làm mới</button>--%>
+                            <button type="submit" class="update-btn">Tạo sản phẩm</button>
                         </div>
                     </div>
                 </div>
@@ -289,12 +301,12 @@
 <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/libs/mdb-bootstrap-5-pro/js/mdb.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/admin/sidebar.js"></script>
-<script src="${pageContext.request.contextPath}/libs/image-uploader/image-uploader.js"></script>
+<script src="${pageContext.request.contextPath}/libs/image-uploader/image-uploader.js?v=2"></script>
 <script src="${pageContext.request.contextPath}/libs/daterangepicker-master/moment.min.js"></script>
 <script src="${pageContext.request.contextPath}/libs/DataTables/datatables.min.js"></script>
 <script src="${pageContext.request.contextPath}/libs/daterangepicker-master/daterangepicker.js"></script>
 <script src="${pageContext.request.contextPath}/libs/suneditor-master/dist/suneditor.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/admin/products-edit.js"></script>
+<script src="${pageContext.request.contextPath}/js/admin/products-new.js?v=5"></script>
 </body>
 
 </html>

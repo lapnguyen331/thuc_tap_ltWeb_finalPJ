@@ -1,5 +1,7 @@
 package com.project.models;
 
+import org.json.JSONObject;
+
 import java.time.LocalDateTime;
 
 public class OrderItem {
@@ -69,15 +71,17 @@ public class OrderItem {
     public void setUpdateAt(LocalDateTime updateAt) {
         this.updateAt = updateAt;
     }
-    public float countTotal(float price,int quantity ){
+    public float countTotal(float price, int quantity ){
         return price*quantity;
+    }
+    public float calcPrice() {
+        return this.getProduct().getDiscountPrice() * this.getQuantity();
     }
     public String getStringPrice(float price) {
         String r = (int) price+"";
         r = r.replaceAll("(?<=\\d)(?=(\\d{3})+(?!\\d))", ".");
         return r;
     }
-
 
     @Override
     public String toString() {

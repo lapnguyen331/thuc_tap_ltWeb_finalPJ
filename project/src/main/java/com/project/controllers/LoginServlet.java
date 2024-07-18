@@ -23,10 +23,18 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String forwardURL = (String) request.getAttribute(RequestDispatcher.FORWARD_REQUEST_URI);
-//        System.out.println("forwardURL in doGet = "+forwardURL);
+        System.out.println("forwardURL in doGet = "+forwardURL);
         HttpSession session = request.getSession(false);
 //        CASE: Người dùng này đã đăng nhập trước đó, forward sang trang khác
         if (session.getAttribute("role") != null) {
+            System.out.println(session.getAttribute("role"));
+            //case cho phép admin đăng nhập qua tk và mk
+            if(session.getAttribute("role").equals("0")){
+                System.out.println("admin -login");
+                response.sendRedirect("admin/product");
+                return;
+            }
+            //case role khác
             if (forwardURL == null) {
                 response.sendRedirect("home");
                 return;

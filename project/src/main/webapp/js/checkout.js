@@ -19,3 +19,15 @@
 //         })
 //     })
 // })
+// tạo event chọn radio list chỗ phương thức
+$('.payment-method-item').on('click', function(e){
+    var em = $('input:radio',this);
+    em.prop('checked',true);
+    $('.payment-method-item').removeClass("input-choose")
+    this.classList.add ("input-choose")
+
+    // $('..forEach(e =>{
+    //     e.nodeParent.style.backgroundColor = e.checked?"#7fa3a9":"#fff"
+    // })
+
+})

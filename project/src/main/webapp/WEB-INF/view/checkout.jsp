@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main-style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main-footer.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/button-title.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/checkout.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/checkout.css?v1">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/fixed-buttons.css">
 
 
@@ -31,7 +31,7 @@
 <%@ include file="/WEB-INF/view/shared/header.jsp" %>
 <section id="checkout-section">
     <div class="container">
-        <form action="checkout" method="post" id="checkout-form">
+        <form action="checkout" method="post" id="checkout-form" onsubmit="return validateCheckoutForm();">
             <div class="row">
                 <div class="col-md-12 d-flex justify-content-between px-3 py-3">
                     <div class="checkout-info-wrap">
@@ -61,6 +61,9 @@
                                 <div class="txt-field note-txt-field">
                                     <label for="txt-note">Thông tin bổ sung (tùy chọn):</label>
                                     <textarea name="note" id="txt-note" rows="5" placeholder="Ghi chú về đơn hàng, ví dụ: thời gian hay chỉ dẫn địa điểm giao hàng chi tiết hơn"></textarea>
+                                </div>
+                                <div class="d-flex justify-content-center" id="checkout-status">
+                                    <div class="text-danger fw-bold"></div>
                                 </div>
                             </div>
                         </div>
@@ -136,16 +139,52 @@
                                 <span class="amount">
                                         ${requestScope.items[0].product['getStringPrice'](discountPrice)}₫
                                     </span>
+
+                            </div>
+<%--                            <span class="checkout-text right">(Chưa bao gồm VAT)</span>--%>
+
+                        <%--                            phương thức thanh toán--%>
+                            <div class="payment-method-list">
+                                    <span class="checkout-text">
+                                        Chọn phương thức thanh toán
+                                    </span>
+                                <div class="method-list">
+                                    <div class="payment-method-item">
+                                        <div class="left-part">
+                                            <input class="form-check-input" type="radio" name="payment-method" value="pay1" id="pay-receive"/>
+                                            <label class="form-check-label" for="pay-receive"> Thanh toán khi nhận hàng </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Default checked radio -->
+                                    <div class="payment-method-item">
+                                        <div class="left-part">
+                                            <input class="form-check-input" type="radio" value="pay2" name="payment-method" id="pay-vnpay" />
+                                            <label class="form-check-label" for="pay-vnpay">Thanh toán bằng <span class="vn-text red">VN</span> <span class="vn-text blue">Pay</span> </label>
+                                        </div>
+                                        <div class="icon">
+                                            <img src="${pageContext.request.contextPath}/inventory/icons/64x64-vi-vnpay.svg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="payment-method-item">
+                                        <div class="left-part">
+                                            <input class="form-check-input" type="radio" value="pay3" name="payment-method" id="pay-momo" />
+                                            <label class="form-check-label" for="pay-momo">Thanh toán bằng <span class="momo-text">MoMo</span>  </label>
+                                        </div>
+                                        <div class="icon">
+                                            <img src="${pageContext.request.contextPath}/inventory/icons//momo_icon_square_pinkbg.svg" alt="">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="call-action">
-                                <span class="checkout-text">(Chưa bao gồm VAT)</span>
                                 <div class="d-flex gap-2">
                                     <div class="bg-gold bg-sharp-5">
                                         <a href="${pageContext.request.contextPath}/template/cart.html" type="submit" class="action-btn">Quay lại</a>
                                     </div>
                                     <div class="bg-gold bg-sharp-5">
-                                        <button type="submit" class="action-btn">Hoàn tất thanh toán</button>
+                                        <button type="submit" class="action-btn">Đặt hàng</button>
                                     </div>
                                 </div>
                             </div>
@@ -167,6 +206,9 @@
         src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v18.0" nonce="Qoebijhj">
 </script>
 <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/js/checkout-validation.js"></script>
+
+
 <script src="${pageContext.request.contextPath}/libs/mdb-bootstrap-5-pro/js/mdb.min.js"></script>
 </body>
 </html>

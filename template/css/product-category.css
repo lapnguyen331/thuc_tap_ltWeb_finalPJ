@@ -1,0 +1,64 @@
+.category-product {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 50px;
+}
+
+.category-product .banner-wrap {
+    position: relative;
+    flex-grow: 0;
+    overflow: hidden;
+}
+
+.category-product .banner-wrap .img-wrap {
+    overflow: hidden;
+    height: 50px;
+}
+
+.category-product .banner-wrap img {
+    display: block;
+    width: 100%;
+    transition: all ease-in-out 0.5s;
+}
+
+.category-product .banner-wrap .banner-title {
+    display: flex;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    align-items: center;
+    color: white;
+    justify-content: center;
+}
+
+.category-product .banner-wrap .banner-title h3 {
+    font-size: 20px;
+    text-shadow: 3px 3px 8px rgba(0,0,0,.4);
+    text-transform: capitalize;
+    padding: 20px;
+    color: var(--wheat-color);
+    font-style: italic;
+}
+
+.category-product .btn-view-products-more {
+    display: inline-flex;
+    padding: 5px 15px;
+    border-radius: 30px;
+    background-color: var(--red-color-main);
+    color: var(--wheat-color);
+    font-size: 18px;
+    width: 300px;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-product .btn-view-products-more::after {
+    content: '\f101';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: bold;
+    margin-top: 3px;
+    margin-left: 5px;
+}

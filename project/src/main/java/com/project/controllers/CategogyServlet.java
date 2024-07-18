@@ -44,7 +44,7 @@ public class CategogyServlet extends HttpServlet {
                     var em = productService.getALlOf(c);
                     productsCate.put(c.getId(), em);
         });
-        System.out.println("hehe"+productsCate.toString());
+        System.out.println("hehe"+ productsCate);
 
         request.setAttribute("productsCate", productsCate);
         request.setAttribute("cateName", categoriesName);

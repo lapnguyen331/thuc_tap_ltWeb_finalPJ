@@ -222,3 +222,45 @@ input:focus-visible {
     font-weight: 350;
     font-size: 14px;
 }
+/*đoạn danh sách thanh toán*/
+.payment-method-list{
+    display: flex;
+    /* justify-content: space-between; */
+    flex-direction: column;
+}
+.payment-method-item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 50px;
+    font-weight: 700;
+}
+.payment-method-item{
+    background-color: #fff;
+    /* background-color: #fffcf5; */
+    border-radius: 3px;
+    transition: .15s all linear;
+    border: 2px;
+    height: 64px;
+    width: 80%;
+    margin-top: 10px;
+}
+.input-choose{
+    background-color: #bfd1dc;
+}
+
+.payment-method-item:hover{
+    webkit-box-shadow: 0 4px 8px rgba(26, 30, 35, 0.16);
+    box-shadow: 0 4px 8px rgba(137, 173, 218, 0.16);
+    background-color: #bfd1dc;
+}
+.vn-text{
+    font-weight: 700;
+}
+.red{
+    color: #e50019;
+}
+.blue{
+    color: #004a9c;
+}

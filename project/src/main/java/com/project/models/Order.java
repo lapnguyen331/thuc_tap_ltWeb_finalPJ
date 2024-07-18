@@ -100,10 +100,12 @@ public class Order {
     public String getCreateAt1() {
         return createAt.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
     }
+    public String getDayCreateAt() {
+        return createAt.format(DateTimeFormatter.ofPattern("DD/MM/YYYY"));
+    }
     public LocalDateTime getCreateAt(){
         return this.createAt;
     }
-
 
     public void setCreateAt(LocalDateTime createAt) {
         this.createAt = createAt;
@@ -119,6 +121,17 @@ public class Order {
     public String  getDateOnly(LocalDateTime in){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("DD/MM/YYYY");
         return in.format(formatter);
+    }
+
+    public String getDateTimeCreateAt() {
+        var format =  DateTimeFormatter.ofPattern("DD/MM/YYYY hh:mm A");
+        return this.createAt.format(format);
+    }
+
+    public String getReceiverNameOrUserName() {
+        if (this.receiverName == null) return user.getFirstName() + " " + user.getLastName();
+        else
+            return receiverName;
     }
 
     @Override

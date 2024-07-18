@@ -1,0 +1,67 @@
+#main-content-section,
+#main-content-section .main-content {
+    height: 100%;
+}
+
+
+#customers-form {
+    width: 100%;
+}
+
+#customers-form .left-container {
+    width: 100%;
+}
+
+#customers-form .left-container .avatar-wrap {
+    width: 100%;
+    padding: 20px;
+}
+
+#customers-form .left-container .avatar-wrap .upload-text {
+    font-size: 14px;
+}
+
+.actions-field {
+    display: flex;
+    justify-content: end;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.actions-field .update-btn:hover {
+    background-color: #14a44d;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 11px -4px rgba(20,164,77,0.3), 0 4px 18px 0 rgba(20,164,77,0.2);
+}
+
+.actions-field .update-btn {
+    border: none;
+    font-weight: 500;
+    padding: 5px 15px;
+    border-radius: 5px;
+    background-color: #19a952;
+    color: white;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all .2s ease;
+    box-shadow: 0 8px 9px -4px rgba(20,164,77,0.3), 0 4px 18px 0 rgba(20,164,77,0.2);
+}
+
+.actions-field .cancel-btn:hover {
+    background-color: #4dabf7;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 11px -4px rgba(77, 171, 247, 0.3), 0 4px 18px rgba(97, 191, 247, 0.2);
+}
+
+.actions-field .cancel-btn {
+    border: none;
+    font-weight: 500;
+    padding: 5px 15px;
+    border-radius: 5px;
+    background-color: #4dabf7;
+    color: white;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all .2s ease;
+    box-shadow: 0 8px 9px -4px rgba(77, 171, 247, 0.3), 0 4px 18px 0 rgba(97, 191, 247, 0.2)
+}

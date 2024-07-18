@@ -5,7 +5,9 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.UUID;
 
@@ -46,6 +48,17 @@ public class User {
         this.verified = verified;
         this.createAt = createAt;
         this.updateAt = updateAt;
+    }
+
+    public User( String username,  Image avatar, int levelAccess, String firstName, int status, String email, boolean verified) throws NoSuchAlgorithmException {
+        this.username = username;
+        this.password = User.hashPassword("default");
+        this.status = status;
+        this.email = email;
+        this.avatar = avatar;
+        this.levelAccess = levelAccess;
+        this.firstName = firstName;
+        this.verified = verified;
     }
 
     public User(int id, String username, String password, Image avatar, int levelAccess, String firstName, String lastName, boolean gender, String address, String phone, Date birthDate, int status, String email, boolean verified, LocalDateTime createAt, LocalDateTime updateAt, String token, LocalDateTime tokenCreateAt) {
@@ -227,10 +240,18 @@ public class User {
 
     public String getFullName(String last, String first){
         if(last.isEmpty() && first.isEmpty()) return "";
-        return last+first;
+        return last+" "+first;
     }
     public String getGender(int gender){
         return gender == 0?"nữ":"nam";
+    }
+    public String conGender(boolean gender){
+        return gender == true ?"1":"0";
+    }
+    public Date convertToDateViaInstant(LocalDate dateToConvert) {
+        return Date.from(dateToConvert.atStartOfDay()
+                .atZone(ZoneId.systemDefault())
+                .toInstant());
     }
     @Override
     public String toString() {

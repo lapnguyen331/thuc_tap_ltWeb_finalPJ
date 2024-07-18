@@ -18,7 +18,7 @@ const countBy = (collection = [], value) => {
           output[key]++;
         }
 
-        return;
+
       });
     });
   } else {
@@ -36,7 +36,7 @@ const countBy = (collection = [], value) => {
           output[key]++;
         }
 
-        return;
+
       });
     });
   }
@@ -63,7 +63,7 @@ const groupBy = (collection = [], value) => {
           output[key].push(collection[index]);
         }
 
-        return;
+
       });
     });
   } else {
@@ -81,7 +81,7 @@ const groupBy = (collection = [], value) => {
           output[key].push(collection[objKeys[index]]);
         }
 
-        return;
+
       });
     });
   }
@@ -132,7 +132,7 @@ const orderBy = (collection = [], values = [], order = []) => {
             return -1;
           }
 
-          continue;
+
         }
       });
     } else {
@@ -182,7 +182,7 @@ const sortBy = (collection = [], values = []) => {
             return -1;
           }
 
-          continue;
+
         }
       });
     } else {

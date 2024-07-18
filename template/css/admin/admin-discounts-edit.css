@@ -1,0 +1,277 @@
+#main-content-section {
+    height: 100%;
+}
+
+#discount_edit {
+    width: 100%;
+}
+
+#discount_edit .left-container {
+    position: sticky;
+    top: 160px;
+    display: flex;
+    flex-flow: column;
+    gap: 20px;
+}
+
+#discount-info {
+    min-height: 100px;
+    background-color: white;
+    width: 100%;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+#discounts-list-section {
+    min-height: 800px;
+    background-color: white;
+    width: 100%;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+#discount_edit #discounts-form .form-title {
+    font-weight: 500;
+}
+
+#discount_edit #discounts-form .products-range {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    gap: 10px;
+    padding: 20px;
+    border: 1px dashed rgba(0,0,0,.5);
+    border-radius: 5px;
+    min-height: 236px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#discount_edit #discounts-form .products-range .product-card {
+    display: flex;
+    align-items: center;
+    width: inherit;
+    gap: 10px;
+    border: 1px dashed rgba(0,0,0,.5);
+    border-radius: 5px;
+    padding: 10px;
+    height: fit-content;
+    position: relative;
+}
+
+#discount_edit #discounts-form .products-range .product-card .remove-btn {
+    font-size: 18px;
+    cursor: pointer;
+    color: #fa5252;
+    position: absolute;
+    right: -8px;
+    top: -12px;
+    display: inline-block;
+    opacity: 0;
+    transition: all .2s;
+}
+
+#discount_edit #discounts-form .products-range .product-card:hover .remove-btn {
+    opacity: 1;
+}
+
+#discount_edit #discounts-form .products-range .product-card .img-wrap {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    background-color: #f9f9f9;
+    border: 1px dashed rgba(0,0,0,.5);
+}
+
+#discount_edit #discounts-form .products-range .product-card .info-wrap {
+    overflow: hidden;
+}
+
+#discount_edit #discounts-form .products-range .product-card .info-wrap .product-title {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-weight: 500;
+}
+
+#discount_edit #discounts-form .products-range .product-card .info-wrap .product-price {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#discount_edit #discounts-form .products-range .product-card .info-wrap .id-wrap {
+    display: flex;
+    align-items: center;
+}
+
+#discount_edit #discounts-form .products-range .product-card .info-wrap .id-wrap .product-id {
+    font-size: 14px;
+    color: rgba(0,0,0,.5);
+}
+
+#discount_edit input:focus-visible {
+    outline: none;
+}
+
+#discount_edit textarea:focus-visible {
+    outline: none;
+}
+
+#discount_edit #discounts-form .products-range .product-card .info-wrap .id-wrap .number-field button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(0,0,0,.5);
+    background-color: var(--red-color-main);
+    color: var(--wheat-color);
+    transition: all .3s;
+}
+
+#discount_edit #discounts-form .products-range .product-card .info-wrap .id-wrap .number-field button:hover {
+    background-color: var(--red-dark-color-main);
+}
+
+#discount_edit #discounts-form .products-range .product-card .info-wrap .id-wrap .number-field button span {
+    display: flex;
+    width: 10px;
+    height: 10px;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+#discount_edit #discounts-form .filter-input {
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    display: inline-flex;
+    padding: 10px 15px;
+    gap: 10px;
+    align-items: center;
+    color: #4B5675;
+}
+
+#discount_edit #discounts-form .filter-input:has(input:focus) {
+    background-color: #f1f1f4;
+}
+
+#discount_edit #discounts-form .filter-input input {
+    width: 250px;
+    border: 0;
+    background: none;
+    font-weight: 500;
+}
+
+/*  */
+.product-wrap {
+    display: flex;
+    align-items: center;
+    width: inherit;
+    gap: 10px;
+    border-radius: 5px;
+    height: fit-content;
+    position: relative;
+}
+
+.product-wrap .img-wrap {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    background-color: #f9f9f9;
+    border: 1px dashed rgba(0,0,0,.5);
+}
+
+.product-wrap .info-wrap {
+    overflow: hidden;
+}
+
+.product-wrap .info-wrap .product-title {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-weight: 500;
+    max-width: 500px;
+}
+
+.product-wrap .info-wrap .product-price {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.product-wrap .info-wrap .id-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.product-wrap .info-wrap .id-wrap .product-id {
+    font-size: 14px;
+    color: rgba(0,0,0,.5);
+}
+
+#products_filter_table tbody tr td {
+    background-color: white;
+    box-shadow: none;
+}
+
+#products_filter_table tbody tr td {
+    border-top: 1px dashed rgba(0,0,0,.5);
+}
+
+#products_filter_table tbody tr:first-child td {
+    border-top: none;
+}
+
+#discount-info .customer-contact ul {
+    margin: 0;
+    margin-top: 15px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+}
+
+.actions-field {
+    display: flex;
+    justify-content: end;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.actions-field .update-btn:hover {
+    background-color: #14a44d;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 11px -4px rgba(20,164,77,0.3), 0 4px 18px 0 rgba(20,164,77,0.2);
+}
+
+.actions-field .update-btn {
+    border: none;
+    font-weight: 500;
+    padding: 5px 15px;
+    border-radius: 5px;
+    background-color: #19a952;
+    color: white;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all .2s ease;
+    box-shadow: 0 8px 9px -4px rgba(20,164,77,0.3), 0 4px 18px 0 rgba(20,164,77,0.2);
+}
+
+.actions-field .cancel-btn:hover {
+    background-color: #4dabf7;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 11px -4px rgba(77, 171, 247, 0.3), 0 4px 18px rgba(97, 191, 247, 0.2);
+}
+
+.actions-field .cancel-btn {
+    border: none;
+    font-weight: 500;
+    padding: 5px 15px;
+    border-radius: 5px;
+    background-color: #4dabf7;
+    color: white;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all .2s ease;
+    box-shadow: 0 8px 9px -4px rgba(77, 171, 247, 0.3), 0 4px 18px 0 rgba(97, 191, 247, 0.2)
+}

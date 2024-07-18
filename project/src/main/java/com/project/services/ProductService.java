@@ -38,6 +38,10 @@ public class ProductService extends AbstractService {
     public List<Product> getTop4() {
         return productDAO.selectTop4_shortDetails();
     }
+    //lấy num sản phẩm có nội dung ngắn (meta data)
+    public List<Product> getTopNum(int num){
+        return productDAO.selectTopNum_shortDetails(num);
+    }
     public List<Product> getTopOf(Category c, int n) {
         return productDAO.selectTopProductsOf_shortDetails(c, n);
     }
@@ -54,6 +58,9 @@ public class ProductService extends AbstractService {
 
     public List<Product> search(String name, int categoryId, String brand, String minPrice, String maxPrice) {
         return productDAO.searchProduct(name, categoryId, brand, minPrice, maxPrice);
+    }
+    public int insertProduct(Product p) {
+        return productDAO.insert(p);
     }
     public List<Product> search(@Nullable String name, @NotNull List<Integer> categoryIds, @NotNull List<String> brands) {
         return productDAO.searchProduct(name, categoryIds, brands);

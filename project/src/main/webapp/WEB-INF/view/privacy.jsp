@@ -16,8 +16,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main-header.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main-style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main-footer.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/button-title.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/product-card.css">
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/button-title.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/product-filter.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/product-category.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/privacy.css">
@@ -30,7 +31,7 @@
 <jsp:include page="/WEB-INF/view/shared/cart.jsp"></jsp:include>
 
 <!-- Header -->
-    <jsp:include page="/WEB-INF/view/shared/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/view/shared/header.jsp"></jsp:include>
 
 
 <div class="container news">
@@ -90,205 +91,49 @@
                             </div>
                         </div>
                         <!-- Col 1 -->
-                        <div class="col-md-4">
-                            <div class="product-card">
-                                <a href="${pageContext.request.contextPath}/#">
-                                    <div class="product-img">
-                                        <img src="image/cao-sam-hu-doi-1.jpg" alt="">
-                                    </div>
+                        <c:if test="${not empty requestScope.products2}">
+                            <c:forEach var="product" items="${requestScope.products2}" >
+                                <div class="col-md-4">
+                                    <div class="product-card">
+                                        <a href="${pageContext.request.contextPath}/product?id=${product.id}">
+                                            <div class="product-img">
+                                                <img src="${pageContext.request.contextPath}/files/${product.thumbnail.path}" alt="">
+                                            </div>
 
-                                    <div class="product-name">
-                                        <p>Cao Sâm Hũ Đôi Arirang Hàn Quốc</p>
-                                    </div>
-                                </a>
-                                <div class="product-price-wrapper">
-                                    <div class="discount-label">-13</div>
-                                    <div class="price">
-                                        <p class="m-price">2.400.000</p>
-                                        <p class="c-price">2.100.000</p>
+                                            <div class="product-name">
+                                                <p>${product.name}</p>
+                                            </div>
+                                        </a>
+                                        <div class="product-price-wrapper">
+                                            <div class="discount-label">-${product.discount.discountPercent}%</div>
+                                            <div class="price">
+                                                <c:set var ="price" value="${product.price}"/>
+                                                <c:set var="discountPrice" value="${(100 - product.discount.discountPercent) * product.price / 100}"/>
+                                                <p class="m-price">${product['getStringPrice'](price)}</p>
+                                                <p class="c-price">${product['getStringPrice'](discountPrice)}</p>
+                                            </div>
+                                        </div>
+                                        <div class="product-button">
+                                            <div class="bg-gold bg-sharp-5">
+                                                <button class="btn-store-cart btn-review" data-cart-product="true" data-cart-action="add" data-cart-id="${product.id}" data-cart-amount="1">
+                                                    Thêm vào giỏ
+                                                </button>
+                                            </div>
+                                            <div class="bg-gold bg-sharp-5">
+                                                <button href="${pageContext.request.contextPath}/product?id=${product.id}" class="btn-details">
+                                                    <a href="${pageContext.request.contextPath}/product?id=${product.id}" class="move-to-details">Xem chi tiết</a>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="product-button">
-                                    <div class="bg-gold bg-sharp-5">
-                                        <button class="btn-review">
-                                            Xem nhanh
-                                        </button>
-                                    </div>
-                                    <div class="bg-gold bg-sharp-5">
-                                        <button class="btn-details">
-                                            Xem chi tiết
-                                        </button>
-                                    </div>
-                                </div>
+                            </c:forEach>
+                        </c:if>
+                        <c:if test="${empty requestScope.products2}">
+                            <div class="col-md-12 d-flex justify-content-center">
+                                <div class="text-danger">Chưa có sản phẩm nào...</div>
                             </div>
-                        </div>
-
-                        <!-- Col 2 -->
-                        <div class="col-md-4">
-                            <div class="product-card">
-                                <a href="${pageContext.request.contextPath}/#">
-                                    <div class="product-img">
-                                        <img src="image/cao-sam-hu-doi-1.jpg" alt="">
-                                    </div>
-
-                                    <div class="product-name">
-                                        <p>Cao Sâm Hũ Đôi Arirang Hàn Quốc</p>
-                                    </div>
-                                </a>
-                                <div class="product-price-wrapper">
-                                    <div class="discount-label">-13</div>
-                                    <div class="price">
-                                        <p class="m-price">2.400.000</p>
-                                        <p class="c-price">2.100.000</p>
-                                    </div>
-                                </div>
-                                <div class="product-button">
-                                    <div class="bg-gold bg-sharp-5">
-                                        <button class="btn-review">
-                                            Xem nhanh
-                                        </button>
-                                    </div>
-                                    <div class="bg-gold bg-sharp-5">
-                                        <button class="btn-details">
-                                            Xem chi tiết
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Col 3 -->
-                        <div class="col-md-4">
-                            <div class="product-card">
-                                <a href="${pageContext.request.contextPath}/#">
-                                    <div class="product-img">
-                                        <img src="image/cao-sam-hu-doi-1.jpg" alt="">
-                                    </div>
-
-                                    <div class="product-name">
-                                        <p>Cao Sâm Hũ Đôi Arirang Hàn Quốc</p>
-                                    </div>
-                                </a>
-                                <div class="product-price-wrapper">
-                                    <div class="discount-label">-13</div>
-                                    <div class="price">
-                                        <p class="m-price">2.400.000</p>
-                                        <p class="c-price">2.100.000</p>
-                                    </div>
-                                </div>
-                                <div class="product-button">
-                                    <div class="bg-gold bg-sharp-5">
-                                        <button class="btn-review">
-                                            Xem nhanh
-                                        </button>
-                                    </div>
-                                    <div class="bg-gold bg-sharp-5">
-                                        <button class="btn-details">
-                                            Xem chi tiết
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Col 4 -->
-                        <div class="col-md-4">
-                            <div class="product-card">
-                                <a href="${pageContext.request.contextPath}/#">
-                                    <div class="product-img">
-                                        <img src="image/cao-sam-hu-doi-1.jpg" alt="">
-                                    </div>
-
-                                    <div class="product-name">
-                                        <p>Cao Sâm Hũ Đôi Arirang Hàn Quốc</p>
-                                    </div>
-                                </a>
-                                <div class="product-price-wrapper">
-                                    <div class="discount-label">-13</div>
-                                    <div class="price">
-                                        <p class="m-price">2.400.000</p>
-                                        <p class="c-price">2.100.000</p>
-                                    </div>
-                                </div>
-                                <div class="product-button">
-                                    <div class="bg-gold bg-sharp-5">
-                                        <button class="btn-review">
-                                            Xem nhanh
-                                        </button>
-                                    </div>
-                                    <div class="bg-gold bg-sharp-5">
-                                        <button class="btn-details">
-                                            Xem chi tiết
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Col 5 -->
-                        <div class="col-md-4">
-                            <div class="product-card">
-                                <a href="${pageContext.request.contextPath}/#">
-                                    <div class="product-img">
-                                        <img src="image/cao-sam-hu-doi-1.jpg" alt="">
-                                    </div>
-
-                                    <div class="product-name">
-                                        <p>Cao Sâm Hũ Đôi Arirang Hàn Quốc</p>
-                                    </div>
-                                </a>
-                                <div class="product-price-wrapper">
-                                    <div class="discount-label">-13</div>
-                                    <div class="price">
-                                        <p class="m-price">2.400.000</p>
-                                        <p class="c-price">2.100.000</p>
-                                    </div>
-                                </div>
-                                <div class="product-button">
-                                    <div class="bg-gold bg-sharp-5">
-                                        <button class="btn-review">
-                                            Xem nhanh
-                                        </button>
-                                    </div>
-                                    <div class="bg-gold bg-sharp-5">
-                                        <button class="btn-details">
-                                            Xem chi tiết
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Col 6 -->
-                        <div class="col-md-4">
-                            <div class="product-card">
-                                <a href="${pageContext.request.contextPath}/#">
-                                    <div class="product-img">
-                                        <img src="image/cao-sam-hu-doi-1.jpg" alt="">
-                                    </div>
-
-                                    <div class="product-name">
-                                        <p>Cao Sâm Hũ Đôi Arirang Hàn Quốc</p>
-                                    </div>
-                                </a>
-                                <div class="product-price-wrapper">
-                                    <div class="discount-label">-13</div>
-                                    <div class="price">
-                                        <p class="m-price">2.400.000</p>
-                                        <p class="c-price">2.100.000</p>
-                                    </div>
-                                </div>
-                                <div class="product-button">
-                                    <div class="bg-gold bg-sharp-5">
-                                        <button class="btn-review">
-                                            Xem nhanh
-                                        </button>
-                                    </div>
-                                    <div class="bg-gold bg-sharp-5">
-                                        <button class="btn-details">
-                                            Xem chi tiết
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </c:if>
                     </div>
                 </div>
             </section>
@@ -304,5 +149,7 @@
 </script>
 <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/libs/mdb-bootstrap-5/js/mdb.min.js"></script>
+<script src="${pageContext.request.contextPath}/libs/mdb-bootstrap-5-pro/js/mdb.min.js"></script>
+
 </body>
 </html>

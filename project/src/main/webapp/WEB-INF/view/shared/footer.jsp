@@ -56,11 +56,11 @@
             <c:if test="${not empty sessionScope.categories}">
                 <c:forEach var="category" items="${sessionScope.categories}">
                     <div class="portfolio-product">
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/files/${category.thumbnail.path}" alt="${category.thumbnail.uuid}">
+                        <div class="product-img" data-public-id="${category.thumbnail}">
+                            <img src="${pageContext.request.contextPath}/inventory/images/loading-gif.gif" alt="${category.name}">
                         </div>
                         <div class="product-name">
-                            <a href="${pageContext.request.contextPath}/categogy-detail?id=${category.id}">${category.name}</a> <!---Note sửa lại href-->
+                            <a href="${pageContext.request.contextPath}/categogy-detail?id=${category.id}">${category.name}</a>
                         </div>
                     </div>
                 </c:forEach>

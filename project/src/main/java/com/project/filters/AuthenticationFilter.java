@@ -28,11 +28,11 @@ public class AuthenticationFilter implements Filter {
         ServletContext context = request.getServletContext();
         HttpSession session = httpRequest.getSession(false);
 //        Get resource name
-        int lastIndex = uri.lastIndexOf("/");
-        String resource = uri.substring(lastIndex + 1);
+        int contextIndex = uri.indexOf(context.getContextPath());
+        String resource = uri.substring(contextIndex + context.getContextPath().length());
 //        Lỗi xảy ra ở Google Chrome, chuyển hướng về trang khởi đầu..
 //        if (resource.isEmpty()) {
-//            ((HttpServletResponse) response).sendRedirect("home");
+//            ((HttpServletResponse) r  esponse).sendRedirect("home");
 //            return;
 //        }
 //        Get Authentication Properties
@@ -41,8 +41,12 @@ public class AuthenticationFilter implements Filter {
         String rule = authProperties.getProperty(resource);
 //        System.out.printf("permission of %s = %s\n", httpRequest.getRequestURI(), rule);
         if (rule != null) {
-            if ((session == null) || !(rule.equals(session.getAttribute("role")))) {
-                httpRequest.getRequestDispatcher("login").forward(httpRequest, httpResponse);
+            if ((session.getAttribute("user") == null)) {
+                httpRequest.setAttribute("message", "Xin lỗi bạn cần đăng nhập để tiếp tục...");
+                httpRequest.getRequestDispatcher("/login").forward(httpRequest, httpResponse);
+                return;
+            } else if (!(rule.equals(session.getAttribute("role")))) {
+                httpRequest.getRequestDispatcher("/home").forward(request, response);
                 return;
             }
         }

@@ -1,5 +1,10 @@
 package com.project.controllers;
 
+import com.project.dao.IContactDAO;
+import com.project.dao.implement.ContactDAO;
+import com.project.models.Contact;
+import com.project.models.Rating;
+import com.project.services.ContactService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,13 +14,13 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet(name = "ContactServlet", urlPatterns = {"/contact"})
+@WebServlet(name = "ContactADServlet", urlPatterns = {"/contact"})
 public class ContactServlet extends HttpServlet {
-
+    private ContactService contactService;
 
     @Override
     public void init() throws ServletException {
-
+        this.contactService = new ContactService();
         super.init();
     }
 
@@ -28,6 +33,15 @@ public class ContactServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+        String firstname = request.getParameter("firstname");
+        String lastname = request.getParameter("lastname");
+        String email = request.getParameter("submitemail");
+        String phone = request.getParameter("submitphone");
+        String content = request.getParameter("content");
+        contactService.begin();
+        int rs = contactService.insertContact(new Contact(-1, firstname, lastname, phone, email, 0, content,null,null));
+        contactService.commit();
+        request.getRequestDispatcher("/WEB-INF/view/ThankYou.jsp").forward(request, response);
+
     }
 }
