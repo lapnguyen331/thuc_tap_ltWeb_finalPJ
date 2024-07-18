@@ -87,6 +87,7 @@
         src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v18.0" nonce="Qoebijhj">
 </script>
 <script src="${pageContext.request.contextPath}/js/login-page_v06.js"></script>
+<script src="${pageContext.request.contextPath}/js/login-validation.js"></script>
 <script src="${pageContext.request.contextPath}/libs/swiper/swiper-bundle.min.js"></script>
 </body>
 </html>

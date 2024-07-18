@@ -192,7 +192,7 @@ public class Product implements Serializable {
 
     public String getStringDayCreateAt() {
         return String.format("%s-%s-%s", this.getCreateAt().getDayOfMonth(),
-                this.getCreateAt().getMonthValue() + 1,
+                this.getCreateAt().getMonthValue(),
                 this.getCreateAt().getYear());
     }
 

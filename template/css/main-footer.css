@@ -1,0 +1,240 @@
+#main-footer-section {
+    background-image: url('../inventory/images/footer-bg.jpg');
+    background-size: cover;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+    position: relative;
+    font-family: 'Segoe UI';
+}
+
+/* Override Bootstrap default margin and padding */
+#main-footer-section * {
+    padding: 0;
+    margin: 0;
+}
+
+
+/* Reuse Components */
+#main-footer-section .contact-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+#main-footer-section .contact-wrap + .contact-wrap {
+    margin-top: 10px;
+}
+
+#main-footer-section .contact-wrap i {
+    color: var(--wheat-color);
+}
+
+/* Footer Guide */
+#main-footer-section .footer-guide {
+    min-height: 300px;
+    width: 85%;
+    box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.25);
+    display: grid;
+    grid-template-columns: 1.5fr 2fr 1fr;
+    padding: 20px;
+    padding-top: 0;
+    align-items: stretch;
+}
+
+#main-footer-section .footer-guide .guide-title {
+    padding: 20px 10px;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    box-shadow: 0 1px 0 0 rgb(0 0 0 / 12%);
+    border-bottom: 1px solid var(--red-light-color-main);
+    align-self: center;
+}
+
+
+#main-footer-section .footer-guide .guide-content {
+    height: 300px;
+    color: white;
+    font-family: 'Segoe UI';
+    font-weight: 300;
+    padding: 20px 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#main-footer-section .footer-guide .guide-content::-webkit-scrollbar {
+    width: 0px;
+}
+
+#main-footer-section .footer-guide .guide-content:hover::-webkit-scrollbar {
+    width: 5px;
+    background-color: #ff9d9d39;
+    border-radius: 10px;
+}
+
+#main-footer-section .footer-guide .guide-content::-webkit-scrollbar-thumb {
+    background-color: var(--red-color-main);
+    border-radius: 10px;
+}
+
+#main-footer-section * .guide-content + .guide-content {
+    border-left: 1px solid var(--red-light-color-main);
+    box-shadow: -4px 0 0px -3px rgb(0 0 0 / 12%);
+}
+
+#main-footer-section .footer-guide .guide-content strong {
+    margin: 10px 0;
+    display: inline-block;
+}
+
+#main-footer-section .footer-guide .guide-content strong:first-child {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+#main-footer-section .footer-guide .guide-content .address-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#main-footer-section .footer-guide .guide-content .address-list .address {
+    display: flex;
+    align-items: start;
+    gap: 10px;
+}
+
+#main-footer-section .footer-guide .guide-content .address-list .address::before {
+    content: '\f3c5';
+    color: var(--wheat-color);
+    font-weight: bold;
+    font-family: 'Font Awesome 6 Free';
+    padding-top: 3px;
+}
+
+/* Danh mục sản phẩm */
+#main-footer-section .footer-guide .guide-content .portfolio-product {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#main-footer-section * .portfolio-product+.portfolio-product {
+    margin-top: 15px;
+}
+
+#main-footer-section .footer-guide .guide-content .portfolio-product .product-name {
+    min-width: 100%;
+}
+
+#main-footer-section .footer-guide .guide-content .portfolio-product .product-name a {
+    color: white;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+#main-footer-section .footer-guide .guide-content .portfolio-product .product-img {
+    position: relative;
+    min-width: 30px;
+    min-height: 30px;
+}
+
+#main-footer-section .footer-guide .guide-content .portfolio-product .product-img::after {
+    content: url('../inventory/images/polygon-2.svg');
+    position: absolute;
+    top: -2px;
+    left: -2px;
+}
+
+
+#main-footer-section .footer-guide .guide-content .portfolio-product .product-img img {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+/* Kết thúc Footer Guide */
+
+/* Footer Contact */
+#main-footer-section .footer-contact {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1.5fr 2fr 1fr;
+    width: 85%;
+    padding: 0px 20px;
+    row-gap: 30px;
+    color: white;
+    font-weight: 300;
+}
+
+#main-footer-section .footer-contact .contact-title {
+    color: white;
+    font-weight: bold;
+}
+
+#main-footer-section .footer-contact .contact-title .title-list {
+    list-style: none;
+    display: flex;
+}
+
+#main-footer-section * .title-list .title-item+.title-item {
+    padding-left: 10px;
+    border-left: 1px white solid;
+    margin-left: 10px;
+}
+
+#main-footer-section .footer-contact .contact-title strong {
+    text-transform: uppercase;
+}
+
+#main-footer-section .footer-contact .contact-content .contact-info-wrapper {
+    display: flex;
+}
+
+#main-footer-section .footer-contact .contact-content .contact-info-wrapper .img-logo img {
+    width: 70px;
+}
+
+#main-footer-section .footer-contact .contact-content .contact-info-wrapper .info-text {
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+#main-footer-section .footer-contact .contact-content .intro-wrapper {
+    display: flex;
+    gap: 20px;
+}
+
+#main-footer-section .footer-contact .contact-content .intro-wrapper .intro-col {
+    display: flex;
+    flex-direction: column;
+}
+
+#main-footer-section .footer-contact .contact-content .intro-wrapper .intro-col a {
+    text-decoration: none;
+    color: white;
+}
+/* Kết thúc Footer Contact */
+
+/* Footer copyright */
+#main-footer-section .copy-right {
+    margin-top: 40px;
+    width: 100%;
+    text-align: center;
+    background-color: var(--red-color-main);
+}
+
+#main-footer-section .copy-right span {
+    display: block;
+    padding: 15px 0;
+    color: white;
+    font-weight: 300;
+}

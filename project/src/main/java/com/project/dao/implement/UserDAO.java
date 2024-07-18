@@ -48,7 +48,7 @@ public class UserDAO extends AbstractDAO<User> implements IUserDAO {
                 " ON u.avatar = i.id" +
                 " WHERE u.id = :id";
         var rs = query(SELECT, User.class, (query -> {
-            query.define("columns", " u.*,i.id,i.path")
+            query.define("columns", " u.*,i.id, i.path")
                     .define("table1", "users")
                     .define("table2", "images")
                     .bind("id", id);
@@ -197,6 +197,55 @@ public class UserDAO extends AbstractDAO<User> implements IUserDAO {
                 birth,
                 email,
                 Optional.ofNullable(new User().getUpdateAt()).orElse(LocalDateTime.now())
+        );
+        List<String> con = new ArrayList<>();
+        for (int i = 0; i < keys.size(); i++) {
+            con.add(keys.get(i)+ "='" +values.get(i)+"'");
+        }
+        final String UPDATE = "UPDATE <table> SET <values> WHERE id = <col1>";
+        return update(UPDATE, (update ->  {
+            update.define("table", "users")
+                    .define("col1",id)
+                    .define("values", String.join(", ", con));
+        }));
+    }
+
+    @Override
+    public List<User> getAllCustomer() {
+        final String SELECT = "SELECT <columns> FROM <table1> u LEFT JOIN <table2> i " +
+                " ON u.avatar = i.id  where u.levelAccess =0";
+        return query(SELECT, User.class, (query -> {
+            query.define("columns", "u.*, i.path")
+                    .define("table1", "users")
+                    .define("table2", "images");
+        }), new UserRowMapper("u"), new ImageRowMapper("i"));
+    }
+
+    @Override
+    public int updateCusIfor(int id, String username, String firstname, String lastname, String email, String phone, String address, String gender, String birth, String status) {
+        var keys = Arrays.asList(
+                "username",
+                "firstName",
+                "lastName",
+                "gender",
+                "address",
+                "phone",
+                "birth",
+                "email",
+                "updateAt",
+                "status"
+        );
+        var values = Arrays.asList(
+                username,
+                firstname,
+                lastname,
+                gender,
+                address,
+                phone,
+                birth,
+                email,
+                Optional.ofNullable(new User().getUpdateAt()).orElse(LocalDateTime.now()),
+                status
         );
         List<String> con = new ArrayList<>();
         for (int i = 0; i < keys.size(); i++) {

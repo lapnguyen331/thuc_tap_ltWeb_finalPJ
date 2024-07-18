@@ -17,7 +17,7 @@ public class CategoryService extends AbstractService {
         this.categoryDAO = FactoryDAO.getDAO(handle, FactoryDAO.DAO_CATEGORY);
     }
 
-    public CategoryService(Handle handle, ICategoryDAO dao) {
+    public CategoryService(Handle handle) {
         super(handle);
         this.categoryDAO = FactoryDAO.getDAO(handle, FactoryDAO.DAO_CATEGORY);
     }

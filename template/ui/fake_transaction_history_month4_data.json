@@ -1,0 +1,47 @@
+{
+  "draw": 2,
+  "recordsTotal": 57,
+  "recordsFiltered": 57,
+    "data": [
+      {
+        "transactionId": "xxx",
+        "productId": "xxx",
+        "changeType": "THEM_HANG",
+        "productName": "This is a very long product name with fully description, Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quos enim ducimus minima ea iusto velit laudantium est, iste inventore nobis, at aliquam adipisci magni voluptas maxime. Exercitationem, quaerat optio.",
+        "dateTime": "22 - 04 - 2024",
+        "change": 22,
+        "inStocks": 61,
+        "note": "Nhập thêm hàng vào lô tháng 4 Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quos enim ducimus minima ea iusto velit laudantium est, iste inventore nobis, at aliquam adipisci magni voluptas maxime. Exercitationem, quaerat optio."
+      },
+      {
+        "transactionId": "xxx",
+        "productId": "xxx",
+        "changeType": "THEM_HANG",
+        "productName": "This is a very long product name with fully description, Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quos enim ducimus minima ea iusto velit laudantium est, iste inventore nobis, at aliquam adipisci magni voluptas maxime. Exercitationem, quaerat optio.",
+        "dateTime": "22 - 04 - 2024",
+        "change": 22,
+        "inStocks": 61,
+        "note": "Nhập thêm hàng vào lô tháng 4 Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quos enim ducimus minima ea iusto velit laudantium est, iste inventore nobis, at aliquam adipisci magni voluptas maxime. Exercitationem, quaerat optio."
+      },
+      {
+        "transactionId": "xxx",
+        "productId": "xxx",
+        "changeType": "THEM_HANG",
+        "productName": "This is a very long product name with fully description, Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quos enim ducimus minima ea iusto velit laudantium est, iste inventore nobis, at aliquam adipisci magni voluptas maxime. Exercitationem, quaerat optio.",
+        "dateTime": "22 - 04 - 2024",
+        "change": 22,
+        "inStocks": 61,
+        "note": "Nhập thêm hàng vào lô tháng 4 Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quos enim ducimus minima ea iusto velit laudantium est, iste inventore nobis, at aliquam adipisci magni voluptas maxime. Exercitationem, quaerat optio."
+      },
+      {
+        "transactionId": "xxx",
+        "productId": "xxx",
+        "changeType": "THEM_HANG",
+        "productName": "This is a very long product name with fully description, Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quos enim ducimus minima ea iusto velit laudantium est, iste inventore nobis, at aliquam adipisci magni voluptas maxime. Exercitationem, quaerat optio.",
+        "dateTime": "22 - 04 - 2024",
+        "change": 22,
+        "inStocks": 61,
+        "note": "Nhập thêm hàng vào lô tháng 4 Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quos enim ducimus minima ea iusto velit laudantium est, iste inventore nobis, at aliquam adipisci magni voluptas maxime. Exercitationem, quaerat optio."
+      }
+    ]
+  }

@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
-@WebServlet(name = "SearchServlet", value = "/checkout")
+@WebServlet(name = "CheckoutServlet", value = "/checkout")
 public class CheckoutServlet extends HttpServlet {
     private OrderService orderService;
     private ProductService productService;
@@ -39,9 +39,10 @@ public class CheckoutServlet extends HttpServlet {
         String receiverLastName = request.getParameter("receiverLastName");
         String receiverPhone = request.getParameter("receiverPhone");
         String receiverEmail = request.getParameter("receiverEmail");
+        String receiverAddress = request.getParameter("receiverAddress");
         User user = (User) request.getSession(false).getAttribute("user");
         Cart cart = (Cart) request.getSession(false).getAttribute("cart");
-        Order order = new Order(-1, user, 0f, 1, receiverFirstName, receiverLastName, receiverPhone, receiverEmail, null, null);
+        Order order = new Order(-1, user, 0f, 1, receiverFirstName +" "+receiverLastName, receiverAddress, receiverPhone, receiverEmail, null, null);
         String responseMessage = "Đặt đơn hàng thành công!";
         try {
             orderService.begin();

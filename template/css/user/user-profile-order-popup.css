@@ -1,0 +1,52 @@
+/* đánh giá sp */
+.service-rating{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.rating-wrapper .raing-comment{
+    display: flex;
+    flex-direction: column;
+    height: 90px;
+}
+.rating-wrapper .raing-comment textarea{
+    height: 95%;
+}
+
+/* khiếu nại sp */
+.complaint-tittle{
+    font-size: 16px;
+}
+.complaint-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+.complaint-customer-infor{
+    margin-bottom: 20px;
+}
+.complaint-customer-infor{
+    display: flex;
+    flex-direction: row;
+}
+.label-left,.in-infor-right{
+    display: flex;
+    flex-direction: column;
+}
+.label-left label, .in-infor-right input {
+    margin-bottom: 10px;
+}
+.label-left label {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.in-infor-right input {
+    width: 300px;
+}
+.complaint-comment{
+    display: flex;
+    flex-direction: column;
+    height: 90px;
+}
+complaint-comment textarea{
+    height: 95%;
+}

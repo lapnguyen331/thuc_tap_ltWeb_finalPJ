@@ -1,0 +1,40 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+*::selection {
+    background-color: var(--red-color-main);
+    color: var(--wheat-color);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('../inventory/images/body-background_1.jpg');
+    background-repeat: repeat;
+}
+
+:root {
+    --red-color-main: #bf1e2e;
+    --red-light-color-main: #bd303d;
+    --red-dark-color-main: #940e11;
+    --gray-color: #d4d4d4;
+    --wheat-color: #f0ad4e;
+    --bisque-color: #e7dccc;
+}
+.bg-primary-red-main-color {
+    background-color: var(--red-color-main) !important;
+}
+
+.text-wheat-color {
+    color: var(--wheat-color) !important;
+}
+
+.text-primray-red-color-main {
+    color: var(--red-color-main) !important;
+}
+
+.bg-primary-bisque {
+    background-color: #fffcf5 !important;
+}

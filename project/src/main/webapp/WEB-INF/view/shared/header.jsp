@@ -45,7 +45,8 @@
                                         <div class="shadow">
                                             <ul>
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/user-profile" class="d-flex text-decoration-none align-items-baseline gap-2">
+                                                    <c:set var="link" value="${pageContext.request.contextPath}/${(sessionScope.user.levelAccess > 0) ? 'admin/product' : 'user-profile'}"/>
+                                                    <a href="${link}" class="d-flex text-decoration-none align-items-baseline gap-2">
                                                         <i class="fa-solid fa-circle-user"></i>
                                                         <span>Trang cá nhân</span>
                                                     </a>

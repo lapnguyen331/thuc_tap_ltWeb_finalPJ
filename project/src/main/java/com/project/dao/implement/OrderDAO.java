@@ -96,4 +96,15 @@ public class OrderDAO extends AbstractDAO<Order> implements IOrderDAO {
         }, new OrderRowMapper("od"), new UserRowMapper("c"));
     }
 
+    @Override
+    public List<Order> getAllOrder() {
+        final String SELECT = "SELECT <columns> FROM <table1> od JOIN <table2> u ON" +
+                " od.userId = u.id where u.levelAccess=0 ORDER BY od.createAt desc";
+        return query(SELECT, Order.class, query -> {
+            query.define("table1", "orders")
+                    .define("table2", "users")
+                    .define("columns", "od.*, u.*");
+        }, new OrderRowMapper("od"), new UserRowMapper("u"));
+    }
+
 }

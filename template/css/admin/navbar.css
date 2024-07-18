@@ -1,0 +1,47 @@
+#navbar-header {
+    background-color: #dddd;
+    width: calc(100% - 260px);
+    display: flex;
+    justify-content: space-between;
+    z-index: 5;
+    position: sticky;
+    top: 0;
+    left: 260px;
+    transition: all .5s ease;
+}
+
+#navbar-header.close {
+    width: calc(100% - 78px);
+    left: 78px;
+}
+
+#navbar-header .left-side {
+    display: flex;
+    align-items: center;
+}
+
+#navbar-header .right-side .avatar-wrap {
+    min-width: 100px;
+    background-color: var(--red-color-main);
+    padding: 12px;
+    display: flex;
+    color: var(--wheat-color);
+    align-items: center;
+    font-weight: 500;
+    gap: 10px;
+    cursor: pointer;
+}
+
+#navbar-header .right-side .avatar-wrap img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+#navbar-header .right-side .avatar-wrap .username::after {
+    font-family: 'Font Awesome 6 Free';
+    content: '\f078';
+    font-weight: bold;
+    margin-left: 10px;
+    font-size: 12px;
+}

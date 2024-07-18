@@ -31,7 +31,7 @@
 <%@ include file="/WEB-INF/view/shared/header.jsp" %>
 <section id="checkout-section">
     <div class="container">
-        <form action="checkout" method="post" id="checkout-form">
+        <form action="checkout" method="post" id="checkout-form" onsubmit="return validateCheckoutForm();">
             <div class="row">
                 <div class="col-md-12 d-flex justify-content-between px-3 py-3">
                     <div class="checkout-info-wrap">
@@ -61,6 +61,9 @@
                                 <div class="txt-field note-txt-field">
                                     <label for="txt-note">Thông tin bổ sung (tùy chọn):</label>
                                     <textarea name="note" id="txt-note" rows="5" placeholder="Ghi chú về đơn hàng, ví dụ: thời gian hay chỉ dẫn địa điểm giao hàng chi tiết hơn"></textarea>
+                                </div>
+                                <div class="d-flex justify-content-center" id="checkout-status">
+                                    <div class="text-danger fw-bold"></div>
                                 </div>
                             </div>
                         </div>
@@ -203,7 +206,8 @@
         src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v18.0" nonce="Qoebijhj">
 </script>
 <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
-<script src="${pageContext.request.contextPath}/js/checkout.js?v2"></script>
+<script src="${pageContext.request.contextPath}/js/checkout-validation.js"></script>
+
 
 <script src="${pageContext.request.contextPath}/libs/mdb-bootstrap-5-pro/js/mdb.min.js"></script>
 </body>

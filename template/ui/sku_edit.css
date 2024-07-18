@@ -1,0 +1,85 @@
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    position: relative;
+    height: 1200px;
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+#sku_edit.main {
+    background-image: url(https://thumbs.dreamstime.com/b/ear-malt-corn-wheat-seamless-pattern-repeating-fiber-repeated-whole-grains-spikelet-shape-design-prints-ears-golden-agriculture-273440654.jpg);
+    background-size: 200px;
+    width: calc(100% - 78px);
+    left: 78px;
+    height: inherit;
+    position: relative;
+    padding-top: 20px;
+    padding-left: 60px;
+    padding-right: 20px;
+}
+
+#sku_edit.main>.body {
+    background-color: #EBEBEB;
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#sku_edit.main>.body>.content {
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 100%;
+}
+
+#sku_edit.main>.body>.content>.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+#sku_edit.main>.body>.content>.overview {
+    display: flex;
+    gap: 20px;
+    box-shadow: 2px 6px 7px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    margin-top: 15px;
+}
+
+#sku_edit.main>.body>.content>.overview>.square {
+    width: 100%;
+    background-color: #F5F5F5;
+    aspect-ratio: 1/1;
+}
+
+#sku_edit.main-header {
+    height: 100px;
+    width: 100%;
+    background-color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    left: 0;
+    box-shadow:2px 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+.side-bar {
+    background-color: #FF2424;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    box-shadow:5px 0px 10px rgba(0, 0, 0, 0.3)
+}
+
+.side-bar.open {
+    width: 260px;
+}
+
+.side-bar.close {
+    width: 78px;
+}

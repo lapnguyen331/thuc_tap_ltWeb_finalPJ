@@ -1,0 +1,57 @@
+#profile-user-notify-modify{
+    display: contents;
+}
+.user-notify-modify-wrapper{
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0;
+    justify-content: space-around;
+}
+
+.notify-modify-left{
+
+}
+.notify-modify-label{
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+.notify-modify-label .nottify-midify-des{
+    font-size: .875rem;
+    line-height: 1.25rem;
+    color: #999;
+}
+.notify-modify-label label{
+    font-size: 17px;
+    line-height: 1.5rem;
+    color: #333;
+    margin-bottom: 4px;
+    padding: 0 5px;
+}
+.notify-modify-right{
+
+}
+.notify-modify-tickbox{
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.notify-modify-tickbox input[type='checkbox']{
+    height: 20px;
+    width: 20px;
+}
+.notify-modify-tickbox input[type='checkbox']::before{
+    background: #ee4d2d;
+    border-color: #ee4d2d;
+}
+.notify-modify-tickbox input[type='checkbox']::after{
+
+}
+.notify-modify-tickbox span{
+    font-size: 17px;
+    font-weight: 400;
+}
