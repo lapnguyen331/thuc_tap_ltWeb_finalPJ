@@ -13,4 +13,5 @@ import java.time.LocalDateTime;
 public class WSUserRequestDTO {
     String action;
     String data;
+    String target;
 }

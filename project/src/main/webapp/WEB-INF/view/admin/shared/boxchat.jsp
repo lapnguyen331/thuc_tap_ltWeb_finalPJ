@@ -6,13 +6,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/stylesheet/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/stylesheet/fontawesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/libs/mdb-bootstrap-5-pro/plugins/css/drag-and-drop.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/boxchat.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/boxchat.css?v=2">
 </head>
 <div
         style="
@@ -24,65 +25,36 @@
           left: 50%;
           transform: translate(-20%, -20%);
         "
-        class="draggable-element"
+        class="draggable-element d-none"
         data-mdb-draggable-init
 >
     <div class="center" class="shadow-3">
-        <div class="contacts d-none">
-            <i class="fas fa-bars fa-2x"></i>
-            <h2>Contacts</h2>
-            <div class="contact-wrap empty">
-                <div class="empty-placeholder">
-                    <i class="fa-regular fa-envelope"></i>
-                    <span class="msg">Danh sách chat đang trống.</span>
-                </div>
-                <div class="contact">
-                    <div class="pic rogers"></div>
-                    <div class="badge">14</div>
-                    <div class="name">Steve Rogers</div>
-                    <div class="message">That is America's ass 🇺🇸🍑</div>
-                </div>
-                <div class="contact">
-                    <div class="pic stark"></div>
-                    <div class="name">Tony Stark</div>
-                    <div class="message">
-                        Uh, he's from space, he came here to steal a necklace from a
-                        wizard.
+        <div class="contacts">
+            <div class="d-flex flex-column h-100">
+                <div class="d-flex gap-2 mb-2 align-items-center justify-content-between">
+                    <div class="fw-semibold fs-5">Lịch sử chat</div>
+                    <div class="bg-success" id="searchButton" style="padding: 5px 10px; border-radius: 10px; color: white">
+                        <i class="fas fa-search fa-1x"></i>
                     </div>
                 </div>
-                <div class="contact">
-                    <div class="pic banner"></div>
-                    <div class="badge">1</div>
-                    <div class="name">Bruce Banner</div>
-                    <div class="message">
-                        There's an Ant-Man *and* a Spider-Man?
-                    </div>
-                </div>
-                <div class="contact">
-                    <div class="pic thor"></div>
-                    <div class="name">Thor Odinson</div>
-                    <div class="badge">3</div>
-                    <div class="message">I like this one</div>
-                </div>
-                <div class="contact">
-                    <div class="pic danvers"></div>
-                    <div class="badge">2</div>
-                    <div class="name">Carol Danvers</div>
-                    <div class="message">
-                        Hey Peter Parker, you got something for me?
+                <hr>
+                <div class="contact-wrap empty">
+                    <div class="empty-placeholder">
+                        <i class="fa-regular fa-envelope"></i>
+                        <span class="msg">Lịch sử chat đang trống.</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="chat d-none empty">
+        <div class="chat empty">
             <div class="empty-placeholder">
                 <i class="fa-regular fa-comments fs-1"></i>
-                <div class="msg">Chưa có tin nhắn nào mới</div>
+                <div class="msg">Vui lòng chọn user muốn chat</div>
             </div>
             <div class="contact bar">
                 <div class="pic stark"></div>
                 <div class="name d-flex justify-content-between">
-                    Tony Stark
+                    <span class="text">Tony Stark</span>
                     <span
                             class="fw-bold text-danger fs-4"
                             id="close_btn"
@@ -94,19 +66,19 @@
             </div>
             <div class="messages" id="chat">
                 <div class="time">Today at 11:41</div>
-                <div class="message parker">
+                <div class="message me">
                     Hey, man! What's up, Mr Stark? 👋
                 </div>
-                <div class="message stark">Kid, where'd you come from?</div>
-                <div class="message parker">Field trip! 🤣</div>
-                <div class="message parker">
+                <div class="message target">Kid, where'd you come from?</div>
+                <div class="message me">Field trip! 🤣</div>
+                <div class="message me">
                     Uh, what is this guy's problem, Mr. Stark? 🤔
                 </div>
-                <div class="message stark">
+                <div class="message target">
                     Uh, he's from space, he came here to steal a necklace from a
                     wizard.
                 </div>
-                <div class="message stark">
+                <div class="message target">
                     <div class="typing typing-1"></div>
                     <div class="typing typing-2"></div>
                     <div class="typing typing-3"></div>
@@ -117,6 +89,43 @@
                 <i class="fa-regular fa-paper-plane"></i>
             </div>
         </div>
+    </div>
+</div>
+<div class="searchPane" style="position: fixed;
+    bottom: 0;
+    z-index: 2;
+    right: 20%;
+    width: 300px;
+    height: 400px;
+    border-radius: 10px;
+    transform:translate(0%, -20%);
+    box-shadow: 0 0 8rem 0 rgba(0, 0, 0, 0.1), 0rem 2rem 4rem -3rem rgba(0, 0, 0, 0.5);
+    background-color: #ffffff">
+    <div style="display: flex; width: 100%; justify-content: center; gap: 20px; padding: 10px 0px">
+        <div class="form-outline" style="width: 200px;">
+            <input type="text" class="form-control form-control-sm" />
+        </div>
+        <div class="bg-primary py-1 px-2 rounded text-white" style="cursor: pointer">
+            <i class="fa fa-search"></i>
+        </div>
+    </div>
+    <div class="bg-primary" style="height: 320px; overflow: auto">
+        <div>A</div>
+        <div>A</div>
+        <div>A</div>
+        <div>A</div>
+        <div>A</div>
+        <div>A</div>
+        <div>A</div>
+        <div>A</div>
+        <div>A</div>
+        <div>A</div>
+        <div>A</div>
+        <div>A</div>
+        <div>A</div>
+        <div>A</div>
+        <div>A</div>
+        <div>A</div>
     </div>
 </div>
 <div
@@ -151,17 +160,11 @@
 <script src="${pageContext.request.contextPath}/libs/mdb-bootstrap-5-pro/plugins/js/drag-and-drop.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 <script>
-    var chat = document.getElementById("chat");
-    chat.scrollTop = chat.scrollHeight - chat.clientHeight;
-
-    $("#boxchat-icon").on("click", function () {
-        $(".center .contacts").removeClass("d-none");
-        $(".center .chat").removeClass("d-none");
-        DragAndDrop.Draggable.getInstance($('.draggable-element').get(0)).resetPosition()
-    });
-    $("#close_btn").on("click", function () {
-        $(".center .contacts").addClass("d-none");
-        $(".center .chat").addClass("d-none");
-    });
+    var context = "${pageContext.request.contextPath}"
+    <c:if test="${not empty sessionScope.user}">
+        var userId = ${sessionScope.user.id}
+    </c:if>
+    var chooseId = undefined;
 </script>
+<script type="module" src="${pageContext.request.contextPath}/js/admin/chatbox.js?v=15"></script>
 </html>
