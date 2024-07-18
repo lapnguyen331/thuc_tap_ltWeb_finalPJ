@@ -21,6 +21,11 @@ public class LogFomatter {
         String formattedDateTime = log.getLogTime().format(formatter);
         return String.format("%s [%s] %s", formattedDateTime, log.getLevel(), log.getMessage());
     }
+    public static String createAtFormat() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = LocalDateTime.now().format(formatter);
+        return String.format( formattedDateTime);
+    }
 
     public static void main(String[] args) {
         LogService l = new LogService();
