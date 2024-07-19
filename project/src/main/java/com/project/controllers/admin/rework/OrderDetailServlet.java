@@ -1,11 +1,11 @@
-package com.project.controllers.admin;
+package com.project.controllers.admin.rework;
 
 import com.project.exceptions.NotEnoughQuantityException;
 import com.project.exceptions.NotFoundProductException;
 import com.project.models.Order;
 import com.project.models.OrderItem;
 import com.project.models.Product;
-import com.project.models_rework.log.Logger;
+import com.project.service_rework.StockKeepingService;
 import com.project.services.OrderItemService;
 import com.project.services.OrderService;
 import com.project.services.ProductService;
@@ -19,25 +19,25 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//@WebServlet(name = "OrderDetailsServlet", value = "/admin/order/*")
+@WebServlet(name = "OrderDetailsServlet", value = "/admin/order/*")
 public class OrderDetailServlet extends HttpServlet {
     private OrderService orderService;
     private UserService userService;
     private ProductService productService;
     private OrderItemService orderItemService;
+    private StockKeepingService stockKeepingService;
 
     public OrderDetailServlet() {
         this.orderService = new OrderService();
         this.userService = new UserService(orderService.getHandle());
         this.productService = new ProductService(orderService.getHandle());
         this.orderItemService = new OrderItemService(orderService.getHandle());
+        this.stockKeepingService = new StockKeepingService(orderService.getHandle());
     }
 
     @Override
@@ -67,8 +67,10 @@ public class OrderDetailServlet extends HttpServlet {
         var order = orderService.getOrderById(id);
         int userid = order.getUser().getId();
         var user = userService.getInforById(userid);
+        var orderDetailsHandle = stockKeepingService.getHandleOrderDetailsDTO(id);
         request.setAttribute("order", order);
         request.setAttribute("user", user);
+        request.setAttribute("handled", orderDetailsHandle);
         request.setAttribute("status", Arrays.asList("Hủy đơn hàng", "Đã giao", "Đang giao", "Đang trả về"));
         request.getRequestDispatcher("/WEB-INF/view/admin/order_details_update.jsp").forward(request, response);
     }
@@ -145,10 +147,6 @@ public class OrderDetailServlet extends HttpServlet {
             orderService.commit();
         } catch (NotFoundProductException e) {
             orderService.rollback();
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            e.printStackTrace(pw);
-            Logger.error(sw.toString());
             request.setAttribute("message", "Không tìm thấy sản phẩm");
             request.setAttribute("id", id);
             showUpdatePage(request, response);

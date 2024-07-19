@@ -133,4 +133,10 @@ public interface SKUHistoryDAO {
                 );
             """)
     SKUHistory getLatestHistoryByStockId(@Bind("stockId") Integer stockId);
+
+    @SqlQuery("""
+            SELECT * FROM sku_history
+            WHERE id = :id
+            """)
+    List<SKUHistory> getById_all(@Bind("id") Integer id);
 }
