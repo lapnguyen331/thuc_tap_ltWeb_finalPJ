@@ -3,6 +3,7 @@ package com.project.controllers;
 import com.project.exceptions.NotEnoughQuantityException;
 import com.project.exceptions.NotFoundProductException;
 import com.project.models.*;
+import com.project.models_rework.log.Logger;
 import com.project.services.OrderService;
 import com.project.services.ProductService;
 import jakarta.servlet.ServletException;
@@ -44,6 +45,7 @@ public class CheckoutServlet extends HttpServlet {
         Cart cart = (Cart) request.getSession(false).getAttribute("cart");
         Order order = new Order(-1, user, 0f, 1, receiverFirstName +" "+receiverLastName, receiverAddress, receiverPhone, receiverEmail, null, null);
         String responseMessage = "Đặt đơn hàng thành công!";
+        Logger.info("Order placed successfully ");
         try {
             orderService.begin();
             orderService.createOrder(cart.getProducts().values().stream().toList(), order);
