@@ -37,8 +37,7 @@
 </head>
 
 <body>
-
-<jsp:include page="/WEB-INF/view/shared/header.jsp"></jsp:include>
+<%@ include file="/WEB-INF/view/admin/shared/header.jsp" %>
 <%@ include file="/WEB-INF/view/admin/shared/sidebar.jsp" %>
 
 <section id="main-content-section">
