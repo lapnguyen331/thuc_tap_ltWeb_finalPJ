@@ -45,6 +45,12 @@ $(document).ready(function() {
                     return badget_level[data];
                 }
             },
+            {
+              "data":"ipAddress",
+                render:function(data,type,row){
+                    return data == null?"":data;
+                }
+            },
             { "data": "message" },
             { "data": "createAt",
                 render: function (data, type, row){

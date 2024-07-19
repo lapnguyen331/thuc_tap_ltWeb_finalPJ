@@ -14,4 +14,5 @@ public class Log {
     String level;
     String message;
     LocalDateTime logTime;
+    String ipAddress;
 }

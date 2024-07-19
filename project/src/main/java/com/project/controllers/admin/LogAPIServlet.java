@@ -1,10 +1,7 @@
 package com.project.controllers.admin;
 
-import com.project.models.Order;
 import com.project.models_rework.log.Log;
-import com.project.services.LogService;
-import com.project.services.OrderService;
-import com.project.services.UserService;
+import com.project.service_rework.LogService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -68,7 +65,7 @@ public class LogAPIServlet extends HttpServlet {
             json.put("level",u.getLevel());
             json.put("message",u.getMessage());
             json.put("createAt", u.getLogTime());
-
+            json.put("ipAddress",u.getIpAddress());
 //            json.put("status",u.getStatus()==1 ? "active":"deactive");
 //            json.put("note",u.getContent());
             objectArray.put(json);

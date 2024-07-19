@@ -21,9 +21,9 @@ import java.util.List;
 public interface LogDAO {
     @SqlUpdate("""
             INSERT INTO logs
-                (level, message,logTime)
+                (level, message,logTime,ipAddress)
             VALUES
-                (:level, :message,:logTime)
+                (:level, :message,:logTime,:ipAddress)
             """)
     @GetGeneratedKeys
     int insert(@BindBean Log log);

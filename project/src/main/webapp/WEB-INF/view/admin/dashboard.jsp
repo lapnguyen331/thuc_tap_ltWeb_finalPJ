@@ -168,6 +168,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Level</th>
+                                    <th>IP</th>
                                     <th>Message</th>
                                     <th>Create At</th>
                                     <th></th>
@@ -193,7 +194,7 @@
 
 
 
-<script src="${pageContext.request.contextPath}/js/admin/mapvisitor.js?v3"></script>
+<script src="${pageContext.request.contextPath}/js/admin/mapvisitor.js?v5"></script>
 
 <script src="${pageContext.request.contextPath}/libs/DataTables/datatables.min.js"></script>
 
