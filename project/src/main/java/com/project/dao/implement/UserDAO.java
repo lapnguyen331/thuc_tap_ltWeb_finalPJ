@@ -142,7 +142,7 @@ public class UserDAO extends AbstractDAO<User> implements IUserDAO {
         var values = Arrays.asList(
                 user.getUsername(),
                 user.getPassword(),
-                Optional.ofNullable(user.getAvatar()).map(Image::getId).orElse(1042),
+                Optional.ofNullable(user.getAvatar()).map(Image::getId).orElse(1851),
                 user.getLevelAccess(),
                 user.getFirstName(),
                 user.getLastName(),

@@ -15,9 +15,16 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/libs/flickity/flickity.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/details-product-template.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/libs/image-uploader/image-uploader.min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/dashboard.css?v1">
+
     <link rel="stylesheet" href="${pageContext.request.contextPath}/libs/DataTables/datatables.min.css">
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/dashboard.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main-style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/sidebar.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/navbar.css">
@@ -169,6 +176,11 @@
                             </table>
                         </div>
                     </div>
+<%--                    map visitor--%>
+                    <div id="map">
+                        <div id="container"></div>
+                    </div>
+
                 </main>
             </div>
     </div>
@@ -178,6 +190,11 @@
 <script src="${pageContext.request.contextPath}/libs/flickity/flickity.pkgd.min.js"></script>
 <script src="${pageContext.request.contextPath}/libs/suneditor-master/dist/suneditor.min.js"></script>
 <script src="${pageContext.request.contextPath}/libs/image-uploader/image-uploader.js"></script>
+
+
+
+<script src="${pageContext.request.contextPath}/js/admin/mapvisitor.js?v3"></script>
+
 <script src="${pageContext.request.contextPath}/libs/DataTables/datatables.min.js"></script>
 
 <script src="${pageContext.request.contextPath}/js/admin/data-log.js"></script>

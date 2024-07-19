@@ -9,10 +9,11 @@ import com.project.models.User;
 import com.project.services.UserService;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
+
 import jakarta.servlet.http.HttpSession;
 import org.apache.hc.client5.http.ClientProtocolException;
 import org.apache.hc.client5.http.fluent.Form;
@@ -26,6 +27,14 @@ import java.security.NoSuchAlgorithmException;
 @WebServlet(name = "LoginGoogleServlet", urlPatterns = {"/login-google"})
 public class LoginGoogleServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    public LoginGoogleServlet() {
+        super();
+    }
+    @Override
+    public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+        super.service(req, res);
+    }
+
     protected UserGoogleDTO processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String code = request.getParameter("code");
@@ -58,29 +67,13 @@ public class LoginGoogleServlet extends HttpServlet {
 
         return googlePojo;
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the +
-    // sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("vào được google session");
         doPost(request,response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -129,11 +122,12 @@ public class LoginGoogleServlet extends HttpServlet {
 //                      }
         }
 
-        }
+    }
 
     //trường hợp tài khoản đăng nhập bằng google chưa có trong database --> insert tk vào database
     protected void insertGoogleAccount(HttpServletRequest request, HttpServletResponse response,UserService userService,UserGoogleDTO usergog)
             throws ServletException, IOException {
+        System.out.println("insert vào data base");
         String username = usergog.getName();
         if (username == null) {
             username = usergog.exactUserNameGoogle(usergog.getEmail());
@@ -151,6 +145,7 @@ public class LoginGoogleServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
+
 
 }

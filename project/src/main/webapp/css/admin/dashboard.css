@@ -477,7 +477,27 @@ body{
     }
 
 }
+
+#map {
+    margin-top: 24px;
+    height: 600px;
+    width: 100%;
+}
+#container {
+    height: 500px;
+    min-width: 310px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.loading {
+    margin-top: 10em;
+    text-align: center;
+    color: grey;
+}
+
 .bottom-data{
     margin-bottom: 24px;
 }
 .log-data{width: 100%}
+
