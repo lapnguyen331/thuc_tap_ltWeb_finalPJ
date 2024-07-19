@@ -12,6 +12,7 @@ public class SKUHistory_Handle_Order {
     Integer skuHistoryId;
     Integer orderId;
     Integer productId;
+    Integer stockId;
     Float revenue;
     Integer quantity;
 }

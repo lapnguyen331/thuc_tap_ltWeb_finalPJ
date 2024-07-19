@@ -75,21 +75,6 @@ public class OrderAPI extends HttpServlet {
         out.flush();
     }
 
-    private void doGetOrderItemsUnHandled(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int orderId = Integer.parseInt(request.getParameter("id"));
-        Order order = orderService.getOrderById(orderId);
-        List<OrderItem> items = orderItemService.getOrderItemOf(order);
-        response.setContentType("application/json");
-        var out = response.getWriter();
-        JSONObject obj = new JSONObject();
-        obj.put("data", new JSONArray());
-        for (var item : items) {
-            obj.getJSONArray("data").put(getOrderItemJSON(item));
-        }
-        out.print(obj);
-        out.flush();
-    }
-
     private JSONObject getOrderItemJSON(OrderItem orderItem) {
         JSONObject obj = new JSONObject();
         obj.put("quantity", orderItem.getQuantity());

@@ -16,17 +16,18 @@ import java.util.List;
 
 public class OrderService extends AbstractService {
     public List<HandleOrderDetailsDTO> getHandleOrderDetailsDTO(Integer orderId) {
-        var productIds = handle.attach(OrderDetailsDAO.class)
-                .getById_productId(orderId);
+        var handles = handle.attach(SKUHistoryHandleOrderDetailsDAO.class)
+                .getByOrderId_orderId_productId_stockId(orderId);
         List<HandleOrderDetailsDTO> list = new ArrayList<>();
-        for (var id : productIds) {
+        for (var h : handles) {
+            Integer productId = h.getProductId();
+            Integer stockId = h.getStockId();
             var r = handle.attach(SKUHistoryHandleOrderDetailsDAO.class)
-                    .getByOrderIdAndProductId_all(orderId, id);
+                    .getByOrderIdAndProductIdAndStockId_all(orderId, productId, stockId);
             list.add(HandleOrderDetailsDTOMapper.INSTANCE.mapToDTO(handle, r));
         }
         return list;
-    }
-
+}
     public static void main(String[] args) {
         var instance = new OrderService();
         System.out.println(instance.getHandleOrderDetailsDTO(34));

@@ -119,7 +119,6 @@ $(document).ready(function() {
         });
     };
     const renderOrderItems = function() {
-        let price = 0;
         $('.products-range.requirement').html(``)
         for (let [id, quantity] of order_map.entries()) {
             const product = product_map.get(id);
@@ -152,7 +151,6 @@ $(document).ready(function() {
                 `
             $('.products-range.requirement').append(html);
         }
-        $('#total-price').text(formatCurrency(price))
         $('#order-items').val(JSON.stringify(mapToJSON()))
     };
 

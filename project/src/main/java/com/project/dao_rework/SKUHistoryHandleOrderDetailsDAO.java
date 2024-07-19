@@ -33,13 +33,26 @@ public interface SKUHistoryHandleOrderDetailsDAO {
                              @Bind("orderId") Integer orderId);
 
     @SqlQuery("""
-            SELECT * FROM sku_history_handle_order
+            SELECT DISTINCT orderId, productId, stockId FROM 
+                sku_history_handle_order
+            WHERE
+                orderId = :orderId
+            """)
+    @RegisterBeanMapper(SKUHistory_Handle_Order.class)
+    List<SKUHistory_Handle_Order> getByOrderId_orderId_productId_stockId(@Bind("orderId") Integer orderId);
+
+    @SqlQuery("""
+            SELECT * FROM 
+                sku_history_handle_order
             WHERE
                 orderId = :orderId
             AND
                 productId = :productId
+            AND
+                stockId = :stockId
             """)
     @RegisterBeanMapper(SKUHistory_Handle_Order.class)
-    List<SKUHistory_Handle_Order> getByOrderIdAndProductId_all(@Bind("orderId") Integer orderId,
-                                                               @Bind("productId") Integer productId);
+    List<SKUHistory_Handle_Order> getByOrderIdAndProductIdAndStockId_all(@Bind("orderId") Integer orderId,
+                                                               @Bind("productId") Integer productId,
+                                                                         @Bind("stockId") Integer stockId);
 }

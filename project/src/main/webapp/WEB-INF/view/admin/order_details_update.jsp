@@ -136,7 +136,6 @@
                                         <h6 class="form-title">Chọn sản phẩm từ lô hàng</h6>
                                         <div class="products-range from-sku">
                                         </div>
-                                        <h4 class="form-title">Tổng tiền: <span id="total-price">0</span>₫</h4>
                                         <hr class="horizontal">
                                         <div class="filter-input">
                                             <i class="fa-solid fa-magnifying-glass"></i>
