@@ -12,6 +12,7 @@ import com.project.exceptions.custom_exception.ProductException;
 import com.project.models_rework.Product;
 import com.project.models_rework.SKUHistory;
 import com.project.models_rework.StockKeeping;
+import com.project.models_rework.log.Logger;
 import com.project.service_rework.UploadService;
 import lombok.NoArgsConstructor;
 import org.jdbi.v3.core.Handle;
@@ -51,6 +52,7 @@ public abstract class SKURowDTOMapper {
         try {
             thumbnail_link = uploadService.getURL(thumbnail_path);
         } catch (Exception e) {
+            Logger.warning("load image from cloudinary failed");
             throw new MyServletException("Lỗi server khi cố lấy thông tin ảnh", 500);
         }
         return SKURowDTO.Product.builder()

@@ -1,6 +1,7 @@
 package com.project.controllers.admin;
 
 
+import com.project.models_rework.log.Logger;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -54,6 +55,10 @@ public class MapVisitorAPIServlet extends HttpServlet {
             return dataMap;
 
         } catch (IOException e) {
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            Logger.error(sw.toString());
             throw new RuntimeException("Error reading JSON file", e);
 
         }
@@ -82,6 +87,10 @@ public class MapVisitorAPIServlet extends HttpServlet {
                 out.write(data);
                 out.flush();
             } catch (IOException e) {
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+                Logger.error(sw.toString());
                 throw new RuntimeException(e);
             }
         }

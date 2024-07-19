@@ -3,6 +3,7 @@ package com.project.controllers;
 import com.project.exceptions.DuplicateInfoUserException;
 import com.project.models.Image;
 import com.project.models.User;
+import com.project.models_rework.log.Logger;
 import com.project.services.MailService;
 import com.project.services.UserService;
 import jakarta.mail.MessagingException;
@@ -55,6 +56,7 @@ public class SignUpServlet extends HttpServlet {
             birth = format.parse(request.getParameter("dob"));
         } catch (ParseException e) {
             responseMsg = "Xin lỗi hệ thống không thể định dạng ngày tháng năm vừa nhập";
+            Logger.warning(this.getClass().toString() +": can not fomat date-time");
             e.printStackTrace();
         }
         boolean verified = false;
@@ -63,6 +65,7 @@ public class SignUpServlet extends HttpServlet {
             user = new User(-1, username, User.hashPassword(password), null, levelAccess, firstName, lastName, gender, null, phone,
                     birth, status, email, verified, null, null, User.getUUID(), LocalDateTime.now());
         } catch (NoSuchAlgorithmException e) {
+            Logger.error(this.getClass().toString() +": lỗi sign up");
             throw new RuntimeException(e);
         }
         userService.begin();
@@ -72,14 +75,17 @@ public class SignUpServlet extends HttpServlet {
             user.setId(userId);
             MailService.sendMail("Xác minh tài khoản", getBaseURL(request)+"/activation?id="+user.getId()+"&token="+user.getToken(), email);
             responseMsg = String.format("Đăng kí tài khoản thành công, kiểm tra email %s để lấy mã xác minh", email);
+            Logger.info("new user register success id=" +userId);
         } catch (DuplicateInfoUserException e) {
             code = 300;
             responseMsg = e.getMessage();
             userService.rollback();
+            Logger.warning(this.getClass().toString() +" :can not create account, duplicate information");
             e.printStackTrace();
         } catch (MessagingException e) {
             code = 500;
             responseMsg = "Xảy ra lỗi trong quá trình gửi mã xác nhận, thử lại sau.";
+            Logger.error(this.getClass().toString()+" :can not sending varify mail");
             userService.rollback();
             e.printStackTrace();
         }

@@ -5,6 +5,7 @@ import com.project.exceptions.NotFoundProductException;
 import com.project.helpers.PropertiesFileHelper;
 import com.project.models.Image;
 import com.project.models.Product;
+import com.project.models_rework.log.Logger;
 import com.project.services.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,6 +18,8 @@ import org.json.JSONObject;
 
 import jakarta.servlet.annotation.MultipartConfig;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
@@ -158,6 +161,10 @@ public class ProductDetailServlet extends HttpServlet {
             request.setAttribute("message", "Thêm sản phẩm thành công");
             response.sendRedirect(request.getContextPath()+"/admin/product/detail/update?id="+id);
         } catch (IOException e) {
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            Logger.error(sw.toString());
             e.printStackTrace();
             imageService.rollback();
             request.setAttribute("message", "Có lỗi xảy ra trong quá trình thêm mới");
@@ -246,6 +253,10 @@ public class ProductDetailServlet extends HttpServlet {
             e.printStackTrace();
             imageService.rollback();
         } catch (NotFoundProductException e) {
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            Logger.error(sw.toString());
             throw new RuntimeException(e);
         }
         response.sendRedirect(request.getContextPath()+"/admin/product/detail/update?id="+id);

@@ -1,6 +1,7 @@
 package com.project.controllers;
 
 import com.project.models.User;
+import com.project.models_rework.log.Logger;
 import com.project.services.MailService;
 import com.project.services.UserService;
 import jakarta.mail.MessagingException;
@@ -45,6 +46,7 @@ public class ForgotPassServlet extends HttpServlet {
         String responseMsg = null;
         User user = userService.getUserByMail(email.trim());
         if(user == null){
+            Logger.warning("Email address not found");
             responseMsg = "không tồn tại email này trong hệ thống";
         }
         else {
@@ -63,6 +65,7 @@ public class ForgotPassServlet extends HttpServlet {
                 responseMsg = String.format("Đăng kí tài khoản thành công, kiểm tra email %s để lấy mã xác minh", email.trim());
             } catch (MessagingException | NoSuchAlgorithmException e) {
                 userService.rollback();
+                Logger.error(this.getClass().toString() +" : Email sending failed : email ='" + email.trim()+"'");
                 responseMsg = "gửi thất bại vui lòng thử lại sau ít phút";
             }
         }

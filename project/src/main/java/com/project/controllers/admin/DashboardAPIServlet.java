@@ -2,6 +2,7 @@ package com.project.controllers.admin;
 
 import com.project.models.Contact;
 import com.project.models.Order;
+import com.project.models_rework.log.Logger;
 import com.project.services.ContactService;
 import com.project.services.OrderService;
 import com.project.services.UserService;
@@ -15,6 +16,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 
 @WebServlet(name = "DashboardAPIServlet", urlPatterns = {"/admin/dashboardAPI"})
@@ -66,6 +69,10 @@ public class DashboardAPIServlet extends HttpServlet {
             out.write(data);
             out.flush();
         } catch (IOException e) {
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            Logger.error(sw.toString());
             throw new RuntimeException(e);
         }
 

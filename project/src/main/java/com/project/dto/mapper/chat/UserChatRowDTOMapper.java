@@ -4,6 +4,7 @@ import com.project.dao_rework.UserDAO;
 import com.project.dto.response.chat.UserChatRowDTO;
 import com.project.exceptions.custom_exception.MyServletException;
 import com.project.models_rework.Chat;
+import com.project.models_rework.log.Logger;
 import com.project.service_rework.UploadService;
 import org.jdbi.v3.core.Handle;
 import org.mapstruct.*;
@@ -44,6 +45,7 @@ public abstract class UserChatRowDTOMapper {
         try {
             link = upload.getURL(img.get(0).getPath());
         } catch (Exception e) {
+            Logger.warning("Upload image to cloudinary failed");
             throw new RuntimeException(e.getMessage());
         }
         return new UserChatRowDTO.Receiver(user.getId(), user.getUsername(), link);

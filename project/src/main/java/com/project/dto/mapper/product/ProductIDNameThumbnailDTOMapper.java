@@ -6,6 +6,7 @@ import com.project.dto.response.product.ProductIDNameThumbnailDTO;
 import com.project.exceptions.custom_exception.MyServletException;
 import com.project.models_rework.Category;
 import com.project.models_rework.Product;
+import com.project.models_rework.log.Logger;
 import com.project.service_rework.UploadService;
 import lombok.NoArgsConstructor;
 import org.jdbi.v3.core.Handle;
@@ -28,6 +29,7 @@ public abstract class ProductIDNameThumbnailDTOMapper {
         try {
             return uploadService.getURL(path);
         } catch (Exception e) {
+            Logger.warning("can not load image from cloudinary");
             throw new MyServletException("Lỗi server khi cố lấy thông tin ảnh", 500);
         }
     }

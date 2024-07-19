@@ -1,6 +1,7 @@
 package com.project.models_rework.log;
 
-import com.project.services.LogService;
+
+import com.project.service_rework.LogService;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;

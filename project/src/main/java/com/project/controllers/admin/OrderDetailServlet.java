@@ -5,6 +5,7 @@ import com.project.exceptions.NotFoundProductException;
 import com.project.models.Order;
 import com.project.models.OrderItem;
 import com.project.models.Product;
+import com.project.models_rework.log.Logger;
 import com.project.services.OrderItemService;
 import com.project.services.OrderService;
 import com.project.services.ProductService;
@@ -18,6 +19,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -142,6 +145,10 @@ public class OrderDetailServlet extends HttpServlet {
             orderService.commit();
         } catch (NotFoundProductException e) {
             orderService.rollback();
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            Logger.error(sw.toString());
             request.setAttribute("message", "Không tìm thấy sản phẩm");
             request.setAttribute("id", id);
             showUpdatePage(request, response);
