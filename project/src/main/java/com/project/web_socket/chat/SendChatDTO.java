@@ -1,4 +1,4 @@
-package com.project.web_socket;
+package com.project.web_socket.chat;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;

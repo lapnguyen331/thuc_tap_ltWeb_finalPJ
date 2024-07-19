@@ -28,4 +28,10 @@ public interface CategoryDAO {
             SELECT id, name, thumbnail FROM categories
             """)
     List<Category> getAll_id_name_thumbnail();
+
+    @SqlQuery("""
+            SELECT * FROM categories
+            WHERE id = :id
+            """)
+    List<Category> getById_All(@Bind("id") Integer id);
 }
