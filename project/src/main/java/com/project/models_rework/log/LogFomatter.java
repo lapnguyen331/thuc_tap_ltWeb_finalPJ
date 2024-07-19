@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 
 //định dạng log
 public class LogFomatter {
@@ -20,7 +21,7 @@ public class LogFomatter {
     public static String format(Log log) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formattedDateTime = log.getLogTime().format(formatter);
-        return String.format("%s [%s] %s", formattedDateTime, log.getLevel(), log.getMessage());
+        return String.format("%s [%s] [IP: %s] %s", formattedDateTime, log.getLevel(), log.getIpAddress(),log.getMessage());
     }
     public static String createAtFormat() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -30,8 +31,10 @@ public class LogFomatter {
 
     public static void main(String[] args) {
         LogService l = new LogService();
-        Logger.info("lỗi ở dòng 15");
-        System.out.println(format(l.getAll().get(0)));
-
+        Logger.warning("12.0.0.1","lỗi ở dòng này");
+        List<Log> em = l.getAll();
+        for(Log i : em){
+            System.out.println(format(i));
+        }
     }
 }

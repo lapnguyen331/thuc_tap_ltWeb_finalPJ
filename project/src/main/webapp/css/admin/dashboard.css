@@ -486,6 +486,7 @@ body{
 #container {
     height: 500px;
     min-width: 310px;
+
     max-width: 100%;
     margin: 0 auto;
 }
