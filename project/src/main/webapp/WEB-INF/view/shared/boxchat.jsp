@@ -13,13 +13,13 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/stylesheet/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/stylesheet/fontawesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/libs/mdb-bootstrap-5-pro/plugins/css/drag-and-drop.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/boxchat.css?v=5">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/boxchat.css?v=3">
 </head>
 <div
         style="
           width: 24rem;
           height: 38rem;
-          position: fixed;
+          position: absolute;
           z-index: 10;
           top: 5%;
           left: 50%;
@@ -147,5 +147,5 @@
     </c:if>
     var choosedUser = undefined;
 </script>
-<script type="module" src="${pageContext.request.contextPath}/js/admin/chatbox.js?v=19"></script>
+<script type="module" src="${pageContext.request.contextPath}/js/admin/chatbox.js?v=18"></script>
 </html>

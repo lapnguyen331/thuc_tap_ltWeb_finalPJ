@@ -477,6 +477,7 @@ body{
     }
 
 }
+
 #map {
     margin-top: 24px;
     height: 600px;
@@ -494,3 +495,9 @@ body{
     text-align: center;
     color: grey;
 }
+
+.bottom-data{
+    margin-bottom: 24px;
+}
+.log-data{width: 100%}
+

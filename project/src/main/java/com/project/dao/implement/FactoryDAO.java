@@ -15,7 +15,7 @@ public abstract class FactoryDAO {
     public static final Class<IRatingDAO> DAO_RATING = IRatingDAO.class;
     public static final Class<IContactDAO> DAO_CONTACT = IContactDAO.class;
     public static final Class<IProducerDAO> DAO_PRODUCER = IProducerDAO.class;
-    public static final Class<ILogDAO> DAO_LOG = ILogDAO.class;
+
     public static <T> T getDAO(Handle handle, Class<T> clazz) {
         if (clazz == DAO_PRODUCT) return (T) new ProductDAO(handle);
         else if (clazz == DAO_IMAGE) return (T) new ImageDAO(handle);
@@ -27,7 +27,6 @@ public abstract class FactoryDAO {
         else if (clazz == DAO_RATING) return (T) new RatingDAO(handle);
         else if (clazz == DAO_CONTACT) return (T) new ContactDAO(handle);
         else if (clazz == DAO_PRODUCER) return (T) new ProducerDAO(handle);
-        else if (clazz == DAO_LOG) return (T) new LogDAO(handle);
         return null;
     }
 }

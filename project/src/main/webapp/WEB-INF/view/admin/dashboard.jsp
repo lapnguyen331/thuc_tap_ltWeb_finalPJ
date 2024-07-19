@@ -22,6 +22,9 @@
     <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/dashboard.css?v1">
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/libs/DataTables/datatables.min.css">
+
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main-style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/sidebar.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/navbar.css">
@@ -147,6 +150,31 @@
                                     data-mdb-dataset-data="[2112, 2343, 2545, 3423, 2365, 1985, 987]"
                             ></canvas>
                         </div>
+
+                    </div>
+                    <%--logs --%>
+                    <div class="header">
+                        <div class="left">
+                            <h1>Báo cáo hệ thống</h1>
+                        </div>
+                    </div>
+                    <div class="bottom-data container mt-5">
+                        <div class="log-data">
+                            <div class="header">
+                                <h3>Báo cáo logs</h3>
+                            </div>
+                            <table id="logTable" class=" table  table-striped" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Level</th>
+                                    <th>Message</th>
+                                    <th>Create At</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
 <%--                    map visitor--%>
                     <div id="map">
@@ -164,7 +192,13 @@
 <script src="${pageContext.request.contextPath}/libs/image-uploader/image-uploader.js"></script>
 
 
+
 <script src="${pageContext.request.contextPath}/js/admin/mapvisitor.js?v3"></script>
+
+<script src="${pageContext.request.contextPath}/libs/DataTables/datatables.min.js"></script>
+
+<script src="${pageContext.request.contextPath}/js/admin/data-log.js"></script>
+
 <%--<script src="${pageContext.request.contextPath}/js/admin/modal.js"></script>--%>
 </body>
 

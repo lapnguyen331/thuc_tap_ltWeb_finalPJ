@@ -1,5 +1,6 @@
 'use strict';
 $(document).ready(function() {
+    let isConnected = false;
     let cart = $('#my-cart .cart-products');
     let toast = $('#message-toasts');
     let cartData;
@@ -16,6 +17,53 @@ $(document).ready(function() {
             }
         })
     }
+    let websocket = null;
+    $.ajax(`${window.context}/api/v1/web-socket`)
+        .then((resp) => {
+            websocket = new WebSocket(resp + "/cart");
+            websocket.onopen = function (message) {
+                processOpen(message);
+            };
+            websocket.onmessage = function (message) {
+                processMessage(message);
+            };
+            websocket.onclose = function (message) {
+                processClose(message);
+            };
+            websocket.onerror = function (message) {
+                processError(message);
+            };
+
+            function processOpen(message) {
+                isConnected = true;
+            }
+            function processMessage(message) {
+                console.log(message)
+                const obj = JSON.parse(message.data);
+                console.log('obj', obj)
+                switch (obj.action) {
+                    case "sync-change": {
+                        // console.log('cart', cartData)
+                        // cartData = obj.data[0]
+                        loadData();
+                        refreshCart();
+                        announce("Thông báo", "Thay đổi giỏ hàng thành công!")
+                        break;
+                    }
+                }
+            }
+
+            function processClose(message) {
+            }
+
+            function processError(message) {
+            }
+        })
+    function sendMessage(myMessage) {
+        if (typeof websocket != 'undefined' && websocket.readyState == WebSocket.OPEN) {
+            websocket.send(myMessage);
+        }
+    }
     $(document).on('click', '*[data-cart-product=true]', function(e) {
         const id = this.dataset.cartId;
         const quantity = this.dataset.cartAmount;
@@ -30,8 +78,14 @@ $(document).ready(function() {
                         quantity: quantity,
                     },
                     success: ({status, msg}) => {
-                        announce("Thông báo", msg)
-                        loadData();
+                        if (isConnected) {
+                            sendMessage(JSON.stringify({
+                                action: 'sync-change'
+                            }))
+                        }
+                        else {
+                            loadData();
+                        }
                     }
                 })
                 break;
@@ -45,8 +99,14 @@ $(document).ready(function() {
                         quantity: quantity,
                     },
                     success: ({status, msg}) => {
-                        announce("Thông báo", msg)
-                        loadData();
+                        if (isConnected) {
+                            sendMessage(JSON.stringify({
+                                action: 'sync-change'
+                            }))
+                        }
+                        else {
+                            loadData();
+                        }
                     }
                 })
                 break;
@@ -75,7 +135,7 @@ $(document).ready(function() {
                 <i class="fa-regular fa-trash-can"></i>
             </div>
             <div class="img-wrap border rounded d-flex align-items-center justify-content-center">
-                <img src="${window.context}/files/${product.thumbnail.path}" width="100%">
+                <img src="${product.thumbnail.path}" width="100%">
             </div>
             <div class="d-flex flex-column justify-content-center">
                 <div class="product-name">
