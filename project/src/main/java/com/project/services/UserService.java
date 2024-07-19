@@ -87,7 +87,7 @@ public class UserService extends AbstractService {
     }
     public static void main(String[] args) {
         var service = new UserService();
-//        System.out.println(service.getUserByName("root"));
+        System.out.println(service.getUserByMail("haudau124@gmail.com"));
 //        System.out.println(service.updateInfor(3,"up","up","up","up","up","up","0","2023-11-10"));
 //        try {
 //            String em = User.hashPassword("conga");
@@ -98,7 +98,11 @@ public class UserService extends AbstractService {
 //            throw new RuntimeException(e);
 //        }
 //        service.getAllCustomer().forEach(System.out::println);
-        System.out.println(service.getInforById(15));
+        try {
+            System.out.println(service.addNewGoogleUser("lap","hihi@gmail.com",0,"lap","imur"));
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -108,7 +112,7 @@ public class UserService extends AbstractService {
             username += cuuid;
         }
         //BUG :đang set mặc định tài khoản mới gender là true
-        User user =new User(-1, username, User.hashPassword("default"), null, levelAccess, firstName, null, true, null, null,
+        User user =new User(-1, username, User.hashPassword("default"), null, levelAccess, firstName, null, true, null, "",
                 null, 1, email, true, null, null, cuuid, LocalDateTime.now());
         return userDAO.insert(user);
 
