@@ -1,6 +1,8 @@
 
+
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,9 +32,13 @@
 <%@ include file="/WEB-INF/view/shared/cart.jsp" %>
 <main>
     <%@ include file="/WEB-INF/view/shared/header.jsp" %>
+
     <c:if test="${not empty sessionScope.user}">
         <%@ include file="/WEB-INF/view/admin/shared/boxchat.jsp" %>
     </c:if>
+
+
+
     <section id="home-slider-section">
         <!-- Slider main container -->
         <div class="swiper">
@@ -739,4 +745,6 @@
     }
 </script>
 </body>
+
 </html>
+
