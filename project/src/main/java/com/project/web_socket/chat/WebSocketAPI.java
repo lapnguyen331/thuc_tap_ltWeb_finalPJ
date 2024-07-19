@@ -1,4 +1,4 @@
-package com.project.web_socket;
+package com.project.web_socket.chat;
 
 import com.project.filters.RestResponseDTOApiFilter;
 import com.project.service_rework.ProducerService;

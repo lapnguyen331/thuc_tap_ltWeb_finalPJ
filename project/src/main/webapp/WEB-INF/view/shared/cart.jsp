@@ -25,7 +25,7 @@
                 <div class="bg-gold bg-sharp-5">
                     <button class="btn-moveTo" >
                         <a href="${pageContext.request.contextPath}/cart" >
-                            <span >Xem chi tiết giỏ hàng</span>
+                            <span>Xem chi tiết giỏ hàng</span>
                         </a>
                     </button>
                 </div>
@@ -58,4 +58,4 @@
     </div>
     <div class="toast-body">Static Example</div>
 </div>
-<script src="${pageContext.request.contextPath}/js/cart.js?v=03" defer></script>
+<script src="${pageContext.request.contextPath}/js/cart.js?v=09" defer></script>
