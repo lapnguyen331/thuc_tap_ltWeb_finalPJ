@@ -2,6 +2,7 @@ package com.project.controllers.admin;
 
 import com.project.models.Contact;
 import com.project.models.Order;
+import com.project.models_rework.log.Logger;
 import com.project.services.ContactService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,6 +14,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 
 @WebServlet(name = "ContactAdminServlet", urlPatterns = {"/admin/contactInform"})
@@ -46,6 +49,7 @@ public class ContactAdminServlet extends HttpServlet {
             out.write(data);
             out.flush();
         } catch (IOException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
 

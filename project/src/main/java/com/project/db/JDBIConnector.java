@@ -4,7 +4,6 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
@@ -21,7 +20,7 @@ public class JDBIConnector {
             dataSource.setUseCompression(true);
             dataSource.setAutoReconnect(true);
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+           throwables.printStackTrace();
             throw new RuntimeException(throwables);
         }
         jdbi = Jdbi.create(dataSource);

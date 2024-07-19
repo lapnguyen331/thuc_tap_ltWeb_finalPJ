@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main-style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/sidebar.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main-header.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/admin-orders-edit.css?v=5">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/admin-orders-new.css?v=5">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-override.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/datatables-override.css">
     <title>Quản lí sản phẩm</title>

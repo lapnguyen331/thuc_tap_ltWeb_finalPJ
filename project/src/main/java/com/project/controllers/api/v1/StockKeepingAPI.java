@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.project.dto.MessageDTO;
+import com.project.dto.request.order.ProcessOrderDetailsDTO;
 import com.project.dto.request.stock.ChangeInStockDTO;
 import com.project.dto.request.stock.NewStockKeepingDTO;
 import com.project.dto.request.stock.SelectIDsDTO;
@@ -14,6 +15,7 @@ import com.project.dto.response.stock.SKURowDTO;
 import com.project.exceptions.custom_exception.MyServletException;
 import com.project.filters.RestResponseDTOApiFilter;
 import com.project.filters.RestRequestBodyApiFilter;
+import com.project.service_rework.OrderService;
 import com.project.service_rework.StockKeepingService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -29,6 +31,7 @@ import java.util.List;
 @WebServlet(name = "StockKeeping_API", value = "/api/v1/stock-keeping/*")
 public class StockKeepingAPI extends HttpServlet {
     private StockKeepingService stockKeepingService;
+    private ObjectMapper mapper = new ObjectMapper();
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,7 +47,20 @@ public class StockKeepingAPI extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getPathInfo();
+        switch (action) {
+            case "/doGet-Handle-OrderDetails": {
+                doGet_Handle_OrderDetails(request, response);
+                break;
+            }
+        }
+    }
 
+    private void doGet_Handle_OrderDetails(HttpServletRequest request, HttpServletResponse response) {
+        Integer orderId = Integer.valueOf(request.getParameter("orderId"));
+        var service = new OrderService();
+        var dto = service.getHandleOrderDetailsDTO(orderId);
+        request.setAttribute(RestResponseDTOApiFilter.PUT_KEY, dto);
     }
 
     private void doGet_SKURowData(HttpServletRequest request, HttpServletResponse response) throws MyServletException {
@@ -110,7 +126,27 @@ public class StockKeepingAPI extends HttpServlet {
                     doGetSession_stockIds(request, response);
                     break;
                 }
+                case "/doAddNew-Handle-OrderDetails": {
+                    doAddNew_Handle_OrderDetails(request, response);
+                    break;
+                }
             }
+        }
+    }
+
+    private void doAddNew_Handle_OrderDetails(HttpServletRequest request, HttpServletResponse response) throws JsonProcessingException {
+        String json = request.getAttribute(RestRequestBodyApiFilter.PUT_KEY).toString();
+        ProcessOrderDetailsDTO dto = mapper.readValue(json, ProcessOrderDetailsDTO.class);
+        stockKeepingService.begin();
+        MessageDTO responseMessage = MessageDTO.builder().message("OK").build();
+        try {
+            if (stockKeepingService.insertHandleOrderDetails(dto) > 0) {
+                stockKeepingService.commit();
+                request.setAttribute(RestResponseDTOApiFilter.PUT_KEY, responseMessage);
+            }
+        } catch (Exception e) {
+            stockKeepingService.rollback();
+            throw e;
         }
     }
 
@@ -130,7 +166,6 @@ public class StockKeepingAPI extends HttpServlet {
 
     private void doUpdateSession_stockIds(HttpServletRequest request, HttpServletResponse response) throws JsonProcessingException {
         String json = request.getAttribute(RestRequestBodyApiFilter.PUT_KEY).toString();
-        ObjectMapper mapper = new ObjectMapper();
         SelectIDsDTO dto = mapper.readValue(json, SelectIDsDTO.class);
         HttpSession session = request.getSession(false);
         session.setAttribute("selectStockIDs", dto.getStockIds());

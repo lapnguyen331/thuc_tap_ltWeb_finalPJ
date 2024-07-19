@@ -1,7 +1,11 @@
 package com.project.controllers.admin;
 
 import com.project.models_rework.log.Log;
+
 import com.project.service_rework.LogService;
+
+import com.project.models_rework.log.Logger;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,6 +16,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 
 @WebServlet(name = "LogAPIServlet", urlPatterns = {"/admin/logAPI"})
@@ -77,6 +83,10 @@ public class LogAPIServlet extends HttpServlet {
             out.write(data);
             out.flush();
         } catch (IOException e) {
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            Logger.error(sw.toString());
             throw new RuntimeException(e);
         }
 

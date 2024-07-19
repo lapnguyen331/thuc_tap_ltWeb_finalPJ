@@ -2,6 +2,7 @@ package com.project.controllers;
 import com.project.exceptions.NotVerifiedException;
 import com.project.models.Cart;
 import com.project.models.User;
+import com.project.models_rework.log.Logger;
 import com.project.services.UserService;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
@@ -31,6 +32,7 @@ public class LoginServlet extends HttpServlet {
             //case cho phép admin đăng nhập qua tk và mk
             if(session.getAttribute("role").equals("0")){
                 System.out.println("admin -login");
+                Logger.info("admin login ");
                 response.sendRedirect("admin/product");
                 return;
             }
@@ -77,10 +79,12 @@ public class LoginServlet extends HttpServlet {
                     } catch (NoSuchAlgorithmException e) {
                         e.printStackTrace();
                         json.put("status", HttpServletResponse.SC_UNAUTHORIZED);
+                        Logger.warning(this.getClass().toString() +" : Fail login can not decode password");
                         msg = "Xảy ra lỗi, thử lại sau...";
                         break;
                     } catch (NotVerifiedException e) {
                         json.put("status", HttpServletResponse.SC_UNAUTHORIZED);
+                        Logger.warning(this.getClass().toString()+" : Fail login, unverified account login attempt userid = "+user.getId());
                         msg = "Tài khoản này chưa được xác minh, vui lòng kiểm tra lại email!";
                         break;
                     }
@@ -89,9 +93,11 @@ public class LoginServlet extends HttpServlet {
                         session.setAttribute("role", user.getLevelAccess()+"");
                         json.put("status", HttpServletResponse.SC_OK);
                         msg = "Đăng nhập thành công!";
+                        Logger.info("Login success user ="+ user.getId() );
                     }
                     else {
                         json.put("status", HttpServletResponse.SC_UNAUTHORIZED);
+                        Logger.warning("Incorrect password attempt: userid =" +user.getId());
                         msg = "Mật khẩu đăng nhập không đúng!";
                     }
                 }
@@ -101,6 +107,7 @@ public class LoginServlet extends HttpServlet {
                 session.removeAttribute("user");
                 session.removeAttribute("role");
                 json.put("status", HttpServletResponse.SC_OK);
+                Logger.info("User logged out");
                 msg = "Đăng xuất thành công";
             }
             break;

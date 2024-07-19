@@ -4,6 +4,7 @@ import com.project.dao_rework.ImageDAO;
 import com.project.dto.response.user.UserDetailsDTO;
 import com.project.exceptions.custom_exception.MyServletException;
 import com.project.models_rework.User;
+import com.project.models_rework.log.Logger;
 import com.project.service_rework.UploadService;
 import org.jdbi.v3.core.Handle;
 import org.mapstruct.Context;
@@ -29,6 +30,7 @@ public abstract class UserDTOMapper {
         try {
             link = service.getURL(avt.get(0).getPath());
         } catch (Exception e) {
+            Logger.warning("load image from cloudinary failed");
             throw new MyServletException("Lỗi xảy ra khi lấy hình ảnh", 500);
         }
         return link;

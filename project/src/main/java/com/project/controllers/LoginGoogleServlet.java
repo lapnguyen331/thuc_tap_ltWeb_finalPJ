@@ -6,6 +6,7 @@ import com.project.accessBySocial.google.Constants;
 import com.project.dto.UserGoogleDTO;
 
 import com.project.models.User;
+import com.project.models_rework.log.Logger;
 import com.project.services.UserService;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -82,6 +83,7 @@ public class LoginGoogleServlet extends HttpServlet {
         String msg = "";
         if (code == null || code.isEmpty()) {
             RequestDispatcher dis = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
+            Logger.warning(this.getClass().toString() +" : Failed login by google");
             dis.forward(request, response);
         }
         else {
@@ -108,11 +110,13 @@ public class LoginGoogleServlet extends HttpServlet {
                 // redirect to admin page
 //                        MyUtils.setUserRole(session, "Admin");
 //                response.sendRedirect("admin/profile");
+                Logger.info("Admin login by google success");
                 response.sendRedirect("home");
             } else if (role == 0) { //khách hàng
                 // redirect to home
 //                        MyUtils.setUserRole(session, "User");
                 System.out.println("vào dc kh");
+                Logger.info("User login by google success");
                 response.sendRedirect("home");
             }
 //                    else if (result.equals("Manager")) { //phát triển thêm các vai trò khác
@@ -136,6 +140,7 @@ public class LoginGoogleServlet extends HttpServlet {
             int count = userService.addNewGoogleUser(username, usergog.getEmail(), 0, usergog.getFamily_name(), usergog.getPicture()); //add tài khoản google vào db
         } catch ( NoSuchAlgorithmException e) {
             System.out.println("lỗi ko tạo được pass googleSignup");
+            Logger.error(this.getClass().toString() +": Password creation failed");
         }
     }
     /**

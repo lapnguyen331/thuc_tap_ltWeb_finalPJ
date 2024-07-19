@@ -7,6 +7,7 @@ import com.project.dao.implement.ImageDAO;
 import com.project.db.JDBIConnector;
 import com.project.db.JDBIConnector2;
 import com.project.models.*;
+import com.project.models_rework.log.Logger;
 import com.project.services.BlogService;
 import com.project.services.ImageService;
 import org.jdbi.v3.core.Handle;

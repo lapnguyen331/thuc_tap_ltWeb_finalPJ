@@ -5,6 +5,7 @@ import com.project.exceptions.AlreadyVerifiedException;
 import com.project.exceptions.DuplicateInfoUserException;
 import com.project.exceptions.NotFoundUserException;
 import com.project.models.User;
+import com.project.models_rework.log.Logger;
 import com.project.services.MailService;
 import com.project.services.UserService;
 import jakarta.mail.MessagingException;
@@ -49,6 +50,7 @@ public class ActivationServlet extends HttpServlet {
                 }
                 code = 300;
                 responseMsg = "Đã gửi lại mã xác nhận";
+                Logger.info("Sending verify mail success: userId = "+id);
                 request.setAttribute("code", code);
                 request.setAttribute("message", responseMsg);
                 request.setAttribute("userid", id);
@@ -61,9 +63,11 @@ public class ActivationServlet extends HttpServlet {
             if (!userService.validateToken(id, token)) {
                 code = 300;
                 responseMsg = "Mã xác minh không chính xác!";
+                Logger.warning("Incorrect verification code : userID" + id);
                 request.setAttribute("resend", true);
             }
             else
+                Logger.info("Account verification successful: userId " +id);
                 responseMsg = "Xác minh tài khoản thành công!";
         } catch (TimeoutException e) {
             var email = userService.getInforById(id).getEmail();
@@ -72,16 +76,20 @@ public class ActivationServlet extends HttpServlet {
                 userService.updateToken(id, newToken);
                 MailService.sendMail("Xác minh tài khoản", getBaseURL(request)+"/activation?id="+id+"&token="+newToken, email);
                 code = 300;
+                Logger.info("Sending verify mail success: mail ="+email);
                 responseMsg = "Mã xác minh của bạn đã hết hạn, đã gửi lại mã mới trong tài khoản email";
             } catch (MessagingException ex) {
                 code = 500;
+                Logger.error(this.getClass().toString() +" : Failed to send verification code to email : email = "+email);
                 responseMsg = "Hệ thống không thể gửi mã xác minh đến email, thử lại sau...";
             }
         } catch (NotFoundUserException e) {
             code = 300;
+            Logger.warning("User not found for the provided token");
             responseMsg = "Không tìm thấy user có id tương ứng với token này!";
         } catch (AlreadyVerifiedException e) {
             code = 300;
+            Logger.info("Account already verified");
             responseMsg = "Tài khoản này đã được xác minh!";
         }
         request.setAttribute("userid", id);

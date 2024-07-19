@@ -9,8 +9,11 @@ import com.project.exceptions.DuplicateInfoUserException;
 import com.project.exceptions.NotFoundUserException;
 import com.project.models.Image;
 import com.project.models.User;
+import com.project.models_rework.log.Logger;
 import org.jdbi.v3.core.Handle;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -101,6 +104,10 @@ public class UserService extends AbstractService {
         try {
             System.out.println(service.addNewGoogleUser("lap","hihi@gmail.com",0,"lap","imur"));
         } catch (NoSuchAlgorithmException e) {
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            Logger.error(sw.toString());
             throw new RuntimeException(e);
         }
 

@@ -6,6 +6,7 @@ import com.cloudinary.api.ApiResponse;
 import com.cloudinary.utils.ObjectUtils;
 import com.project.models.Contact;
 import com.project.models.User;
+import com.project.models_rework.log.Logger;
 import com.project.services.ContactService;
 import com.project.services.UploadService;
 import jakarta.servlet.ServletException;
@@ -144,7 +145,9 @@ public class CloudinaryServlet extends HttpServlet {
                     try {
                         ApiResponse resp = uploadService.destroy(resource_type, public_id);
                     } catch (Exception e) {
+                        Logger.warning("Failed upload image");
                         throw new RuntimeException(e);
+
                     }
                 }
                 response.getWriter().write(resMsg);

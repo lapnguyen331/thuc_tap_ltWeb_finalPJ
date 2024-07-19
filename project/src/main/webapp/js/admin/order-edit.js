@@ -2,7 +2,9 @@ $(document).ready(function() {
     const id = $('#order-item').val();
     let customer = undefined;
     let order_map = new Map();
+    let order_map_sku = new Map()
     let product_map = new Map();
+    let sku_map = new Map();
     let dataTable = undefined;
     const loadCustomerData = async function() {
         const userid = $('#userid').val();
@@ -15,18 +17,27 @@ $(document).ready(function() {
     };
     const loadOrderItemsData = async function () {
         const json = await $.ajax({
-            url: `${window.context}/api/order/getOrderItems?id=${id}`,
+            url: `${window.context}/api/v1/order/getHandled?id=${id}`,
             method: 'get',
             dataType: 'json'
         })
-        json.data.forEach(o => order_map.set(o.product.id, o.quantity))
-        console.log(mapToJSON());
+        if (json.length == 0) {
+            $('.products-range.requirement').css({
+                backgroundColor: 'rgba(20, 164, 77, 0.2)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+            }).append(`<div class="fw-semibold">Đơn hàng này không cần xử lí gì thêm :)</div>`)
+            return;
+        }
+        json.forEach(o => order_map.set(o.product.id, o.quantity))
+        renderOrderItems()
     };
     const loadAllProducts = async function () {
         const json = await $.ajax({
             url: `${window.context}/api/product/getAll`,
             method: 'get',
-            dataType: 'json'
+            dataType: 'json',
         })
         json.data.forEach(p => product_map.set(p.id, p))
     };
@@ -37,7 +48,6 @@ $(document).ready(function() {
 
         renderDataTable();
         renderInfoCustomer();
-        renderOrderItems();
     })();
     const renderDataTable = function () {
         dataTable = new DataTable('#products_filter_table', {
@@ -46,7 +56,15 @@ $(document).ready(function() {
             scrollCollapse: true,
             scrollY: '400px',
             width: '100%',
-            data: [...product_map.values()],
+            ajax: {
+                url: `${window.context}/api/v1/stock-keeping/doGetAll-SKURowData`,
+                method: 'post',
+                data: (d) => JSON.stringify(d),
+                dataSrc: (response) => {
+                    [... response.data].forEach(sku => sku_map.set(sku.stockId, sku))
+                    return response.data
+                }
+            },
             columnDefs: [
                 {
                     width: 1,
@@ -56,7 +74,7 @@ $(document).ready(function() {
                     orderable: false,
                     data: null,
                     render: function(data, type, row) {
-                        return `<input class="form-check-input product-check" data-product-id="${row.id}" type="checkbox" ${order_map.has(row.id) ? 'checked' : ''}/>`
+                        return `<input class="form-check-input product-check" data-stock-id="${row.stockId}" type="checkbox" ${order_map_sku.has(row.stockId) ? 'checked' : ''}/>`
                     }
                 },
                 {
@@ -66,28 +84,28 @@ $(document).ready(function() {
                 {
                     target: 1,
                     data: null,
-                    render: function(data, type, product) {
+                    render: function(data, type, row) {
                         const html = `
                 <div class="product-wrap">
                     <div class="img-wrap">
-                        <img src="${window.context}/files/${data.image}" width="100%" alt="">
+                        <img src="${row.product.thumbnail}" width="100%" alt="">
                     </div>
                     <div class="info-wrap">
-                        <div class="product-title">${data.name}</div>
-                        <div class="product-price">Giá bán: ${formatCurrency(getDiscountPrice(product))}đ</div>
+                        <div class="product-title">${row.product.name}</div>
+                        <div class="fw-normal">Ngày hết hạn <span class="text-info">${row.expiredDate}</span></div>
                         <div class="id-wrap">
-                            <div class="product-id">Mã SP: ${data.id}</div>
+                            <div class="product-id">Mã lô hàng: #<a href="#">${row.stockId}</a></div>
                         </div>
                     </div>
                 </div>
                 `;
                         if (type === 'display') return html;
                         else
-                            return data.name;
+                            return row.product.name;
                     }
                 },
                 {
-                    data: 'quantity',
+                    data: 'availableQuantity',
                     target: 2,
                     className: 'dt-center dt-nowrap',
                     width: 1
@@ -101,8 +119,7 @@ $(document).ready(function() {
         });
     };
     const renderOrderItems = function() {
-        let price = 0;
-        $('.products-range').html(``)
+        $('.products-range.requirement').html(``)
         for (let [id, quantity] of order_map.entries()) {
             const product = product_map.get(id);
             price += getDiscountPrice(product) * quantity;
@@ -132,11 +149,48 @@ $(document).ready(function() {
                     </div>
                 </div>
                 `
-            $('.products-range').append(html);
+            $('.products-range.requirement').append(html);
         }
-        $('#total-price').text(formatCurrency(price))
         $('#order-items').val(JSON.stringify(mapToJSON()))
     };
+
+    const renderOrderItemsSKU = function() {
+        console.log(sku_map)
+        console.log(order_map_sku)
+        $('.products-range.from-sku').html(``)
+        for (let [id, quantity] of order_map_sku.entries()) {
+            const sku = sku_map.get(id);
+            const html = `
+                <div class="product-card" data-stock-id="${sku.stockId}">
+                    <div class="img-wrap">
+                        <img src="${sku.product.thumbnail}" width='100%' alt="">
+                    </div>
+                    <div class="info-wrap">
+                        <div class="product-title">${sku.product.name}</div>
+                        <div class="fw-light text-info fs-6">${sku.expiredDate}</div>
+                        <div class="id-wrap">
+                            <div class="product-id">Mã lô: ${sku.stockId}</div>
+                            <div class="number-field">
+                                <button type="button" class="action-btn" data-btn-action="down">
+                                    <span>-</span>
+                                </button>
+                                <input type="text" name="quantity" id="" value=${quantity} disabled/>
+                                <button type="button" class="action-btn" data-btn-action="up">
+                                    <span>+</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="remove-btn">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </div>
+                </div>
+                `
+            $('.products-range.from-sku').append(html);
+        }
+        $('#order-items').val(JSON.stringify(mapToJSON()))
+    };
+
     const renderInfoCustomer = function() {
         $('#username').val(customer[0].username)
         $('#user-avatar').attr('src', `${window.context}/files/${customer[0].avatar}`)
@@ -156,54 +210,46 @@ $(document).ready(function() {
     }, function(start, end, label) {
         console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
     });
-    const basicAutocomplete = document.querySelector('#search-autocomplete');
-    const asyncFilter = async (query) => {
-        const url = `https://dummyjson.com/products`;
-        const response = await fetch(url);
-        const data = await response.json();
-        const filter = data.products.filter(({brand}) => brand.indexOf(query) >= 0);
-        return filter;
-    };
     $('#products_filter_table').on('change', '.product-check', function(e) {
         console.log($(this))
-        const productId = $(this).data('product-id');
+        const productId = $(this).data('stock-id');
         if (this.checked) {
-            order_map.set(productId, 1)
-            renderOrderItems();
+            order_map_sku.set(productId, 1)
+            renderOrderItemsSKU();
         } else {
-            order_map.delete(productId)
-            renderOrderItems();
+            order_map_sku.delete(productId)
+            renderOrderItemsSKU();
         }
     });
     const doUp = function(id) {
-        let quantity = order_map.get(id);
-        order_map.set(id, ++quantity);
-        renderOrderItems();
+        let quantity = order_map_sku.get(id);
+        order_map_sku.set(id, ++quantity);
+        renderOrderItemsSKU();
     }
     const doDown = function(id) {
-        let quantity = order_map.get(id);
+        let quantity = order_map_sku.get(id);
         if (quantity - 1 <= 0) {
-            order_map.delete(id)
+            order_map_sku.delete(id)
             dataTable.rows().invalidate().draw()
         } else {
-            order_map.set(id, --quantity);
+            order_map_sku.set(id, --quantity);
         }
-        renderOrderItems();
+        renderOrderItemsSKU();
     }
     const mapToJSON = function() {
-        return [...order_map.entries()].map(([key, value]) => {
+        return [...order_map_sku.entries()].map(([key, value]) => {
             return {productId: key, quantity: value, orderId: id}
         });
     }
-    $('.products-range').on('click', '.remove-btn', function(e) {
-        const id = $(this).closest('.product-card').data('product-id');
-        order_map.delete(id)
+    $('.products-range.from-sku').on('click', '.remove-btn', function(e) {
+        const id = $(this).closest('.product-card').data('stock-id');
+        order_map_sku.delete(id)
         dataTable.rows().invalidate().draw()
-        renderOrderItems();
+        renderOrderItemsSKU();
     })
-    $('.products-range').on('click', '.action-btn', function(e) {
+    $('.products-range.from-sku').on('click', '.action-btn', function(e) {
         const action = $(this).data('btn-action')
-        const id = $(this).closest('.product-card').data('product-id');
+        const id = $(this).closest('.product-card').data('stock-id');
         switch (action) {
             case 'up':
                 doUp(id);
@@ -216,8 +262,4 @@ $(document).ready(function() {
     $('#search-data').on('input', function(e) {
         dataTable.column(1).search($(this).val()).draw();
     })
-    new mdb.Autocomplete(basicAutocomplete, {
-        filter: asyncFilter,
-        displayValue: (value) => value.brand
-    });
 })

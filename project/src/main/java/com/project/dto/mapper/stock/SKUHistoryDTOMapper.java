@@ -10,6 +10,7 @@ import com.project.exceptions.custom_exception.StockKeepingException;
 import com.project.models_rework.OrderItem;
 import com.project.models_rework.SKUHistory;
 import com.project.models_rework.StockKeeping;
+import com.project.models_rework.log.Logger;
 import com.project.service_rework.UploadService;
 import lombok.NoArgsConstructor;
 import org.jdbi.v3.core.Handle;
@@ -49,6 +50,7 @@ public abstract class SKUHistoryDTOMapper {
         try {
             thumbnail_link = uploadService.getURL(thumbnail_path);
         } catch (Exception e) {
+            Logger.warning("can not load image from cloudinary");
             throw new MyServletException("Lỗi server khi cố lấy thông tin ảnh", 500);
         }
         return SKUHistoryDTO.Product.builder()
