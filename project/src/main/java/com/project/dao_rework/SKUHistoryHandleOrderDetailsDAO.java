@@ -11,6 +11,7 @@ import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface SKUHistoryHandleOrderDetailsDAO {
     @SqlUpdate("""
@@ -30,4 +31,14 @@ public interface SKUHistoryHandleOrderDetailsDAO {
             """)
     Integer getTotalQuantity(@Bind("productId") Integer productId,
                              @Bind("orderId") Integer orderId);
+
+    @SqlQuery("""
+            SELECT * FROM sku_history_handle_order
+            WHERE
+                productId = :productId
+            AND
+                orderId = :orderId
+            """)
+    List<SKUHistory_Handle_Order> getByProductIdAndOrderId_all(@Bind("productId") Integer productId,
+                                                               @Bind("orderId") Integer orderId);
 }

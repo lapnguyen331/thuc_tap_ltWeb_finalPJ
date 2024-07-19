@@ -41,4 +41,6 @@ public interface OrderDetailsDAO {
     Integer setStatus(@Bind("orderId") Integer orderId,
                       @Bind("productId") Integer productId,
                       @Bind("status") OrderDetailsStatus status);
+
+
 }
