@@ -2,18 +2,17 @@ package com.project.service_rework;
 
 import com.project.dao_rework.ProductDAO;
 import com.project.dao_rework.SKUHistoryDAO;
+import com.project.dao_rework.SKUHistoryHandleOrderDetailsDAO;
 import com.project.dao_rework.StockKeepingDAO;
-import com.project.dto.mapper.product.ProductCardDTOMapper;
-import com.project.dto.mapper.product.ProductDetailsDTOMapper;
+import com.project.dto.mapper.oder.ProcessOrderDetailsDTOMapper;
 import com.project.dto.mapper.stock.NewStockKeepingDTOMapper;
 import com.project.dto.mapper.stock.SKUHistoryDTOMapper;
 import com.project.dto.mapper.stock.SKURowDTOMapper;
+import com.project.dto.request.order.ProcessOrderDetailsDTO;
 import com.project.dto.request.stock.ChangeInStockDTO;
 import com.project.dto.request.stock.NewStockKeepingDTO;
 import com.project.dto.request.stock.data_table.DataTableFilterDTO;
 import com.project.dto.response.dataTable.DataTableDTO;
-import com.project.dto.response.product.ProductCardDTO;
-import com.project.dto.response.product.ProductDetailsDTO;
 import com.project.dto.response.stock.SKUHistoryDTO;
 import com.project.dto.response.stock.SKURowDTO;
 import com.project.exceptions.custom_exception.MyServletException;
@@ -24,7 +23,6 @@ import com.project.models_rework.enums.SKUChangeType;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,6 +102,11 @@ public class StockKeepingService extends AbstractService {
         var modelList = handle.attach(SKUHistoryDAO.class)
                 .getAllSKUHistory_all();
         return SKUHistoryDTOMapper.INSTANCE.mapToDTO(handle, modelList);
+    }
+
+    public Integer insertHandleOrderDetails(ProcessOrderDetailsDTO dto) {
+        var handleOrder = ProcessOrderDetailsDTOMapper.INSTANCE.mapToModel(handle, dto);
+        return handle.attach(SKUHistoryHandleOrderDetailsDAO.class).insert(handleOrder);
     }
 
     public DataTableDTO getAllSKUHistory(DataTableFilterDTO filterDTO) throws MyServletException {

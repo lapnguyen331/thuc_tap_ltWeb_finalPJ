@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main-style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/sidebar.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main-header.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/admin-orders-edit.css?v=3">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/admin-orders-edit.css?v=4">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-override.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/datatables-override.css">
     <title>Quản lí sản phẩm</title>
@@ -100,8 +100,11 @@
                                             </div>
                                         </c:if>
                                         <h4 class="form-title">Lựa chọn sản phẩm</h4>
-                                        <h6 class="form-title">Thêm sản phẩm vào đơn hàng này</h6>
-                                        <div class="products-range">
+                                        <h6 class="form-title">Các sản phẩm cần xử lí</h6>
+                                        <div class="products-range requirement">
+                                        </div>
+                                        <h6 class="form-title">Chọn sản phẩm từ lô hàng</h6>
+                                        <div class="products-range from-sku">
                                         </div>
                                         <h4 class="form-title">Tổng tiền: <span id="total-price">0</span>₫</h4>
                                         <hr class="horizontal">
@@ -118,46 +121,6 @@
                                             </tr>
                                             </thead>
                                         </table>
-                                    </section>
-                                    <section id="order-details-section">
-                                        <h4 class="form-title">Thông tin đơn hàng</h4>
-                                        <h6 class="form-title">Nhập thông tin người nhận vào trường dưới đây</h6>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="input-field">
-                                                    <label for="receiverName">Họ và tên *</label>
-                                                    <input type="text" name="receiverName" placeholder="Họ và tên" value="${requestScope.order.receiverName}" id="receiverName">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="input-field">
-                                                    <label for="receiverEmail">Email *</label>
-                                                    <input type="text" name="receiverEmail" placeholder="Email" id="receiverEmail" value="${requestScope.order.receiverEmail}">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-6">
-                                                <div class="input-field">
-                                                    <label for="receiverPhone">Số điện thoại *</label>
-                                                    <input type="text" name="receiverPhone" placeholder="Số điện thoại" value="${requestScope.order.receiverPhone}" id="receiverPhone">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="input-field">
-                                                    <label for="receiverAddress">Địa chỉ nhận hàng *</label>
-                                                    <input type="text" name="receiverAddress" placeholder="Địa chỉ" value="${requestScope.order.receiverAddress}" id="receiverAddress">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-12">
-                                                <div class="input-field">
-                                                    <label for="txtArea_note">Ghi chú (tùy chọn)</label>
-                                                    <textarea name="" id="txtArea_note" rows="5"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </section>
                                 </div>
                             </div>
@@ -180,6 +143,6 @@
 <script src="${pageContext.request.contextPath}/libs/daterangepicker-master/moment.min.js"></script>
 <script src="${pageContext.request.contextPath}/libs/daterangepicker-master/daterangepicker.js"></script>
 <script src="${pageContext.request.contextPath}/libs/DataTables/datatables.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/admin/order-edit.js?v=26"></script>
+<script src="${pageContext.request.contextPath}/js/admin/order-edit.js?v=30"></script>
 </body>
 </html>
