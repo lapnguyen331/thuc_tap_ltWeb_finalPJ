@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
-//@WebFilter(filterName = "global4", urlPatterns = {"/api/v1/*"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
+@WebFilter(filterName = "global4", urlPatterns = {"/api/v1/*"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
 public class RestRequestBodyApiFilter implements Filter {
     public static final String PUT_KEY = "json_data";
     @Override
