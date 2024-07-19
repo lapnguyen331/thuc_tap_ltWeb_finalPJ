@@ -1,7 +1,6 @@
 package com.project.db;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
-import com.project.models_rework.log.Logger;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 
@@ -21,7 +20,6 @@ public class JDBIConnector2 {
             dataSource.setAutoReconnect(true);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            Logger.error("JDBIConector: Access database failed "+ throwables.getStackTrace());
             throw new RuntimeException(throwables);
         }
         jdbi = Jdbi.create(dataSource);

@@ -1,7 +1,11 @@
 package com.project.services;
+import com.project.models_rework.log.Logger;
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Properties;
 
 public class JavaService {
@@ -34,6 +38,10 @@ public class JavaService {
             Transport.send(message);
             System.out.println("Message sent successfully");
         } catch (MessagingException e) {
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            Logger.error(sw.toString());
             throw new RuntimeException(e);
         }
         return true;

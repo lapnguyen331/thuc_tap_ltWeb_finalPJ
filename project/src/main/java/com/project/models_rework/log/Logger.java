@@ -1,12 +1,12 @@
 package com.project.models_rework.log;
 
-import com.project.services.LogService;
+
+import com.project.service_rework.LogService;
 
 import java.time.LocalDateTime;
-import java.util.logging.Level;
 
 public class Logger {
-    static  LogService logService = new LogService();
+    static LogService logService = new LogService();
     private static  void logDump(Log log) {
         logService.publish(log);
     }
@@ -31,11 +31,6 @@ public class Logger {
         Logger.error("lỗi trang home");
         Logger.info("lỗi trang home");
         Logger.warning("cảnh báo lỗi");
-
-
-
-
-
     }
 
 }

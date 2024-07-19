@@ -8,12 +8,15 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.google.gson.Gson;
 import com.project.dto.MessageDTO;
 import com.project.exceptions.custom_exception.MyServletException;
+import com.project.models_rework.log.Logger;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 @WebFilter(filterName = "global3", urlPatterns = {"/api/v1/*"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
 public class RestResponseDTOApiFilter implements Filter {

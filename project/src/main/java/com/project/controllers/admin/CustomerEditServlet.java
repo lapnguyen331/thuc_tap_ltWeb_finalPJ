@@ -2,6 +2,7 @@ package com.project.controllers.admin;
 
 import com.project.models.Image;
 import com.project.models.User;
+import com.project.models_rework.log.Logger;
 import com.project.services.ContactService;
 import com.project.services.UserService;
 import jakarta.servlet.ServletException;
@@ -13,6 +14,8 @@ import jakarta.servlet.http.HttpSession;
 
 import javax.transaction.TransactionalException;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
@@ -72,6 +75,7 @@ public class CustomerEditServlet extends HttpServlet {
             repUser1.setStatus(Integer.parseInt(status));
         } catch (TransactionalException e) {
             userService.rollback();
+            e.printStackTrace();
             responseMessage = e.getMessage();
         }
         request.setAttribute("message",responseMessage);

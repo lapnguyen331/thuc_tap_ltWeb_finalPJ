@@ -1,6 +1,10 @@
 package com.project.mails;
 
+import com.project.models_rework.log.Logger;
+
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Properties;
 
 public class MailProperties {
@@ -10,7 +14,10 @@ public class MailProperties {
         try {
             prop.load(MailProperties.class.getClassLoader().getResourceAsStream("mail.properties"));
         } catch (IOException ioException) {
-            ioException.printStackTrace();
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ioException.printStackTrace(pw);
+            Logger.error(sw.toString());
         }
     }
 

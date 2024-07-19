@@ -1,6 +1,8 @@
 package com.project.db;
 
+
 import java.io.IOException;
+
 import java.util.Properties;
 
 public class DBProperties2 {
@@ -10,7 +12,7 @@ public class DBProperties2 {
         try {
             prop.load(DBProperties2.class.getClassLoader().getResourceAsStream("db2.properties"));
         } catch (IOException ioException) {
-            ioException.printStackTrace();
+           ioException.printStackTrace();
         }
     }
 

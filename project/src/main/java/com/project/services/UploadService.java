@@ -5,12 +5,15 @@ import com.cloudinary.Transformation;
 import com.cloudinary.Url;
 import com.cloudinary.api.ApiResponse;
 import com.cloudinary.utils.ObjectUtils;
+import com.project.models_rework.log.Logger;
 import com.project.service_rework.ProductScriptService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -29,7 +32,10 @@ public class UploadService {
             cloudinary = new Cloudinary(String.format("cloudinary://%s:%s@%s", PUBLIC_KEY, SECRET_KEY, CLOUD_NAME));
             cloudinary.config.secure = true;
         } catch (IOException ioException) {
-            ioException.printStackTrace();
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ioException.printStackTrace(pw);
+            Logger.error(sw.toString());
         }
     }
     public String upload(Map<String, Object> params) {
@@ -78,7 +84,10 @@ public class UploadService {
                 rs.add((String) response.get("public_id"));
             }
         } catch (Exception e) {
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
             e.printStackTrace();
+            Logger.error(sw.toString());
             cloudinary.api().deleteResourcesByPrefix(folder+"/", ObjectUtils.emptyMap());
             System.out.println("Xảy ra lỗi, đã xóa toàn bộ folder: "+folder);
         }

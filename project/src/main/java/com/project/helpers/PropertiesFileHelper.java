@@ -1,9 +1,12 @@
 package com.project.helpers;
 
+import com.project.models_rework.log.Logger;
 import jakarta.servlet.ServletContext;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Properties;
 
 public class PropertiesFileHelper {

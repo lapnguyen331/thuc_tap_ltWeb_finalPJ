@@ -1,10 +1,13 @@
 package com.project.mappers;
 
 import com.project.models.*;
+import com.project.models_rework.log.Logger;
 import org.jdbi.v3.core.config.ConfigRegistry;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;

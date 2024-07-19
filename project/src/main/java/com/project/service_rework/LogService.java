@@ -1,4 +1,4 @@
-package com.project.services;
+package com.project.service_rework;
 
 
 import com.project.dao_rework.LogDAO;
@@ -25,7 +25,6 @@ public class LogService extends AbstractService {
 
     public static void main(String[] args) {
         LogService l = new LogService();
-        System.out.println(l.deleteById(3));
     }
 
 
