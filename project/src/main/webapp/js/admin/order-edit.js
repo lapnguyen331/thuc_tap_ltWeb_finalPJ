@@ -17,12 +17,21 @@ $(document).ready(function() {
     };
     const loadOrderItemsData = async function () {
         const json = await $.ajax({
-            url: `${window.context}/api/order/getOrderItems?id=${id}`,
+            url: `${window.context}/api/v1/order/getHandled?id=${id}`,
             method: 'get',
             dataType: 'json'
         })
-        json.data.forEach(o => order_map.set(o.product.id, o.quantity))
-        console.log(mapToJSON());
+        if (json.length == 0) {
+            $('.products-range.requirement').css({
+                backgroundColor: 'rgba(20, 164, 77, 0.2)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+            }).append(`<div class="fw-semibold">Đơn hàng này không cần xử lí gì thêm :)</div>`)
+            return;
+        }
+        json.forEach(o => order_map.set(o.product.id, o.quantity))
+        renderOrderItems()
     };
     const loadAllProducts = async function () {
         const json = await $.ajax({
@@ -39,7 +48,6 @@ $(document).ready(function() {
 
         renderDataTable();
         renderInfoCustomer();
-        renderOrderItems();
     })();
     const renderDataTable = function () {
         dataTable = new DataTable('#products_filter_table', {
@@ -57,8 +65,6 @@ $(document).ready(function() {
                     return response.data
                 }
             },
-            // serverSide: true,
-            // processing: true,
             columnDefs: [
                 {
                     width: 1,

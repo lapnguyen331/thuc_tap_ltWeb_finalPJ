@@ -35,10 +35,11 @@ public interface SKUHistoryHandleOrderDetailsDAO {
     @SqlQuery("""
             SELECT * FROM sku_history_handle_order
             WHERE
-                productId = :productId
-            AND
                 orderId = :orderId
+            AND
+                productId = :productId
             """)
-    List<SKUHistory_Handle_Order> getByProductIdAndOrderId_all(@Bind("productId") Integer productId,
-                                                               @Bind("orderId") Integer orderId);
+    @RegisterBeanMapper(SKUHistory_Handle_Order.class)
+    List<SKUHistory_Handle_Order> getByOrderIdAndProductId_all(@Bind("orderId") Integer orderId,
+                                                               @Bind("productId") Integer productId);
 }

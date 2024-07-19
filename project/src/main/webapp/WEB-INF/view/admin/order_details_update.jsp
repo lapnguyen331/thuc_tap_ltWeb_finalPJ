@@ -99,9 +99,39 @@
                                                 ${requestScope.message}
                                             </div>
                                         </c:if>
+                                        <c:if test="${not empty requestScope.handled}">
+                                            <h4 class="form-title">Các SKU đã được chọn</h4>
+                                            <h6 class="form-title">Các sản phẩm đã được chọn ra từ lô hàng dành cho đơn hàng này.</h6>
+                                            <div class="products-range handled">
+                                                <c:forEach var="handle" items="${requestScope.handled}">
+                                                    <div class="product-card">
+                                                        <div class="img-wrap">
+                                                            <img src="${handle.thumbnail}" width='100%' alt="">
+                                                        </div>
+                                                        <div class="info-wrap">
+                                                            <div class="product-title">${handle.productName}</div>
+                                                            <div class="fw-light text-info fs-6">${handle.expiredDate}</div>
+                                                            <div class="id-wrap">
+                                                                <div class="product-id">Mã lô: ${handle.stockId}</div>
+                                                                <div class="number-field">
+                                                                    <button type="button" class="action-btn" data-btn-action="down">
+                                                                        <span>-</span>
+                                                                    </button>
+                                                                    <input type="text" name="quantity" id="" value=${handle.quantity} disabled/>
+                                                                    <button type="button" class="action-btn" data-btn-action="up">
+                                                                        <span>+</span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </c:forEach>
+                                            </div>
+                                        </c:if>
                                         <h4 class="form-title">Lựa chọn sản phẩm</h4>
                                         <h6 class="form-title">Các sản phẩm cần xử lí</h6>
                                         <div class="products-range requirement">
+
                                         </div>
                                         <h6 class="form-title">Chọn sản phẩm từ lô hàng</h6>
                                         <div class="products-range from-sku">

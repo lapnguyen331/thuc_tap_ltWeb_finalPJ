@@ -1,8 +1,7 @@
-package com.project.dto.mapper.oder;
+package com.project.dto.mapper.order;
 
 import com.project.dao_rework.*;
 import com.project.dto.request.order.ProcessOrderDetailsDTO;
-import com.project.models_rework.OrderDetails;
 import com.project.models_rework.SKUHistory;
 import com.project.models_rework.SKUHistory_Handle_Order;
 import com.project.models_rework.enums.OrderDetailsStatus;

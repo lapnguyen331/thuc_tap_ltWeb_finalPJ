@@ -1,10 +1,8 @@
 package com.project.service_rework;
 
-import com.project.dao_rework.ProductDAO;
-import com.project.dao_rework.SKUHistoryDAO;
-import com.project.dao_rework.SKUHistoryHandleOrderDetailsDAO;
-import com.project.dao_rework.StockKeepingDAO;
-import com.project.dto.mapper.oder.ProcessOrderDetailsDTOMapper;
+import com.project.dao_rework.*;
+import com.project.dto.mapper.order.HandleOrderDetailsDTOMapper;
+import com.project.dto.mapper.order.ProcessOrderDetailsDTOMapper;
 import com.project.dto.mapper.stock.NewStockKeepingDTOMapper;
 import com.project.dto.mapper.stock.SKUHistoryDTOMapper;
 import com.project.dto.mapper.stock.SKURowDTOMapper;
@@ -13,6 +11,7 @@ import com.project.dto.request.stock.ChangeInStockDTO;
 import com.project.dto.request.stock.NewStockKeepingDTO;
 import com.project.dto.request.stock.data_table.DataTableFilterDTO;
 import com.project.dto.response.dataTable.DataTableDTO;
+import com.project.dto.response.order.HandleOrderDetailsDTO;
 import com.project.dto.response.stock.SKUHistoryDTO;
 import com.project.dto.response.stock.SKURowDTO;
 import com.project.exceptions.custom_exception.MyServletException;
@@ -20,14 +19,36 @@ import com.project.exceptions.custom_exception.ProductException;
 import com.project.exceptions.custom_exception.StockKeepingException;
 import com.project.models_rework.SKUHistory;
 import com.project.models_rework.enums.SKUChangeType;
+import org.jdbi.v3.core.Handle;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class StockKeepingService extends AbstractService {
+
+    public StockKeepingService() {
+    }
+
+    public StockKeepingService(Handle handle) {
+        super(handle);
+    }
+
+    public List<HandleOrderDetailsDTO> getHandleOrderDetailsDTO(Integer orderId) {
+        var productIds = handle.attach(OrderDetailsDAO.class)
+                .getById_productId(orderId);
+        List<HandleOrderDetailsDTO> list = new ArrayList<>();
+        for (var id : productIds) {
+            var r = handle.attach(SKUHistoryHandleOrderDetailsDAO.class)
+                    .getByOrderIdAndProductId_all(orderId, id);
+            list.add(HandleOrderDetailsDTOMapper.INSTANCE.mapToDTO(handle, r));
+        }
+        return list;
+    }
+
     public Integer insertNewStock(NewStockKeepingDTO dto) throws MyServletException {
         if (handle.attach(ProductDAO.class).checkExistByProductId(dto.productId).isEmpty()) {
             throw new ProductException(String.format("Không tồn tại product với id: %d", dto.productId), 404);

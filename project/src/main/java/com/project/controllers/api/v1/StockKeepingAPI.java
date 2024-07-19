@@ -15,6 +15,7 @@ import com.project.dto.response.stock.SKURowDTO;
 import com.project.exceptions.custom_exception.MyServletException;
 import com.project.filters.RestResponseDTOApiFilter;
 import com.project.filters.RestRequestBodyApiFilter;
+import com.project.service_rework.OrderService;
 import com.project.service_rework.StockKeepingService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -46,7 +47,20 @@ public class StockKeepingAPI extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getPathInfo();
+        switch (action) {
+            case "/doGet-Handle-OrderDetails": {
+                doGet_Handle_OrderDetails(request, response);
+                break;
+            }
+        }
+    }
 
+    private void doGet_Handle_OrderDetails(HttpServletRequest request, HttpServletResponse response) {
+        Integer orderId = Integer.valueOf(request.getParameter("orderId"));
+        var service = new OrderService();
+        var dto = service.getHandleOrderDetailsDTO(orderId);
+        request.setAttribute(RestResponseDTOApiFilter.PUT_KEY, dto);
     }
 
     private void doGet_SKURowData(HttpServletRequest request, HttpServletResponse response) throws MyServletException {

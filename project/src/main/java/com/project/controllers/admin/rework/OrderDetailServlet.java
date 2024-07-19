@@ -1,10 +1,11 @@
-package com.project.controllers.admin;
+package com.project.controllers.admin.rework;
 
 import com.project.exceptions.NotEnoughQuantityException;
 import com.project.exceptions.NotFoundProductException;
 import com.project.models.Order;
 import com.project.models.OrderItem;
 import com.project.models.Product;
+import com.project.service_rework.StockKeepingService;
 import com.project.services.OrderItemService;
 import com.project.services.OrderService;
 import com.project.services.ProductService;
@@ -23,18 +24,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//@WebServlet(name = "OrderDetailsServlet", value = "/admin/order/*")
+@WebServlet(name = "OrderDetailsServlet", value = "/admin/order/*")
 public class OrderDetailServlet extends HttpServlet {
     private OrderService orderService;
     private UserService userService;
     private ProductService productService;
     private OrderItemService orderItemService;
+    private StockKeepingService stockKeepingService;
 
     public OrderDetailServlet() {
         this.orderService = new OrderService();
         this.userService = new UserService(orderService.getHandle());
         this.productService = new ProductService(orderService.getHandle());
         this.orderItemService = new OrderItemService(orderService.getHandle());
+        this.stockKeepingService = new StockKeepingService(orderService.getHandle());
     }
 
     @Override
@@ -64,8 +67,10 @@ public class OrderDetailServlet extends HttpServlet {
         var order = orderService.getOrderById(id);
         int userid = order.getUser().getId();
         var user = userService.getInforById(userid);
+        var orderDetailsHandle = stockKeepingService.getHandleOrderDetailsDTO(id);
         request.setAttribute("order", order);
         request.setAttribute("user", user);
+        request.setAttribute("handled", orderDetailsHandle);
         request.setAttribute("status", Arrays.asList("Hủy đơn hàng", "Đã giao", "Đang giao", "Đang trả về"));
         request.getRequestDispatcher("/WEB-INF/view/admin/order_details_update.jsp").forward(request, response);
     }

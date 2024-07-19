@@ -42,5 +42,20 @@ public interface OrderDetailsDAO {
                       @Bind("productId") Integer productId,
                       @Bind("status") OrderDetailsStatus status);
 
+    @SqlQuery("""
+            SELECT DISTINCT productId FROM order_details
+            WHERE
+                orderId = :orderId
+            """)
+    List<Integer> getById_productId(@Bind("orderId") Integer orderId);
+
+    @SqlQuery("""
+            SELECT DISTINCT productId FROM order_details
+            WHERE
+                orderId = :orderId
+            AND status = :status
+            """)
+    List<Integer> getByIdAndStatus_productId(@Bind("orderId") Integer orderId,
+                                             @Bind("status") OrderDetailsStatus status);
 
 }
