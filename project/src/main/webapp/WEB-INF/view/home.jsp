@@ -17,7 +17,7 @@
     <!-- Style của project -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/stylesheet/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main-style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home-slider.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home-slider.css?v=2">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/button-title.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/product-card.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/product-filter.css?v=2">
