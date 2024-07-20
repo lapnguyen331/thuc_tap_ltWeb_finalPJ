@@ -94,28 +94,41 @@ public interface SKUHistoryDAO {
     Integer getRelatedOrderItemById(@Bind("skuHistoryId") Integer skuHistoryId);
 
     @SqlQuery("""
-            SELECT * FROM sku_history sh
-            JOIN sku_history_order sho
+            SELECT 
+                sh.id sh_id, sh.stockId sh_stockId, sh.prevValue sh_prevValue, 
+                sh.changeValue sh_changeValue, sh.type sh_type, 
+                sh.note sh_note, sh.createAt sh_createAt 
+            FROM sku_history sh
+            JOIN sku_history_handle_order sho
             ON 
                 sh.id = sho.skuHistoryId
             WHERE
-                sh.stockId = :stockId
+                sho.stockId = :stockId
             AND 
                 MONTH(sh.createAt) = :month
             """)
+    @RegisterBeanMapper(value = SKUHistory.class, prefix = "sh")
     List<SKUHistory> getByRelatedWithOrderItemAndByStockIdAndInMonth_all(
             @Bind("stockId") Integer skuId,
             @Bind("month") Integer month);
 
     @SqlQuery("""
-            SELECT sum(changeValue) FROM sku_history sh
+            SELECT IFNULL(SUM(revenue),0) FROM sku_history_handle_order shho
+            INNER JOIN sku_history sh
+            ON shho.skuHistoryId = sh.id
+            WHERE DATE(sh.createAt) = :d
+            """)
+    Integer getRevenueInDate(@Bind("d") LocalDate date);
+
+    @SqlQuery("""
+            SELECT sum(-changeValue) FROM sku_history sh
             WHERE 
                 sh.id IN (<skuHistoryIds>)
             """)
     Integer getTotalChangeValueBySkuHistoryIds(@BindList("skuHistoryIds") List<Integer> skuHistoryIds);
 
     @SqlQuery("""
-            SELECT sum(revenue) FROM sku_history_order sho
+            SELECT sum(revenue) FROM sku_history_handle_order sho
             WHERE 
                 sho.skuHistoryId IN (<skuHistoryIds>)
             """)
@@ -124,12 +137,12 @@ public interface SKUHistoryDAO {
     @SqlQuery("""
             SELECT * FROM sku_history sh
             WHERE 
-                sh.id = :stockId
+                sh.stockId = :stockId
             AND
                 sh.createAt = (
                     SELECT MAX(createAt) FROM sku_history
                     WHERE
-                        id = :stockId
+                        stockId = :stockId
                 );
             """)
     SKUHistory getLatestHistoryByStockId(@Bind("stockId") Integer stockId);

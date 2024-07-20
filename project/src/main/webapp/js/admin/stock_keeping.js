@@ -53,12 +53,6 @@ $(document).ready(() => {
                             value="${row.stockId}" />
                             <label class="form-check-label">Mã lô hàng: ${row.stockId}</label>
                         </div>
-                        <div class="d-flex gap-1">
-                            <div class="fw-normal">Mức độ phân loại lô hàng này:</div>
-                            <div class="shipment-tag outdate">
-                                <span>Sắp hết hạn</span>
-                            </div>
-                        </div>
                     </div>
                     <div class="body">
                         <div class="thumbnail-wrap">
@@ -108,7 +102,8 @@ $(document).ready(() => {
     });
     const typeChange = {
         'THEM_HANG': '<div class="text-success fw-semibold">Thêm hàng</div>',
-        'THEM_SKU_MOI': '<div class="text-success fw-semibold">Thêm SKU mới</div>'
+        'THEM_SKU_MOI': '<div class="text-success fw-semibold">Thêm SKU mới</div>',
+        'BAN_CHO_KHACH': '<div class="text-info fw-semibold">Bán cho đơn hàng của khách</div>'
     }
     const data_tables_transaction_history = new DataTable('#table_history_transaction', {
         language: translate,
@@ -178,7 +173,7 @@ $(document).ready(() => {
                 <div class="d-flex gap-1">
                     <span class="fw-normal">Trong kho:</span>
                     <span class="fw-semibold">${row.prevValue}</span>
-                    <span class="fw-semibold text-${data <= 0 ? 'danger' : 'success'}">(${data > 0 && '+'}${data})</span>
+                    <span class="fw-semibold text-${data <= 0 ? 'danger' : 'success'}">(${data > 0 ? '+' : ''}${data})</span>
                 </div>
                 `
                 }
@@ -385,7 +380,7 @@ $(document).ready(() => {
             const unitPrice = Number($('#sku_newForm_unitPrice').val())
             const data = {producerId, inStock, expiredDate, unitPrice, productId};
             $.ajax({
-                url: `${window.context}/api/v1/stock-keeping`,
+                url: `${window.context}/api/v1/stock-keeping/doAddNew-SKU`,
                 data: JSON.stringify(data),
                 type: 'POST',
                 success: (data) => {
@@ -413,4 +408,49 @@ $(document).ready(() => {
             return dd + '/' + mm + '/' + yyyy;
         }
     })();
+    $.ajax({
+        url: `${window.context}/api/v1/stock-keeping/doGet-RevenueLast7Days`,
+        success: function(data) {
+            console.log(data)
+            const ctx = document.getElementById("myChart");
+            new mdb.Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: [
+                        "14/07",
+                        "15/07",
+                        "16/07",
+                        "17/07",
+                        "18/07",
+                        "19/07",
+                        "20/07",
+                    ],
+                    datasets: [
+                        {
+                            data: data,
+                            lineTension: 0,
+                            backgroundColor: "transparent",
+                            borderColor: "#007bff",
+                            borderWidth: 4,
+                            pointBackgroundColor: "#007bff",
+                        },
+                    ],
+                },
+                options: {
+                    scales: {
+                        yAxes: [
+                            {
+                                ticks: {
+                                    beginAtZero: false,
+                                },
+                            },
+                        ],
+                    },
+                    legend: {
+                        display: false,
+                    },
+                },
+            });
+        }
+    })
 })

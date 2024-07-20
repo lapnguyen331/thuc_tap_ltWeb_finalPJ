@@ -12,7 +12,6 @@ import lombok.experimental.FieldDefaults;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProcessOrderDetailsDTO {
     Integer orderId;
-    Integer productId;
     Integer stockId;
     Integer quantity;
 }

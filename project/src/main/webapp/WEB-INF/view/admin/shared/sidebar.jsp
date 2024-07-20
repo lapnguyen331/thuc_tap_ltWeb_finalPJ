@@ -116,14 +116,12 @@
                 </ul>
             </li>
             <li class="nav-link-page">
-                <a href="${pageContext.request.contextPath}/admin/contact">
-                    <i class="fa-solid fa-headset new-info">
-                        <span>1</span>
-                    </i>
-                    <span class="link_name">Liên hệ</span>
+                <a href="${pageContext.request.contextPath}/admin/stock-keeping">
+                    <i class="fa-solid fa-cubes"></i>
+                    <span class="link_name">Tồn kho</span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a class="link_name" href="${pageContext.request.contextPath}/admin/contacts">Liên hệ</a></li>
+                    <li><a class="link_name" href="${pageContext.request.contextPath}/admin/stock-keeping">Quản lý tồn kho</a></li>
                 </ul>
 
             </li>

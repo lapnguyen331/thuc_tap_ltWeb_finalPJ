@@ -53,7 +53,16 @@ public class StockKeepingAPI extends HttpServlet {
                 doGet_Handle_OrderDetails(request, response);
                 break;
             }
+            case "/doGet-RevenueLast7Days": {
+                doGet_RevenueLast7Days(request, response);
+                break;
+            }
         }
+    }
+
+    private void doGet_RevenueLast7Days(HttpServletRequest request, HttpServletResponse response) {
+        var list = stockKeepingService.getRevenueLast7Days();
+        request.setAttribute(RestResponseDTOApiFilter.PUT_KEY, list);
     }
 
     private void doGet_Handle_OrderDetails(HttpServletRequest request, HttpServletResponse response) {
@@ -136,14 +145,16 @@ public class StockKeepingAPI extends HttpServlet {
 
     private void doAddNew_Handle_OrderDetails(HttpServletRequest request, HttpServletResponse response) throws JsonProcessingException {
         String json = request.getAttribute(RestRequestBodyApiFilter.PUT_KEY).toString();
-        ProcessOrderDetailsDTO dto = mapper.readValue(json, ProcessOrderDetailsDTO.class);
+
+        List<ProcessOrderDetailsDTO> dtos = mapper.readValue(json, new TypeReference<List<ProcessOrderDetailsDTO>>() {});
         stockKeepingService.begin();
         MessageDTO responseMessage = MessageDTO.builder().message("OK").build();
         try {
-            if (stockKeepingService.insertHandleOrderDetails(dto) > 0) {
-                stockKeepingService.commit();
-                request.setAttribute(RestResponseDTOApiFilter.PUT_KEY, responseMessage);
+            for (var dto : dtos) {
+                stockKeepingService.insertHandleOrderDetails(dto);
             }
+            stockKeepingService.commit();
+            request.setAttribute(RestResponseDTOApiFilter.PUT_KEY, responseMessage);
         } catch (Exception e) {
             stockKeepingService.rollback();
             throw e;

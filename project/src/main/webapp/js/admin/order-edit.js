@@ -17,21 +17,13 @@ $(document).ready(function() {
     };
     const loadOrderItemsData = async function () {
         const json = await $.ajax({
-            url: `${window.context}/api/v1/order/getHandled?id=${id}`,
+            url: `${window.context}/api/order/getOrderItems?id=${id}`,
             method: 'get',
             dataType: 'json'
         })
-        if (json.length == 0) {
-            $('.products-range.requirement').css({
-                backgroundColor: 'rgba(20, 164, 77, 0.2)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-            }).append(`<div class="fw-semibold">Đơn hàng này không cần xử lí gì thêm :)</div>`)
-            return;
-        }
-        json.forEach(o => order_map.set(o.product.id, o.quantity))
+        json.data.forEach(o => order_map.set(o.product.id, o.quantity))
         renderOrderItems()
+        checkIfOrderDone()
     };
     const loadAllProducts = async function () {
         const json = await $.ajax({
@@ -119,6 +111,7 @@ $(document).ready(function() {
         });
     };
     const renderOrderItems = function() {
+        let price = 0;
         $('.products-range.requirement').html(``)
         for (let [id, quantity] of order_map.entries()) {
             const product = product_map.get(id);
@@ -212,12 +205,12 @@ $(document).ready(function() {
     });
     $('#products_filter_table').on('change', '.product-check', function(e) {
         console.log($(this))
-        const productId = $(this).data('stock-id');
+        const stockId = $(this).data('stock-id');
         if (this.checked) {
-            order_map_sku.set(productId, 1)
+            order_map_sku.set(stockId, 1)
             renderOrderItemsSKU();
         } else {
-            order_map_sku.delete(productId)
+            order_map_sku.delete(stockId)
             renderOrderItemsSKU();
         }
     });
@@ -238,7 +231,7 @@ $(document).ready(function() {
     }
     const mapToJSON = function() {
         return [...order_map_sku.entries()].map(([key, value]) => {
-            return {productId: key, quantity: value, orderId: id}
+            return {stockId: key, quantity: value, orderId: id}
         });
     }
     $('.products-range.from-sku').on('click', '.remove-btn', function(e) {
@@ -261,5 +254,30 @@ $(document).ready(function() {
     })
     $('#search-data').on('input', function(e) {
         dataTable.column(1).search($(this).val()).draw();
+    })
+    function checkIfOrderDone() {
+        $.ajax({
+            url: `${window.context}/api/v1/order/getUnhandled?id=${id}`,
+            success: function(data) {
+                data.length === 0
+                    && $('.products-range.requirement').html('').css({
+                        backgroundColor: 'rgba(20, 164, 77, 0.2)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                }).append(`<div class="fw-semibold">Đơn hàng này không cần xử lí gì thêm :)</div>`)
+            }
+        })
+    }
+    $('.update-btn').on('click', function (e){
+        e.preventDefault()
+        $.ajax({
+            url: `${window.context}/api/v1/stock-keeping/doAddNew-Handle-OrderDetails`,
+            data: $('#order-items').val(),
+            method: 'post',
+            success: () => {
+                location.reload();
+            }
+        })
     })
 })
