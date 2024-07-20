@@ -30,7 +30,7 @@
 <section id="main-content-section">
     <div class="main-content">
         <section id="product_edit">
-            <form action="${pageContext.request.contextPath}/admin/order/update" method="post" id="order-form">
+            <form id="order-form">
                 <input type="hidden" value="${requestScope.order.id}" name="orderId" id="orderId">
                 <div class="container">
                     <div class="row">
@@ -129,7 +129,7 @@
                                             </div>
                                         </c:if>
                                         <h4 class="form-title">Lựa chọn sản phẩm</h4>
-                                        <h6 class="form-title">Các sản phẩm cần xử lí</h6>
+                                        <h6 class="form-title">Các sản phẩm khách đặt</h6>
                                         <div class="products-range requirement">
 
                                         </div>
@@ -157,7 +157,7 @@
                     </div>
                     <div class="row">
                         <div class="actions-field">
-                            <button type="submit" class="update-btn">Cập nhật thông tin</button>
+                            <button type="button" class="update-btn">Cập nhật thông tin</button>
                         </div>
                     </div>
                 </div>
@@ -172,6 +172,6 @@
 <script src="${pageContext.request.contextPath}/libs/daterangepicker-master/moment.min.js"></script>
 <script src="${pageContext.request.contextPath}/libs/daterangepicker-master/daterangepicker.js"></script>
 <script src="${pageContext.request.contextPath}/libs/DataTables/datatables.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/admin/order-edit.js?v=30"></script>
+<script src="${pageContext.request.contextPath}/js/admin/order-edit.js?v=36"></script>
 </body>
 </html>

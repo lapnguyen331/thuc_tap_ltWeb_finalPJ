@@ -46,14 +46,18 @@
                 <h1 class="text-uppercase fw-semibold fs-4 underline">
                     <u>Tổng quan nhập kho</u>
                 </h1>
-                <article class="overview">
-                    <div class="square"></div>
-                    <div class="square"></div>
-                    <div class="square"></div>
-                    <div class="square"></div>
-                    <div class="square"></div>
-                    <div class="square"></div>
-                </article>
+
+                <section class="mb-4">
+                    <div class="card">
+                        <div class="card-header py-3">
+                            <h5 class="mb-0 text-center"><strong>Doanh thu 7 ngày qua</strong></h5>
+                        </div>
+                        <div class="card-body d-flex align-items-center justify-content-center">
+                            <canvas class="my-4 w-75" id="myChart" height="250"></canvas>
+                        </div>
+                    </div>
+                </section>
+
                 <div class="table-header d-flex justify-content-between align-items-center">
                     <div>
                         <span>Trình quản lý nhập kho</span>
@@ -79,38 +83,38 @@
                 <div class="table-header mt-lg-5">
                     <span>Lịch sử biến động tồn kho</span>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <nav id="table_tabs">
-                            <ul class="w-100 justify-content-between">
-                                <li class="active" data-json-name="month4">
-                                    <i class="fa-solid fa-arrow-trend-up"></i>
-                                    <span>Tháng 04/2024</span>
-                                </li>
-                                <li data-json-name="month5">
-                                    <i class="fa-solid fa-arrow-trend-up"></i>
-                                    <span>Tháng 05/2024</span>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-arrow-trend-up"></i>
-                                    <span>Tháng 06/2024</span>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-arrow-trend-up"></i>
-                                    <span>Tháng 07/2024</span>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-arrow-trend-up"></i>
-                                    <span>Tháng 08/2024</span>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-arrow-trend-up"></i>
-                                    <span>Tháng 09/2024</span>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
+<%--                <div class="row">--%>
+<%--                    <div class="col-md-12">--%>
+<%--                        <nav id="table_tabs">--%>
+<%--                            <ul class="w-100 justify-content-between">--%>
+<%--                                <li class="active" data-json-name="month4">--%>
+<%--                                    <i class="fa-solid fa-arrow-trend-up"></i>--%>
+<%--                                    <span>Tháng 04/2024</span>--%>
+<%--                                </li>--%>
+<%--                                <li data-json-name="month5">--%>
+<%--                                    <i class="fa-solid fa-arrow-trend-up"></i>--%>
+<%--                                    <span>Tháng 05/2024</span>--%>
+<%--                                </li>--%>
+<%--                                <li>--%>
+<%--                                    <i class="fa-solid fa-arrow-trend-up"></i>--%>
+<%--                                    <span>Tháng 06/2024</span>--%>
+<%--                                </li>--%>
+<%--                                <li>--%>
+<%--                                    <i class="fa-solid fa-arrow-trend-up"></i>--%>
+<%--                                    <span>Tháng 07/2024</span>--%>
+<%--                                </li>--%>
+<%--                                <li>--%>
+<%--                                    <i class="fa-solid fa-arrow-trend-up"></i>--%>
+<%--                                    <span>Tháng 08/2024</span>--%>
+<%--                                </li>--%>
+<%--                                <li>--%>
+<%--                                    <i class="fa-solid fa-arrow-trend-up"></i>--%>
+<%--                                    <span>Tháng 09/2024</span>--%>
+<%--                                </li>--%>
+<%--                            </ul>--%>
+<%--                        </nav>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
                 <table id="table_history_transaction" class="hover" style="width: 100%">
                     <thead>
                     <tr>
@@ -195,7 +199,7 @@
 <script>
     let initStockIds = ${requestScope.json}
 </script>
-<script type="module" src="${pageContext.request.contextPath}/js/admin/stock_keeping.js?v=19"></script>
+<script type="module" src="${pageContext.request.contextPath}/js/admin/stock_keeping.js?v=23"></script>
 <script>
     new mdb.Select(document.getElementById('sku_newForm_selectField_supplier'), {
         container: 'body',

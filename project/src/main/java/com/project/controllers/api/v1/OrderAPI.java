@@ -39,13 +39,13 @@ public class OrderAPI extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getPathInfo();
         switch (action) {
-            case "/getHandled":
-                doGetHandled(request, response);
+            case "/getUnhandled":
+                doGetUnHandled(request, response);
                 break;
         }
     }
 
-    private void doGetHandled(HttpServletRequest request, HttpServletResponse response) {
+    private void doGetUnHandled(HttpServletRequest request, HttpServletResponse response) {
         Integer id = Integer.valueOf(request.getParameter("id"));
         List<Integer> productIds = handle.attach(OrderDetailsDAO.class)
                 .getByIdAndStatus_productId(id, OrderDetailsStatus.CHUA_XU_LY);

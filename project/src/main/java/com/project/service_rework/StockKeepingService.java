@@ -75,6 +75,18 @@ public class StockKeepingService extends AbstractService {
         return SKURowDTOMapper.INSTANCE.mapToDTO(handle, model);
     }
 
+    public List<Integer> getRevenueLast7Days() {
+        List<Integer> list = new ArrayList<>();
+        list.add(handle.attach(SKUHistoryDAO.class).getRevenueInDate(LocalDate.of(2024, 7, 14)));
+        list.add(handle.attach(SKUHistoryDAO.class).getRevenueInDate(LocalDate.of(2024, 7, 15)));
+        list.add(handle.attach(SKUHistoryDAO.class).getRevenueInDate(LocalDate.of(2024, 7, 16)));
+        list.add(handle.attach(SKUHistoryDAO.class).getRevenueInDate(LocalDate.of(2024, 7, 17)));
+        list.add(handle.attach(SKUHistoryDAO.class).getRevenueInDate(LocalDate.of(2024, 7, 18)));
+        list.add(handle.attach(SKUHistoryDAO.class).getRevenueInDate(LocalDate.of(2024, 7, 19)));
+        list.add(handle.attach(SKUHistoryDAO.class).getRevenueInDate(LocalDate.of(2024, 7, 20)));
+        return list;
+    }
+
     public List<SKURowDTO> getAllSKURowDTO() throws MyServletException {
         var list = handle.attach(StockKeepingDAO.class).getAll_all();
         return SKURowDTOMapper.INSTANCE.mapToDTO(handle, list);

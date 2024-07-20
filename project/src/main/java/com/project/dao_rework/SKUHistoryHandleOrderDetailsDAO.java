@@ -16,9 +16,9 @@ import java.util.List;
 public interface SKUHistoryHandleOrderDetailsDAO {
     @SqlUpdate("""
             INSERT INTO sku_history_handle_order
-                (skuHistoryId, orderId, productId, revenue, quantity)
+                (skuHistoryId, orderId, productId, stockId, revenue, quantity)
             VALUES
-                (:h.skuHistoryId, :h.orderId, :h.productId, :h.revenue, :h.quantity)
+                (:h.skuHistoryId, :h.orderId, :h.productId, :h.stockId, :h.revenue, :h.quantity)
             """)
     Integer insert(@BindBean("h") SKUHistory_Handle_Order handle);
 

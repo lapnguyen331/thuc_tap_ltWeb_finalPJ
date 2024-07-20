@@ -24,7 +24,7 @@ public abstract class ProcessOrderDetailsDTOMapper {
         var stock = handle.attach(StockKeepingDAO.class)
                 .getById_all(dto.stockId).get(0);
         var details = handle.attach(OrderDetailsDAO.class)
-                .getDetailsByOrderIdAndProductId(dto.orderId, dto.productId)
+                .getDetailsByOrderIdAndProductId(dto.orderId, stock.getProductId())
                 .get(0);
         var history = SKUHistory.builder()
                 .type(SKUChangeType.BAN_CHO_KHACH)
@@ -38,17 +38,18 @@ public abstract class ProcessOrderDetailsDTOMapper {
         handle.attach(StockKeepingDAO.class)
                 .updateInStockById(dto.stockId, stock.getInStock() - dto.quantity);
         Integer totalPrevious = handle.attach(SKUHistoryHandleOrderDetailsDAO.class)
-                .getTotalQuantity(dto.productId, dto.orderId);
+                .getTotalQuantity(stock.getProductId(), dto.orderId);
         OrderDetailsStatus status = OrderDetailsStatus.CHUA_XU_LY;
         if (totalPrevious + dto.quantity == details.getQuantity()) {
             status = OrderDetailsStatus.DA_XU_LY;
         }
         handle.attach(OrderDetailsDAO.class)
-                .setStatus(dto.orderId, dto.productId, status);
+                .setStatus(dto.orderId, stock.getProductId(), status);
         var handleOrder = SKUHistory_Handle_Order.builder()
                 .orderId(dto.orderId)
                 .revenue(revenue)
-                .productId(dto.productId)
+                .stockId(dto.stockId)
+                .productId(stock.getProductId())
                 .quantity(dto.quantity)
                 .skuHistoryId(historyId)
                 .build();
